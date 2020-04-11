@@ -192,17 +192,18 @@ function makelines(width,height,npieces,actwidth,actheight) {
 
 		
 		
-		/*if (i%6 > 0){ //not first column
+		if (i%6 > 0){ //not first column
 			var oldLine = vlines[i-1][1].split(' ');
 			var newLine = '';
 			for (var ii=oldLine.length-1;ii>=0;ii--){
 				newLine += oldLine[ii]+' ';
 			}
-			vlines.push([newLine,line2])
+			console.log(oldLine, newLine);
+			//vlines.push([newLine,line2])
 		}
 		else {
-			vlines.push([line1,line2])
-		}*/
+			//vlines.push([line1,line2])
+		}
 		vlines.push([line1,line2]);
 		
 		//line1 = (x[i%ncols]*2+x[i%ncols+1]*1)/3+','+y[Math.floor(i/ncols)+1]+' '+(x[i%ncols]+x[i%ncols+1]*1)/2+','+(y[Math.floor(i/ncols)+1]+ydist[0])+' '+(x[i%ncols]*1+x[i%ncols+1]*2)/3+','+y[Math.floor(i/ncols)+1]+' '+x[i%ncols+1]+','+y[Math.floor(i/ncols)+1]+' '
