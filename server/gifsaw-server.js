@@ -195,8 +195,8 @@ function makelines(width,height,npieces,actwidth,actheight) {
 		if (i%6 > 0){ //not first column
 			var oldLine = vlines[i-1][1].split(' ');
 			var newLine = '';
-			for (var i=oldLine.length-1;i>=0;i--){
-				newLine += oldLine[i]+' ';
+			for (var ii=oldLine.length-1;ii>=0;ii--){
+				newLine += oldLine[ii]+' ';
 			}
 			vlines.push([newLine,line2])
 		}
