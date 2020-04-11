@@ -196,7 +196,7 @@ function makelines(width,height,npieces,actwidth,actheight) {
 			var oldLine = vlines[i-1][1].split(' ');
 			var newLine = '';
 			for (var ii=oldLine.length-1;ii>=0;ii--){
-				if (oldLine.indexOf(',')>0){
+				if (oldLine[ii].indexOf(',')>0){
 					newLine += oldLine[ii]+' ';
 				}
 			}
