@@ -232,6 +232,7 @@ function dragend() {
 
 				if (rotations[parseInt(dragid.substr(5,))-1]==rotations[tempkey]) {
 					if (newx < tempbox[0] + piecewidth + 10 && newy < tempbox[1] + pieceheight + 10) {
+						console.log(vmatches[i]);
 						if (newx > tempbox[0] + piecewidth - 10) {
 							//in far right match zone
 						
@@ -260,7 +261,6 @@ function dragend() {
 					}
 				}
 				if (possMatch) {
-					console.log(vmatches[i]);
 					var skipMatch = false;
 					for (var iii=0;iii<possMatches[parseInt(dragid.substr(5,))].length;iii++) {
 						if (possMatches[parseInt(dragid.substr(5,))][iii][0]==tempkey+1 && possMatches[parseInt(dragid.substr(5,))][iii][1]==possMatch){
