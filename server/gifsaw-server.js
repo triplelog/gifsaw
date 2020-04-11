@@ -40,8 +40,8 @@ app.get('/puzzle',
 		var gametype = 'solo';
 		var players = 'one';
 		var score = false;
-		var fname = 'testname';
-		var fullname = 'testname.gif';
+		var fname = 'optdodgers';
+		var fullname = 'outdodgers.gif';
 		
 		
 		var dimensions = sizeOf('static/gifs/' + fullname);
