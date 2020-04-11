@@ -188,7 +188,7 @@ function makelines(width,height,npieces,actwidth,actheight) {
 		//	line2 = (x[ncols]+conversions['video'+i][0]*cwidth)+','+y[Math.floor(i/ncols)]+' '
 		//}
 		var line1 = x0+','+y0+' '+x0+','+y1+' ';
-		var line2 = x1+','+y1+' '+x1+','+y0+' ';
+		var line2 = x1+','+y1+' ' +(x1+(x1-x0)/5)+','+(y0+y1)/2+' ' +x1+','+y0+' ';
 
 		
 		
