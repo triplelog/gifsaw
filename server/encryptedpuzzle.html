@@ -220,7 +220,7 @@ function dragend() {
 	}
 	else if (dragid && dragid != '') {
 		var pieceheight = cheight*144/164/4;
-		var piecewidth = pieceheight*cwidth/cheight*4/6;//512/288*4/6;
+		var piecewidth = pieceheight*512/288*4/6;
 		var possMatches = {};
 		possMatches[parseInt(dragid.substr(5,))]=[];
 		for (var ii=0;ii<centers[parseInt(dragid.substr(5,))-1].length;ii++) {
