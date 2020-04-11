@@ -316,14 +316,14 @@ else {
 <script src="../js/collabpuzzle.js"></script>
 <script src="../js/solopuzzle.js"></script>
 
-{% else if (gametype == 'comp' and players != 'multiple') %}
+{% elif (gametype == 'comp' and players != 'multiple') %}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
 <script>var socket = io.connect('', {query: 'name={{ pagename }}'}); var keepscore = true; var keeppoints = {{ score }};</script>
 <script src="../js/collabpuzzle.js"></script>
 <script src="../js/solopuzzle.js"></script>
 
-{% else if (gametype == 'comp' and players == 'multiple') %}
+{% elif (gametype == 'comp' and players == 'multiple') %}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
 
