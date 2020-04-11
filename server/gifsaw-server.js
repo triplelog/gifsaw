@@ -35,9 +35,17 @@ app.use('/',express.static('static'));
 
 app.get('/puzzle', 
 	function(req, res) {
-		
+		var nrows = 4;
+		var ncols = 6;
+
+
+
+		styles = [];
+		for (var i=0;i<ncols*nrows;i++){
+			styles.push(i);
+		}
 		res.write(nunjucks.render('gifpuzzle.html',{
-			
+			styles: styles,
 		}));
 		res.end();
 	}

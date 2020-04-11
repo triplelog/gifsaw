@@ -22,7 +22,13 @@ img {
 	top: 50px;
 }
 
-{{ stylesgohere }}
+{% for i in styles %}
+#video{{ i+1 }} {
+	webkit-clip-path:url(#clip{{ i+1 }});
+	clip-path:url(#clip{{ i+1 }});
+}
+{% endfor %}
+
 
 #playbutton {
 	position: absolute;
