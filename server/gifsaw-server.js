@@ -193,15 +193,22 @@ function makelines(width,height,npieces,actwidth,actheight) {
 		
 		
 		if (i%6 > 0){ //not first column
+			
 			var oldLine = vlines[i-1][1].split(' ');
+			var oldx1 = parseFloat(oldLine[0].split(',')[0]);
+			var oldy1 = parseFloat(oldLine[0].split(',')[1]);
 			var newLine = '';
 			for (var ii=oldLine.length-1;ii>=0;ii--){
 				if (oldLine[ii].indexOf(',')>0){
-					newLine += oldLine[ii]+' ';
+					var newx = parseFloat(oldLine[ii].split(',')[0]);
+					var linex = newx-oldx1+parseFloat(x0);//old x1 should be new x0
+					var newy = parseFloat(oldLine[ii].split(',')[1]);
+					var liney = newy-oldy1+parseFloat(y1);//old y1 should be same as new y1
+					newLine += linex+','+liney+' ';
 				}
 			}
 			console.log(line1, ";", newLine, ";");
-			vlines.push([newLine,line2])
+			vlines.push([line1,line2])
 		}
 		else {
 			vlines.push([line1,line2])
