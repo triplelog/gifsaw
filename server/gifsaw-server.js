@@ -188,25 +188,17 @@ function makelines(width,height,npieces,actwidth,actheight) {
 		//	line2 = (x[ncols]+conversions['video'+i][0]*cwidth)+','+y[Math.floor(i/ncols)]+' '
 		//}
 		var line1 = x0+','+y0+' '+x0+','+y1+' ';
+		
 		var line2 = x1+','+y1+' ' +(x1+(x1-x0)/5)+','+(y0+y1)/2+' ' +x1+','+y0+' ';
-
+		if (i%6 == 5){
+			line2 = x1+','+y1+' ' +x1+','+y0+' ';
+		}
 		
 		
 		if (i%6 > 0){ //not first column
 			
-			var oldLine = vlines[i-1][1].split(' ');
-			var oldx1 = parseFloat(oldLine[0].split(',')[0]);
-			var oldy1 = parseFloat(oldLine[0].split(',')[1]);
-			var newLine = '';
-			for (var ii=oldLine.length-1;ii>=0;ii--){
-				if (oldLine[ii].indexOf(',')>0){
-					var newx = parseFloat(oldLine[ii].split(',')[0]);
-					var linex = newx-oldx1+parseFloat(x0);//old x1 should be new x0
-					var newy = parseFloat(oldLine[ii].split(',')[1]);
-					var liney = newy-oldy1+parseFloat(y1);//old y1 should be same as new y1
-					newLine += linex+','+liney+' ';
-				}
-			}
+			var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0,y1);
+			
 			console.log(line1, ";", newLine, ";");
 			vlines.push([newLine,line2])
 		}
@@ -274,4 +266,20 @@ function makelines(width,height,npieces,actwidth,actheight) {
 		}
 	}
 	return [vlines,hlines,centers,locations,rotations,matches,nrows*ncols,vclines,hclines,ccenters];
+}
+
+function flipRightVertical(oldLine,x0,y1) {
+	var oldx1 = parseFloat(oldLine[0].split(',')[0]);
+	var oldy1 = parseFloat(oldLine[0].split(',')[1]);
+	var newLine = '';
+	for (var ii=oldLine.length-1;ii>=0;ii--){
+		if (oldLine[ii].indexOf(',')>0){
+			var newx = parseFloat(oldLine[ii].split(',')[0]);
+			var linex = newx-oldx1+parseFloat(x0);//old x1 should be new x0
+			var newy = parseFloat(oldLine[ii].split(',')[1]);
+			var liney = newy-oldy1+parseFloat(y1);//old y1 should be same as new y1
+			newLine += linex+','+liney+' ';
+		}
+	}
+	return newLine;
 }
