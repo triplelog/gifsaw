@@ -40,14 +40,14 @@ app.get('/puzzle',
 		var gametype = 'solo';
 		var players = 'one';
 		var score = false;
-		var fname = 'testname';
-		var fullname = 'testname.gif';
+		var fname = 'optdodgers';
+		var fullname = 'optdodgers.gif';
 		
 		
 		var dimensions = sizeOf('static/gifs/' + fullname);
 		var retval = makelines(dimensions.width,dimensions.height,npieces);
 
-		res.write(nunjucks.render('puzzle.html',{
+		res.write(nunjucks.render('encryptedpuzzle.html',{
 			gametype: gametype,
 			players: players,
 			score: score,

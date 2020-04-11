@@ -150,7 +150,7 @@ function dragstart(event) {
 			startX = [e.pageX,parseFloat(cvideo.style.left)];
 			startY = [e.pageY,parseFloat(cvideo.style.top)];
 			for (var i=0;i<nmatches;i++) {
-				let tempkey = matches[dragid][i][0];
+				let tempkey = matches[dragid][i];
 				console.log(videos);
 				console.log(tempkey);
 				let tempvideo = videos[tempkey].getBoundingClientRect();
@@ -208,11 +208,11 @@ function dragend() {
 		while (stillmatch) {
 			stillmatch = false;
 			for (var i=0;i<nmatches;i++) {
-				let tempbox = vmatches[matches[dragid][i][0]];
-				if (rotations[parseInt(dragid.substr(5,))-1]==rotations[parseInt(matches[dragid][i][0].substr(5,))-1]) {
+				let tempbox = vmatches[matches[dragid][i]];
+				if (rotations[parseInt(dragid.substr(5,))-1]==rotations[parseInt(matches[dragid][i].substr(5,))-1]) {
 					if ( newx < parseFloat(tempbox[0])+20 && newx > parseFloat(tempbox[0])-20 && newy < parseFloat(tempbox[1])+20 && newy > parseFloat(tempbox[1])-20){
 						if ( Math.pow(newx - parseFloat(tempbox[0]),2) + Math.pow(newy - parseFloat(tempbox[1]),2) < 400.0){
-							mergepieces(dragid,matches[dragid][i][0],i);
+							mergepieces(dragid,matches[dragid][i],i);
 							stillmatch = true;
 							break;
 						}

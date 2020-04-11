@@ -107,13 +107,13 @@ var gifheight = {{ image.height }};
 var npieces= {{ npieces }};
 var locations= {{ locations }};
 var rotations= {{ rotations }};
-var matches= {{ matches | dump | safe }};
+var matches= {{ matches | safe }};
 var centers= {{ centers }};
 var saveButton = document.getElementById('save');
 var cwidth = 512*1.5;
 var cheight = 512*1.5*328/(276*2+512);
-var hclines = {{ hclines | dump | safe }};
-var vclines = {{ vclines | dump | safe }};
+var hclines = {{ hclines | safe }};
+var vclines = {{ vclines | safe }};
 var ccenters= {{ ccenters }};
 
 for (var i=1;i<npieces+1;i++) {
