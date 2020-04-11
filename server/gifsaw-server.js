@@ -53,8 +53,7 @@ app.get('/puzzle',
 			score: score,
 			npieces: retval[6],
 			pagename: fname,
-			//image: {'name':'../gifs/'+fullname,'width':dimensions.width,'height':dimensions.height},
-			image: {'name':'../gifs/'+fullname,'width':512,'height':288},
+			image: {'name':'../gifs/'+fullname,'width':dimensions.width,'height':dimensions.height},
 			vclines:JSON.stringify(retval[7]),
 			hclines:JSON.stringify(retval[8]),
 			ccenters:JSON.stringify(retval[9]),
@@ -137,11 +136,9 @@ function makelines(width,height,npieces) {
 	nrows = 4;
 	ncols = 6;
 
-	//width = 512/(276*2+512); //Revert to 1
-	//height = 144/164; //Revert to 1
+	width = 512/(276*2+512); //Revert to 1
+	height = 144/164; //Revert to 1
 	
-	width= 512;
-	height = 288;
 	
 	const xchoices = [-1*width/ncols*.25,-1*width/ncols*.15,width/ncols*.15,width/ncols*.25];
 	const ychoices = [-1*height/nrows*.25,-1*height/nrows*.15,height/nrows*.15,height/nrows*.25];
