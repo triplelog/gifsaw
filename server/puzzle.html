@@ -151,6 +151,8 @@ function dragstart(event) {
 			startY = [e.pageY,parseFloat(cvideo.style.top)];
 			for (var i=0;i<nmatches;i++) {
 				let tempkey = matches[dragid][i];
+				console.log(videos);
+				console.log(tempkey);
 				let tempvideo = videos[tempkey].getBoundingClientRect();
 				vmatches[tempkey]=[tempvideo.left,tempvideo.top];
 			}
