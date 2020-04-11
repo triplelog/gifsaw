@@ -1,6 +1,7 @@
 #!/bin/bash
 WIDTH=276
 HEIGHT=164
+echo "starting"
 for i in 0 1
 do
 	for ii in 0 1
