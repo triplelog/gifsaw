@@ -188,9 +188,21 @@ function makelines(width,height,npieces,actwidth,actheight) {
 		//	line2 = (x[ncols]+conversions['video'+i][0]*cwidth)+','+y[Math.floor(i/ncols)]+' '
 		//}
 		var line1 = x0+','+y0+' '+x0+','+y1+' ';
-		var line2 = x1+','+y0+' ';
+		var line2 = x1+','+y1+' '+x1+','+y0+' ';
 
-		vlines.push([line1,line2])
+		
+		
+		if (i%6 > 0){ //not first column
+			var oldLine = vlines[i-1][1].split(' ');
+			var newLine = '';
+			for (var i=oldLine.length-1;i>=0;i--){
+				newLine += oldLine[i]+' ';
+			}
+			vlines.push([newLine,line2])
+		}
+		else {
+			vlines.push([line1,line2])
+		}
 
 		//line1 = (x[i%ncols]*2+x[i%ncols+1]*1)/3+','+y[Math.floor(i/ncols)+1]+' '+(x[i%ncols]+x[i%ncols+1]*1)/2+','+(y[Math.floor(i/ncols)+1]+ydist[0])+' '+(x[i%ncols]*1+x[i%ncols+1]*2)/3+','+y[Math.floor(i/ncols)+1]+' '+x[i%ncols+1]+','+y[Math.floor(i/ncols)+1]+' '
 		//line2 = (x[i%ncols+1]*2+x[i%ncols]*1)/3+','+y[Math.floor(i/ncols)]+' '+(x[i%ncols]+x[i%ncols+1]*1)/2+','+(y[Math.floor(i/ncols)]+ydist[1])+' '+(x[i%ncols]*2+x[i%ncols+1]*1)/3+','+y[Math.floor(i/ncols)]+' '+x[i%ncols]+','+y[Math.floor(i/ncols)]+' '
@@ -201,13 +213,14 @@ function makelines(width,height,npieces,actwidth,actheight) {
 		//if (Math.floor(i/ncols)<=nrows-1){//Revert to equality and remove conversions
 		//	line1 = (x[i%ncols+1]+conversions['video'+i][0]*cwidth)+','+y[nrows]+' '
 		//}
-		line2 = x0+','+y0+' ';
-		line1 = x1+','+y1+' ';
+		line2 = x1+','+y0+' '+x0+','+y0+' ';
+		line1 = x0+','+y1+' '+x1+','+y1+' ';
 
 		hlines.push([line1,line2])
 
 		centers.push([[(x0+x1)/2,(y0+y1)/2]]);
 		
+		//This (everything with c for correct) is for the correct version of the gif
 		const x0c = (actwidth+40)/(40+2*actwidth)+(i%ncols)*actwidth/(40+2*actwidth)/ncols;
 		const y0c = Math.floor(i/ncols)*actheight/(actheight+40)/(nrows);
 		const x1c = x0c+actwidth/(40+2*actwidth)/ncols;
