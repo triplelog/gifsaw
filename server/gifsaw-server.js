@@ -36,12 +36,12 @@ app.use('/',express.static('static'));
 
 app.get('/puzzle', 
 	function(req, res) {
-		var npieces = 4;
+		var npieces = 8;
 		var gametype = 'solo';
 		var players = 'one';
 		var score = false;
-		var fname = 'optdodgers';
-		var fullname = 'optdodgers.gif';
+		var fname = 'testname';
+		var fullname = 'testname.gif';
 		
 		
 		var dimensions = sizeOf('static/gifs/' + fullname);
