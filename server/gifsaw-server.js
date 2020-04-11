@@ -200,8 +200,8 @@ function makelines(width,height,npieces,actwidth,actheight) {
 					newLine += oldLine[ii]+' ';
 				}
 			}
-			console.log(vlines[i-1][1], line1, newLine);
-			vlines.push([line1,line2])
+			console.log(line1, ";", newLine, ";");
+			vlines.push([newLine,line2])
 		}
 		else {
 			vlines.push([line1,line2])
