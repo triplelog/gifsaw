@@ -136,8 +136,8 @@ function makelines(width,height,npieces) {
 	//nrows = 4;
 	//ncols = 6;
 	
-	nrows = 2;
-	ncols = 3;
+	nrows = 4;
+	ncols = 6;
 
 	width = 512/(276*2+512); //Revert to 1
 	height = 144/164; //Revert to 1
