@@ -1,6 +1,6 @@
 #!/bin/bash
-WIDTH=$(${1}/2+20)
-HEIGHT=$(${2}/2+20)
+WIDTH=$((${1}/2+20))
+HEIGHT=$((${2}/2+20))
 echo "starting"
 for i in 0 1
 do
