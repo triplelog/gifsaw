@@ -1,8 +1,6 @@
 function socketanswer(piece1,pairs) {
 	var tomatch = [];
 	var piece1 = 'video'+piece1;
-	console.log(piece1);
-	console.log(pairs);
 	if (pairs.length>0 && document.getElementById(piece1)){
 		for (var i=0;i<pairs.length;i++){
 			var piece2 = 'video'+pairs[i][0];
