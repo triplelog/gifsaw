@@ -42,11 +42,12 @@ app.get('/puzzle',
 		var score = false;
 		var fname = 'opttest';
 		var fullname = 'opttest.gif';
-		
+		var actheight = 246;
+		var actwidth = 480;
 		
 		var dimensions = sizeOf('static/gifs/' + fullname);
-		var retval = makelines(dimensions.width,dimensions.height,npieces);
-		console.log(dimensions);
+		var retval = makelines(dimensions.width,dimensions.height,npieces,actwidth,actheight);
+
 		res.write(nunjucks.render('encryptedpuzzle.html',{
 			gametype: gametype,
 			players: players,
@@ -67,8 +68,8 @@ app.get('/puzzle',
 			ncols:6,
 			//actheight:288,
 			//actwidth:512,
-			actheight:246,
-			actwidth:480,
+			actheight:actheight,
+			actwidth:actwidth,
 		}));
 		res.end();
 	}
@@ -110,7 +111,7 @@ wss.on('connection', function connection(ws) {
 });
 
 
-function makelines(width,height,npieces) {
+function makelines(width,height,npieces,actwidth,actheight) {
 	var vlines = [];
 	var hlines = [];
 	var vclines = [];
@@ -144,8 +145,6 @@ function makelines(width,height,npieces) {
 	
 	nrows = 4;
 	ncols = 6;
-	actwidth = width;
-	actheight = height;
 	//width = 512/(276*2+512); //Revert to 1
 	//height = 144/164; //Revert to 1
 	
