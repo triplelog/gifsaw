@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+
+	
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demographics</title>
+<link rel="icon" href="http://localhost:1313/">
+<meta name="description" content="Complete a sudoku puzzle without Javascript or server-side interaction."/>
+
+<style>
+:root {
+	--block-width: 17px;
+	--side-height: 33;
+	--top-width: 27;
+}
+
+img {
+	position: absolute;
+	left: 50px;
+	top: 50px;
+}
+
+#video1 {
+	-webkit-clip-path:url(#clip1);
+	clip-path:url(#clip1);
+}
+
+#video2 {
+	-webkit-clip-path:url(#clip2);
+	clip-path:url(#clip2);
+}
+
+#video3 {
+	-webkit-clip-path:url(#clip3);
+	clip-path:url(#clip3);
+}
+
+#video4 {
+	-webkit-clip-path:url(#clip4);
+	clip-path:url(#clip4);
+}
+
+#video5 {
+	-webkit-clip-path:url(#clip5);
+	clip-path:url(#clip5);
+}
+
+#video6 {
+	-webkit-clip-path:url(#clip6);
+	clip-path:url(#clip6);
+}
+
+#video7 {
+	-webkit-clip-path:url(#clip7);
+	clip-path:url(#clip7);
+}
+
+#video8 {
+	-webkit-clip-path:url(#clip8);
+	clip-path:url(#clip8);
+}
+
+#video9 {
+	-webkit-clip-path:url(#clip9);
+	clip-path:url(#clip9);
+}
+
+#video10 {
+	-webkit-clip-path:url(#clip10);
+	clip-path:url(#clip10);
+}
+
+#video11 {
+	-webkit-clip-path:url(#clip11);
+	clip-path:url(#clip11);
+}
+
+#video12 {
+	-webkit-clip-path:url(#clip12);
+	clip-path:url(#clip12);
+}
+
+#video13 {
+	-webkit-clip-path:url(#clip13);
+	clip-path:url(#clip13);
+}
+
+#video14 {
+	-webkit-clip-path:url(#clip14);
+	clip-path:url(#clip14);
+}
+
+#video15 {
+	-webkit-clip-path:url(#clip15);
+	clip-path:url(#clip15);
+}
+
+#video16 {
+	-webkit-clip-path:url(#clip16);
+	clip-path:url(#clip16);
+}
+
+#video17 {
+	-webkit-clip-path:url(#clip17);
+	clip-path:url(#clip17);
+}
+
+#video18 {
+	-webkit-clip-path:url(#clip18);
+	clip-path:url(#clip18);
+}
+
+#video19 {
+	-webkit-clip-path:url(#clip19);
+	clip-path:url(#clip19);
+}
+
+#video20 {
+	-webkit-clip-path:url(#clip20);
+	clip-path:url(#clip20);
+}
+
+#video21 {
+	-webkit-clip-path:url(#clip21);
+	clip-path:url(#clip21);
+}
+
+#video22 {
+	-webkit-clip-path:url(#clip22);
+	clip-path:url(#clip22);
+}
+
+#video23 {
+	-webkit-clip-path:url(#clip23);
+	clip-path:url(#clip23);
+}
+
+#video24 {
+	-webkit-clip-path:url(#clip24);
+	clip-path:url(#clip24);
+}
+
+
+
+#playbutton {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+#rotatebutton {
+	position: absolute;
+	left: 50px;
+	top: 0px;
+}
+#pointsspan {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+img {
+	display: block;
+	width: calc(512 * 1.5px);
+	height: auto;
+	background: rgba(255,255,255,1);
+}
+
+#progressdiv {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+</style>
+
+</head>
+<body>
+
+<svg width="960" height="448" viewBox = "0 0 960 448" version = "1.1">
+    <defs>
+    	
+    	
+    	  <clipPath id="clip1" clipPathUnits="objectBoundingBox">
+			<path id="path1" d="M0.2593984962406015,0 0.2593984962406015,0.21951219512195122 0.33959899749373434,0.21951219512195122 0.33959899749373434,0 0.2593984962406015,0 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip2" clipPathUnits="objectBoundingBox">
+			<path id="path2" d="M0.33959899749373434,0 0.33959899749373434,0.21951219512195122 0.4197994987468672,0.21951219512195122 0.4197994987468672,0 0.33959899749373434,0 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip3" clipPathUnits="objectBoundingBox">
+			<path id="path3" d="M0.4197994987468672,0 0.4197994987468672,0.21951219512195122 0.5,0.21951219512195122 0.5,0 0.4197994987468672,0 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip4" clipPathUnits="objectBoundingBox">
+			<path id="path4" d="M0.018796992481203006,0 0.018796992481203006,0.21951219512195122 0.09899749373433583,0.21951219512195122 0.09899749373433583,0 0.018796992481203006,0 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip5" clipPathUnits="objectBoundingBox">
+			<path id="path5" d="M0.09899749373433583,0 0.09899749373433583,0.21951219512195122 0.17919799498746866,0.21951219512195122 0.17919799498746866,0 0.09899749373433583,0 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip6" clipPathUnits="objectBoundingBox">
+			<path id="path6" d="M0.17919799498746866,0 0.17919799498746866,0.21951219512195122 0.2593984962406015,0.21951219512195122 0.2593984962406015,0 0.17919799498746866,0 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip7" clipPathUnits="objectBoundingBox">
+			<path id="path7" d="M0.2593984962406015,0.21951219512195122 0.2593984962406015,0.43902439024390244 0.33959899749373434,0.43902439024390244 0.33959899749373434,0.21951219512195122 0.2593984962406015,0.21951219512195122 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip8" clipPathUnits="objectBoundingBox">
+			<path id="path8" d="M0.33959899749373434,0.21951219512195122 0.33959899749373434,0.43902439024390244 0.4197994987468672,0.43902439024390244 0.4197994987468672,0.21951219512195122 0.33959899749373434,0.21951219512195122 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip9" clipPathUnits="objectBoundingBox">
+			<path id="path9" d="M0.4197994987468672,0.21951219512195122 0.4197994987468672,0.43902439024390244 0.5,0.43902439024390244 0.5,0.21951219512195122 0.4197994987468672,0.21951219512195122 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip10" clipPathUnits="objectBoundingBox">
+			<path id="path10" d="M0.018796992481203006,0.21951219512195122 0.018796992481203006,0.43902439024390244 0.09899749373433583,0.43902439024390244 0.09899749373433583,0.21951219512195122 0.018796992481203006,0.21951219512195122 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip11" clipPathUnits="objectBoundingBox">
+			<path id="path11" d="M0.09899749373433583,0.21951219512195122 0.09899749373433583,0.43902439024390244 0.17919799498746866,0.43902439024390244 0.17919799498746866,0.21951219512195122 0.09899749373433583,0.21951219512195122 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip12" clipPathUnits="objectBoundingBox">
+			<path id="path12" d="M0.17919799498746866,0.21951219512195122 0.17919799498746866,0.43902439024390244 0.2593984962406015,0.43902439024390244 0.2593984962406015,0.21951219512195122 0.17919799498746866,0.21951219512195122 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip13" clipPathUnits="objectBoundingBox">
+			<path id="path13" d="M0.2593984962406015,0.5609756097560976 0.2593984962406015,0.7804878048780488 0.33959899749373434,0.7804878048780488 0.33959899749373434,0.5609756097560976 0.2593984962406015,0.5609756097560976 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip14" clipPathUnits="objectBoundingBox">
+			<path id="path14" d="M0.33959899749373434,0.5609756097560976 0.33959899749373434,0.7804878048780488 0.4197994987468672,0.7804878048780488 0.4197994987468672,0.5609756097560976 0.33959899749373434,0.5609756097560976 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip15" clipPathUnits="objectBoundingBox">
+			<path id="path15" d="M0.4197994987468672,0.5609756097560976 0.4197994987468672,0.7804878048780488 0.5,0.7804878048780488 0.5,0.5609756097560976 0.4197994987468672,0.5609756097560976 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip16" clipPathUnits="objectBoundingBox">
+			<path id="path16" d="M0.018796992481203006,0.5609756097560976 0.018796992481203006,0.7804878048780488 0.09899749373433583,0.7804878048780488 0.09899749373433583,0.5609756097560976 0.018796992481203006,0.5609756097560976 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip17" clipPathUnits="objectBoundingBox">
+			<path id="path17" d="M0.09899749373433583,0.5609756097560976 0.09899749373433583,0.7804878048780488 0.17919799498746866,0.7804878048780488 0.17919799498746866,0.5609756097560976 0.09899749373433583,0.5609756097560976 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip18" clipPathUnits="objectBoundingBox">
+			<path id="path18" d="M0.17919799498746866,0.5609756097560976 0.17919799498746866,0.7804878048780488 0.2593984962406015,0.7804878048780488 0.2593984962406015,0.5609756097560976 0.17919799498746866,0.5609756097560976 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip19" clipPathUnits="objectBoundingBox">
+			<path id="path19" d="M0.2593984962406015,0.7804878048780488 0.2593984962406015,1 0.33959899749373434,1 0.33959899749373434,0.7804878048780488 0.2593984962406015,0.7804878048780488 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip20" clipPathUnits="objectBoundingBox">
+			<path id="path20" d="M0.33959899749373434,0.7804878048780488 0.33959899749373434,1 0.4197994987468672,1 0.4197994987468672,0.7804878048780488 0.33959899749373434,0.7804878048780488 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip21" clipPathUnits="objectBoundingBox">
+			<path id="path21" d="M0.4197994987468672,0.7804878048780488 0.4197994987468672,1 0.5,1 0.5,0.7804878048780488 0.4197994987468672,0.7804878048780488 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip22" clipPathUnits="objectBoundingBox">
+			<path id="path22" d="M0.018796992481203006,0.7804878048780488 0.018796992481203006,1 0.09899749373433583,1 0.09899749373433583,0.7804878048780488 0.018796992481203006,0.7804878048780488 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip23" clipPathUnits="objectBoundingBox">
+			<path id="path23" d="M0.09899749373433583,0.7804878048780488 0.09899749373433583,1 0.17919799498746866,1 0.17919799498746866,0.7804878048780488 0.09899749373433583,0.7804878048780488 " />
+		  </clipPath>
+		
+    	  <clipPath id="clip24" clipPathUnits="objectBoundingBox">
+			<path id="path24" d="M0.17919799498746866,0.7804878048780488 0.17919799498746866,1 0.2593984962406015,1 0.2593984962406015,0.7804878048780488 0.17919799498746866,0.7804878048780488 " />
+		  </clipPath>
+		
+    	
+    	  
+    </defs>
+</svg>
+
+
+    <!--<img id="video1" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video1" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video2" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video2" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video3" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video3" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video4" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video4" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video5" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video5" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video6" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video6" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video7" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video7" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video8" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video8" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video9" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video9" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video10" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video10" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video11" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video11" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video12" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video12" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video13" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video13" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video14" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video14" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video15" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video15" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video16" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video16" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video17" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video17" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video18" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video18" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video19" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video19" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video20" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video20" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video21" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video21" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video22" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video22" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video23" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video23" src="../gifs/optdodgers.gif">
+
+    <!--<img id="video24" src="../gifs/2-frozen-pizzas.gif">-->
+    <img id="video24" src="../gifs/optdodgers.gif">
+
+
+
+
+	
+
+
+<!--<button id="playbutton" onclick="playvideo()">Play</button>-->
+<!--<button id="rotatebutton" onclick="rotate()">Rotate</button>-->
+
+<div id="scorediv"></div>
+<progress id="progressdiv" class="progress" value="15" max="100">15%</progress>
+<button id="save" href="">Save</button>
+
+<script>
+
+var dragid;
+var isclick = true;
+var startX;
+var startY;
+var cvideo;
+var vmatches;
+var nmatches;
+var videos = {};
+var score = {};
+var myname;
+var gifwidth = 512;
+var gifheight = 288;
+var npieces= 24;
+var locations= [[370,23],[367,215],[563,81],[30,95],[177,301],[194,153],[140,92],[524,218],[160,139],[313,45],[454,206],[339,303],[273,41],[331,126],[507,62],[494,99],[172,45],[210,220],[511,161],[317,175],[316,46],[310,251],[316,152],[2,43]];
+var rotations= [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var matches= {"video1":[["video2","left"],["video7","top"]],"video2":[["video3","left"],["video1","right"],["video8","top"]],"video3":[["video4","left"],["video2","right"],["video9","top"]],"video4":[["video5","left"],["video3","right"],["video10","top"]],"video5":[["video6","left"],["video4","right"],["video11","top"]],"video6":[["video5","right"],["video12","top"]],"video7":[["video8","left"],["video13","top"],["video1","bottom"]],"video8":[["video9","left"],["video7","right"],["video14","top"],["video2","bottom"]],"video9":[["video10","left"],["video8","right"],["video15","top"],["video3","bottom"]],"video10":[["video11","left"],["video9","right"],["video16","top"],["video4","bottom"]],"video11":[["video12","left"],["video10","right"],["video17","top"],["video5","bottom"]],"video12":[["video11","right"],["video18","top"],["video6","bottom"]],"video13":[["video14","left"],["video19","top"],["video7","bottom"]],"video14":[["video15","left"],["video13","right"],["video20","top"],["video8","bottom"]],"video15":[["video16","left"],["video14","right"],["video21","top"],["video9","bottom"]],"video16":[["video17","left"],["video15","right"],["video22","top"],["video10","bottom"]],"video17":[["video18","left"],["video16","right"],["video23","top"],["video11","bottom"]],"video18":[["video17","right"],["video24","top"],["video12","bottom"]],"video19":[["video20","left"],["video13","bottom"]],"video20":[["video21","left"],["video19","right"],["video14","bottom"]],"video21":[["video22","left"],["video20","right"],["video15","bottom"]],"video22":[["video23","left"],["video21","right"],["video16","bottom"]],"video23":[["video24","left"],["video22","right"],["video17","bottom"]],"video24":[["video23","right"],["video18","bottom"]]};
+var centers= [[[0.29949874686716793,0.10975609756097561]],[[0.37969924812030076,0.10975609756097561]],[[0.4598997493734336,0.10975609756097561]],[[0.05889724310776942,0.10975609756097561]],[[0.13909774436090225,0.10975609756097561]],[[0.2192982456140351,0.10975609756097561]],[[0.29949874686716793,0.32926829268292684]],[[0.37969924812030076,0.32926829268292684]],[[0.4598997493734336,0.32926829268292684]],[[0.05889724310776942,0.32926829268292684]],[[0.13909774436090225,0.32926829268292684]],[[0.2192982456140351,0.32926829268292684]],[[0.29949874686716793,0.6707317073170732]],[[0.37969924812030076,0.6707317073170732]],[[0.4598997493734336,0.6707317073170732]],[[0.05889724310776942,0.6707317073170732]],[[0.13909774436090225,0.6707317073170732]],[[0.2192982456140351,0.6707317073170732]],[[0.29949874686716793,0.8902439024390244]],[[0.37969924812030076,0.8902439024390244]],[[0.4598997493734336,0.8902439024390244]],[[0.05889724310776942,0.8902439024390244]],[[0.13909774436090225,0.8902439024390244]],[[0.2192982456140351,0.8902439024390244]]];
+var saveButton = document.getElementById('save');
+var cwidth = 512*1.5;
+var cheight = 512*1.5*328/(276*2+512);
+var hclines = [["0.5989974937343359,0.21951219512195122 ","0.518796992481203,0 "],["0.6791979949874687,0.21951219512195122 ","0.5989974937343359,0 "],["0.7593984962406015,0.21951219512195122 ","0.6791979949874687,0 "],["0.8395989974937343,0.21951219512195122 ","0.7593984962406015,0 "],["0.9197994987468672,0.21951219512195122 ","0.8395989974937343,0 "],["1,0.21951219512195122 ","0.9197994987468672,0 "],["0.5989974937343359,0.43902439024390244 ","0.518796992481203,0.21951219512195122 "],["0.6791979949874687,0.43902439024390244 ","0.5989974937343359,0.21951219512195122 "],["0.7593984962406015,0.43902439024390244 ","0.6791979949874687,0.21951219512195122 "],["0.8395989974937343,0.43902439024390244 ","0.7593984962406015,0.21951219512195122 "],["0.9197994987468672,0.43902439024390244 ","0.8395989974937343,0.21951219512195122 "],["1,0.43902439024390244 ","0.9197994987468672,0.21951219512195122 "],["0.5989974937343359,0.6585365853658537 ","0.518796992481203,0.43902439024390244 "],["0.6791979949874687,0.6585365853658537 ","0.5989974937343359,0.43902439024390244 "],["0.7593984962406015,0.6585365853658537 ","0.6791979949874687,0.43902439024390244 "],["0.8395989974937343,0.6585365853658537 ","0.7593984962406015,0.43902439024390244 "],["0.9197994987468672,0.6585365853658537 ","0.8395989974937343,0.43902439024390244 "],["1,0.6585365853658537 ","0.9197994987468672,0.43902439024390244 "],["0.5989974937343359,0.8780487804878049 ","0.518796992481203,0.6585365853658537 "],["0.6791979949874687,0.8780487804878049 ","0.5989974937343359,0.6585365853658537 "],["0.7593984962406015,0.8780487804878049 ","0.6791979949874687,0.6585365853658537 "],["0.8395989974937343,0.8780487804878049 ","0.7593984962406015,0.6585365853658537 "],["0.9197994987468672,0.8780487804878049 ","0.8395989974937343,0.6585365853658537 "],["1,0.8780487804878049 ","0.9197994987468672,0.6585365853658537 "]];
+var vclines = [["0.518796992481203,0 0.518796992481203,0.21951219512195122 ","0.5989974937343359,0 "],["0.5989974937343359,0 0.5989974937343359,0.21951219512195122 ","0.6791979949874687,0 "],["0.6791979949874687,0 0.6791979949874687,0.21951219512195122 ","0.7593984962406015,0 "],["0.7593984962406015,0 0.7593984962406015,0.21951219512195122 ","0.8395989974937343,0 "],["0.8395989974937343,0 0.8395989974937343,0.21951219512195122 ","0.9197994987468672,0 "],["0.9197994987468672,0 0.9197994987468672,0.21951219512195122 ","1,0 "],["0.518796992481203,0.21951219512195122 0.518796992481203,0.43902439024390244 ","0.5989974937343359,0.21951219512195122 "],["0.5989974937343359,0.21951219512195122 0.5989974937343359,0.43902439024390244 ","0.6791979949874687,0.21951219512195122 "],["0.6791979949874687,0.21951219512195122 0.6791979949874687,0.43902439024390244 ","0.7593984962406015,0.21951219512195122 "],["0.7593984962406015,0.21951219512195122 0.7593984962406015,0.43902439024390244 ","0.8395989974937343,0.21951219512195122 "],["0.8395989974937343,0.21951219512195122 0.8395989974937343,0.43902439024390244 ","0.9197994987468672,0.21951219512195122 "],["0.9197994987468672,0.21951219512195122 0.9197994987468672,0.43902439024390244 ","1,0.21951219512195122 "],["0.518796992481203,0.43902439024390244 0.518796992481203,0.6585365853658537 ","0.5989974937343359,0.43902439024390244 "],["0.5989974937343359,0.43902439024390244 0.5989974937343359,0.6585365853658537 ","0.6791979949874687,0.43902439024390244 "],["0.6791979949874687,0.43902439024390244 0.6791979949874687,0.6585365853658537 ","0.7593984962406015,0.43902439024390244 "],["0.7593984962406015,0.43902439024390244 0.7593984962406015,0.6585365853658537 ","0.8395989974937343,0.43902439024390244 "],["0.8395989974937343,0.43902439024390244 0.8395989974937343,0.6585365853658537 ","0.9197994987468672,0.43902439024390244 "],["0.9197994987468672,0.43902439024390244 0.9197994987468672,0.6585365853658537 ","1,0.43902439024390244 "],["0.518796992481203,0.6585365853658537 0.518796992481203,0.8780487804878049 ","0.5989974937343359,0.6585365853658537 "],["0.5989974937343359,0.6585365853658537 0.5989974937343359,0.8780487804878049 ","0.6791979949874687,0.6585365853658537 "],["0.6791979949874687,0.6585365853658537 0.6791979949874687,0.8780487804878049 ","0.7593984962406015,0.6585365853658537 "],["0.7593984962406015,0.6585365853658537 0.7593984962406015,0.8780487804878049 ","0.8395989974937343,0.6585365853658537 "],["0.8395989974937343,0.6585365853658537 0.8395989974937343,0.8780487804878049 ","0.9197994987468672,0.6585365853658537 "],["0.9197994987468672,0.6585365853658537 0.9197994987468672,0.8780487804878049 ","1,0.6585365853658537 "]];
+var ccenters= [[0.5588972431077694,0.10975609756097561],[0.6390977443609023,0.10975609756097561],[0.7192982456140351,0.10975609756097561],[0.7994987468671679,0.10975609756097561],[0.8796992481203008,0.10975609756097561],[0.9598997493734336,0.10975609756097561],[0.5588972431077694,0.32926829268292684],[0.6390977443609023,0.32926829268292684],[0.7192982456140351,0.32926829268292684],[0.7994987468671679,0.32926829268292684],[0.8796992481203008,0.32926829268292684],[0.9598997493734336,0.32926829268292684],[0.5588972431077694,0.5487804878048781],[0.6390977443609023,0.5487804878048781],[0.7192982456140351,0.5487804878048781],[0.7994987468671679,0.5487804878048781],[0.8796992481203008,0.5487804878048781],[0.9598997493734336,0.5487804878048781],[0.5588972431077694,0.7682926829268293],[0.6390977443609023,0.7682926829268293],[0.7192982456140351,0.7682926829268293],[0.7994987468671679,0.7682926829268293],[0.8796992481203008,0.7682926829268293],[0.9598997493734336,0.7682926829268293]];
+
+for (var i=1;i<npieces+1;i++) {
+	var video = document.getElementById('video'+i);
+	
+	video.addEventListener('mousedown',dragstart);
+	
+	video.style.left = locations[i-1][0]+'px';
+	video.style.top = locations[i-1][1]+'px';
+	video.style.transform = 'rotate('+rotations[i-1]+'deg)';
+	video.style.transformOrigin = centers[i-1][0][0]*100+'% '+centers[i-1][0][1]*100+'%';
+	//video.style.display = 'none';
+	videos['video'+i] = video;
+	
+	
+}
+
+function throttled(delay, fn) {
+  let lastCall = 0;
+  return function (...args) {
+    const now = (new Date).getTime();
+    if (now - lastCall < delay || !dragid || dragid.length<5) {
+      return;
+    }
+    lastCall = now;
+    return fn(...args);
+  }
+}
+const tHandler = throttled(40, dragmove);
+document.addEventListener('mousemove',tHandler);
+document.addEventListener('mouseup',dragend);
+
+
+
+function dragstart(event) {
+	event.preventDefault();
+	e = event || window.event;
+	
+	if (!dragid || dragid == ''){
+		dragid = e.target.id;
+		cvideo = videos[dragid];
+		if (cvideo) {
+			vmatches = [];
+			nmatches = 0;
+			startX = [e.pageX,parseFloat(cvideo.style.left)];
+			startY = [e.pageY,parseFloat(cvideo.style.top)];
+			for (var i=1;i<npieces+1;i++) {
+				let tempkey = 'video'+i;
+				
+				if (document.getElementById(tempkey) && tempkey != dragid){
+					let tempvideo = videos[tempkey].getBoundingClientRect();
+					for (var ii=0;ii<centers[i-1].length;ii++){
+						vmatches.push([tempkey,[parseFloat(tempvideo.left)+centers[i-1][ii][0]*parseFloat(cwidth),parseFloat(tempvideo.top)+centers[i-1][ii][1]*parseFloat(cheight)]]);
+						nmatches++;
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+function dragmove(event) {
+	e = event || window.event;
+
+	if (dragid && dragid.length > 5) {
+		let newLeft = e.pageX;
+		let newTop = e.pageY;
+		if ((newLeft < startX[0]-0 || newLeft > startX[0]+0) && (newTop < startY[0]-0 || newTop > startY[0]+0)){
+			cvideo.style.left = e.pageX - startX[0] + startX[1] + 'px';
+			cvideo.style.top = e.pageY - startY[0] + startY[1] + 'px';
+			startX[1] += newLeft - startX[0];
+			startY[1] += newTop- startY[0];
+			startX[0] = newLeft;
+			startY[0] = newTop;
+			isclick = false;
+		}
+		else if (newLeft < startX[0]-0 || newLeft > startX[0]+0){
+			cvideo.style.left = e.pageX - startX[0] + startX[1] + 'px';
+			startX[1] += newLeft - startX[0];
+			startX[0] = newLeft;
+			isclick = false;
+		}
+		else if (newTop < startY[0]-0 || newTop > startY[0]+0){
+			cvideo.style.top = e.pageY - startY[0] + startY[1] + 'px';
+			startY[1] += newTop - startY[0];
+			startY[0] = newTop;
+			isclick = false;
+		}
+	}
+	
+
+}
+function dragend() {
+	if (isclick && dragid && dragid != '') {
+		var drid = dragid;
+		document.getElementById(drid).style.transform = 'rotate('+(parseInt(rotations[parseInt(drid.substr(5,))-1])+90)+'deg)';
+		rotations[parseInt(drid.substr(5,))-1]=(parseInt(rotations[parseInt(drid.substr(5,))-1])+90);
+		if (rotations[parseInt(drid.substr(5,))-1]> 350) {
+			rotations[parseInt(drid.substr(5,))-1] = rotations[parseInt(drid.substr(5,))-1]-360;
+		}
+	}
+	else if (dragid && dragid != '') {
+		var pieceheight = cheight*144/164/4;
+		var piecewidth = pieceheight*512/288*4/6;
+		var possMatches = {};
+		possMatches[parseInt(dragid.substr(5,))]=[];
+		for (var ii=0;ii<centers[parseInt(dragid.substr(5,))-1].length;ii++) {
+			let newx = parseFloat(cvideo.getBoundingClientRect().left)+centers[parseInt(dragid.substr(5,))-1][ii][0]*parseFloat(cwidth);
+			let newy = parseFloat(cvideo.getBoundingClientRect().top)+centers[parseInt(dragid.substr(5,))-1][ii][1]*parseFloat(cheight);
+		
+			for (var i=0;i<nmatches;i++) {
+				var possMatch = false;
+				let tempkey = parseInt(vmatches[i][0].substr(5,))-1;
+				let tempbox = vmatches[i][1];
+
+				if (rotations[parseInt(dragid.substr(5,))-1]==rotations[tempkey]) {
+					if (newx < tempbox[0] + piecewidth + 10 && newy < tempbox[1] + pieceheight + 10) {
+						if (newx > tempbox[0] + piecewidth - 10) {
+							//in far right match zone
+						
+							if (newy > tempbox[1] - 10 && newy < tempbox[1] + 10) {
+								possMatch = 'right';
+							}
+						
+						}
+						else if (newx > tempbox[0] - piecewidth - 10 && newx < tempbox[0] - piecewidth + 10) {
+							//in far left match zone
+						
+							if (newy > tempbox[1] - 10 && newy < tempbox[1] + 10) {
+								possMatch = 'left';
+							}
+						}
+						else if (newx > tempbox[0] - 10 && newx < tempbox[0] + 10) {
+							//in center match zone
+							if (newy > tempbox[1] + pieceheight - 10) {
+								possMatch = 'bottom';
+							}
+							else if (newy > tempbox[1] - pieceheight - 10 && newy < tempbox[1] - pieceheight + 10) {
+								possMatch = 'top';
+							}
+						}
+				
+					}
+				}
+				if (possMatch) {
+					var skipMatch = false;
+					for (var iii=0;iii<possMatches[parseInt(dragid.substr(5,))].length;iii++) {
+						if (possMatches[parseInt(dragid.substr(5,))][iii][0]==tempkey+1 && possMatches[parseInt(dragid.substr(5,))][iii][1]==possMatch){
+							skipMatch = true;
+							break;
+						}
+					}
+					if (!skipMatch){
+						possMatches[parseInt(dragid.substr(5,))].push([tempkey+1,possMatch]);
+					}
+				}
+			}
+		}			
+		
+		if (possMatches[parseInt(dragid.substr(5,))].length>0){
+			socketanswer(parseInt(dragid.substr(5,)),possMatches[parseInt(dragid.substr(5,))]);
+		}
+		
+	}
+	dragid = '';
+	isclick = true;
+	
+}
+function playvideo() {
+	for (var i=1;i<npieces+1;i++) {
+		var video = videos['video'+i];
+		if (video){video.style.display = 'inline-block';}
+	}
+}
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+<script>
+
+var socket = false;
+var keepscore = false;
+if (getUrlVars()['type'] && getUrlVars()['type']=='solo') {
+	
+}
+else {
+	socket = io.connect('', {query: 'name=2-frozen-pizzas&username=<%= username %>'});
+}
+</script>
+<script src="../js/collabpuzzle.js"></script>
+<script src="../js/solopuzzle.js"></script>
+
+
+
+</body>
+
+	</html>
+
+
+
+
+
