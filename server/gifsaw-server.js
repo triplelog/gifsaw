@@ -36,7 +36,7 @@ app.use('/',express.static('static'));
 
 app.get('/puzzle', 
 	function(req, res) {
-		var npieces = 30;
+		var npieces = 24;
 		var gametype = 'solo';
 		var players = 'one';
 		var score = false;
@@ -132,6 +132,9 @@ function makelines(width,height,npieces) {
 			}
 		}
 	}
+	
+	nrows = 4;
+	ncols = 6;
 
 	width = 512/(276*2+512); //Revert to 1
 	height = 144/164; //Revert to 1
