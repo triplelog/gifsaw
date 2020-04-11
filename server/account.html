@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=".">    <title>QbluR</title>    
+<link href="../css/prism.css" rel="stylesheet" />
+<link rel="stylesheet" href="../icons/fontawesome/css/all.css">
+<style>
+.container {
+	display: grid;
+	height: calc(100vh - 3rem);
+	width: calc(100vw - 3rem);
+	margin: 1rem auto;
+	/*border: 1px dotted blue;*/
+	grid-template-columns: calc((100vw - 3rem - 193px) / 2) 193px calc((100vw - 3rem - 193px) / 2);
+  	grid-template-rows: calc((100vh - 3rem - 204px) / 2) 204px calc((100vh - 3rem - 204px) / 2);
+}
+
+.header {
+	position: relative;
+	top: 0px;
+	left:0px;
+  	
+}
+.header img{
+	position: absolute;
+}
+.header span{
+	position: absolute;
+	left: 50px;
+	top: 50px;
+	width: 100px;
+}
+.header span ~ span{
+	top: 70px;
+}
+.header span ~ span ~ span{
+	top: 90px;
+}
+.header span ~ span ~ span ~ span{
+	top: 110px;
+}
+.content-11 {
+	grid-row:  1;
+	grid-column:  1;
+	border: 2px solid black;
+  	border-radius: 1.5rem;
+  	position: relative;
+}
+.content-31 {
+	grid-row:  3;
+	grid-column:  1;
+  	border: 2px solid black;
+  	border-radius: 1.5rem;
+  	position: relative;
+}
+.content-22 {
+	grid-row:  2;
+	grid-column:  2;
+}
+.content-13 {
+	grid-row:  1;
+	grid-column:  3;
+  	border: 2px solid black;
+  	border-radius: 1.5rem;
+  	position: relative;
+  	overflow: hidden;
+}
+.content-13 img {
+	max-width: 90%;
+	max-height: 90%;
+	margin: auto;
+	overflow: hidden;
+}
+.content-33 {
+	grid-row:  3;
+	grid-column:  3;
+  	border: 2px solid black;
+  	border-radius: 1.5rem;
+  	position: relative;
+}
+.content-11:hover ~ .content-22 {
+	transition: all 1s ease-in;
+	transform: rotate(180deg);
+}
+.content-13:hover ~ .content-22 {
+	transition: all 1s ease-in;
+	transform: rotate(270deg);
+}
+.content-31:hover ~ .content-22 {
+	transition: all 1s ease-in;
+	transform: rotate(90deg);
+}
+.content-12:hover ~ .content-22 {
+	transition: all 1s ease-in;
+	transform: rotate(225deg);
+}
+.content-21:hover ~ .content-22 {
+	transition: all 1s ease-in;
+	transform: rotate(135deg);
+}
+.content-23:hover ~ .content-22 {
+	transition: all 1s ease-in;
+	transform: rotate(315deg);
+}
+.content-32:hover ~ .content-22 {
+	transition: all 1s ease-in;
+	transform: rotate(45deg);
+}
+.content-33:hover ~ .content-22 {
+	transition: all 1s ease-in;
+	transform: rotate(0deg);
+}
+
+
+.content-12 { 
+  grid-row:  1;
+  grid-column:  2; 
+}
+.content-21 { 
+  grid-row:  2;
+  grid-column:  1; 
+}
+.content-23 { 
+  grid-row:  2;
+  grid-column:  3; 
+}
+.content-32 { 
+  grid-row:  3;
+  grid-column:  2; 
+}
+
+
+
+
+.title {
+	line-height: 3rem;
+	text-align: center;
+	font-size: 1.5rem;
+	border: 2px solid black;
+  	border-radius: 1.5rem;
+  	position: relative;
+  	top:-2px;
+  	left:-2px;
+  	width: calc(100% + 0px);
+  	background: red;
+}
+form div {
+	width: 20rem;
+	margin: auto;
+}
+fieldset {
+	display: inline-block;
+	padding-left: .75rem;
+	padding-right: .75rem;
+}
+fieldset input {
+	width: 18.5rem;
+	font-size:1.1rem;
+}
+form button {
+	display: block;
+	margin: auto;
+	width: 10rem;
+	font-size: 1.5rem;
+}
+
+.container div .title .titleLeft {
+	float: left;
+	margin-left: 4px;
+	width: 100px;
+}
+.container div .title .titleCenter {
+
+}
+.container div .title .titleRight {
+	float: right;
+	width: 100px;
+}
+.container div .title .titleRight label{
+	margin-right: 4px;
+}
+
+.content-11 .content {
+	position: relative;
+	height: calc(100% - 3rem);
+}
+label[for="formula--1"] {
+	position: absolute;
+	display: block;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 150%;
+}
+
+{% for formula in range(0,10 + formulas.length*3/2) %}
+#formula-{{formula}}:checked ~ label[for="formula-{{formula}}"] {
+	pointer-events: none;
+	
+}
+#formula-{{formula}}:checked ~ label[for="formula-{{formula}}"] + div.formulaCode {
+	display: block;
+	
+}
+{% endfor %}
+#formulas {
+	overflow: auto;
+}
+.formulaLabel {
+	position: relative;
+	display: block;
+}
+.formulaCode {
+	display: none;
+	position: absolute;
+	left: 1rem;
+	padding: 1rem;
+	z-index: 5;
+	border: 1px solid black;
+	background: white;
+	pointer-events: none;
+}
+.formulaCode div{
+	pointer-events: all;
+}
+
+
+.creations .content{
+	overflow: auto;
+}
+.creations .content img{
+	max-width: 40%;
+	display: inline-block;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+	
+
+
+	<div class="content-11">
+		
+		<div class="title">
+			<span class="titleLeft">
+				<i class="far fa-plus-square"></i>
+				
+			</span>
+			<span class="titleCenter">
+				Formulas
+			</span>
+			<span class="titleRight">
+				<label for="size11-1"><i class="fas fa-compress-alt"></i></label>
+				<label for="size11-2"><i class="fas fa-expand-alt"></i></label>
+				<label for="size11-3"><i class="fas fa-expand"></i></label>
+			</span>
+		</div>
+		
+		<div class="content" id="formulas">
+			<input type="radio" name="formula" style="display: none;" id="formula--1" checked="checked"></input>
+			{% for formula in formulas %}
+			<input type="radio" name="formula" style="display: none;" id="formula-{{ formula.id }}"></input>
+			{% endfor %}
+			<label for="formula--1"></label>
+			{% for formula in formulas %}
+			<label class="formulaLabel" for="formula-{{ formula.id }}">{{ formula.name }}</label>
+			<div class="formulaCode">
+				<div>
+					<i class="fas fa-trash"></i>
+					<i class="fas fa-edit"></i>
+					<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}')"></i>
+				</div>
+				<pre class="language-python"><code class="language-python">{{ formula.code }}</code></pre>
+				
+			</div>
+			{% endfor %}
+			
+		</div>
+	</div>
+	<div class="content-13">
+		<div class="title">
+			<span class="titleLeft">
+				<i class="far fa-plus-square"></i>
+			</span>
+			<span class="titleCenter">
+				Images
+			</span>
+			<span class="titleRight">
+				<label for="size13-1"><i class="fas fa-compress-alt"></i></label>
+				<label for="size13-2"><i class="fas fa-expand-alt"></i></label>
+				<label for="size13-3"><i class="fas fa-expand"></i></label>
+			</span>
+		</div>
+		
+		<div class="content">
+			{% for image in images %}
+			<img src="{{image.src}}">
+			{% endfor %}
+		</div>
+	</div>
+	<div class="content-31">
+		
+		<div class="title">
+			<span class="titleLeft">
+				<i class="far fa-plus-square"></i>
+				<i class="fas fa-trash"></i>
+			</span>
+			<span class="titleCenter">
+				Templates
+			</span>
+			<span class="titleRight">
+				<label for="size31-1"><i class="fas fa-compress-alt"></i></label>
+				<label for="size31-2"><i class="fas fa-expand-alt"></i></label>
+				<label for="size31-3"><i class="fas fa-expand"></i></label>
+			</span>
+		</div>
+		<div class="content">
+			{% for template in templates %}
+			<label class="templateLabel" for="template-{{ template.id }}">{{ template.name }}</label>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="content-33 creations">
+		
+		<div class="title">
+			<span class="titleLeft">
+				<i class="far fa-plus-square"></i>
+			</span>
+			<span class="titleCenter">
+				Creations
+			</span>
+			<span class="titleRight">
+				<label for="size31-1"><i class="fas fa-compress-alt"></i></label>
+				<label for="size31-2"><i class="fas fa-expand-alt"></i></label>
+				<label for="size31-3"><i class="fas fa-expand"></i></label>
+			</span>
+		</div>
+		<div class="content">
+			{% for creation in creations %}
+			<img src="{{creation}}">
+			{% endfor %}
+		</div>
+	</div>
+	
+	<div class="content-12">
+		<div class="content">
+			Settings: default programming language, default font, upgrade to premium, privacy settings, friends, interactive/ default size builder, robot, bg image for profile/creation page
+			
+		</div>
+	</div>
+	<div class="content-21">
+		<div class="content">
+			
+		</div>
+	</div>
+	<div class="content-23">
+		<div class="content">
+			
+		</div>
+	</div>
+	<div class="content-32">
+		<div class="content">
+			
+		</div>
+	</div>
+	
+	<div class="content-22">
+		<div class="header">
+			
+			<img src="../img/logo.png" id="rotate-33" />
+			<span>Settings</span>
+			<span>Friends</span>
+			<span>Stats</span>
+			<!--<span>Account</span>-->
+		</div>
+	</div>
+</div>
+<xml id="toolbox" style="display: none">
+  <category name="Control">
+	<block type="controls_if"></block>
+	<block type="controls_whileUntil"></block>
+	<block type="controls_for">
+  </category>
+  <category name="Logic">
+	<block type="logic_compare"></block>
+	<block type="logic_operation"></block>
+	<block type="logic_boolean"></block>
+  </category>
+  <category name="Math">
+	<block type="math_number"></block>
+	<block type="math_arithmetic"></block>
+  </category>
+  <category name="Variables" custom="VARIABLE"></category>
+  <category name="Functions" custom="PROCEDURE"></category>
+
+</xml>
+<script src="../js/prism.js"></script>
+<script>var tkey = {{ tkey | dump | safe }}</script>
+<script src="../js/account.js"></script>
+
+</body>
+</html>

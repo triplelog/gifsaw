@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=".">    <title>ChartDN - A Delivery Network for Charts</title>    
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css">
+    
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css">
+
+
+
+</head>
+<body>
+<!--
+<div class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <a class="pure-menu-heading header-logo" href="../"><img width="172" src="../images/logo.png"></a>
+
+        <ul class="pure-menu-list header-menu">
+            <li class="pure-menu-item"><a href="../new" class="pure-menu-link">Link1</a></li>
+        </ul>
+    </div>
+</div>
+-->
+
+<div class="content-wrapper">
+    <div class="content">
+    	<div class="pure-g">
+    		{% if type == "image" %}
+				<div class="l-box pure-u-1 pure-u-md-1-4 pure-u-lg-1-2">
+				
+					<div>
+						Image: <input type="file" name="imgSrc" id="imgSrc"></input>
+					</div>
+					<div>
+						Text: <input type="text" id="text" value=" "></input>
+					</div>
+					<div>
+						Font: <input type="text" id="font" value="Tahoma">Autocomplete w/ fonts</input>
+					</div>
+					<div>
+						Font Size: <input type="number" id="fontSize" value="40"></input>
+					</div>
+					<div id="locY">
+						Location Y: 
+						<select>
+							<option value="0">Middle</option>
+							<option value="200">Top</option>
+							<option value="400">Bottom</option>
+						</select>
+						 = 
+						 <input type="number" value="50"></input>%
+					</div>
+					<div id="locX">
+						Location X: 
+						<select>
+							<option value="0">Middle</option>
+							<option value="200">Left</option>
+							<option value="400">Right</option>
+						</select>
+						 = 
+						 <input type="number" value="50"></input>%
+					</div>
+					<div>
+						Blur Radius: <input type="number" id="blurRadius" value="10"></input>
+					</div>
+					<div id="blurFormula">
+						Blur Formula:
+						<select>
+							<option value="hsl" selected="selected">Custom HSL</option>
+							<option value="rgb">Custom RGB</option>
+						</select>
+						<textarea rows="4" cols="50" style="display: none;"></textarea>
+					</div>
+					<div id="textFormula">
+						Text Formula:
+						<select>
+							<option value="hsl" selected="selected">Custom HSL</option>
+							<option value="rgb">Custom RGB</option>
+						</select>
+						<textarea rows="4" cols="50" style="display: none;"></textarea>
+					</div>
+				</div>
+			{% endif %}
+			{% if type == "text" %}
+				<div class="l-box pure-u-1 pure-u-md-1-4 pure-u-lg-1-2">
+				
+					<div>
+						Image: <input type="file" name="imgSrc" id="imgSrc"></input>
+					</div>
+					<div>
+						Text: <input type="text" id="text" value=" "></input>
+					</div>
+					<div>
+						Font: <input type="text" id="font" value="Tahoma">Autocomplete w/ fonts</input>
+					</div>
+					<div>
+						Font Size: <input type="number" id="fontSize" value="40"></input>
+					</div>
+					<div id="locY">
+						Location Y: 
+						<select>
+							<option value="0">Middle</option>
+							<option value="200">Top</option>
+							<option value="400">Bottom</option>
+						</select>
+						 = 
+						 <input type="number" value="50"></input>%
+					</div>
+					<div id="locX">
+						Location X: 
+						<select>
+							<option value="0">Middle</option>
+							<option value="200">Left</option>
+							<option value="400">Right</option>
+						</select>
+						 = 
+						 <input type="number" value="50"></input>%
+					</div>
+					<div>
+						Blur Radius: <input type="number" id="blurRadius" value="10"></input>
+					</div>
+					<div id="blurFormula">
+						Blur Formula:
+						<select>
+							<option value="hsl" selected="selected">Custom HSL</option>
+							<option value="rgb">Custom RGB</option>
+						</select>
+						<textarea rows="4" cols="50" style="display: none;"></textarea>
+					</div>
+					<div id="textFormula">
+						Text Formula:
+						<select>
+							<option value="hsl" selected="selected">Custom HSL</option>
+							<option value="rgb">Custom RGB</option>
+						</select>
+						<textarea rows="4" cols="50" style="display: none;"></textarea>
+					</div>
+				</div>
+			{% endif %}
+    		<div class="l-box pure-u-1 pure-u-md-1-4 pure-u-lg-1-2">
+    			<div id="blurFormulaHSL" style="height: 280px; width: 500px;"></div>
+    			<div id="blurFormulaRGB" style="height: 280px; width: 500px;"></div>
+    			<div id="textFormulaHSL" style="height: 280px; width: 500px;"></div>
+    			<div id="textFormulaRGB" style="height: 280px; width: 500px;"></div>
+    			<!--<div id="codearea" style="height: 280px; width: 200px; border: 1px solid black;"></div>-->
+    		</div>
+    		<div class="l-box pure-u-1" id="imageHolder">
+    		</div>
+		</div>
+
+    </div>
+    <xml id="toolbox" style="display: none">
+	  
+	  <category name="Control">
+		<block type="controls_if"></block>
+		<block type="controls_whileUntil"></block>
+		<block type="controls_for">
+	  </category>
+	  <category name="Logic">
+		<block type="logic_compare"></block>
+		<block type="logic_operation"></block>
+		<block type="logic_boolean"></block>
+	  </category>
+	  <category name="Math">
+	  	<block type="math_number"></block>
+	  	<block type="math_arithmetic"></block>
+	  </category>
+	  <category name="Variables" custom="VARIABLE"></category>
+	  <category name="Functions" custom="PROCEDURE"></category>
+
+	</xml>
+
+</div>
+<script src="../js/blockly_compressed.js"></script>
+<script src="../js/blocks_compressed.js"></script>
+<script src="../js/blocklyen.js"></script>
+<script src="../js/lua_compressed.js"></script>
+<script>var type = {{ type | dump | safe }}</script>
+
+<script src="../js/blendtext.js"></script>
+<script src="../js/upload.js"></script>
+</body>
+</html>
