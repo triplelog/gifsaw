@@ -220,8 +220,9 @@ function dragend() {
 		var pieceheight = cheight*144/164/4;
 		var piecewidth = pieceheight*512/288*4/6;
 		var possMatches = {};
-		console.log(dragid);
 		possMatches[parseInt(dragid.substr(5,))]=[];
+		console.log(nmatches);
+		console.log(vmatches);
 		for (var ii=0;ii<centers[parseInt(dragid.substr(5,))-1].length;ii++) {
 			let newx = parseFloat(cvideo.getBoundingClientRect().left)+centers[parseInt(dragid.substr(5,))-1][ii][0]*parseFloat(cwidth);
 			let newy = parseFloat(cvideo.getBoundingClientRect().top)+centers[parseInt(dragid.substr(5,))-1][ii][1]*parseFloat(cheight);
