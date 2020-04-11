@@ -40,8 +40,8 @@ app.get('/puzzle',
 		var gametype = 'solo';
 		var players = 'one';
 		var score = false;
-		var fname = 'optdodgers';
-		var fullname = 'optdodgers.gif';
+		var fname = 'opttest';
+		var fullname = 'opttest.gif';
 		
 		
 		var dimensions = sizeOf('static/gifs/' + fullname);
@@ -65,8 +65,10 @@ app.get('/puzzle',
 			matches:JSON.stringify(retval[5]),
 			nrows:4,
 			ncols:6,
-			actheight:288,
-			actwidth:512,
+			//actheight:288,
+			//actwidth:512,
+			actheight:246,
+			actwidth:480,
 		}));
 		res.end();
 	}
@@ -142,10 +144,13 @@ function makelines(width,height,npieces) {
 	
 	nrows = 4;
 	ncols = 6;
-
-	width = 512/(276*2+512); //Revert to 1
-	height = 144/164; //Revert to 1
+	actwidth = width;
+	actheight = height;
+	//width = 512/(276*2+512); //Revert to 1
+	//height = 144/164; //Revert to 1
 	
+	width = actwidth/(40+2*actwidth); //Revert to 1
+	height = actheight/(actheight+40); //Revert to 1
 	
 	
 	const xchoices = [-1*width/ncols*.25,-1*width/ncols*.15,width/ncols*.15,width/ncols*.25];
@@ -162,10 +167,10 @@ function makelines(width,height,npieces) {
 	for (var i=0;i<nrows*ncols;i++){
 		
 		if (i%6<3){ //Delete conversions
-			conversions['video'+i]=[276/(276*2+512),Math.floor(i/(2*ncols))*(.5+20/164/2),i%3,Math.floor(i/(ncols))%2];
+			conversions['video'+i]=[(actwidth/2+20)/(40+2*actwidth),Math.floor(i/(2*ncols))*(.5+20/(actheight/2+20)/2),i%3,Math.floor(i/(ncols))%2];
 		}
 		else{
-			conversions['video'+i]=[20/(276*2+512),Math.floor(i/(2*ncols))*(.5+20/164/2),i%3,Math.floor(i/(ncols))%2];
+			conversions['video'+i]=[20/(40+2*actwidth),Math.floor(i/(2*ncols))*(.5+20/(actheight/2+20)/2),i%3,Math.floor(i/(ncols))%2];
 		}
 		const xdist = [xx[i%ncols],xx[i%ncols+1]];
 		const ydist = [yy[Math.floor(i/ncols)+1],yy[Math.floor(i/ncols)]];
@@ -204,10 +209,10 @@ function makelines(width,height,npieces) {
 
 		centers.push([[(x0+x1)/2,(y0+y1)/2]]);
 		
-		const x0c = 552/(276*2+512)+(i%ncols)*512/(276*2+512)/ncols;
-		const y0c = Math.floor(i/ncols)*288/328/(nrows);
-		const x1c = x0c+512/(276*2+512)/ncols;
-		const y1c = y0c+288/328/(nrows);
+		const x0c = (actwidth+40)/(40+2*actwidth)+(i%ncols)*actwidth/(40+2*actwidth)/ncols;
+		const y0c = Math.floor(i/ncols)*actheight/(actheight+40)/(nrows);
+		const x1c = x0c+actwidth/(40+2*actwidth)/ncols;
+		const y1c = y0c+actheight/(actheight+40)/(nrows);
 
 		var line1c = x0c+','+y0c+' '+x0c+','+y1c+' ';
 		var line2c = x1c+','+y0c+' ';
