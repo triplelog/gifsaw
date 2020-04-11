@@ -46,7 +46,7 @@ app.get('/puzzle',
 		
 		var dimensions = sizeOf('static/gifs/' + fullname);
 		var retval = makelines(dimensions.width,dimensions.height,npieces);
-		console.log(retval);
+		console.log(dimensions);
 		res.write(nunjucks.render('encryptedpuzzle.html',{
 			gametype: gametype,
 			players: players,
