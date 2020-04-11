@@ -142,8 +142,6 @@ function makelines(width,height,npieces) {
 	width = 512/(276*2+512); //Revert to 1
 	height = 144/164; //Revert to 1
 	
-	width = 512;
-	height = 288;
 	
 	
 	const xchoices = [-1*width/ncols*.25,-1*width/ncols*.15,width/ncols*.15,width/ncols*.25];
