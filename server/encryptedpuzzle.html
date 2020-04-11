@@ -20,12 +20,12 @@ img {
 	left: 50px;
 	top: 50px;
 }
-<% for (var i=0;i< npieces;i++) { %>
-#video<%= i+1 %> {
-	-webkit-clip-path:url(#clip<%= i+1 %>);
-	clip-path:url(#clip<%= i+1 %>);
+{% for i in range(0,npieces) %}
+	#video{{ i+1 }} {
+	-webkit-clip-path:url(#clip{{ i+1 }});
+	clip-path:url(#clip{{ i+1 }});
 }
-<% } %>
+{% endfor %}
 
 
 #playbutton {
