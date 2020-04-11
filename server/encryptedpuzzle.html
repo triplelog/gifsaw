@@ -221,8 +221,6 @@ function dragend() {
 		var piecewidth = pieceheight*512/288*4/6;
 		var possMatches = {};
 		possMatches[parseInt(dragid.substr(5,))]=[];
-		console.log(nmatches);
-		console.log(vmatches);
 		for (var ii=0;ii<centers[parseInt(dragid.substr(5,))-1].length;ii++) {
 			let newx = parseFloat(cvideo.getBoundingClientRect().left)+centers[parseInt(dragid.substr(5,))-1][ii][0]*parseFloat(cwidth);
 			let newy = parseFloat(cvideo.getBoundingClientRect().top)+centers[parseInt(dragid.substr(5,))-1][ii][1]*parseFloat(cheight);
@@ -262,6 +260,7 @@ function dragend() {
 					}
 				}
 				if (possMatch) {
+					console.log(vmatches[i]);
 					var skipMatch = false;
 					for (var iii=0;iii<possMatches[parseInt(dragid.substr(5,))].length;iii++) {
 						if (possMatches[parseInt(dragid.substr(5,))][iii][0]==tempkey+1 && possMatches[parseInt(dragid.substr(5,))][iii][1]==possMatch){
