@@ -36,7 +36,7 @@ app.use('/',express.static('static'));
 
 app.get('/puzzle', 
 	function(req, res) {
-		var npieces = 8;
+		var npieces = 4;
 		var gametype = 'solo';
 		var players = 'one';
 		var score = false;
