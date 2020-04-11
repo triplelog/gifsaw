@@ -36,7 +36,7 @@ app.use('/',express.static('static'));
 
 app.get('/puzzle', 
 	function(req, res) {
-		var npieces = 20;
+		var npieces = 4;
 		var gametype = 'solo';
 		var players = 'one';
 		var score = false;
@@ -47,7 +47,7 @@ app.get('/puzzle',
 		var dimensions = sizeOf('static/gifs/' + fullname);
 		var retval = makelines(dimensions.width,dimensions.height,npieces);
 
-		res.write(nunjucks.render('encryptedpuzzle.html',{
+		res.write(nunjucks.render('puzzle.html',{
 			gametype: gametype,
 			players: players,
 			score: score,
