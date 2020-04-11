@@ -45,8 +45,8 @@ img {
 }
 img {
 	display: block;
-	/*width: calc({{ image.width }} * 1.5px);*/
-	width: calc(512 * 1.5px);
+	width: calc({{ image.width }} * 1.5px);
+	/*width: calc(512 * 1.5px);*/
 	height: auto;
 	background: rgba(255,255,255,1);
 }
@@ -103,10 +103,10 @@ var nmatches;
 var videos = {};
 var score = {};
 var myname;
-//var gifwidth = {{ image.width }};
-//var gifheight = {{ image.height }};
-var gifwidth = 512;
-var gifheight = 288;
+var gifwidth = {{ image.width }};
+var gifheight = {{ image.height }};
+//var gifwidth = 512;
+//var gifheight = 288;
 var npieces= {{ npieces }};
 var locations= {{ locations }};
 var rotations= {{ rotations }};
@@ -221,7 +221,7 @@ function dragend() {
 	}
 	else if (dragid && dragid != '') {
 		var pieceheight = cheight*144/164/4;
-		var piecewidth = pieceheight*512/288*4/6;
+		var piecewidth = pieceheight*{{ image.width }}/{{ image.height }}*4/6;
 		var possMatches = {};
 		possMatches[parseInt(dragid.substr(5,))]=[];
 		for (var ii=0;ii<centers[parseInt(dragid.substr(5,))-1].length;ii++) {
