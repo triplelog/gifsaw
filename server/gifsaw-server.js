@@ -63,6 +63,10 @@ app.get('/puzzle',
 			locations:JSON.stringify(retval[3]),
 			rotations:JSON.stringify(retval[4]),
 			matches:JSON.stringify(retval[5]),
+			nrows:4,
+			ncols:6,
+			actheight:288,
+			actwidth:512,
 		}));
 		res.end();
 	}

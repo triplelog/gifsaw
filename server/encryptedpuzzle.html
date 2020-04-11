@@ -222,8 +222,8 @@ function dragend() {
 		}
 	}
 	else if (dragid && dragid != '') {
-		var pieceheight = cheight*144/164/4;
-		var piecewidth = pieceheight*512/288*4/6;
+		var pieceheight = cheight*{{ actheight }}/{{ image.height }}/{{ nrows }};
+		var piecewidth = pieceheight*{{ actwidth }}/{{ actheight }}*{{ nrows }}/{{ ncols }};
 		var possMatches = {};
 		possMatches[parseInt(dragid.substr(5,))]=[];
 		for (var ii=0;ii<centers[parseInt(dragid.substr(5,))-1].length;ii++) {
