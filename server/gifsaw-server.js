@@ -41,7 +41,7 @@ app.get('/puzzle',
 		var players = 'one';
 		var score = false;
 		var fname = 'optdodgers';
-		var fullname = 'outdodgers.gif';
+		var fullname = 'optdodgers.gif';
 		
 		
 		var dimensions = sizeOf('static/gifs/' + fullname);
