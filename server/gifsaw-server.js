@@ -39,7 +39,7 @@ app.use('/',express.static('static'));
 app.get('/create', 
 	
 	function(req, res) {
-		var vm = new VM();
+		/*var vm = new VM();
 		var npieces = 24;
 		var gametype = 'solo';
 		var players = 'one';
@@ -48,7 +48,7 @@ app.get('/create',
 		var fullname = 'opttest.gif';
 		
 		var nrows = 4;
-		var ncols = 8;
+		var ncols = 8;*/
 		//upload gif
 		//get nrows
 		//get ncols
@@ -56,6 +56,7 @@ app.get('/create',
 		//get gametype
 		//create encrypted
 		//save to database
+		
 		res.write(nunjucks.render('createpuzzle.html',{
 			
 		}));
@@ -67,7 +68,7 @@ app.get('/puzzle',
 	
 	function(req, res) {
 		var vm = new VM();
-		var npieces = 24;
+		var npieces;
 		var gametype = 'solo';
 		var players = 'one';
 		var score = false;
@@ -84,7 +85,7 @@ app.get('/puzzle',
 			actheight = dimensions.height-40;
 			actwidth = (dimensions.width-40)/2;
 		}
-		var retval = makelines(vm,npieces,encryptedpuzzle,actwidth,actheight,nrows,ncols);
+		var retval = makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols);
 		
 		var pieces = [];
 		npieces = retval[6];
@@ -153,7 +154,7 @@ wss.on('connection', function connection(ws) {
 });
 
 
-function makelines(vm,npieces,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
+function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	var vlines = [];
 	var hlines = [];
 	var vclines = [];
@@ -184,25 +185,7 @@ function makelines(vm,npieces,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	}
 	line;`));
 	vm.run('var x0; var x1; var y0; var y1; var i; var ncols; var nrows; var line;');
-	/*
-	let nrowsf = Math.floor(Math.sqrt(npieces*height/width));
-	let ncolsf = Math.floor(nrowsf*width/height);
-	var nrows = nrowsf;
-	var ncols = ncolsf;
-	var mind = npieces*2;
-	for (var i=0;i<2;i++) {
-		for (var ii=0;ii<2;ii++) {
-			if (Math.abs(npieces-(nrows+i)*(ncols+ii))<mind){
-				mind = Math.abs(npieces-(nrows+i)*(ncols+ii));
-				nrows = nrows+i;
-				ncols = ncols+ii;
-			}
-		}
-	}
-	
-	
-	nrows = 4;//must be even
-	ncols = 8;//must be even*/
+
 	width = 1;
 	height = 1;
 	
@@ -224,10 +207,10 @@ function makelines(vm,npieces,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 		
 		if (encryptedpuzzle){
 			if (i%ncols<ncols/2){ //left half needs to grab from right half
-				conversions['video'+i]=[(actwidth/2+20)/(40+2*actwidth),Math.floor(i/(2*ncols))*(.5+20/(actheight/2+20)/2)];
+				conversions['video'+i]=[(actwidth/2+20)/(40+2*actwidth),Math.floor(i/(nrows*ncols/2))*(.5+20/(actheight/2+20)/2)];
 			}
 			else{
-				conversions['video'+i]=[20/(40+2*actwidth),Math.floor(i/(2*ncols))*(.5+20/(actheight/2+20)/2)];
+				conversions['video'+i]=[20/(40+2*actwidth),Math.floor(i/(nrows*ncols/2))*(.5+20/(actheight/2+20)/2)];
 			}
 			conversions['video'+i].push(i%(ncols/2)); //column within half of gif
 			conversions['video'+i].push(Math.floor(i/(ncols))%(nrows/2)); //row within half of gif;
