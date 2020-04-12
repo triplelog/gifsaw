@@ -1,9 +1,11 @@
 function socketanswer(piece1,pairs) {
 	var tomatch = [];
 	var piece1 = 'video'+piece1;
-	if (pairs.length>0 && document.getElementById(piece1)){
+	//if (pairs.length>0 && document.getElementById(piece1)){
+	if (pairs.length>0){
 		for (var i=0;i<pairs.length;i++){
 			var piece2 = 'video'+pairs[i][0];
+			console.log(piece1,piece2);
 			for (var ii=0;ii<matches[piece1].length;ii++) {
 				if (piece2 == matches[piece1][ii][0] && pairs[i][1]==matches[piece1][ii][1] && document.getElementById(piece2)) {
 					//console.log(piece1,piece2,pairs,matches[piece1][ii]);
