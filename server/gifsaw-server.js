@@ -71,7 +71,7 @@ app.post('/create',
 		var matches = JSON.stringify(retval[5]);
 		if (collab){
 			matches = false;
-			tempKeys[tkey]={username:'',matches:retval[5]};
+			tempKeys[tkey]={username:'',matches:retval[5],puzzleid:puzzleid};
 		}
 		
 		for (var i=0;i<npieces;i++){
