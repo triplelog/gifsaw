@@ -39,10 +39,56 @@ app.use('/',express.static('static'));
 app.post('/create', 
 	
 	function(req, res) {
-		console.log(req.body);
+		var vm = new VM();
+		var npieces;
+		var gametype = 'solo';
+		var players = 'one';
+		var score = false;
 		
-		res.write(nunjucks.render('createpuzzle.html',{
-			
+		
+		var fullname = req.body.fileSrc.replace('../img/in/','');
+		var fname = fullname.substring(0,fullname.indexOf('.'));
+		var nrows = parseInt(req.body.nrows);
+		var ncols = parseInt(req.body.ncols);
+		
+		var encryptedpuzzle = false;
+		
+		
+		var dimensions = sizeOf('static/img/in/' + fullname);
+		var actheight = dimensions.height;
+		var actwidth = dimensions.width;
+		if (encryptedpuzzle){
+			actheight = dimensions.height-40;
+			actwidth = (dimensions.width-40)/2;
+		}
+		var retval = makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols);
+		
+		var pieces = [];
+		npieces = retval[6];
+		for (var i=0;i<npieces;i++){
+			var piece = {id:'video'+(i+1),rotation:retval[4][i],location:retval[3][i],centers:retval[2][i]};
+			pieces.push(piece);
+		}
+		res.write(nunjucks.render('encryptedpuzzle.html',{
+			gametype: gametype,
+			players: players,
+			score: score,
+			npieces: retval[6],
+			pagename: fname,
+			image: {'name':'../gifs/'+fullname,'width':dimensions.width,'height':dimensions.height},
+			vclines:JSON.stringify(retval[7]),
+			hclines:JSON.stringify(retval[8]),
+			ccenters:JSON.stringify(retval[9]),
+			vlines:retval[0],
+			hlines:retval[1],
+			matches:JSON.stringify(retval[5]),
+			nrows:nrows,
+			ncols:ncols,
+			//actheight:288,
+			//actwidth:512,
+			actheight:actheight,
+			actwidth:actwidth,
+			pieces: JSON.stringify(pieces),
 		}));
 		res.end();
 	}
