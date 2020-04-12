@@ -44,9 +44,10 @@ app.get('/puzzle',
 		var fullname = 'opttest.gif';
 		var actheight = 246;
 		var actwidth = 480;
-		
+		var nrows = 4;
+		var ncols = 8;
 		var dimensions = sizeOf('static/gifs/' + fullname);
-		var retval = makelines(dimensions.width,dimensions.height,npieces,actwidth,actheight);
+		var retval = makelines(dimensions.width,dimensions.height,npieces,actwidth,actheight,nrows,ncols);
 
 		res.write(nunjucks.render('encryptedpuzzle.html',{
 			gametype: gametype,
@@ -64,8 +65,8 @@ app.get('/puzzle',
 			locations:JSON.stringify(retval[3]),
 			rotations:JSON.stringify(retval[4]),
 			matches:JSON.stringify(retval[5]),
-			nrows:4,
-			ncols:6,
+			nrows:nrows,
+			ncols:ncols,
 			//actheight:288,
 			//actwidth:512,
 			actheight:actheight,
@@ -111,7 +112,7 @@ wss.on('connection', function connection(ws) {
 });
 
 
-function makelines(width,height,npieces,actwidth,actheight) {
+function makelines(width,height,npieces,actwidth,actheight,nrows,ncols) {
 	var vlines = [];
 	var hlines = [];
 	var vclines = [];
@@ -125,6 +126,7 @@ function makelines(width,height,npieces,actwidth,actheight) {
 	var locations = [];
 	var rotations = [];
 	var matches = {};
+	/*
 	let nrowsf = Math.floor(Math.sqrt(npieces*height/width));
 	let ncolsf = Math.floor(nrowsf*width/height);
 	var nrows = nrowsf;
@@ -142,7 +144,7 @@ function makelines(width,height,npieces,actwidth,actheight) {
 	
 	
 	nrows = 4;//must be even
-	ncols = 8;//must be even
+	ncols = 8;//must be even*/
 	
 	width = actwidth/(40+2*actwidth); //Revert to 1
 	height = actheight/(actheight+40); //Revert to 1
