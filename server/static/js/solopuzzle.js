@@ -64,6 +64,7 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 					if (3==2 && p1l > p2l || (rotations[parseInt(piece1.substr(5,))-1] == 0 && rotations[parseInt(piece2.substr(5,))-1] != 0)) {
 						rotations[parseInt(piece2.substr(5,))-1]=rotations[parseInt(piece1.substr(5,))-1];
 						video2.style.transform = 'rotate('+parseInt(rotations[parseInt(piece1.substr(5,))-1])+'deg)';
+						video2.style.transformOrigin = ccenters[parseInt(piece1.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece1.substr(5,))-1][1]*100+'%';
 						video2.style.left = video1.style.left;
 						video2.style.top = video1.style.top;
 					}
@@ -77,6 +78,10 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 							video1.style.left = (parseFloat(video2.style.left) - ccenters[parseInt(piece2.substr(5,))-1][0]*cwidth + centers[parseInt(piece2.substr(5,))-1][0][0]*cwidth)+'px';
 							video1.style.top = (parseFloat(video2.style.top) - ccenters[parseInt(piece2.substr(5,))-1][1]*cheight + centers[parseInt(piece2.substr(5,))-1][0][1]*cheight)+'px';
 							centers[parseInt(piece2.substr(5,))-1] = [[ccenters[parseInt(piece2.substr(5,))-1][0],ccenters[parseInt(piece2.substr(5,))-1][1]]];
+							video1.style.transformOrigin = ccenters[parseInt(piece2.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece2.substr(5,))-1][1]*100+'%';
+						}
+						else {
+							video1.style.transformOrigin = ccenters[parseInt(piece1.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece1.substr(5,))-1][1]*100+'%';
 						}
 						for (var i=0;i<centers[parseInt(piece2.substr(5,))-1].length;i++) {
 							centers[parseInt(piece1.substr(5,))-1].push(centers[parseInt(piece2.substr(5,))-1][i]);
@@ -89,6 +94,8 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 							else if (matches[piece2][i][1]=='left') {matches[matches[piece2][i][0]].push([piece1,'right']);}
 							else if (matches[piece2][i][1]=='right') {matches[matches[piece2][i][0]].push([piece1,'left']);}
 						}
+						
+						
 					}
 				}
 				else { //Do this too!
@@ -100,6 +107,7 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 					video2.style.transform = 'rotate(0deg)';
 					video2.style.left = '50px';
 					video2.style.top = '50px';
+					video1.style.transformOrigin = ccenters[parseInt(piece1.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece1.substr(5,))-1][1]*100+'%';
 				}
 
 				
@@ -129,7 +137,7 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 	}
 }
 
-
+//This function never gets called? - not from encryptedpuzzle or this page
 function mergepieces(piece1,piece2,locid,issocket=false,isfirst=false) {
 	if (document.getElementById(piece2) && document.getElementById(piece1)) {
 		var p1 = document.getElementById('path'+piece1.substr(5,));
