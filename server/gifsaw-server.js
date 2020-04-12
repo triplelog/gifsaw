@@ -73,7 +73,7 @@ app.get('/puzzle',
 		var score = false;
 		var fname = 'opttest';
 		var fullname = 'opttest.gif';
-		var encryptedpuzzle = true;
+		var encryptedpuzzle = false;
 		
 		var nrows = 4;
 		var ncols = 8;
