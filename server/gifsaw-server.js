@@ -39,6 +39,7 @@ app.use('/',express.static('static'));
 app.post('/create', 
 	
 	function(req, res) {
+		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
 		var vm = new VM();
 		var npieces;
 		var gametype = 'solo';
@@ -53,7 +54,7 @@ app.post('/create',
 		
 		var encryptedpuzzle = false;
 		
-		
+		var collab = true;
 		var dimensions = sizeOf('static/img/in/' + fullname);
 		var actheight = dimensions.height;
 		var actwidth = dimensions.width;
@@ -65,6 +66,13 @@ app.post('/create',
 		
 		var pieces = [];
 		npieces = retval[6];
+		
+		var matches = JSON.stringify(retval[5]);
+		if (collab){
+			matches = [];
+			tempKeys[tkey]={username:'',matches:retval[5]};
+		}
+		
 		for (var i=0;i<npieces;i++){
 			var piece = {id:'video'+(i+1),rotation:retval[4][i],location:retval[3][i],centers:retval[2][i]};
 			pieces.push(piece);
@@ -81,7 +89,7 @@ app.post('/create',
 			ccenters:JSON.stringify(retval[9]),
 			vlines:retval[0],
 			hlines:retval[1],
-			matches:JSON.stringify(retval[5]),
+			matches:matches,
 			nrows:nrows,
 			ncols:ncols,
 			//actheight:288,
@@ -89,6 +97,8 @@ app.post('/create',
 			actheight:actheight,
 			actwidth:actwidth,
 			pieces: JSON.stringify(pieces),
+			collab: collab,
+			tkey: tkey,
 		}));
 		res.end();
 	}
@@ -97,23 +107,6 @@ app.post('/create',
 app.get('/create', 
 	
 	function(req, res) {
-		/*var vm = new VM();
-		var npieces = 24;
-		var gametype = 'solo';
-		var players = 'one';
-		var score = false;
-		var fname = 'opttest';
-		var fullname = 'opttest.gif';
-		
-		var nrows = 4;
-		var ncols = 8;*/
-		//upload gif
-		//get nrows
-		//get ncols
-		//get name
-		//get gametype
-		//create encrypted
-		//save to database
 		
 		res.write(nunjucks.render('createpuzzle.html',{
 			
@@ -196,6 +189,8 @@ wss.on('connection', function connection(ws) {
   	var inSrc = 'static/img/in/'+imgid+'.png';
   	var imgTypes = ['.png','.jpg','.jpeg','.gif','.tiff','.tif'];//.svg, .psd, .eps, .raw, .pdf?
   	var imgIndex = 0;
+  	var matches= [];
+  	var username = '';
   	ws.on('message', function incoming(message) {
 		if (typeof message !== 'string'){
 			console.log("af",performance.now());
@@ -224,13 +219,16 @@ wss.on('connection', function connection(ws) {
 		if (dm.type && dm.type == 'key'){
 			if (dm.message && tempKeys[dm.message]){
 				username = tempKeys[dm.message].username;
+				if (tempKeys[dm.message].matches){
+					matches = tempKeys[dm.message].matches;
+				}
 			}
 			return;
 		}
 		else if (dm.type == 'possMatch'){
 			
 			if (dm.message && dm.message.length>1){
-				var tomatch = socketanswer(dm.message[0],dm.message[1]);
+				var tomatch = socketanswer(dm.message[0],dm.message[1],matches);
 				if (tomatch.length>0){
 					var jsonmessage = {'type':'foundMatch','message':[dm.message[0],tomatch,'me']}
 					ws.send(JSON.stringify(jsonmessage));
@@ -246,7 +244,7 @@ wss.on('connection', function connection(ws) {
 });
 
 
-function socketanswer(piece1,pairs) {
+function socketanswer(piece1,pairs,matches) {
 	var tomatch = [];
 	var piece1 = 'video'+piece1;
 	if (pairs.length>0){
