@@ -146,7 +146,7 @@ function makelines(vm,npieces,actwidth,actheight,nrows,ncols) {
 		line = x1+','+y1+' ' + x1+','+y0+' ';
 	}
 	line;`));
-	rightcodes.push(new VMScript(`line = x1+','+y1+' ' +(x1+(x1-x0)/6)+','+(y0+y1)/2+' '+ x1+','+y0+' ';
+	rightcodes.push(new VMScript(`line = x1+','+y1+' ' +(x1-(x1-x0)/6)+','+(y0+y1)/2+' '+ x1+','+y0+' ';
 	if (i%ncols == ncols-1){
 		line = x1+','+y1+' ' + x1+','+y0+' ';
 	}
