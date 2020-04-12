@@ -8,6 +8,7 @@ ws.onopen = function(evt) {
 }
 ws.onmessage = function(evt){
 	var dm = JSON.parse(evt.data);
+	console.log(dm);
 	if (dm.type == "foundMatch") {
 		if (dm.message && dm.message.length>2 && document.getElementById(dm.message[0])){
 			console.log(dm.message);
