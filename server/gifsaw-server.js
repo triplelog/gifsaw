@@ -202,7 +202,7 @@ function makelines(vm,npieces,actwidth,actheight,nrows,ncols) {
 
 
 		var line1 = x0+','+y0+' '+x0+','+y1+' ';
-		var rightcode = rightcodes[i%2];
+		var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		
 		var line2 = getRightLine(vm,rightcode,x0,x1,y0,y1,i,ncols);
 		
