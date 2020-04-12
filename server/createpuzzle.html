@@ -31,8 +31,10 @@
 <script>
 function updateNpieces() {
 	var npieces = document.getElementById('npieces').value;
-	var height = imageHeight || 1000;
+	var height = 1000;
+	if(imageHeight){height = imageHeight;}
 	var width = imageWidth || 1000;
+	if(imageWidth){width = imageWidth;}
 	var dimensions = [];
 	if (npieces <0){
 		return;
