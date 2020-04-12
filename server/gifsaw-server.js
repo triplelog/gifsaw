@@ -140,11 +140,17 @@ function makelines(vm,npieces,actwidth,actheight,nrows,ncols) {
 		line = x0+','+y1+' ' +(x1+x0)/2+','+(y1+(y1-y0)/6)+' '+ x1+','+y1+' ';
 	}
 	line;`);
-	const rightcode = new VMScript(`line = x1+','+y1+' ' +(x1+(x1-x0)/6)+','+(y0+y1)/2+' '+ x1+','+y0+' ';
+	var rightcodes = [];
+	rightcodes.push(new VMScript(`line = x1+','+y1+' ' +(x1+(x1-x0)/6)+','+(y0+y1)/2+' '+ x1+','+y0+' ';
 	if (i%ncols == ncols-1){
 		line = x1+','+y1+' ' + x1+','+y0+' ';
 	}
-	line;`);
+	line;`));
+	rightcodes.push(new VMScript(`line = x1+','+y1+' ' +(x1+(x1-x0)/6)+','+(y0+y1)/2+' '+ x1+','+y0+' ';
+	if (i%ncols == ncols-1){
+		line = x1+','+y1+' ' + x1+','+y0+' ';
+	}
+	line;`));
 	vm.run('var x0; var x1; var y0; var y1; var i; var ncols; var nrows; var line;');
 	/*
 	let nrowsf = Math.floor(Math.sqrt(npieces*height/width));
@@ -196,6 +202,7 @@ function makelines(vm,npieces,actwidth,actheight,nrows,ncols) {
 
 
 		var line1 = x0+','+y0+' '+x0+','+y1+' ';
+		var rightcode = rightcodes[i%2];
 		
 		var line2 = getRightLine(vm,rightcode,x0,x1,y0,y1,i,ncols);
 		
