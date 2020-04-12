@@ -135,11 +135,11 @@ function makelines(vm,npieces,actwidth,actheight,nrows,ncols) {
 	var locations = [];
 	var rotations = [];
 	var matches = {};
-	var rightcode = `var line = x1+','+y1+' ' +(x1+(x1-x0)/6)+','+(y0+y1)/2+' '+ x1+','+y0+' ';
+	const rightcode = new VMScript(`var line = x1+','+y1+' ' +(x1+(x1-x0)/6)+','+(y0+y1)/2+' '+ x1+','+y0+' ';
 	if (i%ncols == ncols-1){
 		line = x1+','+y1+' ' + x1+','+y0+' ';
 	}
-	line;`;
+	line;`);
 	/*
 	let nrowsf = Math.floor(Math.sqrt(npieces*height/width));
 	let ncolsf = Math.floor(nrowsf*width/height);
