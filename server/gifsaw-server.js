@@ -192,29 +192,24 @@ function makelines(width,height,npieces,actwidth,actheight) {
 		var line2 = getRightLine(x0,x1,y0,y1,i,ncols);
 		
 		
-		if (i%6 > 0){ //not first column
-			
+		if (i%ncols > 0){ //not first column
 			var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0,y1);
 			vlines.push([newLine,line2])
 		}
 		else {
 			vlines.push([line1,line2])
 		}
-		//vlines.push([line1,line2]);
-		
-		//line1 = (x[i%ncols]*2+x[i%ncols+1]*1)/3+','+y[Math.floor(i/ncols)+1]+' '+(x[i%ncols]+x[i%ncols+1]*1)/2+','+(y[Math.floor(i/ncols)+1]+ydist[0])+' '+(x[i%ncols]*1+x[i%ncols+1]*2)/3+','+y[Math.floor(i/ncols)+1]+' '+x[i%ncols+1]+','+y[Math.floor(i/ncols)+1]+' '
-		//line2 = (x[i%ncols+1]*2+x[i%ncols]*1)/3+','+y[Math.floor(i/ncols)]+' '+(x[i%ncols]+x[i%ncols+1]*1)/2+','+(y[Math.floor(i/ncols)]+ydist[1])+' '+(x[i%ncols]*2+x[i%ncols+1]*1)/3+','+y[Math.floor(i/ncols)]+' '+x[i%ncols]+','+y[Math.floor(i/ncols)]+' '
-	
-		//if (Math.floor(i/ncols)>=0){//Revert to equality and remove conversions
-		//	line2 = (x[i%ncols]+conversions['video'+i][0]*cwidth)+','+y[0]+' '
-		//}
-		//if (Math.floor(i/ncols)<=nrows-1){//Revert to equality and remove conversions
-		//	line1 = (x[i%ncols+1]+conversions['video'+i][0]*cwidth)+','+y[nrows]+' '
-		//}
-		line2 = x1+','+y0+' '+x0+','+y0+' ';
-		line1 = x0+','+y1+' '+x1+','+y1+' ';
 
-		hlines.push([line1,line2])
+		line2 = x1+','+y0+' '+x0+','+y0+' ';
+		line1 = getBottomLine(x0,x1,y0,y1,i,ncols,nrows);
+
+		if (i >= ncols){ //not first row
+			var newLine = flipBottomHorizontal(hlines[i-ncols][0].split(' '),x0,y0);
+			hlines.push([line1,newLine])
+		}
+		else {
+			hlines.push([line1,line2])
+		}
 
 		centers.push([[(x0+x1)/2,(y0+y1)/2]]);
 		
@@ -224,7 +219,7 @@ function makelines(width,height,npieces,actwidth,actheight) {
 		const x1c = x0c+actwidth/(40+2*actwidth)/ncols;
 		const y1c = y0c+actheight/(actheight+40)/(nrows);
 
-		var line1c = x0c+','+y0c+' '+x0c+','+y1c+' ';
+		var line1c = getBottomLine(x0c,x1c,y0c,y1c,i,ncols,nrows);
 		var line2c = getRightLine(x0c,x1c,y0c,y1c,i,ncols);
 		
 		
@@ -272,13 +267,35 @@ function makelines(width,height,npieces,actwidth,actheight) {
 	}
 	return [vlines,hlines,centers,locations,rotations,matches,nrows*ncols,vclines,hclines,ccenters];
 }
-
+function getBottomLine(x0,x1,y0,y1,i,ncols,nrows){
+	
+	var line = x0+','+y1+' '+x1+','+y1+' ';
+	if (i/ncols < nrows-1){
+		line = x0+','+y1+' ' +(x1+x0)/2+','+(y1+(y1-y0)/6)+' '+ x1+','+y1+' ';
+	}
+	return line;
+}
 function getRightLine(x0,x1,y0,y1,i,ncols){
-	var line = x1+','+y1+' ' +(x1+(x1-x0)/5)+','+(y0+y1)/2+' '+ x1+','+y0+' ';
+	var line = x1+','+y1+' ' +(x1+(x1-x0)/6)+','+(y0+y1)/2+' '+ x1+','+y0+' ';
 	if (i%ncols == ncols-1){
 		line = x1+','+y1+' ' + x1+','+y0+' ';
 	}
 	return line;
+}
+function flipBottomHorizontal(oldLine,x0,y0) {
+	var oldx0 = parseFloat(oldLine[0].split(',')[0]);
+	var oldy1 = parseFloat(oldLine[0].split(',')[1]);
+	var newLine = '';
+	for (var ii=oldLine.length-1;ii>=0;ii--){
+		if (oldLine[ii].indexOf(',')>0){
+			var newx = parseFloat(oldLine[ii].split(',')[0]);
+			var linex = newx-oldx0+parseFloat(x0);//old x0 should be new x0
+			var newy = parseFloat(oldLine[ii].split(',')[1]);
+			var liney = newy-oldy1+parseFloat(y0);//old y1 should be new y0
+			newLine += linex+','+liney+' ';
+		}
+	}
+	return newLine;
 }
 function flipRightVertical(oldLine,x0,y1) {
 	var oldx1 = parseFloat(oldLine[0].split(',')[0]);
