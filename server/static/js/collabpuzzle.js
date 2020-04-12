@@ -8,8 +8,12 @@ ws.onopen = function(evt) {
 }
 ws.onmessage = function(evt){
 	var dm = JSON.parse(evt.data);
-	if (dm.type == "merge") {
-		socketmerge();
+	if (dm.type == "foundMatch") {
+		if (dm.message && dm.message.length>2){
+			console.log(dm.message);
+			socketmerge(dm.message[0],dm.message[1],dm.message[2]);
+		}
+		
 	}
 	
 }

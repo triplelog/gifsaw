@@ -227,8 +227,46 @@ wss.on('connection', function connection(ws) {
 			}
 			return;
 		}
+		else if (dm.type == 'possMatch'){
+			
+			if (dm.message && dm.message.length>1){
+				var tomatch = socketanswer(dm.message[0],dm.message[1]);
+				if (tomatch.length>0){
+					var jsonmessage = {'type':'foundMatch','message':[dm.message[0],tomatch,'me']}
+					ws.send(JSON.stringify(jsonmessage));
+		
+				}
+				else {
+					return
+				}
+			}
+			return;
+		}
   	});
 });
+
+
+function socketanswer(piece1,pairs) {
+	var tomatch = [];
+	var piece1 = 'video'+piece1;
+	if (pairs.length>0 && document.getElementById(piece1)){
+		for (var i=0;i<pairs.length;i++){
+			var piece2 = 'video'+pairs[i][0];
+			var realidofotherpiece = pairs[i][2];
+			var myrealid = pairs[i][3];
+			for (var ii=0;ii<matches[myrealid].length;ii++) {
+				if (realidofotherpiece == matches[myrealid][ii][0] && pairs[i][1]==matches[myrealid][ii][1]  && document.getElementById(piece2)) {
+					//console.log(piece1,piece2,pairs,matches[piece1][ii]);
+
+					tomatch.push(piece2);
+				}
+			}
+		}
+	}
+	return tomatch;
+	
+
+}
 
 
 function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
