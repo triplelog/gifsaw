@@ -233,18 +233,6 @@ function makelines(vm,npieces,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			conversions['video'+i].push(Math.floor(i/(ncols))%(nrows/2)); //row within half of gif;
 		}
 		else {
-			if (i%ncols<ncols/2){ //left half grabs from left
-				
-			}
-			else{
-				conversions['video'+i]=[actwidth/2];
-			}
-			if (Math.floor(i/(2*ncols))<1){ //tophalf
-				conversions['video'+i].push(0);
-			}
-			else{
-				conversions['video'+i].push(actheight/2);
-			}
 			conversions['video'+i]=[0];
 			conversions['video'+i].push(0);
 			conversions['video'+i].push(i%(ncols)); //column within full gif
