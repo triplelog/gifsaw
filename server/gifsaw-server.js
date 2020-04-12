@@ -189,10 +189,7 @@ function makelines(width,height,npieces,actwidth,actheight) {
 		//}
 		var line1 = x0+','+y0+' '+x0+','+y1+' ';
 		
-		var line2 = x1+','+y1+' ' +(x1+(x1-x0)/5)+','+(y0+y1)/2+' ' +x1+','+y0+' ';
-		if (i%6 == 5){
-			line2 = x1+','+y1+' ' +x1+','+y0+' ';
-		}
+		var line2 = getRightLine(x0,x1,y0,y1,i,ncols);
 		
 		
 		if (i%6 > 0){ //not first column
@@ -228,13 +225,11 @@ function makelines(width,height,npieces,actwidth,actheight) {
 		const y1c = y0c+actheight/(actheight+40)/(nrows);
 
 		var line1c = x0c+','+y0c+' '+x0c+','+y1c+' ';
-		var line2c = x1c+','+y1c+' ' +(x1c+(x1c-x0c)/5)+','+(y0c+y1c)/2+' '+ x1c+','+y0c+' ';
-		if (i%6 == 5){
-			line2c = x1c+','+y1c+' ' + x1c+','+y0c+' ';
-		}
+		var line2c = getRightLine(x0c,x1c,y0c,y1c,i,ncols);
 		
 		
-		if (i%6 > 0){ //not first column
+		
+		if (i%ncols > 0){ //not first column
 			var newLine = flipRightVertical(vclines[i-1][1].split(' '),x0c,y1c);
 			vclines.push([newLine,line2c])
 		}
@@ -278,6 +273,13 @@ function makelines(width,height,npieces,actwidth,actheight) {
 	return [vlines,hlines,centers,locations,rotations,matches,nrows*ncols,vclines,hclines,ccenters];
 }
 
+function getRightLine(x0,x1,y0,y1,i,ncols){
+	var line = x1+','+y1+' ' +(x1+(x1-x0)/5)+','+(y0+y1)/2+' '+ x1+','+y0+' ';
+	if (i%ncols == ncols-1){
+		line = x1+','+y1+' ' + x1+','+y0+' ';
+	}
+	return line;
+}
 function flipRightVertical(oldLine,x0,y1) {
 	var oldx1 = parseFloat(oldLine[0].split(',')[0]);
 	var oldy1 = parseFloat(oldLine[0].split(',')[1]);
