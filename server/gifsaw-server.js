@@ -133,24 +133,43 @@ const WebSocket = require('ws');
 const wss = new WebSocket.Server({ server });
 
 wss.on('connection', function connection(ws) {
-  ws.on('message', function incoming(message) {
-  	
-  	if (typeof message !== 'string'){
-  		
+	var imgid = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
+  	var outSrc = 'out/'+imgid+'.png';
+  	var inSrc = 'images/in/'+imgid+'.png';
+  	var imgTypes = ['.png','.jpg','.jpeg','.gif','.tiff','.tif'];//.svg, .psd, .eps, .raw, .pdf?
+  	var imgIndex = 0;
+  	ws.on('message', function incoming(message) {
+		if (typeof message !== 'string'){
+			console.log("af",performance.now());
+			var buffer = Buffer.from(message);
+			FileType.fromBuffer(buffer.slice(0,1000)).then( (val) => {
+				var ext = '.'+val.ext;
+				for (var i=0;i<imgTypes.length;i++){
+					if (ext == imgTypes[i]){
+						inSrc = 'images/in/'+imgid+imgTypes[i];
+						console.log(inSrc);
+						fs.writeFile(inSrc, buffer, function (err) {
+							if (err){console.log(err);}
+							console.log("cf",performance.now());
+							var jsonmessage = {'type':'imageSrc','src':inSrc};
+							ws.send(JSON.stringify(jsonmessage));
+						});
+						break;
+					}
+				}
+			});
 		
-  		return;
-  	}
-  	var dm = JSON.parse(message);
-	if (dm.type && dm.type == 'key'){
-		if (dm.message && tempKeys[dm.message]){
-			username = tempKeys[dm.message].username;
+			return;
 		}
-		return;
-	}
 	
-  	
-  	
-  });
+		var dm = JSON.parse(message);
+		if (dm.type && dm.type == 'key'){
+			if (dm.message && tempKeys[dm.message]){
+				username = tempKeys[dm.message].username;
+			}
+			return;
+		}
+  	});
 });
 
 
