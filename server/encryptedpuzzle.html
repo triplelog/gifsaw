@@ -165,7 +165,7 @@ function dragstart(event) {
 				if (document.getElementById(tempkey) && tempkey != dragid){
 					let tempvideo = videos[tempkey].getBoundingClientRect();
 					for (var ii=0;ii<pieces[i-1].centers.length;ii++){
-						vmatches.push([tempkey,[parseFloat(tempvideo.left)+pieces[i-1].centers[ii].x*parseFloat(cwidth),parseFloat(tempvideo.top)+pieces[i-1].centers[ii].y*parseFloat(cheight)]]);
+						vmatches.push([pieces[i-1].centers[ii].id,[parseFloat(tempvideo.left)+pieces[i-1].centers[ii].x*parseFloat(cwidth),parseFloat(tempvideo.top)+pieces[i-1].centers[ii].y*parseFloat(cheight)]]);
 
 						nmatches++;
 					}
