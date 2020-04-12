@@ -1,15 +1,13 @@
 function socketanswer(piece1,pairs) {
 	var tomatch = [];
 	var piece1 = 'video'+piece1;
-	//if (pairs.length>0 && document.getElementById(piece1)){
-	if (pairs.length>0){
+	if (pairs.length>0 && document.getElementById(piece1)){
 		for (var i=0;i<pairs.length;i++){
 			var piece2 = 'video'+pairs[i][0];
-			console.log(piece1,piece2,matches[piece1]);
 			for (var ii=0;ii<matches[piece1].length;ii++) {
-				//if (piece2 == matches[piece1][ii][0] && pairs[i][1]==matches[piece1][ii][1] && document.getElementById(piece2)) {
-				if (piece2 == matches[piece1][ii][0] && pairs[i][1]==matches[piece1][ii][1]) {
+				if (piece2 == matches[piece1][ii][0] && pairs[i][1]==matches[piece1][ii][1]  && document.getElementById(piece2)) {
 					//console.log(piece1,piece2,pairs,matches[piece1][ii]);
+
 					tomatch.push(piece2);
 				}
 			}
@@ -98,7 +96,7 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 							
 							centers[parseInt(piece1.substr(5,))-1].push(tempc);
 						}
-						/*for (var i=0;i<matches[piece2].length;i++){
+						for (var i=0;i<matches[piece2].length;i++){
 						
 							matches[piece1].push(matches[piece2][i]);
 							
@@ -106,7 +104,7 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 							else if (matches[piece2][i][1]=='top') {matches[matches[piece2][i][0]].push([piece1,'bottom']);}
 							else if (matches[piece2][i][1]=='left') {matches[matches[piece2][i][0]].push([piece1,'right']);}
 							else if (matches[piece2][i][1]=='right') {matches[matches[piece2][i][0]].push([piece1,'left']);}
-						}*/
+						}
 						
 						
 					}
