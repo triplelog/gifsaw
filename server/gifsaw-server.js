@@ -45,7 +45,7 @@ app.get('/puzzle',
 		var actheight = 246;
 		var actwidth = 480;
 		var nrows = 4;
-		var ncols = 8;
+		var ncols = 6;
 		var dimensions = sizeOf('static/gifs/' + fullname);
 		var retval = makelines(dimensions.width,dimensions.height,npieces,actwidth,actheight,nrows,ncols);
 
