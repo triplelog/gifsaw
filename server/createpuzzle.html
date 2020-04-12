@@ -119,9 +119,33 @@ function updateNpieces() {
 		option.textContent = dimensions[i].nrows+' x '+dimensions[i].ncols + ' ('+(dimensions[i].nrows*dimensions[i].ncols)+' pieces)';
 		el.appendChild(option);
 	}
+	var option = document.createElement('option');
+	option.value = 'custom';
+	option.textContent = 'Custom';
+	el.appendChild(option);
+	updateSize();
 	
 }
-document.getElementById('npieces').addEventListener('change',updateNpieces);	
+function updateSize(evt) {
+	if (evt && evt.target.id == 'nrows'){
+		return;
+	}
+	else if (evt && evt.target.id == 'ncols'){
+		return;
+	}
+	var el = document.getElementById('size');
+	if (el.value == 'custom'){
+		return;
+	}
+	var dim = el.value.split('x');
+	var nrows = parseInt(dim[0]);
+	var ncols = parseInt(dim[1]);
+	document.getElementById('nrows').value = nrows;
+	document.getElementById('ncols').value = ncols;
+	
+}
+document.getElementById('npieces').addEventListener('change',updateNpieces);
+document.getElementById('size').addEventListener('change',updateSize);
 </script>
 </body>
 
