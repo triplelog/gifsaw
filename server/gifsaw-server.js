@@ -71,8 +71,8 @@ app.get('/puzzle',
 		var gametype = 'solo';
 		var players = 'one';
 		var score = false;
-		var fname = 'opttest';
-		var fullname = 'opttest.gif';
+		var fname = 'testname';
+		var fullname = 'testname.gif';
 		var encryptedpuzzle = false;
 		
 		var nrows = 4;
