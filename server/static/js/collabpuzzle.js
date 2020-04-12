@@ -9,9 +9,17 @@ ws.onopen = function(evt) {
 ws.onmessage = function(evt){
 	var dm = JSON.parse(evt.data);
 	if (dm.type == "foundMatch") {
-		if (dm.message && dm.message.length>2){
+		if (dm.message && dm.message.length>2 && document.getElementById(dm.message[0])){
 			console.log(dm.message);
-			socketmerge(dm.message[0],dm.message[1],dm.message[2]);
+			var tomatch =dm.message[1];
+			for (var i=tomatch.length-1;i>=0;i--){
+				if (document.getElementById(tomatch[i])){
+				}
+				else {
+					tomatch = tomatch.splice(i,1);
+				}
+			}
+			socketmerge(dm.message[0],tomatch,dm.message[2]);
 		}
 		
 	}
