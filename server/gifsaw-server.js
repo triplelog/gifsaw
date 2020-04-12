@@ -142,7 +142,7 @@ function makelines(width,height,npieces,actwidth,actheight) {
 	
 	
 	nrows = 4;//must be even
-	ncols = 6;//must be even
+	ncols = 8;//must be even
 	
 	width = actwidth/(40+2*actwidth); //Revert to 1
 	height = actheight/(actheight+40); //Revert to 1
