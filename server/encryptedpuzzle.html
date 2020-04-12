@@ -223,6 +223,7 @@ function dragend() {
 		var piecewidth = pieceheight*{{ actwidth }}/{{ actheight }}*{{ nrows }}/{{ ncols }};
 		var possMatches = {};
 		possMatches[parseInt(dragid.substr(5,))]=[];
+		const start = Date.now();
 		for (var ii=0;ii<pieceInfo.centers.length;ii++) {
 			let newx = parseFloat(cvideo.getBoundingClientRect().left)+pieceInfo.centers[ii].x*parseFloat(cwidth);
 			let newy = parseFloat(cvideo.getBoundingClientRect().top)+pieceInfo.centers[ii].y*parseFloat(cheight);
@@ -281,6 +282,8 @@ function dragend() {
 		if (possMatches[parseInt(dragid.substr(5,))].length>0){
 			socketanswer(parseInt(dragid.substr(5,)),possMatches[parseInt(dragid.substr(5,))]);
 		}
+		const ms = Date.now() - start;
+		console.log(ms);
 		
 	}
 	dragid = '';
