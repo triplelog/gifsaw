@@ -31,13 +31,14 @@
 <script>
 var imageHeight = false;
 var imageWidth = false;
+var dimensions = [];
 function updateNpieces() {
 	var npieces = document.getElementById('npieces').value;
 	var height = 1000;
 	if(imageHeight){height = imageHeight;}
 	var width = imageWidth || 1000;
 	if(imageWidth){width = imageWidth;}
-	var dimensions = [];
+	dimensions = [];
 	if (npieces <0){
 		return;
 	}
@@ -108,7 +109,16 @@ function updateNpieces() {
 			break;
 		}
 	}
-	console.log(dimensions.slice(0,10));
+	
+	
+	var el = document.getElementById('size');
+	el.innerHTML = '';
+	for (var i in dimensions){
+		var option = document.createElement('option');
+		option.value = dimensions[i].nrows+'x'+dimensions[i].ncols;
+		option.textContent = dimensions[i].nrows+' x '+dimensions[i].ncols + ' ('+(dimensions[i].nrows*dimensions[i].ncols)+' pieces)';
+		el.appendChild(option);
+	}
 	
 }
 document.getElementById('npieces').addEventListener('change',updateNpieces);	
