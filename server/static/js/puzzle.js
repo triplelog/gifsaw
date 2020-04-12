@@ -171,7 +171,6 @@ function dragend() {
 			
 		}
 		const ms = Date.now() - start;
-		console.log(ms);
 		
 	}
 	dragid = '';
