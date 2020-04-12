@@ -56,7 +56,8 @@ function updateNpieces() {
 			var npieceserr = Math.sqrt( (nnpieces-npieces)*(nnpieces-npieces)/(npieces*npieces) );
 			var rat = ii/i;
 			var raterr = Math.sqrt( (rat-width/height)*(rat-width/height)/((width/height)*(width/height)) );
-			var score = (raterr+.01) * Math.pow( npieceserr+.01, 2);
+			//var score = (raterr+.01) * Math.pow( npieceserr+.01, 2);
+			var score = raterr + npieceserr*3;
 			var dim = {nrows:i,ncols:ii,score:score};
 			dimensions.push(dim);
 		}
@@ -70,7 +71,8 @@ function updateNpieces() {
 			var npieceserr = Math.sqrt( (nnpieces-npieces)*(nnpieces-npieces)/(npieces*npieces) );
 			var rat = ii/i;
 			var raterr = Math.sqrt( (rat-width/height)*(rat-width/height)/((width/height)*(width/height)) );
-			var score = (raterr+.01) * Math.pow( npieceserr+.01, 2);
+			//var score = (raterr+.01) * Math.pow( npieceserr+.01, 2);
+			var score = raterr + npieceserr*3;
 			var dim = {nrows:i,ncols:ii,score:score};
 			var isRepeat = false;
 			for (var i in dimensions){
