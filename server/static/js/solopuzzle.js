@@ -88,7 +88,7 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 						
 							var tempc = ['','',piece2];
 							if (centers[parseInt(piece2.substr(5,))-1][i].length>2){
-								temp[2] = centers[parseInt(piece2.substr(5,))-1][i][2];
+								tempc[2] = centers[parseInt(piece2.substr(5,))-1][i][2];
 							}
 							tempc[0] = centers[parseInt(piece2.substr(5,))-1][i][0];
 							tempc[1] = centers[parseInt(piece2.substr(5,))-1][i][1];
