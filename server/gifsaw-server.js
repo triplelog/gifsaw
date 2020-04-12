@@ -40,6 +40,7 @@ app.post('/create',
 	
 	function(req, res) {
 		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
+		var puzzleid = crypto.randomBytes(100).toString('hex').substr(2, 12);
 		var vm = new VM();
 		var npieces;
 		var gametype = 'solo';
