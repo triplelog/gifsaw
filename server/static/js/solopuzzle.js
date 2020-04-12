@@ -6,6 +6,7 @@ function socketanswer(piece1,pairs) {
 			var piece2 = 'video'+pairs[i][0];
 			for (var ii=0;ii<matches[piece1].length;ii++) {
 				if (piece2 == matches[piece1][ii][0] && pairs[i][1]==matches[piece1][ii][1] && document.getElementById(piece2)) {
+					console.log(piece1,piece2,pairs,matches[piece1][ii]);
 					tomatch.push(piece2);
 				}
 			}
