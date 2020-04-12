@@ -227,7 +227,7 @@ wss.on('connection', function connection(ws) {
 		}
 		else if (dm.type == 'possMatch'){
 			if (dm.message && dm.message.length>1){
-				var tomatch = socketanswer(dm.message[0],dm.message[1],matches);
+				var tomatch = socketanswer(dm.message[1],matches);
 				if (tomatch.length>0){
 					var jsonmessage = {'type':'foundMatch','message':[dm.message[0],tomatch,'me']}
 					ws.send(JSON.stringify(jsonmessage));
@@ -243,9 +243,8 @@ wss.on('connection', function connection(ws) {
 });
 
 
-function socketanswer(piece1,pairs,matches) {
+function socketanswer(pairs,matches) {
 	var tomatch = [];
-	var piece1 = 'video'+piece1;
 	if (pairs.length>0){
 		for (var i=0;i<pairs.length;i++){
 			var piece2 = 'video'+pairs[i][0];

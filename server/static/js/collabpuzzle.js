@@ -8,9 +8,8 @@ ws.onopen = function(evt) {
 }
 ws.onmessage = function(evt){
 	var dm = JSON.parse(evt.data);
-	console.log(dm);
 	if (dm.type == "foundMatch") {
-		if (dm.message && dm.message.length>2 && document.getElementById(dm.message[0])){
+		if (dm.message && dm.message.length>2 && document.getElementById('video'+dm.message[0])){
 			console.log(dm.message);
 			var tomatch =dm.message[1];
 			for (var i=tomatch.length-1;i>=0;i--){
