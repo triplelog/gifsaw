@@ -9,7 +9,7 @@ ws.onopen = function(evt) {
 ws.onmessage = function(evt){
 	var dm = JSON.parse(evt.data);
 	if (dm.type == "foundMatch") {
-		if (dm.message && dm.message.length>2 && document.getElementById('video'+dm.message[0])){
+		if (dm.message && dm.message.length>2 && document.getElementById(dm.message[0])){
 			var tomatch =dm.message[1];
 			for (var i=tomatch.length-1;i>=0;i--){
 				if (document.getElementById(tomatch[i])){
@@ -18,7 +18,6 @@ ws.onmessage = function(evt){
 					tomatch = tomatch.splice(i,1);
 				}
 			}
-			console.log(tomatch);
 			socketmerge(dm.message[0],tomatch,dm.message[2]);
 		}
 		

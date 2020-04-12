@@ -229,7 +229,7 @@ wss.on('connection', function connection(ws) {
 			if (dm.message && dm.message.length>1){
 				var tomatch = socketanswer(dm.message[1],matches);
 				if (tomatch.length>0){
-					var jsonmessage = {'type':'foundMatch','message':[dm.message[0],tomatch,'me']}
+					var jsonmessage = {'type':'foundMatch','message':['video'+dm.message[0],tomatch,'me']}
 					ws.send(JSON.stringify(jsonmessage));
 		
 				}
