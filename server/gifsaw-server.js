@@ -219,7 +219,7 @@ function makelines(width,height,npieces,actwidth,actheight) {
 		const x1c = x0c+actwidth/(40+2*actwidth)/ncols;
 		const y1c = y0c+actheight/(actheight+40)/(nrows);
 
-		var line1c = getBottomLine(x0c,x1c,y0c,y1c,i,ncols,nrows);
+		var line1c = x0c+','+y0c+' '+x0c+','+y1c+' ';
 		var line2c = getRightLine(x0c,x1c,y0c,y1c,i,ncols);
 		
 		
@@ -233,10 +233,16 @@ function makelines(width,height,npieces,actwidth,actheight) {
 		}
 		
 		
-		line2c = x0c+','+y0c+' ';
-		line1c = x1c+','+y1c+' ';
+		line2c = x1c+','+y0c+' '+x0c+','+y0c+' ';
+		line1c = getBottomLine(x0c,x1c,y0c,y1c,i,ncols,nrows);
 
-		hclines.push([line1c,line2c])
+		if (i >= ncols){ //not first row
+			var newLine = flipBottomHorizontal(hclines[i-ncols][0].split(' '),x0c,y0c);
+			hclines.push([line1c,newLine])
+		}
+		else {
+			hclines.push([line1c,line2c])
+		}
 
 		ccenters.push([(x0c+x1c)/2,(y0c+y1c)/2]);
 	}
