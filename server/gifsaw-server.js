@@ -42,12 +42,13 @@ app.get('/puzzle',
 		var score = false;
 		var fname = 'opttest';
 		var fullname = 'opttest.gif';
-		var actheight = 246;
-		var actwidth = 480;
+		
 		var nrows = 4;
 		var ncols = 8;
 		var dimensions = sizeOf('static/gifs/' + fullname);
-		var retval = makelines(dimensions.width,dimensions.height,npieces,actwidth,actheight,nrows,ncols);
+		var actheight = dimensions.height-40;
+		var actwidth = (dimensions.width-40)/2;
+		var retval = makelines(npieces,actwidth,actheight,nrows,ncols);
 		
 		var pieces = [];
 		npieces = retval[6];
@@ -116,7 +117,7 @@ wss.on('connection', function connection(ws) {
 });
 
 
-function makelines(width,height,npieces,actwidth,actheight,nrows,ncols) {
+function makelines(npieces,actwidth,actheight,nrows,ncols) {
 	var vlines = [];
 	var hlines = [];
 	var vclines = [];
