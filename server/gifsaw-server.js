@@ -146,7 +146,7 @@ wss.on('connection', function connection(ws) {
 				var ext = '.'+val.ext;
 				for (var i=0;i<imgTypes.length;i++){
 					if (ext == imgTypes[i]){
-						inSrc = 'images/in/'+imgid+imgTypes[i];
+						inSrc = 'static/img/in/'+imgid+imgTypes[i];
 						console.log(inSrc);
 						fs.writeFile(inSrc, buffer, function (err) {
 							if (err){console.log(err);}
