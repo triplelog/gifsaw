@@ -36,7 +36,7 @@ var tempKeys = fromLogin.tempKeys;
 
 app.use('/',express.static('static'));
 
-app.get('/puzzle', 
+app.get('/create', 
 	
 	function(req, res) {
 		var vm = new VM();
@@ -49,10 +49,42 @@ app.get('/puzzle',
 		
 		var nrows = 4;
 		var ncols = 8;
+		//upload gif
+		//get nrows
+		//get ncols
+		//get name
+		//get gametype
+		//create encrypted
+		//save to database
+		res.write(nunjucks.render('createpuzzle.html',{
+			
+		}));
+		res.end();
+	}
+);
+
+app.get('/puzzle', 
+	
+	function(req, res) {
+		var vm = new VM();
+		var npieces = 24;
+		var gametype = 'solo';
+		var players = 'one';
+		var score = false;
+		var fname = 'opttest';
+		var fullname = 'opttest.gif';
+		var encryptedpuzzle = true;
+		
+		var nrows = 4;
+		var ncols = 8;
 		var dimensions = sizeOf('static/gifs/' + fullname);
-		var actheight = dimensions.height-40;
-		var actwidth = (dimensions.width-40)/2;
-		var retval = makelines(vm,npieces,actwidth,actheight,nrows,ncols);
+		var actheight = dimensions.height;
+		var actwidth = dimensions.width;
+		if (encryptedpuzzle){
+			actheight = dimensions.height-40;
+			actwidth = (dimensions.width-40)/2;
+		}
+		var retval = makelines(vm,npieces,encryptedpuzzle,actwidth,actheight,nrows,ncols);
 		
 		var pieces = [];
 		npieces = retval[6];
@@ -121,7 +153,7 @@ wss.on('connection', function connection(ws) {
 });
 
 
-function makelines(vm,npieces,actwidth,actheight,nrows,ncols) {
+function makelines(vm,npieces,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	var vlines = [];
 	var hlines = [];
 	var vclines = [];
@@ -171,9 +203,14 @@ function makelines(vm,npieces,actwidth,actheight,nrows,ncols) {
 	
 	nrows = 4;//must be even
 	ncols = 8;//must be even*/
+	width = 1;
+	height = 1;
 	
-	width = actwidth/(40+2*actwidth); //Revert to 1
-	height = actheight/(actheight+40); //Revert to 1
+	if (encryptedpuzzle){
+		width = actwidth/(40+2*actwidth); //Revert to 1
+		height = actheight/(actheight+40); //Revert to 1
+	}
+	
 	
 	var conversions = {};
 	for (var i=0;i<ncols+1;i++){
@@ -185,14 +222,35 @@ function makelines(vm,npieces,actwidth,actheight,nrows,ncols) {
 	console.log(performance.now());
 	for (var i=0;i<nrows*ncols;i++){
 		
-		if (i%ncols<ncols/2){ //left half needs to grab from right half
-			conversions['video'+i]=[(actwidth/2+20)/(40+2*actwidth),Math.floor(i/(2*ncols))*(.5+20/(actheight/2+20)/2)];
+		if (encryptedpuzzle){
+			if (i%ncols<ncols/2){ //left half needs to grab from right half
+				conversions['video'+i]=[(actwidth/2+20)/(40+2*actwidth),Math.floor(i/(2*ncols))*(.5+20/(actheight/2+20)/2)];
+			}
+			else{
+				conversions['video'+i]=[20/(40+2*actwidth),Math.floor(i/(2*ncols))*(.5+20/(actheight/2+20)/2)];
+			}
+			conversions['video'+i].push(i%(ncols/2)); //column within half of gif
+			conversions['video'+i].push(Math.floor(i/(ncols))%(nrows/2)); //row within half of gif;
 		}
-		else{
-			conversions['video'+i]=[20/(40+2*actwidth),Math.floor(i/(2*ncols))*(.5+20/(actheight/2+20)/2)];
+		else {
+			if (i%ncols<ncols/2){ //left half grabs from left
+				
+			}
+			else{
+				conversions['video'+i]=[actwidth/2];
+			}
+			if (Math.floor(i/(2*ncols))<1){ //tophalf
+				conversions['video'+i].push(0);
+			}
+			else{
+				conversions['video'+i].push(actheight/2);
+			}
+			conversions['video'+i]=[0];
+			conversions['video'+i].push(0);
+			conversions['video'+i].push(i%(ncols)); //column within full gif
+			conversions['video'+i].push(Math.floor(i/(ncols))%(nrows)); //row within full gif;
 		}
-		conversions['video'+i].push(i%(ncols/2)); //column within half of gif
-		conversions['video'+i].push(Math.floor(i/(ncols))%(nrows/2)); //row within half of gif;
+		
 
 		
 		const x0 = conversions['video'+i][0]+conversions['video'+i][2]*width/ncols;
@@ -229,10 +287,16 @@ function makelines(vm,npieces,actwidth,actheight,nrows,ncols) {
 		centers.push([{x:(x0+x1)/2, y:(y0+y1)/2, id:'video'+(i+1)}]);
 		
 		//This (everything with c for correct) is for the correct version of the gif
-		const x0c = (actwidth+40)/(40+2*actwidth)+(i%ncols)*actwidth/(40+2*actwidth)/ncols;
-		const y0c = Math.floor(i/ncols)*actheight/(actheight+40)/(nrows);
-		const x1c = x0c+actwidth/(40+2*actwidth)/ncols;
-		const y1c = y0c+actheight/(actheight+40)/(nrows);
+		var x0c = x0;
+		var y0c = y0;
+		var x1c = x1;
+		var y1c = y1;
+		if (encryptedpuzzle){
+			x0c = (actwidth+40)/(40+2*actwidth)+(i%ncols)*actwidth/(40+2*actwidth)/ncols;
+			y0c = Math.floor(i/ncols)*actheight/(actheight+40)/(nrows);
+			x1c = x0c+actwidth/(40+2*actwidth)/ncols;
+			y1c = y0c+actheight/(actheight+40)/(nrows);
+		}
 
 		var line1c = x0c+','+y0c+' '+x0c+','+y1c+' ';
 		var line2c = getRightLine(vm,rightcode,x0c,x1c,y0c,y1c,i,ncols);
