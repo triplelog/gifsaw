@@ -264,6 +264,9 @@ function dragend() {
 					}
 				}
 				if (possMatch) {
+					console.log(parseInt(dragid.substr(5,)));
+					console.log(tempkey+1);
+					console.log(possMatch);
 					var skipMatch = false;
 					for (var iii=0;iii<possMatches[parseInt(dragid.substr(5,))].length;iii++) {
 						if (possMatches[parseInt(dragid.substr(5,))][iii][0]==tempkey+1 && possMatches[parseInt(dragid.substr(5,))][iii][1]==possMatch){
