@@ -171,6 +171,7 @@ function dragstart(event) {
 					let tempvideo = videos[tempkey].getBoundingClientRect();
 					for (var ii=0;ii<centers[i-1].length;ii++){
 						if (centers[i-1][ii].length>2){
+							console.log(tempkey,centers[i-1][ii][2]);
 							vmatches.push([centers[i-1][ii][2],[parseFloat(tempvideo.left)+centers[i-1][ii][0]*parseFloat(cwidth),parseFloat(tempvideo.top)+centers[i-1][ii][1]*parseFloat(cheight)]]);
 						}
 						else {
