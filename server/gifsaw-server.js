@@ -203,6 +203,8 @@ wss.on('connection', function connection(ws) {
   	var imgIndex = 0;
   	var matches= [];
   	var username = '';
+  	var puzzleid = '';
+  	var myroom = false;
   	ws.on('message', function incoming(message) {
 		if (typeof message !== 'string'){
 			console.log("af",performance.now());
@@ -231,8 +233,17 @@ wss.on('connection', function connection(ws) {
 		if (dm.type && dm.type == 'key'){
 			if (dm.message && tempKeys[dm.message]){
 				username = tempKeys[dm.message].username;
-				if (tempKeys[dm.message].matches){
+				if (tempKeys[dm.message].matches && tempKeys[dm.message].puzzleid){
 					matches = tempKeys[dm.message].matches;
+					puzzleid = tempKeys[dm.message].puzzleid;
+					if (rooms[puzzleid]){
+						rooms[puzzleid].push({username:username,ws:ws});
+						//send all existing matches;
+					}
+					else {
+						rooms[puzzleid]=[{username:username,ws:ws}];
+					}
+					myroom = rooms[puzzleid];
 				}
 			}
 			return;
@@ -243,6 +254,16 @@ wss.on('connection', function connection(ws) {
 				if (tomatch.length>0){
 					var jsonmessage = {'type':'foundMatch','message':['video'+dm.message[0],tomatch,'me']}
 					ws.send(JSON.stringify(jsonmessage));
+					if (myroom) {
+						for (var i in myroom){
+							/*if (myroom[i].username != username){
+							
+							}*/
+							myroom[i].ws.send(JSON.stringify(jsonmessage));
+							
+						}
+					}
+					
 		
 				}
 				else {
