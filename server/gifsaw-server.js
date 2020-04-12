@@ -52,7 +52,7 @@ app.get('/puzzle',
 		var pieces = [];
 		npieces = retval[6];
 		for (var i=0;i<npieces;i++){
-			var piece = {id:i,rotation:retval[4][i],location:retval[3][i]};
+			var piece = {id:'video'+(i+1),rotation:retval[4][i],location:retval[3][i],centers:retval[2][i]};
 			pieces.push(piece);
 		}
 		res.write(nunjucks.render('encryptedpuzzle.html',{
@@ -203,7 +203,7 @@ function makelines(width,height,npieces,actwidth,actheight,nrows,ncols) {
 			hlines.push([line1,line2])
 		}
 
-		centers.push([[(x0+x1)/2,(y0+y1)/2]]);
+		centers.push([{x:(x0+x1)/2, y:(y0+y1)/2, id:'video'+(i+1)}]);
 		
 		//This (everything with c for correct) is for the correct version of the gif
 		const x0c = (actwidth+40)/(40+2*actwidth)+(i%ncols)*actwidth/(40+2*actwidth)/ncols;

@@ -31,7 +31,7 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 		}
 		var p1l = (p1d.match(/M/g)||[]).length;
 		if (p1l == 1){
-			centers[parseInt(piece1.substr(5,))-1] = [[ccenters[parseInt(piece1.substr(5,))-1][0],ccenters[parseInt(piece1.substr(5,))-1][1], piece1]];
+			piece1Info.centers = [[ccenters[parseInt(piece1.substr(5,))-1][0],ccenters[parseInt(piece1.substr(5,))-1][1], piece1]];
 		}
 		var mypoints = pairs.length;
 		if (keepscore) {
@@ -79,24 +79,22 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 						video1.style.top = video2.style.top;
 						
 						if (p2l == 1){
-							video1.style.left = (parseFloat(video2.style.left) - ccenters[parseInt(piece2.substr(5,))-1][0]*cwidth + centers[parseInt(piece2.substr(5,))-1][0][0]*cwidth)+'px';
-							video1.style.top = (parseFloat(video2.style.top) - ccenters[parseInt(piece2.substr(5,))-1][1]*cheight + centers[parseInt(piece2.substr(5,))-1][0][1]*cheight)+'px';
-							centers[parseInt(piece2.substr(5,))-1] = [[ccenters[parseInt(piece2.substr(5,))-1][0],ccenters[parseInt(piece2.substr(5,))-1][1],piece2]];
+							video1.style.left = (parseFloat(video2.style.left) - ccenters[parseInt(piece2.substr(5,))-1][0]*cwidth + piece2Info.centers[0].x*cwidth)+'px';
+							video1.style.top = (parseFloat(video2.style.top) - ccenters[parseInt(piece2.substr(5,))-1][1]*cheight + piece2Info.centers[0].y*cheight)+'px';
+							piece2Info.centers = [[ccenters[parseInt(piece2.substr(5,))-1][0],ccenters[parseInt(piece2.substr(5,))-1][1],piece2]];
 							video1.style.transformOrigin = ccenters[parseInt(piece2.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece2.substr(5,))-1][1]*100+'%';
 						}
 						else {
 							video1.style.transformOrigin = ccenters[parseInt(piece1.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece1.substr(5,))-1][1]*100+'%';
 						}
-						for (var i=0;i<centers[parseInt(piece2.substr(5,))-1].length;i++) {
+						for (var i=0;i<piece2Info.centers.length;i++) {
 						
-							var tempc = ['','',piece2];
-							if (centers[parseInt(piece2.substr(5,))-1][i].length>2){
-								tempc[2] = centers[parseInt(piece2.substr(5,))-1][i][2];
-							}
-							tempc[0] = centers[parseInt(piece2.substr(5,))-1][i][0];
-							tempc[1] = centers[parseInt(piece2.substr(5,))-1][i][1];
+							var tempc = {};
+							tempc.id = piece2Info.centers[i].id;
+							tempc.x = piece2Info.centers[i].x;
+							tempc.y = piece2Info.centers[i].y;
 							
-							centers[parseInt(piece1.substr(5,))-1].push(tempc);
+							piece1Info.centers.push(tempc);
 						}
 						for (var i=0;i<matches[piece2].length;i++){
 						
