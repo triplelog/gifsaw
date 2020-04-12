@@ -99,12 +99,12 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 						}
 						for (var i=0;i<matches[piece2].length;i++){
 						
-							matches[piece1].push(matches[piece2][i]);
+							/*matches[piece1].push(matches[piece2][i]);
 							
 							if (matches[piece2][i][1]=='bottom') {matches[matches[piece2][i][0]].push([piece1,'top']);}
 							else if (matches[piece2][i][1]=='top') {matches[matches[piece2][i][0]].push([piece1,'bottom']);}
 							else if (matches[piece2][i][1]=='left') {matches[matches[piece2][i][0]].push([piece1,'right']);}
-							else if (matches[piece2][i][1]=='right') {matches[matches[piece2][i][0]].push([piece1,'left']);}
+							else if (matches[piece2][i][1]=='right') {matches[matches[piece2][i][0]].push([piece1,'left']);}*/
 						}
 						
 						
