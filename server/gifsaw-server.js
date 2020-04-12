@@ -37,8 +37,9 @@ var tempKeys = fromLogin.tempKeys;
 app.use('/',express.static('static'));
 
 app.get('/puzzle', 
-	var vm = new VM();
+	
 	function(req, res) {
+		var vm = new VM();
 		var npieces = 24;
 		var gametype = 'solo';
 		var players = 'one';
