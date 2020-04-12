@@ -1,7 +1,7 @@
 
 const https = require('https');
 var fs = require("fs");
-const {VM} = require('vm2');
+const {VM, VMScript} = require('vm2');
 
 var qs = require('querystring');
 var sizeOf = require('image-size');
@@ -285,6 +285,12 @@ function getBottomLine(x0,x1,y0,y1,i,ncols,nrows){
 	return line;
 }
 function getRightLine(vm,rightcode,x0,x1,y0,y1,i,ncols){
+	vm.run('var x0='+x0);
+	vm.run('var x1='+x1);
+	vm.run('var y0='+y0);
+	vm.run('var y1='+y1);
+	vm.run('var i='+i);
+	vm.run('var ncols='+ncols);
 	/*var line = x1+','+y1+' ' +(x1+(x1-x0)/6)+','+(y0+y1)/2+' '+ x1+','+y0+' ';
 	if (i%ncols == ncols-1){
 		line = x1+','+y1+' ' + x1+','+y0+' ';
