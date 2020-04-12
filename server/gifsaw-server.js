@@ -48,7 +48,13 @@ app.get('/puzzle',
 		var ncols = 6;
 		var dimensions = sizeOf('static/gifs/' + fullname);
 		var retval = makelines(dimensions.width,dimensions.height,npieces,actwidth,actheight,nrows,ncols);
-
+		
+		var pieces = [];
+		npieces = retval[6];
+		for (var i=0;i<npieces;i++){
+			var piece = {id:i,rotation:retval[4][i]};
+			pieces.push(piece);
+		}
 		res.write(nunjucks.render('encryptedpuzzle.html',{
 			gametype: gametype,
 			players: players,
@@ -63,7 +69,6 @@ app.get('/puzzle',
 			hlines:retval[1],
 			centers:JSON.stringify(retval[2]),
 			locations:JSON.stringify(retval[3]),
-			rotations:JSON.stringify(retval[4]),
 			matches:JSON.stringify(retval[5]),
 			nrows:nrows,
 			ncols:ncols,
@@ -71,6 +76,7 @@ app.get('/puzzle',
 			//actwidth:512,
 			actheight:actheight,
 			actwidth:actwidth,
+			pieces: JSON.stringify(pieces),
 		}));
 		res.end();
 	}

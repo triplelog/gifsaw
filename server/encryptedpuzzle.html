@@ -104,16 +104,13 @@ var score = {};
 var myname;
 var gifwidth = {{ image.width }};
 var gifheight = {{ image.height }};
-//var gifwidth = 512;
-//var gifheight = 288;
+//var pieces = [{id:'',rotation:0,location:0,centers:[[0,0,'piece1']]}];
+var pieces = {{ pieces | safe }};
 var npieces= {{ npieces }};
 var locations= {{ locations }};
-var rotations= {{ rotations }};
 var matches= {{ matches | safe }};
 var centers= {{ centers }};
 var saveButton = document.getElementById('save');
-//var cwidth = 512*1.5;
-//var cheight = 512*1.5*328/(276*2+512);
 var cwidth = {{ image.width }}*1.5;
 var cheight = {{ image.height }}*1.5;
 var hclines = {{ hclines | safe }};
@@ -127,7 +124,7 @@ for (var i=1;i<npieces+1;i++) {
 	
 	video.style.left = locations[i-1][0]+'px';
 	video.style.top = locations[i-1][1]+'px';
-	video.style.transform = 'rotate('+rotations[i-1]+'deg)';
+	video.style.transform = 'rotate('+pieces[i-1].rotation+'deg)';
 	video.style.transformOrigin = centers[i-1][0][0]*100+'% '+centers[i-1][0][1]*100+'%';
 	//video.style.display = 'none';
 	videos['video'+i] = video;
@@ -215,13 +212,15 @@ function dragmove(event) {
 function dragend() {
 	if (isclick && dragid && dragid != '') {
 		var drid = dragid;
-		document.getElementById(drid).style.transform = 'rotate('+(parseInt(rotations[parseInt(drid.substr(5,))-1])+90)+'deg)';
-		rotations[parseInt(drid.substr(5,))-1]=(parseInt(rotations[parseInt(drid.substr(5,))-1])+90);
-		if (rotations[parseInt(drid.substr(5,))-1]> 350) {
-			rotations[parseInt(drid.substr(5,))-1] = rotations[parseInt(drid.substr(5,))-1]-360;
+		var pieceInfo = pieces[parseInt(drid.substr(5,))-1];
+		document.getElementById(drid).style.transform = 'rotate('+(parseInt(pieceInfo.rotation)+90)+'deg)';
+		pieceInfo.rotation=(parseInt(pieceInfo.rotation)+90);
+		if (pieceInfo.rotation> 350) {
+			pieceInfo.rotation = pieceInfo.rotation-360;
 		}
 	}
 	else if (dragid && dragid != '') {
+		var pieceInfo = pieces[parseInt(dragid.substr(5,))-1];
 		var pieceheight = cheight*{{ actheight }}/{{ image.height }}/{{ nrows }};
 		var piecewidth = pieceheight*{{ actwidth }}/{{ actheight }}*{{ nrows }}/{{ ncols }};
 		var possMatches = {};
@@ -235,7 +234,7 @@ function dragend() {
 				let tempkey = parseInt(vmatches[i][0].substr(5,))-1;
 				let tempbox = vmatches[i][1];
 
-				if (rotations[parseInt(dragid.substr(5,))-1]==rotations[tempkey]) {
+				if (pieceInfo.rotation==pieces[tempkey].rotation) {
 					if (newx < tempbox[0] + piecewidth + 10 && newy < tempbox[1] + pieceheight + 10) {
 						if (newx > tempbox[0] + piecewidth - 10) {
 							//in far right match zone
