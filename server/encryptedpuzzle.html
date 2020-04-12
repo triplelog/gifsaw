@@ -165,7 +165,7 @@ function dragstart(event) {
 				if (document.getElementById(tempkey) && tempkey != dragid){
 					let tempvideo = videos[tempkey].getBoundingClientRect();
 					for (var ii=0;ii<pieces[i-1].centers.length;ii++){
-						vmatches.push([pieces[i-1].centers[ii].id,[parseFloat(tempvideo.left)+pieces[i-1].centers[ii].x*parseFloat(cwidth),parseFloat(tempvideo.top)+pieces[i-1].centers[ii].y*parseFloat(cheight)]]);
+						vmatches.push([tempkey,[parseFloat(tempvideo.left)+pieces[i-1].centers[ii].x*parseFloat(cwidth),parseFloat(tempvideo.top)+pieces[i-1].centers[ii].y*parseFloat(cheight), pieces[i-1].centers[ii].id]]);
 
 						nmatches++;
 					}
@@ -262,15 +262,17 @@ function dragend() {
 					}
 				}
 				if (possMatch) {
+					var realid = parseInt(tempbox[2].substr(5,)); //1 if actual piece is topleft
 					var skipMatch = false;
 					for (var iii=0;iii<possMatches[parseInt(dragid.substr(5,))].length;iii++) {
-						if (possMatches[parseInt(dragid.substr(5,))][iii][0]==tempkey+1 && possMatches[parseInt(dragid.substr(5,))][iii][1]==possMatch){
+						if (possMatches[parseInt(dragid.substr(5,))][iii][0]==realid && possMatches[parseInt(dragid.substr(5,))][iii][1]==possMatch){
 							skipMatch = true;
 							break;
 						}
 					}
 					if (!skipMatch){
-						possMatches[parseInt(dragid.substr(5,))].push([tempkey+1,possMatch]);
+						console.log(realid,parseInt(dragid.substr(5,)));
+						possMatches[parseInt(dragid.substr(5,))].push([realid,possMatch]);
 					}
 				}
 			}
