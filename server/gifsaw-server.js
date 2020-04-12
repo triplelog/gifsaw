@@ -1,6 +1,8 @@
 
 const https = require('https');
 var fs = require("fs");
+const {VM} = require('vm2');
+
 var qs = require('querystring');
 var sizeOf = require('image-size');
 const { exec } = require('child_process');
@@ -35,6 +37,7 @@ var tempKeys = fromLogin.tempKeys;
 app.use('/',express.static('static'));
 
 app.get('/puzzle', 
+	var vm = new VM();
 	function(req, res) {
 		var npieces = 24;
 		var gametype = 'solo';
@@ -48,7 +51,7 @@ app.get('/puzzle',
 		var dimensions = sizeOf('static/gifs/' + fullname);
 		var actheight = dimensions.height-40;
 		var actwidth = (dimensions.width-40)/2;
-		var retval = makelines(npieces,actwidth,actheight,nrows,ncols);
+		var retval = makelines(vm,npieces,actwidth,actheight,nrows,ncols);
 		
 		var pieces = [];
 		npieces = retval[6];
@@ -117,7 +120,7 @@ wss.on('connection', function connection(ws) {
 });
 
 
-function makelines(npieces,actwidth,actheight,nrows,ncols) {
+function makelines(vm,npieces,actwidth,actheight,nrows,ncols) {
 	var vlines = [];
 	var hlines = [];
 	var vclines = [];
@@ -131,6 +134,7 @@ function makelines(npieces,actwidth,actheight,nrows,ncols) {
 	var locations = [];
 	var rotations = [];
 	var matches = {};
+	var rightcode = '';
 	/*
 	let nrowsf = Math.floor(Math.sqrt(npieces*height/width));
 	let ncolsf = Math.floor(nrowsf*width/height);
@@ -161,6 +165,7 @@ function makelines(npieces,actwidth,actheight,nrows,ncols) {
 	for (var i=0;i<nrows+1;i++){
 		y.push(height/(nrows)*i);
 	}
+	console.log(performance.now());
 	for (var i=0;i<nrows*ncols;i++){
 		
 		if (i%ncols<ncols/2){ //left half needs to grab from right half
@@ -185,7 +190,7 @@ function makelines(npieces,actwidth,actheight,nrows,ncols) {
 		
 		
 		if (i%ncols > 0){ //not first column
-			var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0,y1);
+			var newLine = flipRightVertical(vm,rightcode,vlines[i-1][1].split(' '),x0,y1);
 			vlines.push([newLine,line2])
 		}
 		else {
@@ -238,15 +243,16 @@ function makelines(npieces,actwidth,actheight,nrows,ncols) {
 
 		ccenters.push([(x0c+x1c)/2,(y0c+y1c)/2]);
 	}
-	
+	console.log(performance.now());
 	for (var i=0;i<ncols*nrows;i++){
 		locations.push([Math.floor(Math.random()*600),10+Math.floor(Math.random()*300)])
 	}
-
+	
 	for (var i=0;i<ncols*nrows;i++){
 		//rotations.push(Math.floor(Math.random()*4)*90)
 		rotations.push(0)
 	}
+	
 	for (var ii=0;ii<ncols*nrows;ii++){
 		var i = parseInt(ii);
 		matches['video'+(i+1)]=[];
@@ -263,6 +269,7 @@ function makelines(npieces,actwidth,actheight,nrows,ncols) {
 			matches['video'+(i+1)].push(['video'+(i+1-parseInt(ncols)),'bottom'])
 		}
 	}
+	
 	return [vlines,hlines,centers,locations,rotations,matches,nrows*ncols,vclines,hclines,ccenters];
 }
 function getBottomLine(x0,x1,y0,y1,i,ncols,nrows){
@@ -295,7 +302,7 @@ function flipBottomHorizontal(oldLine,x0,y0) {
 	}
 	return newLine;
 }
-function flipRightVertical(oldLine,x0,y1) {
+function flipRightVertical(vm,rightcode,oldLine,x0,y1) {
 	var oldx1 = parseFloat(oldLine[0].split(',')[0]);
 	var oldy1 = parseFloat(oldLine[0].split(',')[1]);
 	var newLine = '';
