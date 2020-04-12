@@ -54,7 +54,7 @@ app.post('/create',
 		
 		var encryptedpuzzle = false;
 		
-		var collab = true;
+		var collab = false;
 		var dimensions = sizeOf('static/img/in/' + fullname);
 		var actheight = dimensions.height;
 		var actwidth = dimensions.width;
