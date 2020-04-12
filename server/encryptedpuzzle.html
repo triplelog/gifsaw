@@ -45,7 +45,7 @@ img {
 }
 img {
 	display: block;
-	width: calc({{ image.width }} * 1px);
+	width: calc({{ image.width }} * 1.5px);
 	/*width: calc(512 * 1.5px);*/
 	height: auto;
 	background: rgba(255,255,255,1);
@@ -109,8 +109,8 @@ var pieces = {{ pieces | safe }};
 var npieces= {{ npieces }};
 var matches= {{ matches | safe }};
 var saveButton = document.getElementById('save');
-var cwidth = {{ image.width }}*1;
-var cheight = {{ image.height }}*1;
+var cwidth = {{ image.width }}*1.5;
+var cheight = {{ image.height }}*1.5;
 var hclines = {{ hclines | safe }};
 var vclines = {{ vclines | safe }};
 var ccenters= {{ ccenters }};
