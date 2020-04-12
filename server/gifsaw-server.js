@@ -151,17 +151,12 @@ function makelines(width,height,npieces,actwidth,actheight) {
 	width = actwidth/(40+2*actwidth); //Revert to 1
 	height = actheight/(actheight+40); //Revert to 1
 	
-	
-	const xchoices = [-1*width/ncols*.25,-1*width/ncols*.15,width/ncols*.15,width/ncols*.25];
-	const ychoices = [-1*height/nrows*.25,-1*height/nrows*.15,height/nrows*.15,height/nrows*.25];
 	var conversions = {};
 	for (var i=0;i<ncols+1;i++){
 		x.push(width/(ncols)*i);
-		xx.push(xchoices[Math.floor(Math.random()*4)]);
 	}
 	for (var i=0;i<nrows+1;i++){
 		y.push(height/(nrows)*i);
-		yy.push(ychoices[Math.floor(Math.random()*4)]);
 	}
 	for (var i=0;i<nrows*ncols;i++){
 		
@@ -171,22 +166,14 @@ function makelines(width,height,npieces,actwidth,actheight) {
 		else{
 			conversions['video'+i]=[20/(40+2*actwidth),Math.floor(i/(2*ncols))*(.5+20/(actheight/2+20)/2),i%3,Math.floor(i/(ncols))%2];
 		}
-		const xdist = [xx[i%ncols],xx[i%ncols+1]];
-		const ydist = [yy[Math.floor(i/ncols)+1],yy[Math.floor(i/ncols)]];
+
 		
 		const x0 = conversions['video'+i][0]+conversions['video'+i][2]*width/ncols;
 		const y0 = conversions['video'+i][1]+conversions['video'+i][3]*height/(nrows);
 		const x1 = x0+width/ncols;
 		const y1 = y0+height/(nrows);
-		//var line1 = x[i%ncols]+','+y[Math.floor(i/ncols)]+' '+x[i%ncols]+','+(y[Math.floor(i/ncols)+1]+y[Math.floor(i/ncols)]*2)/3+' '+(x[i%ncols]+xdist[0])+','+(y[Math.floor(i/ncols)+1]+y[Math.floor(i/ncols)]*1)/2+' '+x[i%ncols]+','+(y[Math.floor(i/ncols)+1]*2+y[Math.floor(i/ncols)])/3+' '+x[i%ncols]+','+y[Math.floor(i/ncols)+1]+' '
-		//var line2 = x[i%ncols+1]+','+(y[Math.floor(i/ncols)+1]*2+y[Math.floor(i/ncols)]*1)/3+' '+(x[i%ncols+1]+xdist[1])+','+(y[Math.floor(i/ncols)+1]+y[Math.floor(i/ncols)]*1)/2+' '+x[i%ncols+1]+','+(y[Math.floor(i/ncols)+1]*1+y[Math.floor(i/ncols)]*2)/3+' '+x[i%ncols+1]+','+y[Math.floor(i/ncols)]+' '
 
-		//if (i%ncols>=0){ //Revert to equality and remove conversions
-		//	line1 = (x[0]+conversions['video'+i][0]*cwidth)+','+y[Math.floor(i/ncols)]+' '+(x[0]+conversions['video'+i][0]*cwidth)+','+y[Math.floor(i/ncols)+1]+' '
-		//}
-		//if (i%ncols<=ncols-1){ //Revert to equality and remove conversions
-		//	line2 = (x[ncols]+conversions['video'+i][0]*cwidth)+','+y[Math.floor(i/ncols)]+' '
-		//}
+
 		var line1 = x0+','+y0+' '+x0+','+y1+' ';
 		
 		var line2 = getRightLine(x0,x1,y0,y1,i,ncols);
