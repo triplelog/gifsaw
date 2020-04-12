@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<form>
+<form action="../create" method="post">
 	<label for="npieces">Number of Pieces</label>
 	<input type="number" id="npieces" name="npieces"></input>
 
@@ -28,18 +28,22 @@
 
 	<label for="ncols">Number of Columns</label>
 	<input type="number" id="ncols" name="ncols"></input>
-	<div>
-		Image: 
-		<select id="imgType">
-			<option value="upload">Upload</option>
-			<option value="url">URL</option>
-			<option value="drag">Drag/Drop</option>
-		</select>
-		<input type="file" name="imgSrc" id="imgSrc"></input>
-		<input type="text" name="imgUrl" id="imgUrl"></input>
-		<span id="imgDrag"></span>
-	</div>
+	
+	<input type="text" name="fileSrc" style="display: none;"></input>
+	<button type="submit">Create</button>
 </form>
+<div>
+	Image: 
+	<select id="imgType">
+		<option value="upload">Upload</option>
+		<option value="url">URL</option>
+		<option value="drag">Drag/Drop</option>
+	</select>
+	<input type="file" name="imgSrc" id="imgSrc"></input>
+	<input type="text" name="imgUrl" id="imgUrl"></input>
+	<span id="imgDrag"></span>
+</div>
+
 <div id="imageHolder">
 </div>
 <script>
@@ -56,6 +60,7 @@ ws.onmessage = function(evt){
 	img.setAttribute('src',dm.src);
 	el.innerHTML = '';
 	el.appendChild(img);
+	document.querySelector('input[name="fileSrc"]').setAttribute('value',dm.src);
 }
 
 var imageHeight = false;

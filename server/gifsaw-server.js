@@ -36,6 +36,18 @@ var tempKeys = fromLogin.tempKeys;
 
 app.use('/',express.static('static'));
 
+app.post('/create', 
+	
+	function(req, res) {
+		console.log(req.body);
+		
+		res.write(nunjucks.render('createpuzzle.html',{
+			
+		}));
+		res.end();
+	}
+);
+
 app.get('/create', 
 	
 	function(req, res) {
