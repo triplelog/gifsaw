@@ -140,13 +140,9 @@ function makelines(width,height,npieces,actwidth,actheight) {
 		}
 	}
 	
-	//nrows = 4;
-	//ncols = 6;
 	
-	nrows = 4;
-	ncols = 6;
-	//width = 512/(276*2+512); //Revert to 1
-	//height = 144/164; //Revert to 1
+	nrows = 4;//must be even
+	ncols = 6;//must be even
 	
 	width = actwidth/(40+2*actwidth); //Revert to 1
 	height = actheight/(actheight+40); //Revert to 1
@@ -160,12 +156,14 @@ function makelines(width,height,npieces,actwidth,actheight) {
 	}
 	for (var i=0;i<nrows*ncols;i++){
 		
-		if (i%6<3){ //Delete conversions
-			conversions['video'+i]=[(actwidth/2+20)/(40+2*actwidth),Math.floor(i/(2*ncols))*(.5+20/(actheight/2+20)/2),i%3,Math.floor(i/(ncols))%2];
+		if (i%ncols<ncols/2){ //left half needs to grab from right half
+			conversions['video'+i]=[(actwidth/2+20)/(40+2*actwidth),Math.floor(i/(2*ncols))*(.5+20/(actheight/2+20)/2)];
 		}
 		else{
-			conversions['video'+i]=[20/(40+2*actwidth),Math.floor(i/(2*ncols))*(.5+20/(actheight/2+20)/2),i%3,Math.floor(i/(ncols))%2];
+			conversions['video'+i]=[20/(40+2*actwidth),Math.floor(i/(2*ncols))*(.5+20/(actheight/2+20)/2)];
 		}
+		conversions['video'+i].push(i%(ncols/2)); //column within half of gif
+		conversions['video'+i].push(Math.floor(i/(ncols))%(nrows/2)); //row within half of gif;
 
 		
 		const x0 = conversions['video'+i][0]+conversions['video'+i][2]*width/ncols;
