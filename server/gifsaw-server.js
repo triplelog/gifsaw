@@ -140,7 +140,7 @@ function makelines(vm,npieces,actwidth,actheight,nrows,ncols) {
 		line = x1+','+y1+' ' + x1+','+y0+' ';
 	}
 	line;`);
-	vm.run('var x0; var x1; var y0; var y1; var i; var ncols; var nrows; var line;');
+	//vm.run('var x0; var x1; var y0; var y1; var i; var ncols; var nrows; var line;');
 	/*
 	let nrowsf = Math.floor(Math.sqrt(npieces*height/width));
 	let ncolsf = Math.floor(nrowsf*width/height);
@@ -288,10 +288,6 @@ function getBottomLine(x0,x1,y0,y1,i,ncols,nrows){
 }
 function getRightLine(vm,rightcode,x0,x1,y0,y1,i,ncols){
 	vm.run('x0='+x0+'; '+'x1='+x1+'; '+'y0='+y0+'; '+'y1='+y1+'; '+'i='+i+'; '+'ncols='+ncols+'; ');
-	/*var line = x1+','+y1+' ' +(x1+(x1-x0)/6)+','+(y0+y1)/2+' '+ x1+','+y0+' ';
-	if (i%ncols == ncols-1){
-		line = x1+','+y1+' ' + x1+','+y0+' ';
-	}*/
 	var line = vm.run(rightcode);
 	return line;
 }
