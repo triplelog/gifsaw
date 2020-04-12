@@ -262,7 +262,7 @@ function dragend() {
 					}
 				}
 				if (possMatch) {
-					var realid = tempbox[2].substr(5,); //1 if actual piece is topleft
+					var realid = tempbox[2]; //video1 if actual piece is topleft
 					var skipMatch = false;
 					for (var iii=0;iii<possMatches[parseInt(dragid.substr(5,))].length;iii++) {
 						if (possMatches[parseInt(dragid.substr(5,))][iii][2]==realid && possMatches[parseInt(dragid.substr(5,))][iii][1]==possMatch){
