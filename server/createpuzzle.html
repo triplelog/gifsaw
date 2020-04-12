@@ -15,18 +15,32 @@
 </head>
 <body>
 
-<label for="npieces">Number of Pieces</label>
-<input type="number" id="npieces" name="npieces"></input>
+<form>
+	<label for="npieces">Number of Pieces</label>
+	<input type="number" id="npieces" name="npieces"></input>
 
-<label for="size">Size</label>
-<select id="size">
-</select>
+	<label for="size">Size</label>
+	<select id="size">
+	</select>
 
-<label for="nrows">Number of Rows</label>
-<input type="number" id="nrows" name="nrows"></input>
+	<label for="nrows">Number of Rows</label>
+	<input type="number" id="nrows" name="nrows"></input>
 
-<label for="ncols">Number of Columns</label>
-<input type="number" id="ncols" name="ncols"></input>
+	<label for="ncols">Number of Columns</label>
+	<input type="number" id="ncols" name="ncols"></input>
+	<div>
+		Image: 
+		<select id="imgType">
+			<option value="upload">Upload</option>
+			<option value="url">URL</option>
+			<option value="drag">Drag/Drop</option>
+		</select>
+		<input type="file" name="imgSrc" id="imgSrc"></input>
+		<input type="text" name="imgUrl" id="imgUrl"></input>
+		<span id="imgDrag"></span>
+	</div>
+</form>
+
 
 <script>
 var imageHeight = false;
@@ -144,9 +158,11 @@ function updateSize(evt) {
 	document.getElementById('ncols').value = ncols;
 	
 }
+
 document.getElementById('npieces').addEventListener('change',updateNpieces);
 document.getElementById('size').addEventListener('change',updateSize);
 </script>
+<script src="../js/upload.js"></script>
 </body>
 
 

@@ -5,10 +5,10 @@ var syncWorker = new Worker('../wasm/uploadworker.js');
 var syncWorker2 = new Worker('../wasm/datatypeworker.js');
 */
 
-document.getElementById('fileDrag').addEventListener('drop', handleDrop, false);
+document.getElementById('imgDrag').addEventListener('drop', handleDrop, false);
 var names = ['dragenter', 'dragover', 'dragleave', 'drop'];
 names.forEach(eventName => {
-  document.getElementById('fileDrag').addEventListener(eventName, preventDefaults, false)
+  document.getElementById('imgDrag').addEventListener(eventName, preventDefaults, false)
 })
 
 function preventDefaults(e) {
