@@ -5,8 +5,9 @@ function socketanswer(piece1,pairs) {
 		for (var i=0;i<pairs.length;i++){
 			var piece2 = 'video'+pairs[i][0];
 			var realidofotherpiece = pairs[i][2];
-			for (var ii=0;ii<matches[piece1].length;ii++) {
-				if (realidofotherpiece == matches[piece1][ii][0] && pairs[i][1]==matches[piece1][ii][1]  && document.getElementById(piece2)) {
+			var myrealid = pairs[i][3];
+			for (var ii=0;ii<matches[myrealid].length;ii++) {
+				if (realidofotherpiece == matches[myrealid][ii][0] && pairs[i][1]==matches[myrealid][ii][1]  && document.getElementById(piece2)) {
 					//console.log(piece1,piece2,pairs,matches[piece1][ii]);
 
 					tomatch.push(piece2);

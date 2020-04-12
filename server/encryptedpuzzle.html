@@ -226,7 +226,7 @@ function dragend() {
 		for (var ii=0;ii<pieceInfo.centers.length;ii++) {
 			let newx = parseFloat(cvideo.getBoundingClientRect().left)+pieceInfo.centers[ii].x*parseFloat(cwidth);
 			let newy = parseFloat(cvideo.getBoundingClientRect().top)+pieceInfo.centers[ii].y*parseFloat(cheight);
-		
+			let newid = pieceInfo.centers[ii].id;
 			for (var i=0;i<nmatches;i++) {
 				var possMatch = false;
 				let tempkey = parseInt(vmatches[i][0].substr(5,))-1;
@@ -264,15 +264,15 @@ function dragend() {
 				if (possMatch) {
 					var realid = tempbox[2]; //video1 if actual piece is topleft
 					var skipMatch = false;
-					for (var iii=0;iii<possMatches[parseInt(dragid.substr(5,))].length;iii++) {
+					/*for (var iii=0;iii<possMatches[parseInt(dragid.substr(5,))].length;iii++) {
 						if (possMatches[parseInt(dragid.substr(5,))][iii][2]==realid && possMatches[parseInt(dragid.substr(5,))][iii][1]==possMatch){
 							skipMatch = true;
 							break;
 						}
-					}
+					}*/
 					if (!skipMatch){
 						console.log(realid,parseInt(dragid.substr(5,)));
-						possMatches[parseInt(dragid.substr(5,))].push([tempkey+1,possMatch,realid]);
+						possMatches[parseInt(dragid.substr(5,))].push([tempkey+1,possMatch,realid,newid]);
 					}
 				}
 			}
