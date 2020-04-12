@@ -69,7 +69,7 @@ app.post('/create',
 		
 		var matches = JSON.stringify(retval[5]);
 		if (collab){
-			matches = [];
+			matches = false;
 			tempKeys[tkey]={username:'',matches:retval[5]};
 		}
 		
