@@ -52,7 +52,7 @@ app.get('/puzzle',
 		var pieces = [];
 		npieces = retval[6];
 		for (var i=0;i<npieces;i++){
-			var piece = {id:i,rotation:retval[4][i]};
+			var piece = {id:i,rotation:retval[4][i],location:retval[3][i]};
 			pieces.push(piece);
 		}
 		res.write(nunjucks.render('encryptedpuzzle.html',{
@@ -68,7 +68,6 @@ app.get('/puzzle',
 			vlines:retval[0],
 			hlines:retval[1],
 			centers:JSON.stringify(retval[2]),
-			locations:JSON.stringify(retval[3]),
 			matches:JSON.stringify(retval[5]),
 			nrows:nrows,
 			ncols:ncols,
