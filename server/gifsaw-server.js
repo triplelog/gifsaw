@@ -54,7 +54,7 @@ app.post('/create',
 		
 		var encryptedpuzzle = false;
 		
-		var collab = false;
+		var collab = true;
 		var dimensions = sizeOf('static/img/in/' + fullname);
 		var actheight = dimensions.height;
 		var actwidth = dimensions.width;
@@ -77,7 +77,7 @@ app.post('/create',
 			var piece = {id:'video'+(i+1),rotation:retval[4][i],location:retval[3][i],centers:retval[2][i]};
 			pieces.push(piece);
 		}
-		res.write(nunjucks.render('encryptedpuzzle.html',{
+		var htmlstr = nunjucks.render('encryptedpuzzle.html',{
 			gametype: gametype,
 			players: players,
 			score: score,
@@ -99,8 +99,19 @@ app.post('/create',
 			pieces: JSON.stringify(pieces),
 			collab: collab,
 			tkey: tkey,
-		}));
-		res.end();
+		});
+		fs.writeFile("static/puzzles/"+puzzleid+'.html', htmlstr, function (err) {
+			if (err){
+				console.log(err);
+				res.redirect('../create');
+			}
+			else {
+				
+				res.redirect('../puzzles/'+puzzleid+'.html');
+			}
+			
+		});
+		
 	}
 );
 
@@ -182,7 +193,7 @@ const server = https.createServer(options, (req, res) => {
 
 const WebSocket = require('ws');
 const wss = new WebSocket.Server({ server });
-
+var rooms = {};
 wss.on('connection', function connection(ws) {
 	var imgid = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
   	var outSrc = 'out/'+imgid+'.png';
