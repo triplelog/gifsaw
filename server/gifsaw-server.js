@@ -140,7 +140,7 @@ function makelines(vm,npieces,actwidth,actheight,nrows,ncols) {
 		line = x1+','+y1+' ' + x1+','+y0+' ';
 	}
 	line;`);
-	//vm.run('var x0; var x1; var y0; var y1; var i; var ncols; var nrows; var line;');
+	vm.run('var x0; var x1; var y0; var y1; var i; var ncols; var nrows; var line;');
 	/*
 	let nrowsf = Math.floor(Math.sqrt(npieces*height/width));
 	let ncolsf = Math.floor(nrowsf*width/height);
