@@ -135,7 +135,7 @@ const wss = new WebSocket.Server({ server });
 wss.on('connection', function connection(ws) {
 	var imgid = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
   	var outSrc = 'out/'+imgid+'.png';
-  	var inSrc = 'images/in/'+imgid+'.png';
+  	var inSrc = 'static/img/in/'+imgid+'.png';
   	var imgTypes = ['.png','.jpg','.jpeg','.gif','.tiff','.tif'];//.svg, .psd, .eps, .raw, .pdf?
   	var imgIndex = 0;
   	ws.on('message', function incoming(message) {
@@ -151,7 +151,7 @@ wss.on('connection', function connection(ws) {
 						fs.writeFile(inSrc, buffer, function (err) {
 							if (err){console.log(err);}
 							console.log("cf",performance.now());
-							var jsonmessage = {'type':'imageSrc','src':inSrc};
+							var jsonmessage = {'type':'imageSrc','src':inSrc.replace('static/','../')};
 							ws.send(JSON.stringify(jsonmessage));
 						});
 						break;
