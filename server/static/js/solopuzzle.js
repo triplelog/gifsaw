@@ -45,13 +45,13 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 		
 		
 		for (var pairi=0;pairi<pairs.length;pairi++){
-			
-			console.log(pairs[pairi][3]+piece1.substr(5,));
-			console.log(document.getElementById(pairs[pairi][3]+piece1.substr(5,)));
-			//document.getElementById(pairs[pairi][3]+piece1.substr(5,)).style.display = 'none';
-			
-			
 			var piece2 = pairs[pairi][0];
+			
+			console.log(pairs[pairi][3]+piece2.substr(5,));
+			if (document.getElementById(pairs[pairi][3]+piece2.substr(5,))){
+				document.getElementById(pairs[pairi][3]+piece2.substr(5,)).style.display = 'none';
+			}
+			
 			var piece2Info = pieces[parseInt(piece2.substr(5,))-1];
 			var video2 = document.getElementById(piece2);
 			if (video2) {
