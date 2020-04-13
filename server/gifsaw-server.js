@@ -348,7 +348,7 @@ wss.on('connection', function connection(ws) {
 
 
 function updateScores(myroom,play){
-	myroom.vm.run('newMerge("'+play[1]+'",'+play[0]+');');
+	myroom.vm.run('newMerge("'+play[1]+'",'+JSON.stringify(play[0])+');');
 }
 
 
