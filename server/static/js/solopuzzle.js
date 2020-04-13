@@ -47,37 +47,37 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 		for (var pairi=0;pairi<pairs.length;pairi++){
 			var piece2 = pairs[pairi][0];
 			
-			console.log(piece1,piece2,pairs[pairi][3]);
+			console.log(pairs[pairi]);
 			if (pairs[pairi][3]=='top'){
-				if (document.getElementById(pairs[pairi][3]+piece2.substr(5,))){
-					document.getElementById(pairs[pairi][3]+piece2.substr(5,)).style.display = 'none';
+				if (document.getElementById(pairs[pairi][3]+pairs[pairi][2].substr(5,))){
+					document.getElementById(pairs[pairi][3]+pairs[pairi][2].substr(5,)).style.display = 'none';
 				}
-				if (document.getElementById('bottom'+piece1.substr(5,))){
-					document.getElementById('bottom'+piece1.substr(5,)).style.display = 'none';
+				if (document.getElementById('bottom'+pairs[pairi][1].substr(5,))){
+					document.getElementById('bottom'+pairs[pairi][1].substr(5,)).style.display = 'none';
 				}
 			}
 			else if (pairs[pairi][3]=='bottom'){
-				if (document.getElementById(pairs[pairi][3]+piece2.substr(5,))){
-					document.getElementById(pairs[pairi][3]+piece2.substr(5,)).style.display = 'none';
+				if (document.getElementById(pairs[pairi][3]+pairs[pairi][2].substr(5,))){
+					document.getElementById(pairs[pairi][3]+pairs[pairi][2].substr(5,)).style.display = 'none';
 				}
-				if (document.getElementById('top'+piece1.substr(5,))){
-					document.getElementById('top'+piece1.substr(5,)).style.display = 'none';
+				if (document.getElementById('top'+pairs[pairi][1].substr(5,))){
+					document.getElementById('top'+pairs[pairi][1].substr(5,)).style.display = 'none';
 				}
 			}
 			else if (pairs[pairi][3]=='left'){
-				if (document.getElementById(pairs[pairi][3]+piece2.substr(5,))){
-					document.getElementById(pairs[pairi][3]+piece2.substr(5,)).style.display = 'none';
+				if (document.getElementById(pairs[pairi][3]+pairs[pairi][2].substr(5,))){
+					document.getElementById(pairs[pairi][3]+pairs[pairi][2].substr(5,)).style.display = 'none';
 				}
-				if (document.getElementById('right'+piece1.substr(5,))){
-					document.getElementById('right'+piece1.substr(5,)).style.display = 'none';
+				if (document.getElementById('right'+pairs[pairi][1].substr(5,))){
+					document.getElementById('right'+pairs[pairi][1].substr(5,)).style.display = 'none';
 				}
 			}
 			else if (pairs[pairi][3]=='right'){
-				if (document.getElementById(pairs[pairi][3]+piece2.substr(5,))){
-					document.getElementById(pairs[pairi][3]+piece2.substr(5,)).style.display = 'none';
+				if (document.getElementById(pairs[pairi][3]+pairs[pairi][2].substr(5,))){
+					document.getElementById(pairs[pairi][3]+pairs[pairi][2].substr(5,)).style.display = 'none';
 				}
-				if (document.getElementById('left'+piece1.substr(5,))){
-					document.getElementById('left'+piece1.substr(5,)).style.display = 'none';
+				if (document.getElementById('left'+pairs[pairi][1].substr(5,))){
+					document.getElementById('left'+pairs[pairi][1].substr(5,)).style.display = 'none';
 				}
 			}
 			
