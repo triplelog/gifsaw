@@ -320,7 +320,7 @@ wss.on('connection', function connection(ws) {
 						if (acceptMatch !== false){
 							var jsonmessage = {'type':'foundMatch','message':['video'+dm.message[0],tomatch,'me']}
 							for (var i in myroom.players){
-								if (myroom.players[i].username != username){
+								if (i != username){
 									jsonmessage.message[2] = username;
 									myroom.players[i].ws.send(JSON.stringify(jsonmessage));
 								}
