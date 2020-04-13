@@ -6,11 +6,11 @@ ws.onopen = function(evt) {
 }
 ws.onmessage = function(evt){
 	var dm = JSON.parse(evt.data);
-	var el = document.getElementById('imageHolder');
-	var img = document.createElement('img');
+	//var el = document.getElementById('imageHolder');
+	var img = document.getElementById('imageHolder').querySelector('img');
 	img.setAttribute('src',dm.src);
-	el.innerHTML = '';
-	el.appendChild(img);
+	//el.innerHTML = '';
+	//el.appendChild(img);
 	document.querySelector('input[name="fileSrc"]').setAttribute('value',dm.src);
 	
 }
@@ -140,11 +140,12 @@ function updateSize(evt) {
 	
 	var img = document.getElementById('imageHolder').querySelector('img');
 	if (img){
-		console.log(img.height);
-		console.log(img.width);
 		imageHeight = img.height;
 		imageWidth = img.width;
 		var retval = makelines(imageWidth,imageHeight,nrows,ncols);
+		var svg = document.getElementById('imageHolder').querySelector('svg');
+		svg.setAttribute('width',imageWidth);
+		svg.setAttribute('height',imageHeight);
 		console.log(retval[0]);
 	}
 }
