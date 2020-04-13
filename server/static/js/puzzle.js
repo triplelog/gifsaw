@@ -1,6 +1,8 @@
 function toggle() {
 	var els = document.querySelectorAll('svg path');
 	for (var i in els){
+		console.log(els);
+		console.log(els[i]);
 		els[i].classList.toggle('toggled');
 	}
 }
