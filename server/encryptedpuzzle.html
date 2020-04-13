@@ -86,7 +86,8 @@ img {
 <div id="video{{ i+1 }}">
     <img src="{{ image.name }}">
     <svg style="position:absolute; top:0px; left:0px; width:100%; height:100%;" width="{{ image.width }}" height="{{ image.height }}" preserveAspectRatio="none" viewBox = "0 0 1 1" version = "1.1">
-		<path d="M0,0 0,1 1,1 1,0 0,0" fill="red">
+		<!--<path d="M0,0 0,1 1,1 1,0 0,0" fill="red">-->
+		<use href="#path{{ i+1 }}" fill="transparent" stroke="red" stroke-width="1%"/>
 	</svg>
 </div>
 {% endfor %}
