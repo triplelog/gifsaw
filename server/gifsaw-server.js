@@ -266,7 +266,7 @@ wss.on('connection', function connection(ws) {
 				if (tempKeys[dm.message].username && tempKeys[dm.message].username != ''){
 					username = tempKeys[dm.message].username;
 				}
-				if (tempKeys[dm.message].matches && tempKeys[dm.message].puzzleid){
+				if (tempKeys[dm.message].puzzleid){
 					puzzleid = tempKeys[dm.message].puzzleid;
 					matches = false;
 					Puzzle.findOne({id:puzzleid}, function(err,result) {
