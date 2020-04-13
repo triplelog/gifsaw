@@ -252,7 +252,7 @@ wss.on('connection', function connection(ws) {
 			if (dm.message && dm.message.length>1){
 				var tomatch = socketanswer(dm.message[1],matches);
 				if (tomatch.length>0){
-					console.log('video'+dm.message[0],tomatch);
+					console.log(tomatch);
 					var jsonmessage = {'type':'foundMatch','message':['video'+dm.message[0],tomatch,'me']}
 					ws.send(JSON.stringify(jsonmessage));
 					if (myroom) {
@@ -288,7 +288,7 @@ function socketanswer(pairs,matches) {
 				if (realidofotherpiece == matches[myrealid][ii][0] && pairs[i][1]==matches[myrealid][ii][1]) {
 					//console.log(piece1,piece2,pairs,matches[piece1][ii]);
 
-					tomatch.push(piece2);
+					tomatch.push([piece2,myrealid,realidofotherpiece]);
 				}
 			}
 		}

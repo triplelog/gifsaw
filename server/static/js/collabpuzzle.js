@@ -12,7 +12,7 @@ ws.onmessage = function(evt){
 		if (dm.message && dm.message.length>2 && document.getElementById(dm.message[0])){
 			var tomatch =dm.message[1];
 			for (var i=tomatch.length-1;i>=0;i--){
-				if (document.getElementById(tomatch[i])){
+				if (document.getElementById(tomatch[i][0])){
 				}
 				else {
 					tomatch = tomatch.splice(i,1);
