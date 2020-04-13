@@ -61,6 +61,9 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 				p1d += ' '+p2d;
 				p1l = (p1d.match(/M/g)||[]).length;
 				
+				var p2svg = video2.querySelector('svg');
+				p1.appendChild(p2svg);
+				
 				if (keepscore) {
 					if (keeppoints) {
 						mypoints += Math.min(p1l,p2l);
