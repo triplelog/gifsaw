@@ -23,7 +23,8 @@ function socketanswer(piece1,pairs) {
 
 }
 
-function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
+function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
+	console.log(cssJson);
 	var video1 = document.getElementById(piece1);
 	if (video1) {
 		var p1 = document.getElementById('path'+piece1.substr(5,));
@@ -108,53 +109,42 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 						mypoints += Math.min(p1l,p2l);
 					}
 				}
-				if (!isfirst) {
-					if (3==2 && p1l > p2l || (piece1Info.rotation == 0 && piece2Info.rotation != 0)) {
-						piece2Info.rotation=piece1Info.rotation;
-						video2.style.transform = 'rotate('+parseInt(piece1Info.rotation)+'deg)';
-						video2.style.transformOrigin = ccenters[parseInt(piece1.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece1.substr(5,))-1][1]*100+'%';
-						video2.style.left = video1.style.left;
-						video2.style.top = video1.style.top;
+				
+				if (3==2 && p1l > p2l || (piece1Info.rotation == 0 && piece2Info.rotation != 0)) {
+					piece2Info.rotation=piece1Info.rotation;
+					video2.style.transform = 'rotate('+parseInt(piece1Info.rotation)+'deg)';
+					video2.style.transformOrigin = ccenters[parseInt(piece1.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece1.substr(5,))-1][1]*100+'%';
+					video2.style.left = video1.style.left;
+					video2.style.top = video1.style.top;
+				}
+				else {
+					piece1Info.rotation=piece2Info.rotation;
+					video1.style.transform = 'rotate('+parseInt(piece2Info.rotation)+'deg)';
+					video1.style.left = video2.style.left;
+					video1.style.top = video2.style.top;
+					
+					if (p2l == 1){
+						video1.style.left = (parseFloat(video2.style.left) - ccenters[parseInt(piece2.substr(5,))-1][0]*cwidth + piece2Info.centers[0].x*cwidth)+'px';
+						video1.style.top = (parseFloat(video2.style.top) - ccenters[parseInt(piece2.substr(5,))-1][1]*cheight + piece2Info.centers[0].y*cheight)+'px';
+						piece2Info.centers = [{x:ccenters[parseInt(piece2.substr(5,))-1][0],y:ccenters[parseInt(piece2.substr(5,))-1][1],id:piece2Info.id}];
+						video1.style.transformOrigin = ccenters[parseInt(piece2.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece2.substr(5,))-1][1]*100+'%';
 					}
 					else {
-						piece1Info.rotation=piece2Info.rotation;
-						video1.style.transform = 'rotate('+parseInt(piece2Info.rotation)+'deg)';
-						video1.style.left = video2.style.left;
-						video1.style.top = video2.style.top;
-						
-						if (p2l == 1){
-							video1.style.left = (parseFloat(video2.style.left) - ccenters[parseInt(piece2.substr(5,))-1][0]*cwidth + piece2Info.centers[0].x*cwidth)+'px';
-							video1.style.top = (parseFloat(video2.style.top) - ccenters[parseInt(piece2.substr(5,))-1][1]*cheight + piece2Info.centers[0].y*cheight)+'px';
-							piece2Info.centers = [{x:ccenters[parseInt(piece2.substr(5,))-1][0],y:ccenters[parseInt(piece2.substr(5,))-1][1],id:piece2Info.id}];
-							video1.style.transformOrigin = ccenters[parseInt(piece2.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece2.substr(5,))-1][1]*100+'%';
-						}
-						else {
-							video1.style.transformOrigin = ccenters[parseInt(piece1.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece1.substr(5,))-1][1]*100+'%';
-						}
-						for (var i=0;i<piece2Info.centers.length;i++) {
-						
-							var tempc = {};
-							tempc.id = piece2Info.centers[i].id;
-							tempc.x = piece2Info.centers[i].x;
-							tempc.y = piece2Info.centers[i].y;
-							
-							piece1Info.centers.push(tempc);
-						}
-						
-						
+						video1.style.transformOrigin = ccenters[parseInt(piece1.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece1.substr(5,))-1][1]*100+'%';
 					}
+					for (var i=0;i<piece2Info.centers.length;i++) {
+					
+						var tempc = {};
+						tempc.id = piece2Info.centers[i].id;
+						tempc.x = piece2Info.centers[i].x;
+						tempc.y = piece2Info.centers[i].y;
+						
+						piece1Info.centers.push(tempc);
+					}
+					
+					
 				}
-				else { //Do this too!
-					piece1Info.rotation=0;
-					piece2Info.rotation=0;
-					video1.style.transform = 'rotate(0deg)';
-					video1.style.left = '50px';
-					video1.style.top = '50px';
-					video2.style.transform = 'rotate(0deg)';
-					video2.style.left = '50px';
-					video2.style.top = '50px';
-					video1.style.transformOrigin = ccenters[parseInt(piece1.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece1.substr(5,))-1][1]*100+'%';
-				}
+
 
 				
 				document.getElementById(piece2).remove();

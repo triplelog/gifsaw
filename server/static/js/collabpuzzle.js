@@ -9,7 +9,6 @@ ws.onopen = function(evt) {
 ws.onmessage = function(evt){
 	var dm = JSON.parse(evt.data);
 	if (dm.type == "foundMatch") {
-		console.log(dm.message);
 		if (dm.message && dm.message.length>2 && document.getElementById(dm.message[0])){
 			var tomatch =dm.message[1];
 			for (var i=tomatch.length-1;i>=0;i--){
