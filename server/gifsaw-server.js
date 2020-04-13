@@ -288,7 +288,7 @@ wss.on('connection', function connection(ws) {
 					if (tomatch.length>0){
 						myroom.merges.push(['video'+dm.message[0],tomatch,'me']);
 						var jsonmessage = {'type':'foundMatch','message':['video'+dm.message[0],tomatch,'me']}
-						ws.send(JSON.stringify(jsonmessage));
+						//ws.send(JSON.stringify(jsonmessage));
 						if (myroom) {
 							for (var i in myroom.players){
 								/*if (myroom[i].username != username){
