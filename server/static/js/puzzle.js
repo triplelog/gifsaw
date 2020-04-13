@@ -39,7 +39,7 @@ function dragstart(event) {
 			dragid = e.target.id;
 		}
 		else {
-			dragid = e.parentElement.id;
+			dragid = e.target.parentElement.id;
 		}
 		cvideo = videos[dragid];
 		if (cvideo) {
