@@ -46,8 +46,9 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 		
 		for (var pairi=0;pairi<pairs.length;pairi++){
 			
-			document.getElementById(pairs[pairi][3]+piece1.substr(5,)).style.display = 'none';
 			console.log(pairs[pairi][3]+piece1.substr(5,));
+			//document.getElementById(pairs[pairi][3]+piece1.substr(5,)).style.display = 'none';
+			
 			
 			var piece2 = pairs[pairi][0];
 			var piece2Info = pieces[parseInt(piece2.substr(5,))-1];
