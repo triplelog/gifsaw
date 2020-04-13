@@ -265,7 +265,7 @@ wss.on('connection', function connection(ws) {
 						
 					}
 					else {
-						rooms[puzzleid]={players:[{username:username,ws:ws,score:0}],merges:[]};
+						rooms[puzzleid]={players:[{username:username,ws:ws,score:0}],merges:[],plays:[]};
 					}
 					myroom = rooms[puzzleid];
 				}
@@ -288,7 +288,7 @@ wss.on('connection', function connection(ws) {
 						}
 					}
 					if (tomatch.length>0){
-						myroom.merges.push(['video'+dm.message[0],tomatch,'me']);
+						
 						var jsonmessage = {'type':'foundMatch','message':['video'+dm.message[0],tomatch,'me']}
 						//ws.send(JSON.stringify(jsonmessage));
 						if (myroom) {
@@ -298,13 +298,12 @@ wss.on('connection', function connection(ws) {
 									myroom.players[i].ws.send(JSON.stringify(jsonmessage));
 								}
 								else{
-									myroom.players[i].score++;
-									console.log(myroom.players);
+									myroom.merges.push(['video'+dm.message[0],tomatch,i]);
 									myroom.players[i].ws.send(JSON.stringify(jsonmessage));
 								}
-								
-							
 							}
+							updateScores(myroom,[tomatch,i]);
+							console.log(myroom.players);
 						}
 					}
 					
@@ -318,6 +317,13 @@ wss.on('connection', function connection(ws) {
 		}
   	});
 });
+
+
+function updateScores(myroom,play){
+	var playeridx = parseInt(play[1]);
+	myroom.players[playeridx].score++;
+	myroom.plays.push(play);
+}
 
 
 function socketanswer(pairs,matches) {
