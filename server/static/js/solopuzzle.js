@@ -65,7 +65,7 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 			}
 			else if (pairs[pairi][3]=='right'){
 				var el2 = document.getElementById(pairs[pairi][3]+pairs[pairi][2].substr(5,));
-				var el1 = document.getElementById('right'+pairs[pairi][1].substr(5,));
+				var el1 = document.getElementById('left'+pairs[pairi][1].substr(5,));
 				lrtb = 'lr';
 			}
 			if (el2){
