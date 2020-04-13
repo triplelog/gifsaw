@@ -18,15 +18,19 @@
 body {
 	background: gray;
 }
+/*
 img {
 	position: absolute;
 	left: 50px;
 	top: 50px;
-}
+}*/
 {% for i in range(0,npieces) %}
 #video{{ i+1 }} {
 	-webkit-clip-path:url(#clip{{ i+1 }});
 	clip-path:url(#clip{{ i+1 }});
+	position: absolute;
+	left: 50px;
+	top: 50px;
 }
 {% endfor %}
 
@@ -64,7 +68,7 @@ img {
 </head>
 <body>
 
-<svg width="{{ image.width }}" height="{{ image.height }}" viewBox = "0 0 1 2" version = "1.1">
+<svg width="{{ image.width }}" height="{{ image.height }}" viewBox = "0 0 1 1" version = "1.1">
     <defs>
     	
     	{% for i in range(0,npieces)  %}
@@ -75,14 +79,13 @@ img {
     	
     	  
     </defs>
-    {% for i in range(0,npieces)  %}
-    	<use xlink:href="#path{{ i+1 }}" stroke="red" stroke-width="1%" fill="transparent"/>
-	{% endfor %}
     
 </svg>
 
 {% for i in range(0,npieces)  %}
-    <img id="video{{ i+1 }}" src="{{ image.name }}">
+<div id="video{{ i+1 }}">
+    <img  src="{{ image.name }}">
+</div>
 {% endfor %}
 
 
