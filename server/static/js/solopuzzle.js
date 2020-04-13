@@ -80,6 +80,13 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 				el1.classList.remove('top');
 				el1.classList.remove('bottom');
 				el1.classList.remove('pieceBorder');
+				if (cssJson){
+					for (i in cssJson){
+						console.log(i,cssJson[i]);
+						el1.style[i]=cssJson[i];
+					}
+				}
+				
 			}
 			
 			
