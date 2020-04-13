@@ -1,1 +1,38 @@
 npm install -s image-size
+sudo apt-get install gifsicle imagemagick
+
+
+
+
+
+
+## Creating
+
+Choose a file to upload.
+
+Select the desired number of pieces.
+A dropdown will show you ideal options that make pieces square-like.
+Select your desired dimensions.
+Alternatively you can enter any number of rows/columns directly.
+
+# Style
+
+If you do not want any borders around pieces, you can leave this blank.
+To style your puzzle, you can set the values for the following classes:
+pieceBorder -- applies to every border of every piece. set stroke style
+interiorBorder -- applies to borders that are between connected pieces.
+left -- applies to the left border
+lr -- applies to borders that are horizontally between connected pieces
+piece -- applies to the entire piece, can fill or stroke
+toggled -- applies when the puzzle is toggled
+border{{ id }} -- applies to each of the 4 borders for the piece @ id
+
+# Scoring
+
+If you would like to create a puzzle for multiple users, you can enter your desired scoring algorithm into the box.
+You must include two functions:
+newMerge(username,matches)
+ return false to reject merge
+ return json with css, message, and/or score
+
+newPlayer(username)
