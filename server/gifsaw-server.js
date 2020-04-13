@@ -220,7 +220,7 @@ wss.on('connection', function connection(ws) {
   	var imgTypes = ['.png','.jpg','.jpeg','.gif','.tiff','.tif'];//.svg, .psd, .eps, .raw, .pdf?
   	var imgIndex = 0;
   	var matches= [];
-  	var username = '';
+  	var username = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
   	var puzzleid = '';
   	var myroom = false;
   	ws.on('message', function incoming(message) {
@@ -250,7 +250,9 @@ wss.on('connection', function connection(ws) {
 		var dm = JSON.parse(message);
 		if (dm.type && dm.type == 'key'){
 			if (dm.message && tempKeys[dm.message]){
-				username = tempKeys[dm.message].username;
+				if (tempKeys[dm.message].username && tempKeys[dm.message].username != ''){
+					username = tempKeys[dm.message].username;
+				}
 				if (tempKeys[dm.message].matches && tempKeys[dm.message].puzzleid){
 					matches = tempKeys[dm.message].matches;
 					puzzleid = tempKeys[dm.message].puzzleid;
@@ -291,10 +293,16 @@ wss.on('connection', function connection(ws) {
 						//ws.send(JSON.stringify(jsonmessage));
 						if (myroom) {
 							for (var i in myroom.players){
-								/*if (myroom[i].username != username){
-							
-								}*/
-								myroom.players[i].ws.send(JSON.stringify(jsonmessage));
+								if (myroom.players[i].username != username){
+									jsonmessage.message[2] = username;
+									myroom.players[i].ws.send(JSON.stringify(jsonmessage));
+								}
+								else{
+									myroom.players[i].score++;
+									console.log(myroom.players);
+									myroom.players[i].ws.send(JSON.stringify(jsonmessage));
+								}
+								
 							
 							}
 						}
