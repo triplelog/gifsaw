@@ -9,6 +9,8 @@ ws.onmessage = function(evt){
 	//var el = document.getElementById('imageHolder');
 	var img = document.getElementById('imageHolder').querySelector('img');
 	img.setAttribute('src',dm.src);
+	document.getElementById('imageHolder').style.height= imageHeight;
+	document.getElementById('imageHolder').style.width= imageWidth;
 	//el.innerHTML = '';
 	//el.appendChild(img);
 	document.querySelector('input[name="fileSrc"]').setAttribute('value',dm.src);
@@ -144,8 +146,11 @@ function updateSize(evt) {
 		imageWidth = img.width;
 		var retval = makelines(imageWidth,imageHeight,nrows,ncols);
 		var svg = document.getElementById('imageHolder').querySelector('svg');
+		document.getElementById('imageHolder').style.height= imageHeight;
+		document.getElementById('imageHolder').style.width= imageWidth;
 		svg.setAttribute('width',imageWidth);
 		svg.setAttribute('height',imageHeight);
+		
 		console.log(retval[0]);
 	}
 }
