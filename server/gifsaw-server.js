@@ -21,6 +21,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/gifsaw', {useNewUrlParser: true});
 const User = require('./models/user');
 const UserData = require('./models/userdata');
+const Puzzle = require('./models/puzzle');
 
 var express = require('express');
 
@@ -31,7 +32,6 @@ var tempKeys = fromLogin.tempKeys;
 
 
 
-var tempMatches = [];
 
 
 app.use('/',express.static('static'));
@@ -41,11 +41,16 @@ app.get('/puzzles/:puzzleid',
 	function(req, res) {
 		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
 		var collab = true;
-		if (collab){
+		var puzzleid = req.params.puzzleid;
+		tempKeys[tkey]={username:'',puzzleid:puzzleid};
+		/*if (collab){
 			//Add connection to db
-			tempKeys[tkey]={username:'',matches:tempMatches,puzzleid:req.params.puzzleid};
-		}
-		res.write(nunjucks.render('puzzles/'+req.params.puzzleid+'.html',{
+			Puzzle.findOne({id:puzzleid}, function(err,result) {
+				
+			})
+			
+		}*/
+		res.write(nunjucks.render('puzzles/'+puzzleid+'.html',{
 			tkey: tkey,
 		}));
 		res.end();
@@ -87,7 +92,6 @@ app.post('/create',
 		var matches = JSON.stringify(retval[5]);
 		if (collab){
 			matches = false;
-			tempMatches = retval[5];
 			//Add connection to db
 		}
 		
@@ -119,17 +123,26 @@ app.post('/create',
 			tkeyHolder:'{{tkey}}',
 			
 		});
-		fs.writeFile("puzzles/"+puzzleid+'.html', htmlstr, function (err) {
+		var puzzle = new Puzzle({id:puzzleid,matches:retval[5]});
+		puzzle.save(function(err,result) {
 			if (err){
 				console.log(err);
 				res.redirect('../create');
+				return;
 			}
-			else {
+			fs.writeFile("puzzles/"+puzzleid+'.html', htmlstr, function (err2) {
+				if (err){
+					console.log(err);
+					res.redirect('../create');
+				}
+				else {
 				
-				res.redirect('../puzzles/'+puzzleid);
-			}
+					res.redirect('../puzzles/'+puzzleid);
+				}
 			
-		});
+			});
+		})
+		
 		
 	}
 );
@@ -254,48 +267,54 @@ wss.on('connection', function connection(ws) {
 					username = tempKeys[dm.message].username;
 				}
 				if (tempKeys[dm.message].matches && tempKeys[dm.message].puzzleid){
-					matches = tempKeys[dm.message].matches;
 					puzzleid = tempKeys[dm.message].puzzleid;
-					if (rooms[puzzleid]){
-						myroom = rooms[puzzleid];
-						var acceptPlayer = myroom.vm.run('newPlayer("'+username+'");');
-						if (acceptPlayer !== false) {
-							myroom.players[username]={ws:ws,score:0};
-							for (var ii=0;ii<myroom.merges.length;ii++){ //send all existing matches;
-								var jsonmessage = {'type':'foundMatch','message':myroom.merges[ii]};
-								ws.send(JSON.stringify(jsonmessage));
+					matches = false;
+					Puzzle.findOne({id:puzzleid}, function(err,result) {
+						matches = result.matches;
+						if (rooms[puzzleid]){
+							myroom = rooms[puzzleid];
+							var acceptPlayer = myroom.vm.run('newPlayer("'+username+'");');
+							if (acceptPlayer !== false) {
+								myroom.players[username]={ws:ws,score:0};
+								for (var ii=0;ii<myroom.merges.length;ii++){ //send all existing matches;
+									var jsonmessage = {'type':'foundMatch','message':myroom.merges[ii]};
+									ws.send(JSON.stringify(jsonmessage));
+								}
 							}
+							else {
+								//Add message rejecting player
+							}
+						
+						
 						}
 						else {
-							//Add message rejecting player
+							rooms[puzzleid]={players:{},merges:[],vm:new VM()};
+							myroom = rooms[puzzleid];
+							myroom.initialScript = `var players={};
+							function newPlayer(username){
+								var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
+								players[username]={score:0,color:color};
+							}
+							function newMerge(username,matches){
+								players[username].score++;
+								return {stroke: players[username].color};
+							}`;
+						
+						
+							myroom.vm.run(myroom.initialScript);
+							var acceptPlayer = myroom.vm.run('newPlayer("'+username+'");');
+							if (acceptPlayer !== false) {
+								myroom.players[username]={ws:ws,score:0};
+							}
+							else {
+								//Add message rejecting player
+							}
+						
 						}
-						
-						
-					}
-					else {
-						rooms[puzzleid]={players:{},merges:[],vm:new VM()};
-						myroom = rooms[puzzleid];
-						myroom.initialScript = `var players={};
-						function newPlayer(username){
-							var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
-							players[username]={score:0,color:color};
-						}
-						function newMerge(username,matches){
-							players[username].score++;
-							return {stroke: players[username].color};
-						}`;
-						
-						
-						myroom.vm.run(myroom.initialScript);
-						var acceptPlayer = myroom.vm.run('newPlayer("'+username+'");');
-						if (acceptPlayer !== false) {
-							myroom.players[username]={ws:ws,score:0};
-						}
-						else {
-							//Add message rejecting player
-						}
-						
-					}
+					
+					})
+					
+					
 					
 				}
 			}
