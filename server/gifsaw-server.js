@@ -257,17 +257,44 @@ wss.on('connection', function connection(ws) {
 					matches = tempKeys[dm.message].matches;
 					puzzleid = tempKeys[dm.message].puzzleid;
 					if (rooms[puzzleid]){
-						rooms[puzzleid].players.push({username:username,ws:ws,score:0});
-						for (var ii=0;ii<rooms[puzzleid].merges.length;ii++){ //send all existing matches;
-							var jsonmessage = {'type':'foundMatch','message':rooms[puzzleid].merges[ii]};
-							ws.send(JSON.stringify(jsonmessage));
+						myroom = rooms[puzzleid];
+						var acceptPlayer = myroom.vm.run('newPlayer('+username+');');
+						if (acceptPlayer !== false) {
+							myroom.players[username]={ws:ws,score:0};
+							for (var ii=0;ii<myroom.merges.length;ii++){ //send all existing matches;
+								var jsonmessage = {'type':'foundMatch','message':myroom.merges[ii]};
+								ws.send(JSON.stringify(jsonmessage));
+							}
 						}
+						else {
+							//Add message rejecting player
+						}
+						
 						
 					}
 					else {
-						rooms[puzzleid]={players:[{username:username,ws:ws,score:0}],merges:[],plays:[]};
+						rooms[puzzleid]={players:{},merges:[],vm:new VM()};
+						myroom = rooms[puzzleid];
+						myroom.initialScript = `var players={};
+						function newPlayer(username){
+							players[username]={score:0};
+						}
+						function newMerge(username,matches){
+							players[username].score++;
+						}`;
+						
+						
+						myroom.vm.run(myroom.initialScript);
+						var acceptPlayer = myroom.vm.run('newPlayer('+username+');');
+						if (acceptPlayer !== false) {
+							myroom.players[username]={ws:ws,score:0};
+						}
+						else {
+							//Add message rejecting player
+						}
+						
 					}
-					myroom = rooms[puzzleid];
+					
 				}
 			}
 			return;
@@ -287,11 +314,11 @@ wss.on('connection', function connection(ws) {
 							
 						}
 					}
-					if (tomatch.length>0){
-						
-						var jsonmessage = {'type':'foundMatch','message':['video'+dm.message[0],tomatch,'me']}
-						//ws.send(JSON.stringify(jsonmessage));
-						if (myroom) {
+					if (tomatch.length>0 && myroom){
+						var acceptMatch = updateScores(myroom,[tomatch,username]);
+						console.log(vm.run('players'));
+						if (acceptMatch !== false)
+							var jsonmessage = {'type':'foundMatch','message':['video'+dm.message[0],tomatch,'me']}
 							for (var i in myroom.players){
 								if (myroom.players[i].username != username){
 									jsonmessage.message[2] = username;
@@ -302,8 +329,9 @@ wss.on('connection', function connection(ws) {
 									myroom.players[i].ws.send(JSON.stringify(jsonmessage));
 								}
 							}
-							updateScores(myroom,[tomatch,i]);
-							console.log(myroom.players);
+						}
+						else {
+							///add message explaining denial
 						}
 					}
 					
@@ -320,9 +348,7 @@ wss.on('connection', function connection(ws) {
 
 
 function updateScores(myroom,play){
-	var playeridx = parseInt(play[1]);
-	myroom.players[playeridx].score++;
-	myroom.plays.push(play);
+	myroom.vm.run('newMerge('+play[1]+','+play[0]+');');
 }
 
 
