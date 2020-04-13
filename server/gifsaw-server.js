@@ -281,6 +281,7 @@ wss.on('connection', function connection(ws) {
 						}
 						function newMerge(username,matches){
 							players[username].score++;
+							return {stroke: 'green'};
 						}`;
 						
 						
@@ -318,14 +319,14 @@ wss.on('connection', function connection(ws) {
 						var acceptMatch = updateScores(myroom,[tomatch,username]);
 						console.log(myroom.vm.run('players'));
 						if (acceptMatch !== false){
-							var jsonmessage = {'type':'foundMatch','message':['video'+dm.message[0],tomatch,'me']}
+							var jsonmessage = {'type':'foundMatch','message':['video'+dm.message[0],tomatch,'me',acceptMatch]}
 							for (var i in myroom.players){
 								if (i != username){
 									jsonmessage.message[2] = username;
 									myroom.players[i].ws.send(JSON.stringify(jsonmessage));
 								}
 								else{
-									myroom.merges.push(['video'+dm.message[0],tomatch,i]);
+									myroom.merges.push(['video'+dm.message[0],tomatch,i,acceptMatch]);
 									myroom.players[i].ws.send(JSON.stringify(jsonmessage));
 								}
 							}
