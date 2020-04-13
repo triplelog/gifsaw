@@ -63,42 +63,53 @@ app.post('/create',
 		
 		var puzzleid = crypto.randomBytes(100).toString('hex').substr(2, 12);
 		var vm = new VM();
-		var npieces;
 		var gametype = 'solo';
 		var players = 'one';
 		var score = false;
 		
-		
+		{
+			var initialScript = `var players={};
+			function newPlayer(username){
+				var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
+				players[username]={score:0,color:color};
+			}
+			function newMerge(username,matches){
+				players[username].score++;
+				return {stroke: players[username].color};
+			}`;
+			var initialCSS = `.pieceBorder{
+				stroke-dasharray: .02;
+				stroke:red;
+				stroke-width:.02;
+				stroke-opacity:.5;
+				fill: transparent;
+			}
+			.interiorBorder{
+				stroke-dasharray: .01;
+				stroke:blue;
+				stroke-width:.01;
+				stroke-opacity:.5;
+				fill: transparent;
+			}
+			.interiorBorder.toggled{
+				stroke-dasharray: .03;
+				stroke:blue;
+				stroke-width:.03;
+				stroke-opacity:1;
+				fill: transparent;
+			}
+			.piece {
+				fill: black;
+				fill-opacity: .1;
+				stroke: none;
+			}`;
+		}
 		var fullname = req.body.fileSrc.replace('../img/in/','');
 		var fname = fullname.substring(0,fullname.indexOf('.'));
 		var nrows = parseInt(req.body.nrows);
 		var ncols = parseInt(req.body.ncols);
-		var initialCSS = `.pieceBorder{
-			stroke-dasharray: .02;
-			stroke:red;
-			stroke-width:.02;
-			stroke-opacity:.5;
-			fill: transparent;
-		}
-		.interiorBorder{
-			stroke-dasharray: .01;
-			stroke:blue;
-			stroke-width:.01;
-			stroke-opacity:.5;
-			fill: transparent;
-		}
-		.interiorBorder.toggled{
-			stroke-dasharray: .03;
-			stroke:blue;
-			stroke-width:.03;
-			stroke-opacity:1;
-			fill: transparent;
-		}
-		.piece {
-			fill: black;
-			fill-opacity: .1;
-			stroke: none;
-		}`;
+		initialScript = req.body.initialScript;
+		
 		var encryptedpuzzle = false;
 		
 		var collab = true;
@@ -112,7 +123,7 @@ app.post('/create',
 		var retval = makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols);
 		
 		var pieces = [];
-		npieces = retval[6];
+		var npieces = retval[6];
 		
 		var matches = JSON.stringify(retval[5]);
 		if (collab){
@@ -150,15 +161,7 @@ app.post('/create',
 			
 		});
 		
-		var initialScript = `var players={};
-							function newPlayer(username){
-								var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
-								players[username]={score:0,color:color};
-							}
-							function newMerge(username,matches){
-								players[username].score++;
-								return {stroke: players[username].color};
-							}`;
+		
 		var puzzle = new Puzzle({id:puzzleid,matches:retval[5],initialScript:initialScript});
 		puzzle.save(function(err,result) {
 			if (err){

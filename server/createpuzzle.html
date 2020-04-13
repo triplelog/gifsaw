@@ -42,7 +42,15 @@
 	<input type="number" id="ncols" name="ncols"></input>
 	
 	<label for="initialScript">Scoring Script: </label>
-	<textarea id="initialScript" name="initialScript"></textarea>
+	<textarea id="initialScript" name="initialScript">var players={};
+			function newPlayer(username){
+				var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
+				players[username]={score:0,color:color};
+			}
+			function newMerge(username,matches){
+				players[username].score++;
+				return {stroke: players[username].color};
+			}</textarea>
 	
 	<!--<label for="initialScript">Border CSS: </label>
 	<textarea id="initialScript" name="initialScript"></textarea>
