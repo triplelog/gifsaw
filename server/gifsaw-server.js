@@ -255,11 +255,15 @@ wss.on('connection', function connection(ws) {
 					matches = tempKeys[dm.message].matches;
 					puzzleid = tempKeys[dm.message].puzzleid;
 					if (rooms[puzzleid]){
-						rooms[puzzleid].push({username:username,ws:ws});
-						//send all existing matches;
+						rooms[puzzleid].players.push({username:username,ws:ws,score:0});
+						for (var ii=0;ii<myroom.merges.length;ii++){ //send all existing matches;
+							var jsonmessage = {'type':'foundMatch','message':myroom.merges[ii]};
+							ws.send(JSON.stringify(jsonmessage));
+						}
+						
 					}
 					else {
-						rooms[puzzleid]=[{username:username,ws:ws}];
+						rooms[puzzleid]={players:[{username:username,ws:ws,score:0}],merges:[]};
 					}
 					myroom = rooms[puzzleid];
 				}
@@ -270,16 +274,29 @@ wss.on('connection', function connection(ws) {
 			if (dm.message && dm.message.length>1){
 				var tomatch = socketanswer(dm.message[1],matches);
 				if (tomatch.length>0){
-					console.log(tomatch);
-					var jsonmessage = {'type':'foundMatch','message':['video'+dm.message[0],tomatch,'me']}
-					ws.send(JSON.stringify(jsonmessage));
-					if (myroom) {
-						for (var i in myroom){
-							/*if (myroom[i].username != username){
+					for (var i=tomatch.length-1;i>=0;i--){
+						for (var ii=0;ii<myroom.merges.length;ii++){
+							var oldMatch = myroom.merges[ii][1];
+							for (var iii=0;iii<oldMatch.length;iii++){
+								if (tomatch[i][1] == oldMatch[iii][1] && tomatch[i][2] == oldMatch[iii][2]){
+									tomatch = tomatch.splice(i,1);
+								}
+							}
 							
-							}*/
-							myroom[i].ws.send(JSON.stringify(jsonmessage));
+						}
+					}
+					if (tomatch.length>0){
+						myroom.merges.push(['video'+dm.message[0],tomatch,'me']);
+						var jsonmessage = {'type':'foundMatch','message':['video'+dm.message[0],tomatch,'me']}
+						ws.send(JSON.stringify(jsonmessage));
+						if (myroom) {
+							for (var i in myroom.players){
+								/*if (myroom[i].username != username){
 							
+								}*/
+								myroom.players[i].ws.send(JSON.stringify(jsonmessage));
+							
+							}
 						}
 					}
 					
