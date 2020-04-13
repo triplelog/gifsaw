@@ -146,7 +146,7 @@ app.post('/create',
 			pieces: JSON.stringify(pieces),
 			collab: collab,
 			tkeyHolder:'{{tkey}}',
-			inititalCSS: initialCSS,
+			initialCSS: initialCSS,
 			
 		});
 		
