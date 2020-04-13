@@ -156,7 +156,7 @@ function makelines(actwidth,actheight,nrows,ncols) {
 	width = 1;
 	height = 1;
 	
-
+	var conversions = {};
 	for (var i=0;i<nrows*ncols;i++){
 
 		conversions['video'+i]=[0];
