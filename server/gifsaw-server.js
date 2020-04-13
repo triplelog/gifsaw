@@ -73,7 +73,32 @@ app.post('/create',
 		var fname = fullname.substring(0,fullname.indexOf('.'));
 		var nrows = parseInt(req.body.nrows);
 		var ncols = parseInt(req.body.ncols);
-		
+		var initialCSS = `.pieceBorder{
+			stroke-dasharray: .02;
+			stroke:red;
+			stroke-width:.02;
+			stroke-opacity:.5;
+			fill: transparent;
+		}
+		.interiorBorder{
+			stroke-dasharray: .01;
+			stroke:blue;
+			stroke-width:.01;
+			stroke-opacity:.5;
+			fill: transparent;
+		}
+		.interiorBorder.toggled{
+			stroke-dasharray: .03;
+			stroke:blue;
+			stroke-width:.03;
+			stroke-opacity:1;
+			fill: transparent;
+		}
+		.piece {
+			fill: black;
+			fill-opacity: .1;
+			stroke: none;
+		}`;
 		var encryptedpuzzle = false;
 		
 		var collab = true;
@@ -121,8 +146,10 @@ app.post('/create',
 			pieces: JSON.stringify(pieces),
 			collab: collab,
 			tkeyHolder:'{{tkey}}',
+			inititalCSS: initialCSS,
 			
 		});
+		
 		var initialScript = `var players={};
 							function newPlayer(username){
 								var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
