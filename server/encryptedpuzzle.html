@@ -63,30 +63,27 @@ img {
 	left: 0px;
 	top: 0px;
 }
-svg {
+svg .pieceBorder{
 	stroke-dasharray: .02;
 	stroke:red;
 	stroke-width:.02;
 	stroke-opacity:.5;
 	fill: transparent;
 }
-svg .fill {
+svg .interiorBorder{
+	stroke-dasharray: .02;
+	stroke:blue;
+	stroke-width:.02;
+	stroke-opacity:.5;
+	fill: transparent;
+}
+svg .piece {
 	fill: black;
 	fill-opacity: .1;
 	stroke: none;
-	/*stroke: white;
-	stroke-dasharray: 1;*/
 }
-svg .left {
-	stroke: blue;
-}
-/*svg .full {
-	stroke-dasharray: .02;
-	stroke:red;
-	stroke-width:.02;
-	stroke-opacity:.5;
-	fill-opacity: .1;
-}*/
+
+
 </style>
 
 </head>
@@ -113,11 +110,11 @@ svg .left {
     <svg style="pointer-events: none; position:absolute; top:0px; left:0px; width:100%; height:100%;" width="{{ image.width }}" height="{{ image.height }}" preserveAspectRatio="none" viewBox = "0 0 1 1" version = "1.1">
 		<!--<path d="M0,0 0,1 1,1 1,0 0,0" fill="red">-->
 		<!--<use class="full" href="#path{{ i+1 }}">-->
-		<path class="fill" id="fill{{ i+1 }}" d="M{{ vlines[i][0] }}{{ hlines[i][0] }}{{ vlines[i][1] }}{{ hlines[i][1] }}" />
-		<path class="left border{{ i+1 }}" id="left{{ i+1 }}" d="M{{ vlines[i][0] }}" />
-		<path class="bottom border{{ i+1 }}" id="bottom{{ i+1 }}" d="M{{ hlines[i][0] }}" />
-		<path class="right border{{ i+1 }}" id="right{{ i+1 }}" d="M{{ vlines[i][1] }}" />
-		<path class="top border{{ i+1 }}" id="top{{ i+1 }}" d="M{{ hlines[i][1] }}" />
+		<path class="piece" id="fill{{ i+1 }}" d="M{{ vlines[i][0] }}{{ hlines[i][0] }}{{ vlines[i][1] }}{{ hlines[i][1] }}" />
+		<path class="left pieceBorder border{{ i+1 }}" id="left{{ i+1 }}" d="M{{ vlines[i][0] }}" />
+		<path class="bottom pieceBorder border{{ i+1 }}" id="bottom{{ i+1 }}" d="M{{ hlines[i][0] }}" />
+		<path class="right pieceBorder border{{ i+1 }}" id="right{{ i+1 }}" d="M{{ vlines[i][1] }}" />
+		<path class="top pieceBorder border{{ i+1 }}" id="top{{ i+1 }}" d="M{{ hlines[i][1] }}" />
 		
 	</svg>
 </div>
