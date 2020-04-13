@@ -31,7 +31,7 @@ var tempKeys = fromLogin.tempKeys;
 
 
 
-
+var tempMatches = [];
 
 
 app.use('/',express.static('static'));
@@ -40,10 +40,9 @@ app.get('/puzzles/:puzzleid',
 	
 	function(req, res) {
 		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
-		var matches = JSON.stringify(retval[5]);
 		if (collab){
-			matches = false;
-			tempKeys[tkey]={username:'',matches:retval[5],puzzleid:req.params.puzzleid};
+			//Add connection to db
+			tempKeys[tkey]={username:'',matches:tempMatches,puzzleid:req.params.puzzleid};
 		}
 		res.write(nunjucks.render('puzzles/'+req.params.puzzleid+'.html',{
 			tkey: tkey,
@@ -87,6 +86,8 @@ app.post('/create',
 		var matches = JSON.stringify(retval[5]);
 		if (collab){
 			matches = false;
+			tempMatches = retval[5];
+			//Add connection to db
 		}
 		
 		for (var i=0;i<npieces;i++){
