@@ -1,3 +1,10 @@
+function toggle() {
+	var els = document.querySelectorAll('svg path');
+	for (var i in els){
+		els[i].classList.toggle('toggled');
+	}
+}
+
 for (var i=0;i<npieces;i++) {
 	var video = document.getElementById('video'+(i+1));
 	

@@ -24,7 +24,6 @@ function socketanswer(piece1,pairs) {
 }
 
 function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
-	console.log(cssJson);
 	var video1 = document.getElementById(piece1);
 	if (video1) {
 		var p1 = document.getElementById('path'+piece1.substr(5,));
@@ -82,7 +81,6 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 				el1.classList.remove('pieceBorder');
 				if (cssJson){
 					for (i in cssJson){
-						console.log(i,cssJson[i]);
 						el1.style[i]=cssJson[i];
 					}
 				}

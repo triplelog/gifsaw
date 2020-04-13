@@ -75,21 +75,28 @@ img {
 	fill: none;
 	stroke: none;
 }
-svg .pieceBorder{
+.pieceBorder{
 	stroke-dasharray: .02;
 	stroke:red;
 	stroke-width:.02;
 	stroke-opacity:.5;
 	fill: transparent;
 }
-svg .interiorBorder{
-	stroke-dasharray: .02;
+.interiorBorder{
+	stroke-dasharray: .01;
 	stroke:blue;
-	stroke-width:.02;
+	stroke-width:.01;
 	stroke-opacity:.5;
 	fill: transparent;
 }
-svg .piece {
+.interiorBorder.toggled{
+	stroke-dasharray: .03;
+	stroke:blue;
+	stroke-width:.03;
+	stroke-opacity:1;
+	fill: transparent;
+}
+.piece {
 	fill: black;
 	fill-opacity: .1;
 	stroke: none;
@@ -143,7 +150,7 @@ svg .piece {
 <div id="scorediv"></div>
 <progress id="progressdiv" class="progress" value="15" max="100">15%</progress>
 <button id="save" href="">Save</button>
-
+<button id="toggle" onclick="toggle()">Toggle</button>
 <script>
 
 var dragid;
