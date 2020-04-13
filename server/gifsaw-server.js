@@ -258,7 +258,7 @@ wss.on('connection', function connection(ws) {
 					puzzleid = tempKeys[dm.message].puzzleid;
 					if (rooms[puzzleid]){
 						myroom = rooms[puzzleid];
-						var acceptPlayer = myroom.vm.run('newPlayer('+username+');');
+						var acceptPlayer = myroom.vm.run('newPlayer("'+username+'");');
 						if (acceptPlayer !== false) {
 							myroom.players[username]={ws:ws,score:0};
 							for (var ii=0;ii<myroom.merges.length;ii++){ //send all existing matches;
@@ -285,7 +285,7 @@ wss.on('connection', function connection(ws) {
 						
 						
 						myroom.vm.run(myroom.initialScript);
-						var acceptPlayer = myroom.vm.run('newPlayer('+username+');');
+						var acceptPlayer = myroom.vm.run('newPlayer("'+username+'");');
 						if (acceptPlayer !== false) {
 							myroom.players[username]={ws:ws,score:0};
 						}
@@ -348,7 +348,7 @@ wss.on('connection', function connection(ws) {
 
 
 function updateScores(myroom,play){
-	myroom.vm.run('newMerge('+play[1]+','+play[0]+');');
+	myroom.vm.run('newMerge("'+play[1]+'",'+play[0]+');');
 }
 
 
