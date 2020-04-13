@@ -36,10 +36,26 @@ var tempKeys = fromLogin.tempKeys;
 
 app.use('/',express.static('static'));
 
-app.post('/create', 
+app.get('/puzzles/:puzzleid', 
 	
 	function(req, res) {
 		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
+		var matches = JSON.stringify(retval[5]);
+		if (collab){
+			matches = false;
+			tempKeys[tkey]={username:'',matches:retval[5],puzzleid:req.params.puzzleid};
+		}
+		res.write(nunjucks.render('puzzles/'+req.params.puzzleid+'.html',{
+			tkey: tkey,
+		}));
+		res.end();
+	}
+);
+
+app.post('/create', 
+	
+	function(req, res) {
+		
 		var puzzleid = crypto.randomBytes(100).toString('hex').substr(2, 12);
 		var vm = new VM();
 		var npieces;
@@ -99,16 +115,17 @@ app.post('/create',
 			actwidth:actwidth,
 			pieces: JSON.stringify(pieces),
 			collab: collab,
-			tkey: tkey,
+			tkeyHolder:'{{tkey}}',
+			
 		});
-		fs.writeFile("static/puzzles/"+puzzleid+'.html', htmlstr, function (err) {
+		fs.writeFile("puzzles/"+puzzleid+'.html', htmlstr, function (err) {
 			if (err){
 				console.log(err);
 				res.redirect('../create');
 			}
 			else {
 				
-				res.redirect('../puzzles/'+puzzleid+'.html');
+				res.redirect('../puzzles/'+puzzleid);
 			}
 			
 		});
