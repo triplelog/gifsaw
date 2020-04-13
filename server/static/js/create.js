@@ -137,6 +137,8 @@ function updateSize(evt) {
 	var ncols = parseInt(dim[1]);
 	document.getElementById('nrows').value = nrows;
 	document.getElementById('ncols').value = ncols;
+	
+	var img = document.getElementById('imageHolder').querySelector('img');
 	if (img){
 		console.log(img.height);
 		console.log(img.width);
