@@ -382,6 +382,7 @@ function socketanswer(pairs,matches) {
 			var piece2 = 'video'+pairs[i][0];
 			var realidofotherpiece = pairs[i][2];
 			var myrealid = pairs[i][3];
+			console.log(pairs,myrealid);
 			for (var ii=0;ii<matches[myrealid].length;ii++) {
 				if (realidofotherpiece == matches[myrealid][ii][0] && pairs[i][1]==matches[myrealid][ii][1]) {
 					//console.log(piece1,piece2,pairs,matches[piece1][ii]);
