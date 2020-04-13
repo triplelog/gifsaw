@@ -565,6 +565,7 @@ function flipBottomHorizontal(oldLine,x0,y0) {
 			var linex = newx-oldx0+parseFloat(x0);//old x0 should be new x0
 			var newy = parseFloat(oldLine[ii].split(',')[1]);
 			var liney = newy-oldy1+parseFloat(y0);//old y1 should be new y0
+			liney += .05;
 			newLine += linex+','+liney+' ';
 		}
 	}
