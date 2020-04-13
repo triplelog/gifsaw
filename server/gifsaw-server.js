@@ -123,7 +123,16 @@ app.post('/create',
 			tkeyHolder:'{{tkey}}',
 			
 		});
-		var puzzle = new Puzzle({id:puzzleid,matches:retval[5]});
+		var initialScript = `var players={};
+							function newPlayer(username){
+								var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
+								players[username]={score:0,color:color};
+							}
+							function newMerge(username,matches){
+								players[username].score++;
+								return {stroke: players[username].color};
+							}`;
+		var puzzle = new Puzzle({id:puzzleid,matches:retval[5],initialScript:initialScript});
 		puzzle.save(function(err,result) {
 			if (err){
 				console.log(err);
@@ -269,9 +278,8 @@ wss.on('connection', function connection(ws) {
 				if (tempKeys[dm.message].puzzleid){
 					puzzleid = tempKeys[dm.message].puzzleid;
 					matches = false;
-					Puzzle.findOne({id:puzzleid}, 'matches', function(err,result) {
+					Puzzle.findOne({id:puzzleid}, function(err,result) {
 						matches = result.matches;
-						console.log(matches);
 						if (rooms[puzzleid]){
 							myroom = rooms[puzzleid];
 							var acceptPlayer = myroom.vm.run('newPlayer("'+username+'");');
@@ -291,15 +299,7 @@ wss.on('connection', function connection(ws) {
 						else {
 							rooms[puzzleid]={players:{},merges:[],vm:new VM()};
 							myroom = rooms[puzzleid];
-							myroom.initialScript = `var players={};
-							function newPlayer(username){
-								var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
-								players[username]={score:0,color:color};
-							}
-							function newMerge(username,matches){
-								players[username].score++;
-								return {stroke: players[username].color};
-							}`;
+							myroom.initialScript = result.initialScript;
 						
 						
 							myroom.vm.run(myroom.initialScript);
