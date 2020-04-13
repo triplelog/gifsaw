@@ -270,8 +270,6 @@ wss.on('connection', function connection(ws) {
 					puzzleid = tempKeys[dm.message].puzzleid;
 					matches = false;
 					Puzzle.findOne({id:puzzleid}, function(err,result) {
-						console.log(err);
-						console.log(result);
 						matches = result.matches;
 						console.log(matches);
 						if (rooms[puzzleid]){
@@ -325,6 +323,7 @@ wss.on('connection', function connection(ws) {
 		}
 		else if (dm.type == 'possMatch'){
 			if (dm.message && dm.message.length>1){
+				console.log(matches);
 				var tomatch = socketanswer(dm.message[1],matches);
 				if (tomatch.length>0){
 					for (var i=tomatch.length-1;i>=0;i--){
