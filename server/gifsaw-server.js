@@ -256,8 +256,8 @@ wss.on('connection', function connection(ws) {
 					puzzleid = tempKeys[dm.message].puzzleid;
 					if (rooms[puzzleid]){
 						rooms[puzzleid].players.push({username:username,ws:ws,score:0});
-						for (var ii=0;ii<myroom.merges.length;ii++){ //send all existing matches;
-							var jsonmessage = {'type':'foundMatch','message':myroom.merges[ii]};
+						for (var ii=0;ii<rooms[puzzleid].merges.length;ii++){ //send all existing matches;
+							var jsonmessage = {'type':'foundMatch','message':rooms[puzzleid].merges[ii]};
 							ws.send(JSON.stringify(jsonmessage));
 						}
 						
