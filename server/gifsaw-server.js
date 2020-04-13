@@ -277,11 +277,12 @@ wss.on('connection', function connection(ws) {
 						myroom = rooms[puzzleid];
 						myroom.initialScript = `var players={};
 						function newPlayer(username){
-							players[username]={score:0};
+							var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
+							players[username]={score:0,color:color};
 						}
 						function newMerge(username,matches){
 							players[username].score++;
-							return {stroke: 'green'};
+							return {stroke: players[username].color};
 						}`;
 						
 						
