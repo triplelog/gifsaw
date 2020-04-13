@@ -47,10 +47,39 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 		for (var pairi=0;pairi<pairs.length;pairi++){
 			var piece2 = pairs[pairi][0];
 			
-			console.log(pairs[pairi][3]+piece2.substr(5,));
-			if (document.getElementById(pairs[pairi][3]+piece2.substr(5,))){
-				document.getElementById(pairs[pairi][3]+piece2.substr(5,)).style.display = 'none';
+			if (pairs[pairi][3]=='top'){
+				if (document.getElementById(pairs[pairi][3]+piece2.substr(5,))){
+					document.getElementById(pairs[pairi][3]+piece2.substr(5,)).style.display = 'none';
+				}
+				if (document.getElementById('bottom'+piece1.substr(5,))){
+					document.getElementById('bottom'+piece1.substr(5,)).style.display = 'none';
+				}
 			}
+			else if (pairs[pairi][3]=='bottom'){
+				if (document.getElementById(pairs[pairi][3]+piece2.substr(5,))){
+					document.getElementById(pairs[pairi][3]+piece2.substr(5,)).style.display = 'none';
+				}
+				if (document.getElementById('top'+piece1.substr(5,))){
+					document.getElementById('top'+piece1.substr(5,)).style.display = 'none';
+				}
+			}
+			else if (pairs[pairi][3]=='left'){
+				if (document.getElementById(pairs[pairi][3]+piece2.substr(5,))){
+					document.getElementById(pairs[pairi][3]+piece2.substr(5,)).style.display = 'none';
+				}
+				if (document.getElementById('right'+piece1.substr(5,))){
+					document.getElementById('right'+piece1.substr(5,)).style.display = 'none';
+				}
+			}
+			else if (pairs[pairi][3]=='right'){
+				if (document.getElementById(pairs[pairi][3]+piece2.substr(5,))){
+					document.getElementById(pairs[pairi][3]+piece2.substr(5,)).style.display = 'none';
+				}
+				if (document.getElementById('left'+piece1.substr(5,))){
+					document.getElementById('left'+piece1.substr(5,)).style.display = 'none';
+				}
+			}
+			
 			
 			var piece2Info = pieces[parseInt(piece2.substr(5,))-1];
 			var video2 = document.getElementById(piece2);
