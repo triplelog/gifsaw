@@ -317,7 +317,7 @@ wss.on('connection', function connection(ws) {
 					if (tomatch.length>0 && myroom){
 						var acceptMatch = updateScores(myroom,[tomatch,username]);
 						console.log(vm.run('players'));
-						if (acceptMatch !== false)
+						if (acceptMatch !== false){
 							var jsonmessage = {'type':'foundMatch','message':['video'+dm.message[0],tomatch,'me']}
 							for (var i in myroom.players){
 								if (myroom.players[i].username != username){
