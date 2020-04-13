@@ -144,11 +144,13 @@ function updateSize(evt) {
 		imageWidth = img.width;
 		var retval = makelines(imageWidth,imageHeight,nrows,ncols);
 		var svg = document.getElementById('imageHolder').querySelector('svg');
-		document.getElementById('imageHolder').style.height= imageHeight;
-		document.getElementById('imageHolder').style.width= imageWidth;
+		document.getElementById('imageHolder').style.height= imageHeight+'px';
+		document.getElementById('imageHolder').style.width= imageWidth+'px';
 		console.log(document.getElementById('imageHolder'));
 		svg.setAttribute('width',imageWidth);
 		svg.setAttribute('height',imageHeight);
+		var path1 = svg.querySelector('path');
+		path1.setAttribute('d',"M0,1 1,0");
 		
 		//console.log(retval[0]);
 	}
