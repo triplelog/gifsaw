@@ -40,6 +40,7 @@ app.get('/puzzles/:puzzleid',
 	
 	function(req, res) {
 		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
+		var collab = true;
 		if (collab){
 			//Add connection to db
 			tempKeys[tkey]={username:'',matches:tempMatches,puzzleid:req.params.puzzleid};
