@@ -35,7 +35,12 @@ function dragstart(event) {
 	e = event || window.event;
 	
 	if (!dragid || dragid == ''){
-		dragid = e.target.id;
+		if (e.target.id){
+			dragid = e.target.id;
+		}
+		else {
+			dragid = e.parentElement.id;
+		}
 		cvideo = videos[dragid];
 		if (cvideo) {
 			vmatches = [];
