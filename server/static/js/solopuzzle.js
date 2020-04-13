@@ -10,7 +10,8 @@ function socketanswer(piece1,pairs) {
 				if (realidofotherpiece == matches[myrealid][ii][0] && pairs[i][1]==matches[myrealid][ii][1]  && document.getElementById(piece2)) {
 					//console.log(piece1,piece2,pairs,matches[piece1][ii]);
 
-					tomatch.push([piece2,myrealid,realidofotherpiece]);
+					tomatch.push([piece2,myrealid,realidofotherpiece,matches[myrealid][ii][1]]);
+					
 				}
 			}
 		}
@@ -44,6 +45,10 @@ function socketmerge(piece1,pairs,scoringUser,isfirst=false) {
 		
 		
 		for (var pairi=0;pairi<pairs.length;pairi++){
+			
+			document.getElementById(pairs[pairi][3]+piece1.substr(5,)).style.display = 'none';
+			console.log(pairs[pairi][3]+piece1.substr(5,));
+			
 			var piece2 = pairs[pairi][0];
 			var piece2Info = pieces[parseInt(piece2.substr(5,))-1];
 			var video2 = document.getElementById(piece2);
