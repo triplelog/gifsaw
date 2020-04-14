@@ -370,7 +370,10 @@ wss.on('connection', function connection(ws) {
 					if (tomatch.length>0 && myroom){
 						var acceptMatch = updateScores(myroom,[tomatch,username]);
 						console.log(myroom.vm.run('players'));
-						if (acceptMatch !== false){
+						if (acceptMatch && acceptMatch.accept === false){
+							//Send acceptMerge.message
+						}
+						else{
 							var jsonmessage = {'type':'foundMatch','message':['video'+dm.message[0],tomatch,'me',acceptMatch]}
 							for (var i in myroom.players){
 								if (i != username){
@@ -382,9 +385,6 @@ wss.on('connection', function connection(ws) {
 									myroom.players[i].ws.send(JSON.stringify(jsonmessage));
 								}
 							}
-						}
-						else {
-							///add message explaining denial
 						}
 					}
 					

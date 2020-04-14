@@ -18,7 +18,13 @@ ws.onmessage = function(evt){
 					tomatch = tomatch.splice(i,1);
 				}
 			}
-			socketmerge(dm.message[0],tomatch,dm.message[2],dm.message[3]);
+			if (dm.message[3].css){
+				socketmerge(dm.message[0],tomatch,dm.message[2],dm.message[3].css);
+			}
+			else {
+				socketmerge(dm.message[0],tomatch,dm.message[2],false);
+			}
+			
 		}
 		
 	}

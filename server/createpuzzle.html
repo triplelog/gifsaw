@@ -68,7 +68,9 @@ svg {
 	}
 	function newMerge(username,matches){
 		players[username].score++;
-		return {stroke: players[username].color};
+		var score = {};
+		score[username]=players[username].score;
+		return {'css':{stroke: players[username].color},'message':'Merge','accept':true,'score':score};
 	}</textarea>
 	<textarea id="initialCSS" name="initialCSS">.pieceBorder{
 		stroke-dasharray: .02;
