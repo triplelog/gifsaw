@@ -158,7 +158,6 @@ function updateSize(evt) {
 			pathstr += 'M'+retval[1][i][0]+' ';
 			pathstr += 'M'+retval[1][i][1]+' ';
 		}
-		console.log(pathstr);
 		path.setAttribute('d',pathstr);
 		
 		//console.log(retval[0]);

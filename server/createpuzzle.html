@@ -62,23 +62,40 @@ svg {
 	
 	<label for="initialScript">Scoring Script: </label>
 	<textarea id="initialScript" name="initialScript">var players={};
-			function newPlayer(username){
-				var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
-				players[username]={score:0,color:color};
-			}
-			function newMerge(username,matches){
-				players[username].score++;
-				return {stroke: players[username].color};
-			}</textarea>
-	
-	<!--<label for="initialScript">Border CSS: </label>
-	<textarea id="initialScript" name="initialScript"></textarea>
-	
-	<label for="initialScript">Interior Border CSS: </label>
-	<textarea id="initialScript" name="initialScript"></textarea>
-	
-	<label for="initialScript">Piece CSS: </label>
-	<textarea id="initialScript" name="initialScript"></textarea>-->
+	function newPlayer(username){
+		var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
+		players[username]={score:0,color:color};
+	}
+	function newMerge(username,matches){
+		players[username].score++;
+		return {stroke: players[username].color};
+	}</textarea>
+	<textarea id="initialCSS" name="initialCSS">.pieceBorder{
+		stroke-dasharray: .02;
+		stroke:yellow;
+		stroke-width:.02;
+		stroke-opacity:.5;
+		fill: transparent;
+	}
+	.interiorBorder{
+		stroke-dasharray: .01;
+		stroke:blue;
+		stroke-width:.01;
+		stroke-opacity:.5;
+		fill: transparent;
+	}
+	.interiorBorder.toggled{
+		stroke-dasharray: .03;
+		stroke:blue;
+		stroke-width:.03;
+		stroke-opacity:1;
+		fill: transparent;
+	}
+	.piece {
+		fill: black;
+		fill-opacity: .1;
+		stroke: none;
+	}</textarea>
 	
 	
 	<input type="text" name="fileSrc" style="display: none;"></input>

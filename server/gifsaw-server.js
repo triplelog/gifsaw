@@ -109,6 +109,7 @@ app.post('/create',
 		var nrows = parseInt(req.body.nrows);
 		var ncols = parseInt(req.body.ncols);
 		initialScript = req.body.initialScript;
+		initialCSS = req.body.initialCSS;
 		
 		var encryptedpuzzle = false;
 		
