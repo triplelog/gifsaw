@@ -150,11 +150,12 @@ function updateSize(evt) {
 		svg.setAttribute('height',imageHeight);
 		var path = svg.querySelector('path');
 		var pathstr = '';
+		console.log(retval[0]);
 		for (var i=0;i<retval[0].length;i++){
 			pathstr += 'M'+retval[0][i]+' ';
 		}
 		console.log(pathstr);
-		path1.setAttribute('d',pathstr);
+		path.setAttribute('d',pathstr);
 		
 		//console.log(retval[0]);
 	}
