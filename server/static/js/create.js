@@ -146,11 +146,15 @@ function updateSize(evt) {
 		var svg = document.getElementById('imageHolder').querySelector('svg');
 		document.getElementById('imageHolder').style.height= imageHeight+'px';
 		document.getElementById('imageHolder').style.width= imageWidth+'px';
-		console.log(document.getElementById('imageHolder'));
 		svg.setAttribute('width',imageWidth);
 		svg.setAttribute('height',imageHeight);
-		var path1 = svg.querySelector('path');
-		path1.setAttribute('d',"M0,1 1,0");
+		var path = svg.querySelector('path');
+		var pathstr = '';
+		for (var i=0;i<retval[0].length;i++){
+			pathstr += 'M'+retval[0][i]+' ';
+		}
+		console.log(pathstr);
+		path1.setAttribute('d',pathstr);
 		
 		//console.log(retval[0]);
 	}
