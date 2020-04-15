@@ -126,7 +126,7 @@ app.post('/create',
 		var pieces = [];
 		var npieces = retval[5];
 		
-		var matches = JSON.stringify(retval[5]);
+		var matches = JSON.stringify(retval[4]);
 		if (collab){
 			matches = false;
 			//Add connection to db
@@ -506,7 +506,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			var right = getRightLine(vm,rightcode,x0,x1,y0,y1,i,ncols);
 			var top = x1+','+y0+' '+x0+','+y0+' ';
 			var bottom = getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows);
-			console.log(i,bottom);
 			var piecelines = [];
 			if (i%ncols > 0){ //not first column
 				//var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0,y1);
@@ -675,7 +674,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			matches['video'+(i+1)].push(['video'+(i+1-parseInt(ncols)),'bottom'])
 		}
 	}
-	
+	console.log(lines);
 	return [lines,centers,locations,rotations,matches,nrows*ncols,clines,ccenters];
 }
 function getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows){
