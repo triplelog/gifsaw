@@ -88,7 +88,7 @@ img {
     	
     	{% for i in range(0,npieces)  %}
     	  <clipPath id="clip{{ i+1 }}" clipPathUnits="objectBoundingBox">
-			<path id="path{{ i+1 }}" d="M{{ vlines[i][0] }}{{ hlines[i][0] }}{{ vlines[i][1] }}{{ hlines[i][1] }}" />
+			<path id="path{{ i+1 }}" d="M{{ lines[i][0] }}{{ lines[i][1] }}{{ lines[i][2] }}{{ lines[i][3] }}" />
 		  </clipPath>
 		{% endfor %}
     	
@@ -104,11 +104,19 @@ img {
     <svg style="pointer-events: none; position:absolute; top:0px; left:0px; width:100%; height:100%;" width="{{ image.width }}" height="{{ image.height }}" preserveAspectRatio="none" viewBox = "0 0 1 1" version = "1.1">
 		<!--<path d="M0,0 0,1 1,1 1,0 0,0" fill="red">-->
 		<!--<use class="full" href="#path{{ i+1 }}">-->
-		<path class="piece" id="fill{{ i+1 }}" d="M{{ vlines[i][0] }}{{ hlines[i][0] }}{{ vlines[i][1] }}{{ hlines[i][1] }}" />
-		<path class="left pieceBorder border{{ i+1 }}" id="left{{ i+1 }}" d="M{{ vlines[i][0] }}" />
-		<path class="bottom pieceBorder border{{ i+1 }}" id="bottom{{ i+1 }}" d="M{{ hlines[i][0] }}" />
-		<path class="right pieceBorder border{{ i+1 }}" id="right{{ i+1 }}" d="M{{ vlines[i][1] }}" />
-		<path class="top pieceBorder border{{ i+1 }}" id="top{{ i+1 }}" d="M{{ hlines[i][1] }}" />
+		<path class="piece" id="fill{{ i+1 }}" d="M{{ lines[i][0] }}{{ lines[i][1] }}{{ lines[i][2] }}{{ lines[i][3] }}" />
+		<path class="left pieceBorder border{{ i+1 }}" id="left{{ i+1 }}" d="M{{ lines[i][0] }}" />
+		{% if i%2 == (i/ncols)%2}
+		<path class="bottom pieceBorder border{{ i+1 }}" id="bottom{{ i+1 }}" d="M{{ lines[i][1] }}" />
+		<path class="right pieceBorder border{{ i+1 }}" id="right{{ i+1 }}" d="M{{ lines[i][2] }}" />
+		<path class="top pieceBorder border{{ i+1 }}" id="top{{ i+1 }}" d="M{{ lines[i][3] }}" />
+		{% else %}
+		<path class="top pieceBorder border{{ i+1 }}" id="top{{ i+1 }}" d="M{{ lines[i][1] }}" />
+		<path class="right pieceBorder border{{ i+1 }}" id="right{{ i+1 }}" d="M{{ lines[i][2] }}" />
+		<path class="bottom pieceBorder border{{ i+1 }}" id="bottom{{ i+1 }}" d="M{{ lines[i][3] }}" />
+		
+		
+		{% endif %}
 		
 	</svg>
 </div>
@@ -147,8 +155,7 @@ var matches= {{ matches | safe }};
 var saveButton = document.getElementById('save');
 var cwidth = {{ image.width }}*1;
 var cheight = {{ image.height }}*1;
-var hclines = {{ hclines | safe }};
-var vclines = {{ vclines | safe }};
+var clines = {{ clines | safe }};
 var ccenters= {{ ccenters }};
 var pieceheight = cheight*{{ actheight }}/{{ image.height }}/{{ nrows }};
 var piecewidth = pieceheight*{{ actwidth }}/{{ actheight }}*{{ nrows }}/{{ ncols }};

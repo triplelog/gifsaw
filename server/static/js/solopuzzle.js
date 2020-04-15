@@ -30,7 +30,7 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 		var piece1Info = pieces[parseInt(piece1.substr(5,))-1];
 		var p1d = p1.getAttribute('d');
 		if ((p1d.match(/M/g)||[]).length == 1){
-			p1d = 'M'+vclines[parseInt(piece1.substr(5,))-1][0] + hclines[parseInt(piece1.substr(5,))-1][0] + vclines[parseInt(piece1.substr(5,))-1][1] + hclines[parseInt(piece1.substr(5,))-1][1];
+			p1d = 'M'+clines[parseInt(piece1.substr(5,))-1][0] + clines[parseInt(piece1.substr(5,))-1][1] + clines[parseInt(piece1.substr(5,))-1][2] + clines[parseInt(piece1.substr(5,))-1][3];
 		}
 		var p1l = (p1d.match(/M/g)||[]).length;
 		if (p1l == 1){
@@ -94,7 +94,7 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 				var p2 = document.getElementById('path'+piece2.substr(5,));
 				var p2d = p2.getAttribute('d');
 				if ((p2d.match(/M/g)||[]).length == 1){
-					p2d = 'M'+vclines[parseInt(piece2.substr(5,))-1][0] + hclines[parseInt(piece2.substr(5,))-1][0] + vclines[parseInt(piece2.substr(5,))-1][1] + hclines[parseInt(piece2.substr(5,))-1][1];
+					p2d = 'M'+clines[parseInt(piece2.substr(5,))-1][0] + clines[parseInt(piece2.substr(5,))-1][1] + clines[parseInt(piece2.substr(5,))-1][2] + clines[parseInt(piece2.substr(5,))-1][3];
 				}
 				else {
 					

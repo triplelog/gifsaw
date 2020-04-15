@@ -124,7 +124,7 @@ app.post('/create',
 		var retval = makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols);
 		
 		var pieces = [];
-		var npieces = retval[6];
+		var npieces = retval[5];
 		
 		var matches = JSON.stringify(retval[5]);
 		if (collab){
@@ -133,7 +133,7 @@ app.post('/create',
 		}
 		
 		for (var i=0;i<npieces;i++){
-			var piece = {id:'video'+(i+1),rotation:retval[4][i],location:retval[3][i],centers:retval[2][i]};
+			var piece = {id:'video'+(i+1),rotation:retval[3][i],location:retval[2][i],centers:retval[1][i]};
 			pieces.push(piece);
 		}
 		var htmlstr = nunjucks.render('encryptedpuzzle.html',{
@@ -143,11 +143,9 @@ app.post('/create',
 			npieces: retval[6],
 			pagename: fname,
 			image: {'name':'../img/in/'+fullname,'width':dimensions.width,'height':dimensions.height},
-			vclines:JSON.stringify(retval[7]),
-			hclines:JSON.stringify(retval[8]),
-			ccenters:JSON.stringify(retval[9]),
-			vlines:retval[0],
-			hlines:retval[1],
+			clines:JSON.stringify(retval[6]),
+			ccenters:JSON.stringify(retval[7]),
+			lines:retval[0],
 			matches:matches,
 			nrows:nrows,
 			ncols:ncols,
@@ -501,32 +499,75 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 		const y0 = conversions['video'+i][1]+conversions['video'+i][3]*height/(nrows);
 		const x1 = x0+width/ncols;
 		const y1 = y0+height/(nrows);
-
-
-		var line1 = x0+','+y0+' '+x0+','+y1+' ';
-		var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		
-		var line2 = getRightLine(vm,rightcode,x0,x1,y0,y1,i,ncols);
+		var lines = [];
 		
+		if (i%2 == (i/ncols)%2){
+			var left = x0+','+y0+' '+x0+','+y1+' ';
+			var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		
-		if (i%ncols > 0){ //not first column
-			var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0,y1);
-			vlines.push([newLine,line2])
+			var right = getRightLine(vm,rightcode,x0,x1,y0,y1,i,ncols);
+			var top = x1+','+y0+' '+x0+','+y0+' ';
+			var bottom = getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows);
+			
+			var piecelines = [];
+			if (i%ncols > 0){ //not first column
+				//var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0,y1);
+				//vlines.push([newLine,line2])
+				piecelines.push(lines[i-1][1]);
+			}
+			else {
+				piecelines.push(left);
+			}
+			piecelines.push(bottom);
+			piecelines.push(right);
+			if (i >= ncols){ //not first row
+				//var newLine = flipBottomHorizontal(hlines[i-ncols][0].split(' '),x0,y0);
+				//hlines.push([line1,newLine])
+				piecelines.push(lines[i-ncols][2]);
+			}
+			else {
+				//hlines.push([line1,line2])
+				piecelines.push(top);
+			}
+			lines.push(piecelines);
+		
 		}
 		else {
-			vlines.push([line1,line2])
+			var left = x0+','+y1+' '+x0+','+y0+' ';
+			var rightcode = rightcodes[Math.floor(Math.random()*2)];
+		
+			var right = getRightLine(vm,rightcode,x0,x1,y1,y0,i,ncols);
+			var top = x0+','+y0+' '+x1+','+y0+' ';
+			var bottom = getBottomLine(vm,bottomcode,x1,x0,y0,y1,i,ncols,nrows);
+			
+			var piecelines = [];
+			if (i%ncols > 0){ //not first column
+				//var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0,y1);
+				//vlines.push([newLine,line2])
+				piecelines.push(lines[i-1][2]);
+			}
+			else {
+				piecelines.push(left);
+			}
+			if (i >= ncols){ //not first row
+				//var newLine = flipBottomHorizontal(hlines[i-ncols][0].split(' '),x0,y0);
+				//hlines.push([line1,newLine])
+				piecelines.push(lines[i-ncols][1]);
+			}
+			else {
+				//hlines.push([line1,line2])
+				piecelines.push(top);
+			}
+			piecelines.push(right);
+			piecelines.push(bottom);
+			
+			
+			
+			lines.push(piecelines);
+		
 		}
-
-		line2 = x1+','+y0+' '+x0+','+y0+' ';
-		line1 = getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows);
-
-		if (i >= ncols){ //not first row
-			var newLine = flipBottomHorizontal(hlines[i-ncols][0].split(' '),x0,y0);
-			hlines.push([line1,newLine])
-		}
-		else {
-			hlines.push([line1,line2])
-		}
+		
 
 		centers.push([{x:(x0+x1)/2, y:(y0+y1)/2, id:'video'+(i+1)}]);
 		
@@ -542,29 +583,72 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			y1c = y0c+actheight/(actheight+40)/(nrows);
 		}
 
-		var line1c = x0c+','+y0c+' '+x0c+','+y1c+' ';
-		var line2c = getRightLine(vm,rightcode,x0c,x1c,y0c,y1c,i,ncols);
+		var clines = [];
 		
+		if (i%2 == (i/ncols)%2){
+			var left = x0c+','+y0c+' '+x0c+','+y1c+' ';
+			var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		
+			var right = getRightLine(vm,rightcode,x0c,x1c,y0c,y1c,i,ncols);
+			var top = x1c+','+y0c+' '+x0c+','+y0c+' ';
+			var bottom = getBottomLine(vm,bottomcode,x0c,x1c,y0c,y1c,i,ncols,nrows);
+			
+			var piecelines = [];
+			if (i%ncols > 0){ //not first column
+				//var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0c,y1c);
+				//vlines.push([newLine,line2])
+				piecelines.push(lines[i-1][1]);
+			}
+			else {
+				piecelines.push(left);
+			}
+			piecelines.push(bottom);
+			piecelines.push(right);
+			if (i >= ncols){ //not first row
+				//var newLine = flipBottomHorizontal(hlines[i-ncols][0].split(' '),x0c,y0c);
+				//hlines.push([line1,newLine])
+				piecelines.push(lines[i-ncols][2]);
+			}
+			else {
+				//hlines.push([line1,line2])
+				piecelines.push(top);
+			}
+			clines.push(piecelines);
 		
-		if (i%ncols > 0){ //not first column
-			var newLine = flipRightVertical(vclines[i-1][1].split(' '),x0c,y1c);
-			vclines.push([newLine,line2c])
 		}
 		else {
-			vclines.push([line1c,line2c])
-		}
+			var left = x0c+','+y1c+' '+x0c+','+y0c+' ';
+			var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		
+			var right = getRightLine(vm,rightcode,x0c,x1c,y1c,y0c,i,ncols);
+			var top = x0c+','+y0c+' '+x1c+','+y0c+' ';
+			var bottom = getBottomLine(vm,bottomcode,x1c,x0c,y0c,y1c,i,ncols,nrows);
+			
+			var piecelines = [];
+			if (i%ncols > 0){ //not first column
+				//var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0c,y1c);
+				//vlines.push([newLine,line2])
+				piecelines.push(lines[i-1][2]);
+			}
+			else {
+				piecelines.push(left);
+			}
+			if (i >= ncols){ //not first row
+				//var newLine = flipBottomHorizontal(hlines[i-ncols][0].split(' '),x0c,y0c);
+				//hlines.push([line1,newLine])
+				piecelines.push(lines[i-ncols][1]);
+			}
+			else {
+				//hlines.push([line1,line2])
+				piecelines.push(top);
+			}
+			piecelines.push(right);
+			piecelines.push(bottom);
+			
+			
+			
+			clines.push(piecelines);
 		
-		line2c = x1c+','+y0c+' '+x0c+','+y0c+' ';
-		line1c = getBottomLine(vm,bottomcode,x0c,x1c,y0c,y1c,i,ncols,nrows);
-
-		if (i >= ncols){ //not first row
-			var newLine = flipBottomHorizontal(hclines[i-ncols][0].split(' '),x0c,y0c);
-			hclines.push([line1c,newLine])
-		}
-		else {
-			hclines.push([line1c,line2c])
 		}
 
 		ccenters.push([(x0c+x1c)/2,(y0c+y1c)/2]);
@@ -596,7 +680,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 		}
 	}
 	
-	return [vlines,hlines,centers,locations,rotations,matches,nrows*ncols,vclines,hclines,ccenters];
+	return [lines,centers,locations,rotations,matches,nrows*ncols,clines,ccenters];
 }
 function getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows){
 	vm.run('x0='+x0+'; '+'x1='+x1+'; '+'y0='+y0+'; '+'y1='+y1+'; '+'i='+i+'; '+'ncols='+ncols+'; '+'nrows='+nrows+'; ');
