@@ -191,7 +191,7 @@ function makelines(actwidth,actheight,nrows,ncols,pointyFactor,heightFactor,widt
 			var left = x0+','+y0+' '+x0+','+y1+' ';
 			
 		
-			var right = getRightLine(x0,x1,y0,y1,i,ncols);
+			var right = getRightLine(x0,x1,y0,y1,i,ncols,actwidth,actheight,pointyFactor,heightFactor,widthFactor);
 			var top = x1+','+y0+' '+x0+','+y0+' ';
 			var bottom = getBottomLine(x0,x1,y0,y1,i,ncols,nrows,actwidth,actheight,pointyFactor,heightFactor,widthFactor);
 			var piecelines = [];
@@ -214,7 +214,7 @@ function makelines(actwidth,actheight,nrows,ncols,pointyFactor,heightFactor,widt
 		}
 		else {
 			var left = x0+','+y1+' '+x0+','+y0+' ';
-			var right = getRightLine(x0,x1,y1,y0,i,ncols);
+			var right = getRightLine(x0,x1,y1,y0,i,ncols,actwidth,actheight,pointyFactor,heightFactor,widthFactor);
 			var top = x0+','+y0+' '+x1+','+y0+' ';
 			var bottom = getBottomLine(x1,x0,y0,y1,i,ncols,nrows,actwidth,actheight,pointyFactor,heightFactor,widthFactor);
 			
@@ -281,39 +281,32 @@ function getBottomLine(x0,x1,y0,y1,i,ncols,nrows,actwidth,actheight,pointyFactor
 	}
 	return line;
 }
-function getRightLine(x0,x1,y0,y1,i,ncols){
-	var line = x1+','+y1+' ' + x1+','+y0+' ';
+function getRightLine(x0,x1,y0,y1,i,ncols,actwidth,actheight,pointyFactor,heightFactor,widthFactor){
+	w = x1-x0;
+	if (w<0){w *= -1;}
+	if (y1-y0<0 && y0-y1<w){w=y0-y1;}
+	else if (y1-y0>0 && y1-y0<w){w=y1-y0;}
+	c = (y0+y1)/2;
+	ww = w;
+	if (y1>y0){ww = -1*w;}
+	if (actwidth>actheight){
+		w /= actwidth/actheight;
+	}
+	else {
+		ww /= actheight/actwidth;
+	}
+	w /= heightFactor;
+	ww /= widthFactor;
+	line = x1+','+y1+' ';
+	line += (x1)+','+(c-ww)+' ';
+	line += 'C'+(x1+w)+','+(c-ww/pointyFactor)+' ';
+	line += (x1+w)+','+(c+ww/pointyFactor)+' ';
+	line += (x1)+','+(c+ww)+' ';
+	line += 'L'+x1+','+y0+' ';
+	if (i%ncols == ncols-1){
+		line = x1+','+y1+' ' + x1+','+y0+' ';
+	}
 	return line;
-}
-function flipBottomHorizontal(oldLine,x0,y0) {
-	var oldx0 = parseFloat(oldLine[0].split(',')[0]);
-	var oldy1 = parseFloat(oldLine[0].split(',')[1]);
-	var newLine = '';
-	for (var ii=oldLine.length-1;ii>=0;ii--){
-		if (oldLine[ii].indexOf(',')>0){
-			var newx = parseFloat(oldLine[ii].split(',')[0]);
-			var linex = newx-oldx0+parseFloat(x0);//old x0 should be new x0
-			var newy = parseFloat(oldLine[ii].split(',')[1]);
-			var liney = newy-oldy1+parseFloat(y0);//old y1 should be new y0
-			newLine += linex+','+liney+' ';
-		}
-	}
-	return newLine;
-}
-function flipRightVertical(oldLine,x0,y1) {
-	var oldx1 = parseFloat(oldLine[0].split(',')[0]);
-	var oldy1 = parseFloat(oldLine[0].split(',')[1]);
-	var newLine = '';
-	for (var ii=oldLine.length-1;ii>=0;ii--){
-		if (oldLine[ii].indexOf(',')>0){
-			var newx = parseFloat(oldLine[ii].split(',')[0]);
-			var linex = newx-oldx1+parseFloat(x0);//old x1 should be new x0
-			var newy = parseFloat(oldLine[ii].split(',')[1]);
-			var liney = newy-oldy1+parseFloat(y1);//old y1 should be same as new y1
-			newLine += linex+','+liney+' ';
-		}
-	}
-	return newLine;
 }
 document.getElementById('npieces').addEventListener('change',updateNpieces);
 document.getElementById('size').addEventListener('change',updateSize);
