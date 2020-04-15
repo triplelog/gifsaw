@@ -437,6 +437,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	var locations = [];
 	var rotations = [];
 	var matches = {};
+	var pointyFactor = 20;
 	const bottomcode = new VMScript(`
 	w = x1-x0;
 	if (w<0){w *= -1;}
@@ -446,13 +447,18 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	
 	ww = w;
 	if (x0>x1){ww = -1*w;}
-	ww /= actwidth/actheight;
+	if (actwidth>actheight){
+		ww /= actwidth/actheight;
+	}
+	else {
+		w /= actheight/actwidth;
+	}
 	w /= 3;
 	ww /= 4;
 	line = x0+','+y1+' ';
 	line += (c-ww)+','+y1+' ';
-	line += 'C'+(c-ww)+','+(y1+w)+' ';
-	line += (c+ww)+','+(y1+w)+' ';
+	line += 'C'+(c-ww/pointyFactor)+','+(y1+w)+' ';
+	line += (c+ww/pointyFactor)+','+(y1+w)+' ';
 	line += (c+ww)+','+y1+' ';
 	line += 'L'+x1+','+y1+' ';
 	if (i/ncols >= nrows-1){
@@ -468,13 +474,18 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	c = (y0+y1)/2;
 	ww = w;
 	if (y1>y0){ww = -1*w;}
-	w /= actwidth/actheight;
+	if (actwidth>actheight){
+		w /= actwidth/actheight;
+	}
+	else {
+		ww /= actheight/actwidth;
+	}
 	w /= 3;
 	ww /= 4;
 	line = x1+','+y1+' ';
 	line += (x1)+','+(c-ww)+' ';
-	line += 'C'+(x1+w)+','+(c-ww*2)+' ';
-	line += (x1+w)+','+(c+ww*2)+' ';
+	line += 'C'+(x1+w)+','+(c-ww/pointyFactor)+' ';
+	line += (x1+w)+','+(c+ww/pointyFactor)+' ';
 	line += (x1)+','+(c+ww)+' ';
 	line += 'L'+x1+','+y0+' ';
 	if (i%ncols == ncols-1){
@@ -489,20 +500,25 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	c = (y0+y1)/2;
 	ww = w;
 	if (y1>y0){ww = -1*w;}
-	w /= actwidth/actheight;
+	if (actwidth>actheight){
+		w /= actwidth/actheight;
+	}
+	else {
+		ww /= actheight/actwidth;
+	}
 	w /= 3;
 	ww /= 4;
 	line = x1+','+y1+' ';
 	line += (x1)+','+(c-ww)+' ';
-	line += 'C'+(x1-w)+','+(c-ww*2)+' ';
-	line += (x1-w)+','+(c+ww*2)+' ';
+	line += 'C'+(x1-w)+','+(c-ww*/pointyFactor)+' ';
+	line += (x1-w)+','+(c+ww/pointyFactor)+' ';
 	line += (x1)+','+(c+ww)+' ';
 	line += 'L'+x1+','+y0+' ';
 	if (i%ncols == ncols-1){
 		line = x1+','+y1+' ' + x1+','+y0+' ';
 	}
 	line;`));
-	vm.run('var x0; var x1; var y0; var y1; var i; var ncols; var nrows; var line; var actheight = '+actheight+'; var actwidth = '+actwidth+';');
+	vm.run('var x0; var x1; var y0; var y1; var i; var ncols; var nrows; var line; var actheight = '+actheight+'; var actwidth = '+actwidth+'; var pointyFactor= '+pointyFactor+';');
 
 	width = 1;
 	height = 1;
