@@ -447,11 +447,13 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	ww = w;
 	if (x0>x1){ww = -1*w;}
 	ww /= actwidth/actheight;
+	w /= 4;
+	ww /= 4;
 	line = x0+','+y1+' ';
-	line += (c-ww/5)+','+y1+' ';
-	line += 'C'+(c-ww/5)+','+(y1+w/5)+' ';
-	line += (c+ww/5)+','+(y1+w/5)+' ';
-	line += (c+ww/5)+','+y1+' ';
+	line += (c-ww)+','+y1+' ';
+	line += 'C'+(c-ww)+','+(y1+w)+' ';
+	line += (c+ww)+','+(y1+w)+' ';
+	line += (c+ww)+','+y1+' ';
 	line += 'L'+x1+','+y1+' ';
 	if (i/ncols >= nrows-1){
 		line = x0+','+y1+' '+x1+','+y1+' ';
@@ -467,12 +469,13 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	ww = w;
 	if (y1>y0){ww = -1*w;}
 	w /= actwidth/actheight;
-	
+	w /= 4;
+	ww /= 4;
 	line = x1+','+y1+' ';
-	line += (x1)+','+(c-ww/5)+' ';
-	line += 'C'+(x1+w/5)+','+(c-ww/5)+' ';
-	line += (x1+w/5)+','+(c+ww/5)+' ';
-	line += (x1)+','+(c+ww/5)+' ';
+	line += (x1)+','+(c-ww)+' ';
+	line += 'C'+(x1+w)+','+(c-ww)+' ';
+	line += (x1+w)+','+(c+ww)+' ';
+	line += (x1)+','+(c+ww)+' ';
 	line += 'L'+x1+','+y0+' ';
 	if (i%ncols == ncols-1){
 		line = x1+','+y1+' ' + x1+','+y0+' ';
@@ -487,11 +490,13 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	ww = w;
 	if (y1>y0){ww = -1*w;}
 	w /= actwidth/actheight;
+	w /= 4;
+	ww /= 4;
 	line = x1+','+y1+' ';
-	line += (x1)+','+(c-ww/5)+' ';
-	line += 'C'+(x1-w/5)+','+(c-ww/5)+' ';
-	line += (x1-w/5)+','+(c+ww/5)+' ';
-	line += (x1)+','+(c+ww/5)+' ';
+	line += (x1)+','+(c-ww)+' ';
+	line += 'C'+(x1-w)+','+(c-ww)+' ';
+	line += (x1-w)+','+(c+ww)+' ';
+	line += (x1)+','+(c+ww)+' ';
 	line += 'L'+x1+','+y0+' ';
 	if (i%ncols == ncols-1){
 		line = x1+','+y1+' ' + x1+','+y0+' ';
