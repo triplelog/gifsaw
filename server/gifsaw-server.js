@@ -507,7 +507,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 		const y1 = y0+height/(nrows);
 
 		var rightcode = rightcodes[Math.floor(Math.random()*2)];
-		if (i%2 == Math.floor(i/ncols)%2){
+		if ((i%ncols)%2 == Math.floor(i/ncols)%2){
 			var left = x0+','+y0+' '+x0+','+y1+' ';
 			
 		
@@ -531,7 +531,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 				piecelines.push(top);
 			}
 			lines.push(piecelines);
-		
 		}
 		else {
 			var left = x0+','+y1+' '+x0+','+y0+' ';
@@ -565,7 +564,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			
 			
 			lines.push(piecelines);
-			console.log(i, piecelines, left, bottom, right, top);
 		}
 		
 
@@ -584,7 +582,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 		}
 
 		
-		if (i%2 == Math.floor(i/ncols)%2){
+		if ((i%ncols)%2 == Math.floor(i/ncols)%2){
 			var left = x0c+','+y0c+' '+x0c+','+y1c+' ';
 		
 			var right = getRightLine(vm,rightcode,x0c,x1c,y0c,y1c,i,ncols);
