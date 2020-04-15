@@ -121,7 +121,9 @@ app.post('/create',
 			actheight = dimensions.height-40;
 			actwidth = (dimensions.width-40)/2;
 		}
-		var retval = makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols);
+		var pointyFactor = 5; // from .2 (very round) to 10 (pointy)?
+		var heightFactor = 5; // from 1 (tall) to 10 (short)?
+		var retval = makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFactor,heightFactor);
 		
 		var pieces = [];
 		var npieces = retval[5];
@@ -425,7 +427,7 @@ function socketanswer(pairs,matches) {
 }
 
 
-function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
+function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFactor,heightFactor) {
 	var lines = [];
 	var clines = [];
 	var ccenters = [];
@@ -437,8 +439,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	var locations = [];
 	var rotations = [];
 	var matches = {};
-	var pointyFactor = .4;
-	var heightFactor = 2;
 	const bottomcode = new VMScript(`
 	w = x1-x0;
 	if (w<0){w *= -1;}
@@ -455,7 +455,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 		w /= actheight/actwidth;
 	}
 	w /= heightFactor;
-	ww /= 4;
+	ww /= 5;
 	line = x0+','+y1+' ';
 	line += (c-ww)+','+y1+' ';
 	line += 'C'+(c-ww/pointyFactor)+','+(y1+w)+' ';
@@ -482,7 +482,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 		ww /= actheight/actwidth;
 	}
 	w /= heightFactor;
-	ww /= 4;
+	ww /= 5;
 	line = x1+','+y1+' ';
 	line += (x1)+','+(c-ww)+' ';
 	line += 'C'+(x1+w)+','+(c-ww/pointyFactor)+' ';
@@ -508,7 +508,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 		ww /= actheight/actwidth;
 	}
 	w /= heightFactor;
-	ww /= 4;
+	ww /= 5;
 	line = x1+','+y1+' ';
 	line += (x1)+','+(c-ww)+' ';
 	line += 'C'+(x1-w)+','+(c-ww/pointyFactor)+' ';
