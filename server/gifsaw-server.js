@@ -161,7 +161,7 @@ app.post('/create',
 		});
 		
 		
-		var puzzle = new Puzzle({id:puzzleid,matches:retval[5],initialScript:initialScript});
+		var puzzle = new Puzzle({id:puzzleid,matches:retval[4],initialScript:initialScript});
 		puzzle.save(function(err,result) {
 			if (err){
 				console.log(err);
