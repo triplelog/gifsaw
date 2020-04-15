@@ -673,7 +673,8 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			matches['video'+(i+1)].push(['video'+(i+1-parseInt(ncols)),'bottom'])
 		}
 	}
-	
+	console.log(lines);
+	console.log(clines);
 	return [lines,centers,locations,rotations,matches,nrows*ncols,clines,ccenters];
 }
 function getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows){
