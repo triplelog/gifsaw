@@ -612,7 +612,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 		}
 		else {
 			var left = x0c+','+y1c+' '+x0c+','+y0c+' ';
-			var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		
 			var right = getRightLine(vm,rightcode,x0c,x1c,y1c,y0c,i,ncols);
 			var top = x0c+','+y0c+' '+x1c+','+y0c+' ';
