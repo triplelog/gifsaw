@@ -488,8 +488,8 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	if (y1>y0){ww = -1*w;}
 	line = x1+','+y1+' ';
 	line += (x1)+','+(c-ww/6)+' ';
-	line += 'C'+(x1+w/6)+','+(c-ww/6)+' ';
-	line += (x1+w/6)+','+(c+ww/6)+' ';
+	line += 'C'+(x1-w/6)+','+(c-ww/6)+' ';
+	line += (x1-w/6)+','+(c+ww/6)+' ';
 	line += (x1)+','+(c+ww/6)+' ';
 	line += 'L'+x1+','+y0+' ';
 	if (i%ncols == ncols-1){
