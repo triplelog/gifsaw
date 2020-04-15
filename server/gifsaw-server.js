@@ -568,8 +568,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		if ((i%ncols)%2 == Math.floor(i/ncols)%2){
 			var left = x0+','+y0+' '+x0+','+y1+' ';
-			
-		
 			var right = getRightLine(vm,rightcode,x0,x1,y0,y1,i,ncols);
 			var top = x1+','+y0+' '+x0+','+y0+' ';
 			var bottom = getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows);
@@ -593,7 +591,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		}
 		else {
 			var left = x0+','+y1+' '+x0+','+y0+' ';
-			var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		
 			var right = getRightLine(vm,rightcode,x0,x1,y1,y0,i,ncols);
 			var top = x0+','+y0+' '+x1+','+y0+' ';

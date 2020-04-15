@@ -142,7 +142,10 @@ function updateSize(evt) {
 	if (img){
 		imageHeight = img.height;
 		imageWidth = img.width;
-		var retval = makelines(imageWidth,imageHeight,nrows,ncols);
+		var pointyFactor = .4;
+		var heightFactor = 2.5;
+		var widthFactor = 5;
+		var retval = makelines(imageWidth,imageHeight,nrows,ncols,pointyFactor,heightFactor,widthFactor);
 		var svg = document.getElementById('imageHolder').querySelector('svg');
 		document.getElementById('imageHolder').style.height= imageHeight+'px';
 		document.getElementById('imageHolder').style.width= imageWidth+'px';
@@ -150,13 +153,11 @@ function updateSize(evt) {
 		svg.setAttribute('height',imageHeight);
 		var path = svg.querySelector('path');
 		var pathstr = '';
-		for (var i=0;i<retval[0].length;i++){
-			pathstr += 'M'+retval[0][i][0]+' ';
-			pathstr += 'M'+retval[0][i][1]+' ';
-		}
-		for (var i=0;i<retval[1].length;i++){
-			pathstr += 'M'+retval[1][i][0]+' ';
-			pathstr += 'M'+retval[1][i][1]+' ';
+		for (var i=0;i<retval.length;i++){
+			pathstr += 'M'+retval[i][0]+' ';
+			pathstr += 'M'+retval[i][1]+' ';
+			pathstr += 'M'+retval[i][2]+' ';
+			pathstr += 'M'+retval[i][3]+' ';
 		}
 		path.setAttribute('d',pathstr);
 		
@@ -164,9 +165,8 @@ function updateSize(evt) {
 	}
 }
 
-function makelines(actwidth,actheight,nrows,ncols) {
-	var vlines = [];
-	var hlines = [];
+function makelines(actwidth,actheight,nrows,ncols,pointyFactor,heightFactor,widthFactor) {
+	var lines = [];
 
 	width = 1;
 	height = 1;
@@ -186,39 +186,99 @@ function makelines(actwidth,actheight,nrows,ncols) {
 		const x1 = x0+width/ncols;
 		const y1 = y0+height/(nrows);
 
-
-		var line1 = x0+','+y0+' '+x0+','+y1+' ';
 		
-		var line2 = getRightLine(x0,x1,y0,y1,i,ncols);
+		if ((i%ncols)%2 == Math.floor(i/ncols)%2){
+			var left = x0+','+y0+' '+x0+','+y1+' ';
+			
 		
-		
-		if (i%ncols > 0){ //not first column
-			var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0,y1);
-			vlines.push([newLine,line2])
+			var right = getRightLine(x0,x1,y0,y1,i,ncols);
+			var top = x1+','+y0+' '+x0+','+y0+' ';
+			var bottom = getBottomLine(x0,x1,y0,y1,i,ncols,nrows,actwidth,actheight,pointyFactor,heightFactor,widthFactor);
+			var piecelines = [];
+			if (i%ncols > 0){ //not first column
+				piecelines.push(lines[i-1][2]);
+			}
+			else {
+				piecelines.push(left);
+			}
+			piecelines.push(bottom);
+			piecelines.push(right);
+			if (i >= ncols){ //not first row
+				piecelines.push(lines[i-ncols][3]);
+			}
+			else {
+				//hlines.push([line1,line2])
+				piecelines.push(top);
+			}
+			lines.push(piecelines);
 		}
 		else {
-			vlines.push([line1,line2])
+			var left = x0+','+y1+' '+x0+','+y0+' ';
+			var right = getRightLine(x0,x1,y1,y0,i,ncols);
+			var top = x0+','+y0+' '+x1+','+y0+' ';
+			var bottom = getBottomLine(x1,x0,y0,y1,i,ncols,nrows,actwidth,actheight,pointyFactor,heightFactor,widthFactor);
+			
+			var piecelines = [];
+			if (i%ncols > 0){ //not first column
+				//var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0,y1);
+				//vlines.push([newLine,line2])
+				piecelines.push(lines[i-1][2]);
+			}
+			else {
+				piecelines.push(left);
+			}
+			if (i >= ncols){ //not first row
+				//var newLine = flipBottomHorizontal(hlines[i-ncols][0].split(' '),x0,y0);
+				//hlines.push([line1,newLine])
+				piecelines.push(lines[i-ncols][1]);
+			}
+			else {
+				//hlines.push([line1,line2])
+				piecelines.push(top);
+			}
+			piecelines.push(right);
+			piecelines.push(bottom);
+			
+			
+			
+			lines.push(piecelines);
 		}
+		
 
-		line2 = x1+','+y0+' '+x0+','+y0+' ';
-		line1 = getBottomLine(x0,x1,y0,y1,i,ncols,nrows);
-
-		if (i >= ncols){ //not first row
-			var newLine = flipBottomHorizontal(hlines[i-ncols][0].split(' '),x0,y0);
-			hlines.push([line1,newLine])
-		}
-		else {
-			hlines.push([line1,line2])
-		}
 
 		
 	}
 
 	
-	return [vlines,hlines,nrows*ncols];
+	return lines;
 }
-function getBottomLine(x0,x1,y0,y1,i,ncols,nrows){
+function getBottomLine(x0,x1,y0,y1,i,ncols,nrows,actwidth,actheight,pointyFactor,heightFactor,widthFactor){
 	var line = x0+','+y1+' '+x1+','+y1+' ';
+	w = x1-x0;
+	if (w<0){w *= -1;}
+	if (y1-y0<0 && y0-y1<w){w=y0-y1;}
+	else if (y1-y0>0 && y1-y0<w){w=y1-y0;}
+	c = (x0+x1)/2;
+	
+	ww = w;
+	if (x0>x1){ww = -1*w;}
+	if (actwidth>actheight){
+		ww /= actwidth/actheight;
+	}
+	else {
+		w /= actheight/actwidth;
+	}
+	w /= heightFactor;
+	ww /= widthFactor;
+	line = x0+','+y1+' ';
+	line += (c-ww)+','+y1+' ';
+	line += 'C'+(c-ww/pointyFactor)+','+(y1+w)+' ';
+	line += (c+ww/pointyFactor)+','+(y1+w)+' ';
+	line += (c+ww)+','+y1+' ';
+	line += 'L'+x1+','+y1+' ';
+	if (i/ncols >= nrows-1){
+		line = x0+','+y1+' '+x1+','+y1+' ';
+	}
 	return line;
 }
 function getRightLine(x0,x1,y0,y1,i,ncols){
