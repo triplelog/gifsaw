@@ -136,7 +136,6 @@ app.post('/create',
 			var piece = {id:'video'+(i+1),rotation:retval[3][i],location:retval[2][i],centers:retval[1][i]};
 			pieces.push(piece);
 		}
-		console.log(retval[0]);
 		var htmlstr = nunjucks.render('encryptedpuzzle.html',{
 			gametype: gametype,
 			players: players,
@@ -482,8 +481,8 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			else{
 				conversions['video'+i]=[20/(40+2*actwidth),Math.floor(i/(nrows*ncols/2))*(.5+20/(actheight/2+20)/2)];
 			}
-			conversions['video'+i].push(i%(ncols/2)); //column within half of gif
-			conversions['video'+i].push(Math.floor(i/(ncols))%(nrows/2)); //row within half of gif;
+			conversions['video'+i].push(i%Math.floor(ncols/2)); //column within half of gif
+			conversions['video'+i].push(Math.floor(i/(ncols))%Math.floor(nrows/2)); //row within half of gif;
 		}
 		else {
 			conversions['video'+i]=[0];
@@ -500,7 +499,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 		const y1 = y0+height/(nrows);
 
 		
-		if (i%2 == (i/ncols)%2){
+		if (i%2 == Math.floor(i/ncols)%2){
 			var left = x0+','+y0+' '+x0+','+y1+' ';
 			var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		
@@ -582,7 +581,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 		}
 
 		
-		if (i%2 == (i/ncols)%2){
+		if (i%2 == Math.floor(i/ncols)%2){
 			var left = x0c+','+y0c+' '+x0c+','+y1c+' ';
 			var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		
