@@ -645,7 +645,8 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			clines.push(piecelines);
 		
 		}
-
+		console.log(lines[i]);
+		console.log(clines[i]);
 		ccenters.push([(x0c+x1c)/2,(y0c+y1c)/2]);
 	}
 	console.log(performance.now());
@@ -674,7 +675,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			matches['video'+(i+1)].push(['video'+(i+1-parseInt(ncols)),'bottom'])
 		}
 	}
-	console.log(lines);
+	
 	return [lines,centers,locations,rotations,matches,nrows*ncols,clines,ccenters];
 }
 function getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows){
