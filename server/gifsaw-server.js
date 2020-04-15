@@ -498,10 +498,10 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 		const x1 = x0+width/ncols;
 		const y1 = y0+height/(nrows);
 
-		
+		var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		if (i%2 == Math.floor(i/ncols)%2){
 			var left = x0+','+y0+' '+x0+','+y1+' ';
-			var rightcode = rightcodes[Math.floor(Math.random()*2)];
+			
 		
 			var right = getRightLine(vm,rightcode,x0,x1,y0,y1,i,ncols);
 			var top = x1+','+y0+' '+x0+','+y0+' ';
@@ -582,7 +582,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 		
 		if (i%2 == Math.floor(i/ncols)%2){
 			var left = x0c+','+y0c+' '+x0c+','+y1c+' ';
-			var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		
 			var right = getRightLine(vm,rightcode,x0c,x1c,y0c,y1c,i,ncols);
 			var top = x1c+','+y0c+' '+x0c+','+y0c+' ';
@@ -673,8 +672,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			matches['video'+(i+1)].push(['video'+(i+1-parseInt(ncols)),'bottom'])
 		}
 	}
-	console.log(lines);
-	console.log(clines);
 	return [lines,centers,locations,rotations,matches,nrows*ncols,clines,ccenters];
 }
 function getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows){
