@@ -136,6 +136,7 @@ app.post('/create',
 			var piece = {id:'video'+(i+1),rotation:retval[3][i],location:retval[2][i],centers:retval[1][i]};
 			pieces.push(piece);
 		}
+		console.log(retval[0]);
 		var htmlstr = nunjucks.render('encryptedpuzzle.html',{
 			gametype: gametype,
 			players: players,

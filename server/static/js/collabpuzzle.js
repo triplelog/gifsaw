@@ -32,17 +32,3 @@ ws.onmessage = function(evt){
 }
 
 
-
-
-socket.on('game_over', (data) => {
-	console.log(data.message);
-});
-
-
-function gameOver(isSocket=false) {
-	if (socket) {
-		socket.emit('game_over', {});
-	}
-}
-
-*/
