@@ -510,7 +510,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			if (i%ncols > 0){ //not first column
 				//var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0,y1);
 				//vlines.push([newLine,line2])
-				piecelines.push(lines[i-1][1]);
+				piecelines.push(lines[i-1][2]);
 			}
 			else {
 				piecelines.push(left);
@@ -520,7 +520,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			if (i >= ncols){ //not first row
 				//var newLine = flipBottomHorizontal(hlines[i-ncols][0].split(' '),x0,y0);
 				//hlines.push([line1,newLine])
-				piecelines.push(lines[i-ncols][2]);
+				piecelines.push(lines[i-ncols][3]);
 			}
 			else {
 				//hlines.push([line1,line2])
@@ -592,7 +592,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			if (i%ncols > 0){ //not first column
 				//var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0c,y1c);
 				//vlines.push([newLine,line2])
-				piecelines.push(lines[i-1][1]);
+				piecelines.push(lines[i-1][2]);
 			}
 			else {
 				piecelines.push(left);
@@ -602,7 +602,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			if (i >= ncols){ //not first row
 				//var newLine = flipBottomHorizontal(hlines[i-ncols][0].split(' '),x0c,y0c);
 				//hlines.push([line1,newLine])
-				piecelines.push(lines[i-ncols][2]);
+				piecelines.push(lines[i-ncols][3]);
 			}
 			else {
 				//hlines.push([line1,line2])
