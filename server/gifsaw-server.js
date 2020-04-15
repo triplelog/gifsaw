@@ -441,7 +441,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	line = x0+','+y1+' ';
 	line += (x1+x0*2)/3+','+y1+' ';
 	line += 'C'+(x1+x0*2)/3+','+(y1+(y1-y0)/6)+' ';
-	line += (x1*2+x0)/3++','+(y1+(y1-y0)/6)+' ';
+	line += (x1*2+x0)/3+','+(y1+(y1-y0)/6)+' ';
 	line += (x1*2+x0)/3+','+y1+' ';
 	line += 'L'+x1+','+y1+' ';
 	if (i/ncols >= nrows-1){
