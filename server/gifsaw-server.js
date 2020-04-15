@@ -448,10 +448,10 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	if (x0>x1){ww = -1*w;}
 	ww /= actwidth/actheight;
 	line = x0+','+y1+' ';
-	line += (c-ww/6)+','+y1+' ';
-	line += 'C'+(c-ww/6)+','+(y1+w/6)+' ';
-	line += (c+ww/6)+','+(y1+w/6)+' ';
-	line += (c+ww/6)+','+y1+' ';
+	line += (c-ww/5)+','+y1+' ';
+	line += 'C'+(c-ww/5)+','+(y1+w/5)+' ';
+	line += (c+ww/5)+','+(y1+w/5)+' ';
+	line += (c+ww/5)+','+y1+' ';
 	line += 'L'+x1+','+y1+' ';
 	if (i/ncols >= nrows-1){
 		line = x0+','+y1+' '+x1+','+y1+' ';
@@ -465,13 +465,14 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	else if (y1-y0>0 && y1-y0<w){w=y1-y0;}
 	c = (y0+y1)/2;
 	ww = w;
-	w /= actwidth/actheight;
 	if (y1>y0){ww = -1*w;}
+	w /= actwidth/actheight;
+	
 	line = x1+','+y1+' ';
-	line += (x1)+','+(c-ww/6)+' ';
-	line += 'C'+(x1+w/6)+','+(c-ww/6)+' ';
-	line += (x1+w/6)+','+(c+ww/6)+' ';
-	line += (x1)+','+(c+ww/6)+' ';
+	line += (x1)+','+(c-ww/5)+' ';
+	line += 'C'+(x1+w/5)+','+(c-ww/5)+' ';
+	line += (x1+w/5)+','+(c+ww/5)+' ';
+	line += (x1)+','+(c+ww/5)+' ';
 	line += 'L'+x1+','+y0+' ';
 	if (i%ncols == ncols-1){
 		line = x1+','+y1+' ' + x1+','+y0+' ';
@@ -484,13 +485,13 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	else if (y1-y0>0 && y1-y0<w){w=y1-y0;}
 	c = (y0+y1)/2;
 	ww = w;
-	w /= actwidth/actheight;
 	if (y1>y0){ww = -1*w;}
+	w /= actwidth/actheight;
 	line = x1+','+y1+' ';
-	line += (x1)+','+(c-ww/6)+' ';
-	line += 'C'+(x1-w/6)+','+(c-ww/6)+' ';
-	line += (x1-w/6)+','+(c+ww/6)+' ';
-	line += (x1)+','+(c+ww/6)+' ';
+	line += (x1)+','+(c-ww/5)+' ';
+	line += 'C'+(x1-w/5)+','+(c-ww/5)+' ';
+	line += (x1-w/5)+','+(c+ww/5)+' ';
+	line += (x1)+','+(c+ww/5)+' ';
 	line += 'L'+x1+','+y0+' ';
 	if (i%ncols == ncols-1){
 		line = x1+','+y1+' ' + x1+','+y0+' ';
