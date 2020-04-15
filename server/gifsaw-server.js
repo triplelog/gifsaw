@@ -443,6 +443,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	if (y1-y0<0 && y0-y1<w){w=y0-y1;}
 	else if (y1-y0>0 && y1-y0<w){w=y1-y0;}
 	c = (x0+x1)/2;
+	w *= actheight/actwidth;
 	ww = w;
 	if (x0>x1){ww = -1*w;}
 	line = x0+','+y1+' ';
@@ -462,6 +463,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	if (y1-y0<0 && y0-y1<w){w=y0-y1;}
 	else if (y1-y0>0 && y1-y0<w){w=y1-y0;}
 	c = (y0+y1)/2;
+	w *= actwidth/actheight;
 	ww = w;
 	if (y1>y0){ww = -1*w;}
 	line = x1+','+y1+' ';
