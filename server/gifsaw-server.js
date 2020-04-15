@@ -437,7 +437,8 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	var locations = [];
 	var rotations = [];
 	var matches = {};
-	var pointyFactor = .25;
+	var pointyFactor = .4;
+	var heightFactor = 2;
 	const bottomcode = new VMScript(`
 	w = x1-x0;
 	if (w<0){w *= -1;}
@@ -453,7 +454,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	else {
 		w /= actheight/actwidth;
 	}
-	w /= 3;
+	w /= heightFactor;
 	ww /= 4;
 	line = x0+','+y1+' ';
 	line += (c-ww)+','+y1+' ';
@@ -480,7 +481,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	else {
 		ww /= actheight/actwidth;
 	}
-	w /= 3;
+	w /= heightFactor;
 	ww /= 4;
 	line = x1+','+y1+' ';
 	line += (x1)+','+(c-ww)+' ';
@@ -506,7 +507,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	else {
 		ww /= actheight/actwidth;
 	}
-	w /= 3;
+	w /= heightFactor;
 	ww /= 4;
 	line = x1+','+y1+' ';
 	line += (x1)+','+(c-ww)+' ';
@@ -518,7 +519,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 		line = x1+','+y1+' ' + x1+','+y0+' ';
 	}
 	line;`));
-	vm.run('var x0; var x1; var y0; var y1; var i; var ncols; var nrows; var line; var actheight = '+actheight+'; var actwidth = '+actwidth+'; var pointyFactor= '+pointyFactor+';');
+	vm.run('var x0; var x1; var y0; var y1; var i; var ncols; var nrows; var line; var actheight = '+actheight+'; var actwidth = '+actwidth+'; var pointyFactor= '+pointyFactor+';'+'; var heightFactor= '+heightFactor+';');
 
 	width = 1;
 	height = 1;
