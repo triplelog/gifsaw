@@ -121,8 +121,8 @@ app.post('/create',
 			actheight = dimensions.height-40;
 			actwidth = (dimensions.width-40)/2;
 		}
-		var pointyFactor = 5; // from .2 (very round) to 10 (pointy)?
-		var heightFactor = 5; // from 1 (tall) to 10 (short)?
+		var pointyFactor = 2; // from .2 (very round) to 10 (pointy)?
+		var heightFactor = 1; // from 1 (tall) to 10 (short)?
 		var retval = makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFactor,heightFactor);
 		
 		var pieces = [];
