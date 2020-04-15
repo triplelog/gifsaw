@@ -473,8 +473,8 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	ww /= 4;
 	line = x1+','+y1+' ';
 	line += (x1)+','+(c-ww)+' ';
-	line += 'C'+(x1+w)+','+(c-ww/2)+' ';
-	line += (x1+w)+','+(c+ww/2)+' ';
+	line += 'C'+(x1+w)+','+(c-ww/20)+' ';
+	line += (x1+w)+','+(c+ww/20)+' ';
 	line += (x1)+','+(c+ww)+' ';
 	line += 'L'+x1+','+y0+' ';
 	if (i%ncols == ncols-1){
@@ -494,8 +494,8 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	ww /= 4;
 	line = x1+','+y1+' ';
 	line += (x1)+','+(c-ww)+' ';
-	line += 'C'+(x1-w)+','+(c-ww/2)+' ';
-	line += (x1-w)+','+(c+ww/2)+' ';
+	line += 'C'+(x1-w)+','+(c-ww/20)+' ';
+	line += (x1-w)+','+(c+ww/20)+' ';
 	line += (x1)+','+(c+ww)+' ';
 	line += 'L'+x1+','+y0+' ';
 	if (i%ncols == ncols-1){
