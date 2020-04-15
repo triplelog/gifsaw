@@ -30,7 +30,6 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 		var piece1Info = pieces[parseInt(piece1.substr(5,))-1];
 		var p1d = p1.getAttribute('d');
 		if ((p1d.match(/M/g)||[]).length == 1){
-			console.log(clines[parseInt(piece1.substr(5,))-1]);
 			p1d = 'M'+clines[parseInt(piece1.substr(5,))-1][0] + clines[parseInt(piece1.substr(5,))-1][1] + clines[parseInt(piece1.substr(5,))-1][2] + clines[parseInt(piece1.substr(5,))-1][3];
 		}
 		var p1l = (p1d.match(/M/g)||[]).length;

@@ -444,18 +444,18 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	line;`);
 	var rightcodes = [];
 	rightcodes.push(new VMScript(`line = x1+','+y1+' ';
-	//line += (x1)+','+(y0+y1*2)/3+' ';
+	line += (x1)+','+(y0+y1*2)/3+' ';
 	line += (x1+(x1-x0)/6)+','+(y0+y1)/2+' ';
-	//line += (x1)+','+(y0*2+y1)/3+' ';
+	line += (x1)+','+(y0*2+y1)/3+' ';
 	line += x1+','+y0+' ';
 	if (i%ncols == ncols-1){
 		line = x1+','+y1+' ' + x1+','+y0+' ';
 	}
 	line;`));
 	rightcodes.push(new VMScript(`line = x1+','+y1+' ';
-	//line += (x1)+','+(y0+y1*2)/3+' ';
+	line += (x1)+','+(y0+y1*2)/3+' ';
 	line += (x1-(x1-x0)/6)+','+(y0+y1)/2+' ';
-	//line += (x1)+','+(y0*2+y1)/3+' ';
+	line += (x1)+','+(y0*2+y1)/3+' ';
 	line += x1+','+y0+' ';
 	if (i%ncols == ncols-1){
 		line = x1+','+y1+' ' + x1+','+y0+' ';
