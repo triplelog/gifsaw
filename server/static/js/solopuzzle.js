@@ -95,7 +95,6 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 				var p2 = document.getElementById('path'+piece2.substr(5,));
 				var p2d = p2.getAttribute('d');
 				if ((p2d.match(/M/g)||[]).length == 1){
-					console.log(clines[parseInt(piece2.substr(5,))-1]);
 					p2d = 'M'+clines[parseInt(piece2.substr(5,))-1][0] + clines[parseInt(piece2.substr(5,))-1][1] + clines[parseInt(piece2.substr(5,))-1][2] + clines[parseInt(piece2.substr(5,))-1][3];
 				}
 				else {

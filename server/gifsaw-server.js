@@ -443,7 +443,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	}
 	line;`);
 	var rightcodes = [];
-	rightcodes.push(new VMScript(`line = x1+','+y1+' ' +(x1+(x1-x0)/6)+','+(y0+y1)/2+' '+ x1+','+y0+' ';
+	rightcodes.push(new VMScript(`line = x1+','+y1+' '+(x1)+','+(y0*2+y1)/3+' ' +(x1+(x1-x0)/6)+','+(y0+y1)/2+' '+ x1+','+y0+' ';
 	if (i%ncols == ncols-1){
 		line = x1+','+y1+' ' + x1+','+y0+' ';
 	}
@@ -508,8 +508,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			var bottom = getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows);
 			var piecelines = [];
 			if (i%ncols > 0){ //not first column
-				//var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0,y1);
-				//vlines.push([newLine,line2])
 				piecelines.push(lines[i-1][2]);
 			}
 			else {
@@ -518,8 +516,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			piecelines.push(bottom);
 			piecelines.push(right);
 			if (i >= ncols){ //not first row
-				//var newLine = flipBottomHorizontal(hlines[i-ncols][0].split(' '),x0,y0);
-				//hlines.push([line1,newLine])
 				piecelines.push(lines[i-ncols][3]);
 			}
 			else {
@@ -682,34 +678,4 @@ function getRightLine(vm,rightcode,x0,x1,y0,y1,i,ncols){
 	vm.run('x0='+x0+'; '+'x1='+x1+'; '+'y0='+y0+'; '+'y1='+y1+'; '+'i='+i+'; '+'ncols='+ncols+'; ');
 	var line = vm.run(rightcode);
 	return line;
-}
-function flipBottomHorizontal(oldLine,x0,y0) {
-	var oldx0 = parseFloat(oldLine[0].split(',')[0]);
-	var oldy1 = parseFloat(oldLine[0].split(',')[1]);
-	var newLine = '';
-	for (var ii=oldLine.length-1;ii>=0;ii--){
-		if (oldLine[ii].indexOf(',')>0){
-			var newx = parseFloat(oldLine[ii].split(',')[0]);
-			var linex = newx-oldx0+parseFloat(x0);//old x0 should be new x0
-			var newy = parseFloat(oldLine[ii].split(',')[1]);
-			var liney = newy-oldy1+parseFloat(y0);//old y1 should be new y0
-			newLine += linex+','+liney+' ';
-		}
-	}
-	return newLine;
-}
-function flipRightVertical(oldLine,x0,y1) {
-	var oldx1 = parseFloat(oldLine[0].split(',')[0]);
-	var oldy1 = parseFloat(oldLine[0].split(',')[1]);
-	var newLine = '';
-	for (var ii=oldLine.length-1;ii>=0;ii--){
-		if (oldLine[ii].indexOf(',')>0){
-			var newx = parseFloat(oldLine[ii].split(',')[0]);
-			var linex = newx-oldx1+parseFloat(x0);//old x1 should be new x0
-			var newy = parseFloat(oldLine[ii].split(',')[1]);
-			var liney = newy-oldy1+parseFloat(y1);//old y1 should be same as new y1
-			newLine += linex+','+liney+' ';
-		}
-	}
-	return newLine;
 }
