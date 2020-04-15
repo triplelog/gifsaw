@@ -455,27 +455,31 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	if (y1-y0<0 && y0-y1<w){w=y0-y1;}
 	else if (y1-y0>0 && y1-y0<w){w=y1-y0;}
 	c = (y0+y1)/2;
+	ww = w;
+	if (y1>y0){ww = -1*w;}
 	line = x1+','+y1+' ';
-	line += (x1)+','+(c-w/6)+' ';
-	line += 'C'+(x1+w/6)+','+(c-w/6)+' ';
-	line += (x1+w/6)+','+(c+w/6)+' ';
-	line += (x1)+','+(c+w/6)+' ';
+	line += (x1)+','+(c-ww/6)+' ';
+	line += 'C'+(x1+w/6)+','+(c-ww/6)+' ';
+	line += (x1+w/6)+','+(c+ww/6)+' ';
+	line += (x1)+','+(c+ww/6)+' ';
 	line += 'L'+x1+','+y0+' ';
 	if (i%ncols == ncols-1){
 		line = x1+','+y1+' ' + x1+','+y0+' ';
 	}
 	line;`));
-	rightcodes.push(new VMScript(`
+	rightcodes.push(new VMScript(`line = x1+','+y1+' ';
 	w = x1-x0;
 	if (w<0){w *= -1;}
 	if (y1-y0<0 && y0-y1<w){w=y0-y1;}
 	else if (y1-y0>0 && y1-y0<w){w=y1-y0;}
 	c = (y0+y1)/2;
+	ww = w;
+	if (y1>y0){ww = -1*w;}
 	line = x1+','+y1+' ';
-	line += (x1)+','+(c-w/6)+' ';
-	line += 'C'+(x1-w/6)+','+(c-w/6)+' ';
-	line += (x1-w/6)+','+(c+w/6)+' ';
-	line += (x1)+','+(c+w/6)+' ';
+	line += (x1)+','+(c-ww/6)+' ';
+	line += 'C'+(x1+w/6)+','+(c-ww/6)+' ';
+	line += (x1+w/6)+','+(c+ww/6)+' ';
+	line += (x1)+','+(c+ww/6)+' ';
 	line += 'L'+x1+','+y0+' ';
 	if (i%ncols == ncols-1){
 		line = x1+','+y1+' ' + x1+','+y0+' ';
