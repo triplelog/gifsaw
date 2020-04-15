@@ -545,6 +545,8 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			if (i%ncols > 0){ //not first column
 				//var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0,y1);
 				//vlines.push([newLine,line2])
+				console.log(lines);
+				console.log(i);
 				piecelines.push(lines[i-1][2]);
 			}
 			else {
