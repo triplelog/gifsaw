@@ -647,6 +647,8 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			clines.push(piecelines);
 		
 		}
+		
+		console.log(i, lines[i]);
 		ccenters.push([(x0c+x1c)/2,(y0c+y1c)/2]);
 	}
 	console.log(performance.now());
