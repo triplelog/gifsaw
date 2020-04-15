@@ -152,7 +152,6 @@ function updateLines() {
 		imageHeight = img.height;
 		imageWidth = img.width;
 		
-		
 		var retval = makelines(imageWidth,imageHeight,nrows,ncols,pointyFactor,heightFactor,widthFactor);
 		var svg = document.getElementById('imageHolder').querySelector('svg');
 		document.getElementById('imageHolder').style.height= imageHeight+'px';
@@ -318,6 +317,6 @@ function getRightLine(x0,x1,y0,y1,i,ncols,actwidth,actheight,pointyFactor,height
 }
 document.getElementById('npieces').addEventListener('change',updateNpieces);
 document.getElementById('size').addEventListener('change',updateSize);
-document.getElementById('pointyFunction').addEventListener('change',updateLines);
-document.getElementById('heightFunction').addEventListener('change',updateLines);
-document.getElementById('widthFunction').addEventListener('change',updateLines);
+document.getElementById('pointyFactor').addEventListener('change',updateLines);
+document.getElementById('heightFactor').addEventListener('change',updateLines);
+document.getElementById('widthFactor').addEventListener('change',updateLines);
