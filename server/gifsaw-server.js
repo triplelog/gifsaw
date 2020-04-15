@@ -437,7 +437,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	var locations = [];
 	var rotations = [];
 	var matches = {};
-	var pointyFactor = .1;
+	var pointyFactor = .25;
 	const bottomcode = new VMScript(`
 	w = x1-x0;
 	if (w<0){w *= -1;}
