@@ -507,7 +507,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			var right = getRightLine(vm,rightcode,x0,x1,y0,y1,i,ncols);
 			var top = x1+','+y0+' '+x0+','+y0+' ';
 			var bottom = getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows);
-			
+			console.log(i,bottom);
 			var piecelines = [];
 			if (i%ncols > 0){ //not first column
 				//var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0,y1);
