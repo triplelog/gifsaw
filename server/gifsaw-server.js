@@ -426,10 +426,8 @@ function socketanswer(pairs,matches) {
 
 
 function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
-	var vlines = [];
-	var hlines = [];
-	var vclines = [];
-	var hclines = [];
+	var lines = [];
+	var clines = [];
 	var ccenters = [];
 	var x = [];
 	var y = [];
@@ -499,8 +497,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 		const y0 = conversions['video'+i][1]+conversions['video'+i][3]*height/(nrows);
 		const x1 = x0+width/ncols;
 		const y1 = y0+height/(nrows);
-		
-		var lines = [];
+
 		
 		if (i%2 == (i/ncols)%2){
 			var left = x0+','+y0+' '+x0+','+y1+' ';
@@ -545,8 +542,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			if (i%ncols > 0){ //not first column
 				//var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0,y1);
 				//vlines.push([newLine,line2])
-				console.log(lines);
-				console.log(i);
 				piecelines.push(lines[i-1][2]);
 			}
 			else {
@@ -585,7 +580,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 			y1c = y0c+actheight/(actheight+40)/(nrows);
 		}
 
-		var clines = [];
 		
 		if (i%2 == (i/ncols)%2){
 			var left = x0c+','+y0c+' '+x0c+','+y1c+' ';
