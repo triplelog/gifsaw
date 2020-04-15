@@ -106,7 +106,7 @@ img {
 		<!--<use class="full" href="#path{{ i+1 }}">-->
 		<path class="piece" id="fill{{ i+1 }}" d="M{{ lines[i][0] }}{{ lines[i][1] }}{{ lines[i][2] }}{{ lines[i][3] }}" />
 		<path class="left pieceBorder border{{ i+1 }}" id="left{{ i+1 }}" d="M{{ lines[i][0] }}" />
-		{% if i%2 == (i/ncols)%2 %}
+		{% if i%2 == Math.floor(i/ncols)%2 %}
 		<path class="bottom pieceBorder border{{ i+1 }}" id="bottom{{ i+1 }}" d="M{{ lines[i][1] }}" />
 		<path class="right pieceBorder border{{ i+1 }}" id="right{{ i+1 }}" d="M{{ lines[i][2] }}" />
 		<path class="top pieceBorder border{{ i+1 }}" id="top{{ i+1 }}" d="M{{ lines[i][3] }}" />
