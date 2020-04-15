@@ -510,7 +510,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	ww /= 4;
 	line = x1+','+y1+' ';
 	line += (x1)+','+(c-ww)+' ';
-	line += 'C'+(x1-w)+','+(c-ww*/pointyFactor)+' ';
+	line += 'C'+(x1-w)+','+(c-ww/pointyFactor)+' ';
 	line += (x1-w)+','+(c+ww/pointyFactor)+' ';
 	line += (x1)+','+(c+ww)+' ';
 	line += 'L'+x1+','+y0+' ';
