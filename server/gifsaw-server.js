@@ -447,7 +447,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	ww = w;
 	if (x0>x1){ww = -1*w;}
 	ww /= actwidth/actheight;
-	w /= 4;
+	w /= 3;
 	ww /= 4;
 	line = x0+','+y1+' ';
 	line += (c-ww)+','+y1+' ';
@@ -469,7 +469,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	ww = w;
 	if (y1>y0){ww = -1*w;}
 	w /= actwidth/actheight;
-	w /= 4;
+	w /= 3;
 	ww /= 4;
 	line = x1+','+y1+' ';
 	line += (x1)+','+(c-ww)+' ';
@@ -490,7 +490,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols) {
 	ww = w;
 	if (y1>y0){ww = -1*w;}
 	w /= actwidth/actheight;
-	w /= 4;
+	w /= 3;
 	ww /= 4;
 	line = x1+','+y1+' ';
 	line += (x1)+','+(c-ww)+' ';
