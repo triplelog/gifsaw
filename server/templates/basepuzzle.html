@@ -9,8 +9,8 @@
 {% endblock %}
 	
 {% block centerSize %}
-	--height-center: calc({{ image.height }} * 1.5px);
-	--width-center: calc({{ image.width }} * 1.5px);
+	--height-center: calc({{ image.height }} * 2px);
+	--width-center: calc({{ image.width }} * 2px);
 {% endblock %}
 
 {% block titleCSS %}
@@ -123,6 +123,10 @@ img {
 .piece {
 	fill: none;
 	stroke: none;
+}
+svg {
+	position: absolute;
+	display: none;
 }
 {{ initialCSS }}
 {% endblock %}
