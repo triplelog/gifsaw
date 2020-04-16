@@ -16,8 +16,8 @@
 	width: var(--width-contiainer);
 	margin: 1rem auto;
 	/*border: 1px dotted blue;*/
-	grid-template-columns: calc(var(--width-contiainer) / 2) var(--width-center) calc(var(--width-contiainer) / 2);
-  	grid-template-rows: calc(var(--height-contiainer) / 2) var(--height-center) calc(var(--height-contiainer) / 2);
+	grid-template-columns: calc((var(--width-contiainer) - var(--width-center)) / 2) var(--width-center) calc((var(--width-contiainer) - var(--width-center)) / 2);
+  	grid-template-rows: calc((var(--height-contiainer) - var(--height-center)) / 2) var(--height-center) calc((var(--height-contiainer) - var(--height-center)) / 2);
 }
 
 
