@@ -40,6 +40,7 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 
 		
 		for (var pairi=0;pairi<pairs.length;pairi++){
+			merges++;
 			var piece2 = pairs[pairi][0];
 			
 			var lrtb = 'lr';
@@ -86,7 +87,7 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 			var piece2Info = pieces[parseInt(piece2.substr(5,))-1];
 			var video2 = document.getElementById(piece2);
 			if (video2) {
-				merges++;
+				
 				var p2 = document.getElementById('path'+piece2.substr(5,));
 				var p2d = p2.getAttribute('d');
 				if ((p2d.match(/M/g)||[]).length == 1){
@@ -102,6 +103,7 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 
 				var p2svg = video2.querySelectorAll('svg');
 				for (var i=0;i<p2svg.length;i++){
+					
 					video1.appendChild(p2svg[i]);
 				}
 				
