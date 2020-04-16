@@ -175,6 +175,7 @@ var clines = {{ clines | safe }};
 var ccenters= {{ ccenters }};
 var pieceheight = cheight*{{ actheight }}/{{ image.height }}/{{ nrows }};
 var piecewidth = pieceheight*{{ actwidth }}/{{ actheight }}*{{ nrows }}/{{ ncols }};
+var merges = 0;
 
 </script>
 <script src="../js/puzzle.js"></script>
@@ -184,7 +185,7 @@ var piecewidth = pieceheight*{{ actwidth }}/{{ actheight }}*{{ nrows }}/{{ ncols
 
 {% block content11 %}
 <div id="scorediv"></div>
-<progress id="progressdiv" class="progress" value="15" max="100">15%</progress>
+<progress id="progressdiv" class="progress" value="0" max="100"></progress>
 <button id="save" href="">Save</button>
 <button id="toggle" onclick="toggle()">Toggle</button>
 {% endblock %}

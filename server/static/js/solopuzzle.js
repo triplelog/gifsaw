@@ -86,6 +86,7 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 			var piece2Info = pieces[parseInt(piece2.substr(5,))-1];
 			var video2 = document.getElementById(piece2);
 			if (video2) {
+				merges++;
 				var p2 = document.getElementById('path'+piece2.substr(5,));
 				var p2d = p2.getAttribute('d');
 				if ((p2d.match(/M/g)||[]).length == 1){
@@ -164,6 +165,7 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 				scorediv.appendChild(newDiv);
 			}
 		}
+		document.getElementById('progressDiv').value = merges*100/(ncols*(nrows-1)+nrows*(ncols-1));
 		
 	}
 }
