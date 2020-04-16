@@ -50,6 +50,7 @@ function dragstart(event) {
 		else {
 			dragid = e.target.parentElement.id;
 		}
+		console.log(dragid);
 		cvideo = videos[dragid];
 		if (cvideo) {
 			vmatches = [];
