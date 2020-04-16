@@ -1,5 +1,13 @@
 {% extends "templates/base.html" %}
 
+{% block borderRadius %}
+	--border-radius: .6rem;
+{% endblock %}
+
+{% block content22CSS %}
+	border: 1px solid black;
+{% endblock %}
+	
 {% block centerSize %}
 	--height-center: 200px;
 	--width-center: 300px;
@@ -11,11 +19,14 @@
 	text-align: center;
 	font-size: 1rem;
 	border: 2px solid black;
-  	border-radius: 1.5rem;
+  	border-radius: .6rem;
   	position: relative;
   	top:-2px;
   	left:-2px;
   	width: calc(100% + 0px);
   	background: red;
 }
+{% endblock %}
+
+{% block content22 %}
 {% endblock %}
