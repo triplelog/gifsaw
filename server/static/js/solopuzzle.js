@@ -165,7 +165,7 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 				scorediv.appendChild(newDiv);
 			}
 		}
-		document.getElementById('progressDiv').value = merges*100/(ncols*(nrows-1)+nrows*(ncols-1));
+		document.getElementById('progressdiv').value = merges*100/(ncols*(nrows-1)+nrows*(ncols-1));
 		
 	}
 }
