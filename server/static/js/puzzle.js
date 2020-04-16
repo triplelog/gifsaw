@@ -93,6 +93,9 @@ function dragmove(event) {
 			
 		}
 		else if (newLeft < startX[0]-0 || newLeft > startX[0]+0){
+			if (newLeft - startX[0] + startX[1] <= 0){
+				newLeft = startX[0] - startX[1];
+			}
 			cvideo.style.left = newLeft - startX[0] + startX[1] + 'px';
 			startX[1] += newLeft - startX[0];
 			startX[0] = newLeft;
