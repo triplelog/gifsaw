@@ -54,14 +54,20 @@ function dragstart(event) {
 		if (cvideo) {
 			vmatches = [];
 			nmatches = 0;
-			startX = [e.pageX,parseFloat(cvideo.style.left)];
-			startY = [e.pageY,parseFloat(cvideo.style.top)];
+			startX = [e.pageX,parseFloat(cvideo.style.left),pieces[i-1].centers[0].x*parseFloat(cwidth)];
+			startY = [e.pageY,parseFloat(cvideo.style.top),pieces[i-1].centers[0].y*parseFloat(cheight)];
 			for (var i=1;i<npieces+1;i++) {
 				let tempkey = 'video'+i;
 				
 				if (document.getElementById(tempkey) && tempkey != dragid){
 					let tempvideo = videos[tempkey].getBoundingClientRect();
 					for (var ii=0;ii<pieces[i-1].centers.length;ii++){
+						if (pieces[i-1].centers[ii].x*parseFloat(cwidth) < startX[2]){
+							startX[2] = pieces[i-1].centers[ii].x*parseFloat(cwidth);
+						}
+						if (pieces[i-1].centers[ii].y*parseFloat(cheight) < startY[2]){
+							startY[2] = pieces[i-1].centers[ii].y*parseFloat(cheight);
+						}
 						vmatches.push([tempkey,[parseFloat(tempvideo.left)+pieces[i-1].centers[ii].x*parseFloat(cwidth),parseFloat(tempvideo.top)+pieces[i-1].centers[ii].y*parseFloat(cheight), pieces[i-1].centers[ii].id]]);
 
 						nmatches++;
@@ -80,10 +86,10 @@ function dragmove(event) {
 		let newLeft = e.pageX;
 		let newTop = e.pageY;
 		if ((newLeft < startX[0]-2 || newLeft > startX[0]+2) && (newTop < startY[0]-2 || newTop > startY[0]+2)){
-			if (newLeft - startX[0] + startX[1] <= 0){
+			if (newLeft - startX[0] + startX[1] <= -1*startX[2]){
 				newLeft = startX[0] - startX[1];
 			}
-			if (newTop - startY[0] + startY[1] <= 0){
+			if (newTop - startY[0] + startY[1] <= -1*startY[2]){
 				newTop = startY[0] - startY[1];
 			}
 			cvideo.style.left = newLeft - startX[0] + startX[1] + 'px';
