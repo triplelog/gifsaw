@@ -59,7 +59,7 @@ function dragstart(event) {
 			startY = [e.pageY,parseFloat(cvideo.style.top),pieces[vidid].centers[0].y*parseFloat(cheight)];
 			for (var ii=0;ii<pieces[vidid].centers.length;ii++){
 				if (pieces[vidid].centers[ii].x*parseFloat(cwidth) < startX[2]){
-					startX[2] = pieces[vidid].centers[ii].x*parseFloat(cwidth);
+					startX[2] = pieces[vidid].centers[ii].x*parseFloat(cwidth)-parseFloat(cwidth)/2;
 				}
 				if (pieces[vidid].centers[ii].y*parseFloat(cheight) < startY[2]){
 					startY[2] = pieces[vidid].centers[ii].y*parseFloat(cheight);
