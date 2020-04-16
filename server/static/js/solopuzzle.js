@@ -37,12 +37,7 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 			piece1Info.centers = [{x:ccenters[parseInt(piece1.substr(5,))-1][0],y:ccenters[parseInt(piece1.substr(5,))-1][1], id:piece1Info.id}];
 		}
 		var mypoints = pairs.length;
-		if (keepscore) {
-			if (keeppoints) {
-				mypoints = 0;
-			}
-		}
-		
+
 		
 		for (var pairi=0;pairi<pairs.length;pairi++){
 			var piece2 = pairs[pairi][0];
@@ -109,11 +104,6 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 					video1.appendChild(p2svg[i]);
 				}
 				
-				if (keepscore) {
-					if (keeppoints) {
-						mypoints += Math.min(p1l,p2l);
-					}
-				}
 				
 				if (3==2 && p1l > p2l || (piece1Info.rotation == 0 && piece2Info.rotation != 0)) {
 					piece2Info.rotation=piece1Info.rotation;
