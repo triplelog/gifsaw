@@ -151,7 +151,7 @@ var gifheight = {{ image.height }};
 //var pieces = [{id:'piece1',rotation:0,location:[0,0],centers:[[0,0,'piece1']]}];
 var pieces = {{ pieces | safe }};
 var npieces= {{ npieces }};
-var matches= {{ matches | safe }};
+var matches= {{ matchesHolder | safe}};
 var saveButton = document.getElementById('save');
 var cwidth = {{ image.width }}*1;
 var cheight = {{ image.height }}*1;
@@ -163,50 +163,8 @@ var piecewidth = pieceheight*{{ actwidth }}/{{ actheight }}*{{ nrows }}/{{ ncols
 </script>
 <script src="../js/puzzle.js"></script>
 
-{% if (gametype == 'collab') %}
+{{ collabHolder | safe }}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-<script>
-
-var socket = false;
-var keepscore = false;
-if (getUrlVars()['type'] && getUrlVars()['type']=='solo') {
-	
-}
-else {
-	socket = io.connect('', {query: 'name={{ pagename }}&username=anonuser'});
-}
-</script>
-<script src="../js/collabpuzzle.js"></script>
-<script src="../js/solopuzzle.js"></script>
-
-{% elif (gametype == 'comp' and players != 'multiple') %}
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-<script>var socket = io.connect('', {query: 'name={{ pagename }}'}); var keepscore = true; var keeppoints = {{ score }};</script>
-<script src="../js/collabpuzzle.js"></script>
-<script src="../js/solopuzzle.js"></script>
-
-{% elif (gametype == 'comp' and players == 'multiple') %}
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-
-<script>var socket = io.connect('', {query: 'name={{ pagename }}'+getUrlVars()['user']}); console.log('name={{ pagename }}'+getUrlVars()['user']); var keepscore = false;</script>
-<script src="../js/collabpuzzle.js"></script>
-<script src="../js/solopuzzle.js"></script>
-
-{% else %}
-
-<script>
-function gameOver() {
-	console.log('Congrats');
-}
-</script>
-<script>var socket = false; var keepscore = false; var collab = {{ collab }}; var tkey = '{{tkeyHolder}}';</script>
-<script src="../js/collabpuzzle.js"></script>
-<script src="../js/solopuzzle.js"></script>
-
-{% endif %}
 
 </body>
 

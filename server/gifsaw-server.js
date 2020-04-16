@@ -42,16 +42,15 @@ app.get('/puzzles/:puzzleid',
 		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
 		var collab = true;
 		var puzzleid = req.params.puzzleid;
+		var matches = false;
 		tempKeys[tkey]={username:'',puzzleid:puzzleid};
-		/*if (collab){
-			//Add connection to db
-			Puzzle.findOne({id:puzzleid}, function(err,result) {
-				
-			})
-			
-		}*/
+		if (!collab){
+			matches = true;
+		}
 		res.write(nunjucks.render('puzzles/'+puzzleid+'.html',{
 			tkey: tkey,
+			matches: matches,
+			collab: collab,
 		}));
 		res.end();
 	}
@@ -149,7 +148,7 @@ app.post('/create',
 			clines:JSON.stringify(retval[6]),
 			ccenters:JSON.stringify(retval[7]),
 			lines:retval[0],
-			matches:matches,
+			matchesHolder:'{% if matches %}'+JSON.stringify(retval[4])+'{% else %}false{% endif %}','
 			nrows:nrows,
 			ncols:ncols,
 			//actheight:288,
@@ -157,7 +156,18 @@ app.post('/create',
 			actheight:actheight,
 			actwidth:actwidth,
 			pieces: JSON.stringify(pieces),
-			collab: collab,
+			collabHolder: `{% if collab %}
+
+			<script>var keepscore = true; var collab = true; var tkey = '{{tkeyHolder}}';</script>
+			<script src="../js/collabpuzzle.js"></script>
+			<script src="../js/solopuzzle.js"></script>
+
+			{% else %}
+
+			<script>var keepscore = false; var collab = false; var tkey = '{{tkeyHolder}}';</script>
+			<script src="../js/solopuzzle.js"></script>
+
+			{% endif %}`,
 			tkeyHolder:'{{tkey}}',
 			initialCSS: initialCSS,
 			
