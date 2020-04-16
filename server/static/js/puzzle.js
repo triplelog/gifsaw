@@ -80,22 +80,26 @@ function dragmove(event) {
 		let newLeft = e.pageX;
 		let newTop = e.pageY;
 		if ((newLeft < startX[0]-0 || newLeft > startX[0]+0) && (newTop < startY[0]-0 || newTop > startY[0]+0)){
-			cvideo.style.left = e.pageX - startX[0] + startX[1] + 'px';
-			cvideo.style.top = e.pageY - startY[0] + startY[1] + 'px';
+			if (newLeft - startX[0] + startX[1] <= 0){
+				newLeft = startX[0] - startX[1];
+			}
+			cvideo.style.left = newLeft - startX[0] + startX[1] + 'px';
+			cvideo.style.top = newTop - startY[0] + startY[1] + 'px';
 			startX[1] += newLeft - startX[0];
 			startY[1] += newTop- startY[0];
 			startX[0] = newLeft;
 			startY[0] = newTop;
 			isclick = false;
+			
 		}
 		else if (newLeft < startX[0]-0 || newLeft > startX[0]+0){
-			cvideo.style.left = e.pageX - startX[0] + startX[1] + 'px';
+			cvideo.style.left = newLeft - startX[0] + startX[1] + 'px';
 			startX[1] += newLeft - startX[0];
 			startX[0] = newLeft;
 			isclick = false;
 		}
 		else if (newTop < startY[0]-0 || newTop > startY[0]+0){
-			cvideo.style.top = e.pageY - startY[0] + startY[1] + 'px';
+			cvideo.style.top = newTop - startY[0] + startY[1] + 'px';
 			startY[1] += newTop - startY[0];
 			startY[0] = newTop;
 			isclick = false;
