@@ -158,17 +158,16 @@ app.post('/create',
 			pieces: JSON.stringify(pieces),
 			collabHolder: `{% if collab %}
 
-			<script>var keepscore = true; var collab = true; var tkey = '{{tkeyHolder}}';</script>
+			<script>var keepscore = true; var collab = true; var tkey = '{{tkey}}';</script>
 			<script src="../js/collabpuzzle.js"></script>
 			<script src="../js/solopuzzle.js"></script>
 
 			{% else %}
 
-			<script>var keepscore = false; var collab = false; var tkey = '{{tkeyHolder}}';</script>
+			<script>var keepscore = false; var collab = false; var tkey = '{{tkey}}';</script>
 			<script src="../js/solopuzzle.js"></script>
 
 			{% endif %}`,
-			tkeyHolder:'{{tkey}}',
 			initialCSS: initialCSS,
 			
 		});
