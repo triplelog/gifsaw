@@ -39,6 +39,7 @@ app.use('/',express.static('static'));
 app.get('/puzzles/:puzzleid', 
 	
 	function(req, res) {
+		console.log(req.query);
 		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
 		var collab = false;
 		var puzzleid = req.params.puzzleid;
