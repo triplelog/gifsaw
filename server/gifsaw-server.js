@@ -36,10 +36,19 @@ var tempKeys = fromLogin.tempKeys;
 
 app.use('/',express.static('static'));
 
+app.get('/puzzlepage', 
+	
+	function(req, res) {
+		res.write(nunjucks.render('templates/base.html',{
+		
+		}));
+		res.end();
+	}
+);
+
 app.get('/puzzles/:puzzleid', 
 	
 	function(req, res) {
-		console.log(req.query);
 		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
 		var collab = true;
 		if (req.query && req.query.q && req.query.q == 'solo'){
