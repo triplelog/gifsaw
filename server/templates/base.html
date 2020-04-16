@@ -10,10 +10,10 @@
 	display: grid;
 	--height-container: calc(100vh - 3rem);
 	--width-container: calc(100vw - 3rem);
-	--height-center: 200px;
-	--width-center: 200px;
 	height: var(--height-container);
 	width: var(--width-container);
+	{% block centerSize %}
+	{% endblock %}
 	margin: 1rem auto;
 	/*border: 1px dotted blue;*/
 	grid-template-columns: calc((var(--width-container) - var(--width-center)) / 2) var(--width-center) calc((var(--width-container) - var(--width-center)) / 2);
@@ -127,30 +127,7 @@
   	background: red;
 }
 
-.header {
-	position: relative;
-	top: 0px;
-	left:0px;
-  	
-}
-.header img{
-	position: absolute;
-}
-.header span{
-	position: absolute;
-	left: 50px;
-	top: 50px;
-	width: 100px;
-}
-.header span ~ span{
-	top: 70px;
-}
-.header span ~ span ~ span{
-	top: 90px;
-}
-.header span ~ span ~ span ~ span{
-	top: 110px;
-}
+
 
 </style>
 
@@ -162,28 +139,26 @@
 
 
 	<div class="content-11">
+		<div class="title">Scoreboard</div>
 		<div class="content">
-			<div class="title">Text</div>
+			
 		</div>
 	</div>
 	<div class="content-13">
-		<div class="title">Charts</div>
+		<div class="title">Style</div>
 		<div class="content">
-			<img src="../img/chart.gif">
 		</div>
 	</div>
 	<div class="content-31">
 		
 		<div class="title"><a href="../gradients">Gradients</a></div>
 		<div class="content">
-			Create custom formulas or borrow from others!
 		</div>
 	</div>
 	<div class="content-33">
 		
 		<div class="title">QR Codes</div>
 		<div class="content">
-			<img src="../img/panda_output.gif">
 		</div>
 	</div>
 	
@@ -209,13 +184,8 @@
 	</div>
 	
 	<div class="content-22">
-		<div class="header">
-			
-			<img src="../img/logo.png" id="rotate-33" />
-			<!--<span>Text</span>
-			<span>Chart</span>
-			<span>QR Code</span>
-			<span>Account</span>-->
+		<div class="title">Puzzle</div>
+		<div class="content">
 		</div>
 	</div>
 </div>

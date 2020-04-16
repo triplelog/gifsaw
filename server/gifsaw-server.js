@@ -39,7 +39,7 @@ app.use('/',express.static('static'));
 app.get('/puzzlepage', 
 	
 	function(req, res) {
-		res.write(nunjucks.render('templates/base.html',{
+		res.write(nunjucks.render('templates/basepuzzle.html',{
 		
 		}));
 		res.end();
