@@ -90,10 +90,10 @@ function dragmove(event) {
 		let newTop = e.pageY;
 		if ((newLeft < startX[0]-2 || newLeft > startX[0]+2) && (newTop < startY[0]-2 || newTop > startY[0]+2)){
 			if (newLeft - startX[0] + startX[1] <= -1*startX[2]){
-				newLeft = startX[0] - startX[1];
+				newLeft = startX[0] - startX[1] - startX[2];
 			}
 			if (newTop - startY[0] + startY[1] <= -1*startY[2]){
-				newTop = startY[0] - startY[1];
+				newTop = startY[0] - startY[1] - startY[2];
 			}
 			cvideo.style.left = newLeft - startX[0] + startX[1] + 'px';
 			cvideo.style.top = newTop - startY[0] + startY[1] + 'px';
@@ -106,7 +106,7 @@ function dragmove(event) {
 		}
 		else if (newLeft < startX[0]-2 || newLeft > startX[0]+2){
 			if (newLeft - startX[0] + startX[1] <= -1*startX[2]){
-				newLeft = startX[0] - startX[1];
+				newLeft = startX[0] - startX[1] - startX[2];
 			}
 			cvideo.style.left = newLeft - startX[0] + startX[1] + 'px';
 			startX[1] += newLeft - startX[0];
@@ -115,7 +115,7 @@ function dragmove(event) {
 		}
 		else if (newTop < startY[0]-2 || newTop > startY[0]+2){
 			if (newTop - startY[0] + startY[1] <= -1*startY[2]){
-				newTop = startY[0] - startY[1];
+				newTop = startY[0] - startY[1] - startY[2];
 			}
 			cvideo.style.top = newTop - startY[0] + startY[1] + 'px';
 			startY[1] += newTop - startY[0];
