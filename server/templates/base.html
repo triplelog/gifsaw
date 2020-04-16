@@ -116,6 +116,9 @@
 {% endblock %}
 
 
+{% block moreCSS %}
+{% endblock %}
+
 
 
 </style>
@@ -123,6 +126,8 @@
 </head>
 <body>
 
+{% block bodyStart %}
+{% endblock %}
 <div class="container">
 	
 
@@ -140,13 +145,13 @@
 	</div>
 	<div class="content-31">
 		
-		<div class="title"><a href="../gradients">Gradients</a></div>
+		<div class="title"><a href="../gradients">Rules</a></div>
 		<div class="content">
 		</div>
 	</div>
 	<div class="content-33">
 		
-		<div class="title">QR Codes</div>
+		<div class="title">Messages</div>
 		<div class="content">
 		</div>
 	</div>
@@ -180,6 +185,8 @@
 	</div>
 </div>
 
+{% block scripts %}
+{% endblock %}
 
 </body>
 </html>

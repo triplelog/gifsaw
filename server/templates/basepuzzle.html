@@ -29,4 +29,151 @@
 {% endblock %}
 
 {% block content22 %}
+	{% for i in range(0,npieces)  %}
+	<div id="video{{ i+1 }}">
+		<img src="{{ image.name }}">
+	
+		<svg style="pointer-events: none; position:absolute; top:0px; left:0px; width:100%; height:100%;" width="{{ image.width }}" height="{{ image.height }}" preserveAspectRatio="none" viewBox = "0 0 1 1" version = "1.1">
+			<!--<path d="M0,0 0,1 1,1 1,0 0,0" fill="red">-->
+			<!--<use class="full" href="#path{{ i+1 }}">-->
+			<path class="piece" id="fill{{ i+1 }}" d="M{{ lines[i][0] }}{{ lines[i][1] }}{{ lines[i][2] }}{{ lines[i][3] }}" />
+			<path class="left pieceBorder border{{ i+1 }}" id="left{{ i+1 }}" d="M{{ lines[i][0] }}" />
+			{% if (i%ncols)%2 == ((i-(i%ncols))/ncols)%2 %}
+			<path class="bottom pieceBorder border{{ i+1 }}" id="bottom{{ i+1 }}" d="M{{ lines[i][1] }}" />
+			<path class="right pieceBorder border{{ i+1 }}" id="right{{ i+1 }}" d="M{{ lines[i][2] }}" />
+			<path class="top pieceBorder border{{ i+1 }}" id="top{{ i+1 }}" d="M{{ lines[i][3] }}" />
+			{% else %}
+			<path class="top pieceBorder border{{ i+1 }}" id="top{{ i+1 }}" d="M{{ lines[i][1] }}" />
+			<path class="right pieceBorder border{{ i+1 }}" id="right{{ i+1 }}" d="M{{ lines[i][2] }}" />
+			<path class="bottom pieceBorder border{{ i+1 }}" id="bottom{{ i+1 }}" d="M{{ lines[i][3] }}" />
+		
+		
+			{% endif %}
+		
+		</svg>
+	</div>
+	{% endfor %}
+{% endblock %}
+
+
+
+{% block moreCSS %}
+:root {
+	--block-width: 17px;
+	--side-height: 33;
+	--top-width: 27;
+}
+
+body {
+	background: gray;
+}
+/*
+img {
+	position: absolute;
+	left: 50px;
+	top: 50px;
+}*/
+{% for i in range(0,npieces) %}
+#video{{ i+1 }} {
+	-webkit-clip-path:url(#clip{{ i+1 }});
+	clip-path:url(#clip{{ i+1 }});
+	position: absolute;
+	left: 50px;
+	top: 50px;
+}
+{% endfor %}
+
+
+#playbutton {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+#rotatebutton {
+	position: absolute;
+	left: 50px;
+	top: 0px;
+}
+#pointsspan {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+img {
+	display: block;
+	width: calc({{ image.width }} * 1.5px);
+	/*width: calc(512 * 1.5px);*/
+	height: auto;
+	background: rgba(255,255,255,1);
+}
+
+#progressdiv {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+.pieceBorder{
+	stroke:none;
+	fill: none;
+}
+.interiorBorder{
+	stroke:none;
+	fill: none;
+}
+.piece {
+	fill: none;
+	stroke: none;
+}
+{{ initialCSS }}
+{% endblock %}
+
+
+{% block bodyStart %}
+<svg width="{{ image.width }}" height="{{ image.height }}" viewBox = "0 0 1 1" version = "1.1">
+    <defs>
+    	
+    	{% for i in range(0,npieces)  %}
+    	  <clipPath id="clip{{ i+1 }}" clipPathUnits="objectBoundingBox">
+			<path id="path{{ i+1 }}" d="M{{ lines[i][0] }}{{ lines[i][1] }}{{ lines[i][2] }}{{ lines[i][3] }}" />
+		  </clipPath>
+		{% endfor %}
+    	
+    	  
+    </defs>
+    
+</svg>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+
+var dragid;
+var isclick = true;
+var startX;
+var startY;
+var cvideo;
+var vmatches;
+var nmatches;
+var videos = {};
+var score = {};
+var myname;
+var gifwidth = {{ image.width }};
+var gifheight = {{ image.height }};
+//var pieces = [{id:'piece1',rotation:0,location:[0,0],centers:[[0,0,'piece1']]}];
+var pieces = {{ pieces | safe }};
+var npieces= {{ npieces }};
+var matches= {{ matchesHolder | safe}};
+var saveButton = document.getElementById('save');
+var cwidth = {{ image.width }}*1;
+var cheight = {{ image.height }}*1;
+var clines = {{ clines | safe }};
+var ccenters= {{ ccenters }};
+var pieceheight = cheight*{{ actheight }}/{{ image.height }}/{{ nrows }};
+var piecewidth = pieceheight*{{ actwidth }}/{{ actheight }}*{{ nrows }}/{{ ncols }};
+
+</script>
+<script src="../js/puzzle.js"></script>
+
+{{ collabHolder | safe }}
 {% endblock %}
