@@ -148,7 +148,7 @@ app.post('/create',
 			clines:JSON.stringify(retval[6]),
 			ccenters:JSON.stringify(retval[7]),
 			lines:retval[0],
-			matchesHolder:'{% if matches %}'+JSON.stringify(retval[4])+'{% else %}false{% endif %}','
+			matchesHolder:'{% if matches %}'+JSON.stringify(retval[4])+'{% else %}false{% endif %}',
 			nrows:nrows,
 			ncols:ncols,
 			//actheight:288,
