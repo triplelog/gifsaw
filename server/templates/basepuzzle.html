@@ -9,8 +9,8 @@
 {% endblock %}
 	
 {% block centerSize %}
-	--height-center: 400px;
-	--width-center: 600px;
+	--height-center: calc({{ image.height }} * 1.5px);
+	--width-center: calc({{ image.width }} * 1.5px);
 {% endblock %}
 
 {% block titleCSS %}
@@ -53,10 +53,6 @@
 		</svg>
 	</div>
 	{% endfor %}
-	<div id="scorediv"></div>
-	<progress id="progressdiv" class="progress" value="15" max="100">15%</progress>
-	<button id="save" href="">Save</button>
-	<button id="toggle" onclick="toggle()">Toggle</button>
 {% endblock %}
 
 
@@ -112,7 +108,7 @@ img {
 }
 
 #progressdiv {
-	position: absolute;
+	position: relative;
 	left: 0px;
 	top: 0px;
 }
@@ -180,4 +176,11 @@ var piecewidth = pieceheight*{{ actwidth }}/{{ actheight }}*{{ nrows }}/{{ ncols
 <script src="../js/puzzle.js"></script>
 
 {{ collabHolder | safe }}
+{% endblock %}
+
+{% block content22 %}
+<div id="scorediv"></div>
+<progress id="progressdiv" class="progress" value="15" max="100">15%</progress>
+<button id="save" href="">Save</button>
+<button id="toggle" onclick="toggle()">Toggle</button>
 {% endblock %}
