@@ -17,7 +17,7 @@
 .title {
 	line-height: 1.6rem;
 	text-align: center;
-	font-size: 1rem;
+	font-size: 1.3rem;
 	border: 2px solid black;
   	border-radius: var(--border-radius);
   	position: relative;
@@ -33,7 +33,7 @@
 {% block title11 %}
 <div class="title">
 	<span class="titleLeft">
-		<i class="fas fa-save" onclick="saveTemplate()"></i>
+		
 	</span>
 	<span class="titleCenter">
 		<a href="https://sudokufarm.com">Sudoku Farm</a>
@@ -46,9 +46,31 @@
 </div>
 {% endblock %}
 {% block content11 %}
-Play Sudoku Farm
+Sudoku Farm combines classic Sudoku puzzles with a strategy game.
+Play in browser or download for iOS.
+Create your own level.
 {% endblock %}	
+
+{% block title13 %}
+<div class="title">
+	<span class="titleLeft">
 		
+	</span>
+	<span class="titleCenter">
+		<a href="https://gifsaw.com">Gifsaw</a>
+	</span>
+	<span class="titleRight">
+		<label for="radio13-1"><i class="fas fa-compress-alt"></i></label>
+		<label for="radio13-2"><i class="fas fa-expand-alt"></i></label>
+		<label for="radio13-3"><i class="fas fa-expand"></i></label>
+	</span>
+</div>
+{% endblock %}
+{% block content13 %}
+Gifsaw allows you to create or complete jigsaw puzzles.
+Either complete them yourself, collaboratively, or competitively.
+{% endblock %}	
+	
 {% block content22 %}
 	Triplelog
 {% endblock %}

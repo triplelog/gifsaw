@@ -46,6 +46,8 @@
 	border: 2px solid black;
   	border-radius: var(--border-radius);
   	position: relative;
+  	overflow: scroll;
+  	background: white;
 }
 .content-31 {
 	grid-row:  3;
@@ -53,6 +55,8 @@
   	border: 2px solid black;
   	border-radius: var(--border-radius);
   	position: relative;
+  	overflow: scroll;
+  	background: white;
 }
 .content-22 {
 	grid-row:  2;
@@ -66,7 +70,8 @@
   	border: 2px solid black;
   	border-radius: var(--border-radius);
   	position: relative;
-  	overflow: hidden;
+  	overflow: scroll;
+  	background: white;
 }
 
 .content-33 {
@@ -75,6 +80,8 @@
   	border: 2px solid black;
   	border-radius: var(--border-radius);
   	position: relative;
+  	overflow: scroll;
+  	background: white;
 }
 
 #radio11-1:checked ~ .content-11 {
@@ -88,6 +95,22 @@
 	z-index: 2;
 }
 #radio11-3:checked ~ .content-11 {
+	grid-row:  1 / 4;
+	grid-column:  1 / 4;
+	z-index: 3;
+}
+
+#radio13-1:checked ~ .content-13 {
+	grid-row:  1;
+	grid-column:  3;
+	z-index: 1;
+}
+#radio13-2:checked ~ .content-13 {
+	grid-row:  1 / 3;
+	grid-column:  2 / 4;
+	z-index: 2;
+}
+#radio13-3:checked ~ .content-13 {
 	grid-row:  1 / 4;
 	grid-column:  1 / 4;
 	z-index: 3;
@@ -176,9 +199,16 @@
 			{% endblock %}
 		</div>
 	</div>
+	
+	<input type="radio" style="display: none;" name="radio13" value="1" id="radio13-1"></input>
+	<input type="radio" style="display: none;" name="radio13" value="2" id="radio13-2"></input>
+	<input type="radio" style="display: none;" name="radio13" value="3" id="radio13-3"></input>
 	<div class="content-13">
-		<div class="title">Style</div>
+		{% block title13 %}
+		{% endblock %}
 		<div class="content">
+			{% block content13 %}
+			{% endblock %}
 		</div>
 	</div>
 	<div class="content-31">
