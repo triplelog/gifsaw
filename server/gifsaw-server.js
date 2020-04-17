@@ -45,6 +45,15 @@ app.get('/triplelog',
 		res.end();
 	}
 );
+app.get('/sudokufarm', 
+	
+	function(req, res) {
+		res.write(nunjucks.render('templates/sudokufarm.html',{
+		
+		}));
+		res.end();
+	}
+);
 app.get('/puzzlepage', 
 	
 	function(req, res) {
