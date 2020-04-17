@@ -25,14 +25,18 @@
   	left:-2px;
   	width: calc(100% + 0px);
   	background: red;
-  	background-image: url("../img/farm6.jpg");
+  	background-image: url("../img/farmbg.png");
   	background-size: auto;
-  	background-position: -100px 0px;
+  	background-position: 0px 0px;
   	color: white;
   	transition: background-position 2s linear;
   	text-shadow: 0px 0px 10px black;
 }
-
+.titleBG {
+	background-image: url("../img/ftractor.png");
+  	background-size: auto;
+  	background-position: 0px 0px;
+}
 .title:hover {
 	transition: all 2s linear;
 	background-position: 0px 0px;
@@ -87,19 +91,21 @@ body {
 
 {% block title13 %}
 <div class="title">
-	<span class="titleLeft">
+	<div class="titleBG">
+		<span class="titleLeft">
 		
-	</span>
-	<span class="titleCenter">
-		<a href="https://gifsaw.com">How To Play</a>
-	</span>
-	<span class="titleRight">
-		<label for="radio13-3"><i class="fas fa-expand"></i></label>
-		<label for="radio13-2"><i class="fas fa-expand-alt"></i></label>
-		<label for="radio13-1"><i class="fas fa-compress-alt"></i></label>
+		</span>
+		<span class="titleCenter">
+			<a href="https://gifsaw.com">How To Play</a>
+		</span>
+		<span class="titleRight">
+			<label for="radio13-3"><i class="fas fa-expand"></i></label>
+			<label for="radio13-2"><i class="fas fa-expand-alt"></i></label>
+			<label for="radio13-1"><i class="fas fa-compress-alt"></i></label>
 		
 		
-	</span>
+		</span>
+	</div>
 </div>
 {% endblock %}
 {% block content13 %}
