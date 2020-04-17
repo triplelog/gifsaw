@@ -32,6 +32,23 @@
   	color: white;
   	text-shadow: 0px 0px 10px black;
 }
+.titleBG {
+	background-image: url("../img/ftractor-40.png");
+  	background-size: auto;
+  	background-repeat: no-repeat;
+  	background-position: 0px 0px;
+  	transition: background-position 2s linear;
+}
+.titleBG:hover {
+  	background-position: 350px 0px;
+  	transition: all 2s linear;
+}
+.content-11 .title {
+	background-image: url("../img/farmbg2-40.png");
+}
+.content-11 .titleBG {
+	background-image: url("../img/ftractor-40.png");
+}
 {% endblock %}
 
 
@@ -50,17 +67,19 @@
 
 {% block title11 %}
 <div class="title">
-	<span class="titleLeft">
+	<div class="titleBG">
+		<span class="titleLeft">
 		
-	</span>
-	<span class="titleCenter">
-		<a href="https://sudokufarm.com">Sudoku Farm</a>
-	</span>
-	<span class="titleRight">
-		<label for="radio11-1"><i class="fas fa-compress-alt"></i></label>
-		<label for="radio11-2"><i class="fas fa-expand-alt"></i></label>
-		<label for="radio11-3"><i class="fas fa-expand"></i></label>
-	</span>
+		</span>
+		<span class="titleCenter">
+			<a href="https://sudokufarm.com">Sudoku Farm</a>
+		</span>
+		<span class="titleRight">
+			<label for="radio11-1"><i class="fas fa-compress-alt"></i></label>
+			<label for="radio11-2"><i class="fas fa-expand-alt"></i></label>
+			<label for="radio11-3"><i class="fas fa-expand"></i></label>
+		</span>
+	</div>
 </div>
 {% endblock %}
 {% block content11 %}
