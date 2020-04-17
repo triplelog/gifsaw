@@ -31,7 +31,19 @@
 
 
 {% block title11 %}
-<div class="title"><a href="https://sudokufarm.com">Sudoku Farm</a></div>
+<div class="title">
+	<span class="titleLeft">
+		<i class="fas fa-save" onclick="saveTemplate()"></i>
+	</span>
+	<span class="titleCenter">
+		<a href="https://sudokufarm.com">Sudoku Farm</a>
+	</span>
+	<span class="titleRight">
+		<label for="radio11-1"><i class="fas fa-compress-alt"></i></label>
+		<label for="radio11-2"><i class="fas fa-expand-alt"></i></label>
+		<label for="radio11-3"><i class="fas fa-expand"></i></label>
+	</span>
+</div>
 {% endblock %}
 {% block content11 %}
 Play Sudoku Farm
