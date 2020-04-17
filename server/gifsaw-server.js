@@ -36,6 +36,15 @@ var tempKeys = fromLogin.tempKeys;
 
 app.use('/',express.static('static'));
 
+app.get('/triplelog', 
+	
+	function(req, res) {
+		res.write(nunjucks.render('templates/triplelog.html',{
+		
+		}));
+		res.end();
+	}
+);
 app.get('/puzzlepage', 
 	
 	function(req, res) {

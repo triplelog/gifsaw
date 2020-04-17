@@ -1,0 +1,59 @@
+{% extends "templates/base.html" %}
+
+{% block borderRadius %}
+	--border-radius: .8rem;
+{% endblock %}
+
+{% block content22CSS %}
+	/*border: 1px solid black;*/
+{% endblock %}
+	
+{% block centerSize %}
+	--height-center: 200px;
+	--width-center: 200px;
+{% endblock %}
+
+{% block titleCSS %}
+.title {
+	line-height: 1.6rem;
+	text-align: center;
+	font-size: 1rem;
+	border: 2px solid black;
+  	border-radius: var(--border-radius);
+  	position: relative;
+  	top:-2px;
+  	left:-2px;
+  	width: calc(100% + 0px);
+  	background: red;
+}
+{% endblock %}
+
+
+
+{% block title11 %}
+<div class="title"><a href="https://sudokufarm.com">Sudoku Farm</a></div>
+{% endblock %}
+{% block content11 %}
+Play Sudoku Farm
+{% endblock %}	
+		
+{% block content22 %}
+	Triplelog
+{% endblock %}
+
+
+
+{% block moreCSS %}
+
+{% endblock %}
+
+
+{% block bodyStart %}
+
+{% endblock %}
+
+
+{% block scripts %}
+
+{% endblock %}
+
