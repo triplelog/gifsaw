@@ -158,6 +158,7 @@ function updateLines() {
 		document.getElementById('imageHolder').style.width= imageWidth+'px';
 		svg.setAttribute('width',imageWidth);
 		svg.setAttribute('height',imageHeight);
+		svg.setAttribute('viewBox',"0 0 2 2");
 		var path = svg.querySelector('path');
 		var pathstr = '';
 		for (var i=0;i<retval.length;i++){
@@ -175,8 +176,8 @@ function updateLines() {
 function makelines(actwidth,actheight,nrows,ncols,pointyFactor,heightFactor,widthFactor) {
 	var lines = [];
 
-	width = 1;
-	height = 1;
+	width = actwidth;
+	height = actheight;
 	
 	var conversions = {};
 	for (var i=0;i<nrows*ncols;i++){
