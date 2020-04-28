@@ -481,12 +481,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 	
 	ww = w;
 	if (x0>x1){ww = -1*w;}
-	if (actwidth>actheight){
-		ww /= actwidth/actheight;
-	}
-	else {
-		w /= actheight/actwidth;
-	}
 	w /= heightFactor;
 	ww /= widthFactor;
 	line = x0+','+y1+' ';
@@ -508,12 +502,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 	c = (y0+y1)/2;
 	ww = w;
 	if (y1>y0){ww = -1*w;}
-	if (actwidth>actheight){
-		w /= actwidth/actheight;
-	}
-	else {
-		ww /= actheight/actwidth;
-	}
 	w /= heightFactor;
 	ww /= widthFactor;
 	line = x1+','+y1+' ';
@@ -534,12 +522,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 	c = (y0+y1)/2;
 	ww = w;
 	if (y1>y0){ww = -1*w;}
-	if (actwidth>actheight){
-		w /= actwidth/actheight;
-	}
-	else {
-		ww /= actheight/actwidth;
-	}
 	w /= heightFactor;
 	ww /= widthFactor;
 	line = x1+','+y1+' ';
@@ -556,10 +538,13 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 
 	width = 1;
 	height = 1;
-	
+	var fullwidth = actwidth;
+	var fullheight = actheight;
 	if (encryptedpuzzle){
-		width = actwidth/(40+2*actwidth); //Revert to 1
-		height = actheight/(actheight+40); //Revert to 1
+		width = actwidth/(40+2*actwidth);
+		height = actheight/(actheight+40);
+		fullwidth = (40+2*actwidth);
+		fullheight = (actheight+40);
 	}
 	
 	
@@ -592,10 +577,10 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		
 
 		
-		const x0 = conversions['video'+i][0]+conversions['video'+i][2]*width/ncols;
-		const y0 = conversions['video'+i][1]+conversions['video'+i][3]*height/(nrows);
-		const x1 = x0+width/ncols;
-		const y1 = y0+height/(nrows);
+		const x0 = fullwidth*(conversions['video'+i][0]+conversions['video'+i][2]*width/ncols);
+		const y0 = fullheight*(conversions['video'+i][1]+conversions['video'+i][3]*height/(nrows));
+		const x1 = fullwidth*(x0+width/ncols);
+		const y1 = fullheight*(y0+height/(nrows));
 
 		var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		if ((i%ncols)%2 == Math.floor(i/ncols)%2){
