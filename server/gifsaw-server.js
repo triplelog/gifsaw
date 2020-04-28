@@ -581,7 +581,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		const y0 = fullheight*(conversions['video'+i][1]+conversions['video'+i][3]*height/(nrows));
 		const x1 = fullwidth*(x0+width/ncols);
 		const y1 = fullheight*(y0+height/(nrows));
-		console.log(i, fullwidth, x0, conversions['video'+i],width);
+		
 		
 		var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		if ((i%ncols)%2 == Math.floor(i/ncols)%2){
@@ -639,7 +639,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			
 			lines.push(piecelines);
 		}
-		
+		console.log(i, fullwidth, x0, conversions['video'+i],width, lines[i]);
 
 		centers.push([{x:(x0+x1)/2, y:(y0+y1)/2, id:'video'+(i+1)}]);
 		
