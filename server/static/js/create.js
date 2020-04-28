@@ -273,12 +273,12 @@ function getBottomLine(x0,x1,y0,y1,i,ncols,nrows,actwidth,actheight,pointyFactor
 	
 	ww = w;
 	if (x0>x1){ww = -1*w;}
-	if (actwidth>actheight){
+	/*if (actwidth>actheight){
 		ww /= actwidth/actheight;
 	}
 	else {
 		w /= actheight/actwidth;
-	}
+	}*/
 	w /= heightFactor;
 	ww /= widthFactor;
 	line = x0+','+y1+' ';
@@ -300,12 +300,12 @@ function getRightLine(x0,x1,y0,y1,i,ncols,actwidth,actheight,pointyFactor,height
 	c = (y0+y1)/2;
 	ww = w;
 	if (y1>y0){ww = -1*w;}
-	if (actwidth>actheight){
+	/*if (actwidth>actheight){
 		w /= actwidth/actheight;
 	}
 	else {
 		ww /= actheight/actwidth;
-	}
+	}*/
 	w /= heightFactor;
 	ww /= widthFactor;
 	line = x1+','+y1+' ';
@@ -324,3 +324,8 @@ document.getElementById('size').addEventListener('change',updateSize);
 document.getElementById('pointyFactor').addEventListener('change',updateLines);
 document.getElementById('heightFactor').addEventListener('change',updateLines);
 document.getElementById('widthFactor').addEventListener('change',updateLines);
+
+
+
+
+
