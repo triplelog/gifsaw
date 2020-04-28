@@ -639,7 +639,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			
 			lines.push(piecelines);
 		}
-
+		console.log(i, fullwidth, x0, conversions['video'+i],width, lines[i]);
 		centers.push([{x:(x0+x1)/2/fullwidth, y:(y0+y1)/2/fullheight, id:'video'+(i+1)}]);
 		
 		//This (everything with c for correct) is for the correct version of the gif
