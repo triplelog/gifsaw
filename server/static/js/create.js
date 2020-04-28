@@ -169,7 +169,8 @@ function updateLines() {
 			pathstr += 'M'+retval[i][3]+' ';
 		}
 		path.setAttribute('d',pathstr);
-		var sw = Math.max(imageWidth,imageHeight)/100;
+		//var sw = Math.max(imageWidth,imageHeight)/200;
+		var sw = 2;
 		path.setAttribute('stroke-width',sw);
 		
 		//console.log(retval[0]);
