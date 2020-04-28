@@ -292,7 +292,6 @@ const wss = new WebSocket.Server({ server });
 var rooms = {};
 wss.on('connection', function connection(ws) {
 	var imgid = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
-  	var outSrc = 'out/'+imgid+'.png';
   	var inSrc = 'static/img/in/'+imgid+'.png';
   	var imgTypes = ['.png','.jpg','.jpeg','.gif','.tiff','.tif'];//.svg, .psd, .eps, .raw, .pdf?
   	var imgIndex = 0;
