@@ -581,7 +581,8 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		const y0 = fullheight*(conversions['video'+i][1]+conversions['video'+i][3]*height/(nrows));
 		const x1 = fullwidth*(x0+width/ncols);
 		const y1 = fullheight*(y0+height/(nrows));
-
+		console.log(i, fullwidth, x0, conversions['video'+i],width);
+		
 		var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		if ((i%ncols)%2 == Math.floor(i/ncols)%2){
 			var left = x0+','+y0+' '+x0+','+y1+' ';
