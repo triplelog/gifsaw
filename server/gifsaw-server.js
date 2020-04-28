@@ -171,6 +171,7 @@ app.post('/create',
 			image: {'name':'../img/in/'+fullname,'width':dimensions.width,'height':dimensions.height,'showwidth':dimensions.width/2,'showheight':dimensions.height/2},
 			clines:JSON.stringify(retval[6]),
 			ccenters:JSON.stringify(retval[7]),
+			plines:JSON.stringify(retval[8]),
 			lines:retval[0],
 			matchesHolder:'{% if matches %}'+JSON.stringify(retval[4])+'{% else %}false{% endif %}',
 			nrows:nrows,
@@ -463,6 +464,7 @@ function socketanswer(pairs,matches) {
 function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFactor,heightFactor,widthFactor) {
 	var lines = [];
 	var clines = [];
+	var plines = [];
 	var ccenters = [];
 	var x = [];
 	var y = [];
@@ -582,6 +584,8 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		const x1 = x0+fullwidth*(width/ncols);
 		const y1 = y0+fullheight*(height/(nrows));
 		
+		
+		
 		var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		if ((i%ncols)%2 == Math.floor(i/ncols)%2){
 			var left = x0+','+y0+' '+x0+','+y1+' ';
@@ -641,6 +645,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		
 		centers.push([{x:(x0+x1)/2/fullwidth, y:(y0+y1)/2/fullheight, id:'video'+(i+1)}]);
 		
+		
 		//This (everything with c for correct) is for the correct version of the gif
 		var x0c = x0;
 		var y0c = y0;
@@ -652,6 +657,14 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			x1c = x0c+actwidth/(40+2*actwidth)/ncols;
 			y1c = y0c+actheight/(actheight+40)/(nrows);
 		}
+		x0c /= fullwidth;
+		x1c /= fullwidth;
+		y0c /= fullheight;
+		y1c /= fullheight;
+		var x0p = x0/fullwidth;
+		var y0p = y0/fullheight;
+		var x1p = x1/fullwidth;
+		var y1p = y1/fullheight;
 
 		
 		if ((i%ncols)%2 == Math.floor(i/ncols)%2){
@@ -662,9 +675,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			var bottom = getBottomLine(vm,bottomcode,x0c,x1c,y0c,y1c,i,ncols,nrows);
 			
 			var piecelines = [];
-			if (i%ncols > 0){ //not first column
-				//var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0c,y1c);
-				//vlines.push([newLine,line2])
+			if (i%ncols > 0){
 				piecelines.push(lines[i-1][2]);
 			}
 			else {
@@ -672,16 +683,15 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			}
 			piecelines.push(bottom);
 			piecelines.push(right);
-			if (i >= ncols){ //not first row
-				//var newLine = flipBottomHorizontal(hlines[i-ncols][0].split(' '),x0c,y0c);
-				//hlines.push([line1,newLine])
+			if (i >= ncols){
 				piecelines.push(lines[i-ncols][3]);
 			}
 			else {
-				//hlines.push([line1,line2])
 				piecelines.push(top);
 			}
 			clines.push(piecelines);
+			
+			
 		
 		}
 		else {
@@ -717,7 +727,63 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			clines.push(piecelines);
 		
 		}
-		ccenters.push([(x0c+x1c)/2/fullwidth,(y0c+y1c)/2/fullheight]);
+		if ((i%ncols)%2 == Math.floor(i/ncols)%2){
+			var left = x0p+','+y0p+' '+x0p+','+y1p+' ';
+		
+			var right = getRightLine(vm,rightcode,x0p,x1p,y0p,y1p,i,ncols);
+			var top = x1p+','+y0p+' '+x0p+','+y0p+' ';
+			var bottom = getBottomLine(vm,bottomcode,x0p,x1p,y0p,y1p,i,ncols,nrows);
+			
+			var piecelines = [];
+			if (i%ncols > 0){
+				piecelines.push(lines[i-1][2]);
+			}
+			else {
+				piecelines.push(left);
+			}
+			piecelines.push(bottom);
+			piecelines.push(right);
+			if (i >= ncols){
+				piecelines.push(lines[i-ncols][3]);
+			}
+			else {
+				piecelines.push(top);
+			}
+			plines.push(piecelines);
+			
+			
+		
+		}
+		else {
+			var left = x0p+','+y1p+' '+x0p+','+y0p+' ';
+		
+			var right = getRightLine(vm,rightcode,x0p,x1p,y1p,y0p,i,ncols);
+			var top = x0p+','+y0p+' '+x1p+','+y0p+' ';
+			var bottom = getBottomLine(vm,bottomcode,x1p,x0p,y0p,y1p,i,ncols,nrows);
+			
+			var piecelines = [];
+			if (i%ncols > 0){
+				piecelines.push(lines[i-1][2]);
+			}
+			else {
+				piecelines.push(left);
+			}
+			if (i >= ncols){
+				piecelines.push(lines[i-ncols][1]);
+			}
+			else {
+				//hlines.push([line1,line2])
+				piecelines.push(top);
+			}
+			piecelines.push(right);
+			piecelines.push(bottom);
+			
+			
+			
+			plines.push(piecelines);
+		
+		}
+		ccenters.push([(x0c+x1c)/2,(y0c+y1c)/2]);
 	}
 	console.log(performance.now());
 	for (var i=0;i<ncols*nrows;i++){
@@ -745,7 +811,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			matches['video'+(i+1)].push(['video'+(i+1-parseInt(ncols)),'bottom'])
 		}
 	}
-	return [lines,centers,locations,rotations,matches,nrows*ncols,clines,ccenters];
+	return [lines,centers,locations,rotations,matches,nrows*ncols,clines,ccenters,plines];
 }
 function getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows){
 	vm.run('x0='+x0+'; '+'x1='+x1+'; '+'y0='+y0+'; '+'y1='+y1+'; '+'i='+i+'; '+'ncols='+ncols+'; '+'nrows='+nrows+'; ');

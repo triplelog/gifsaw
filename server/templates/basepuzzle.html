@@ -81,8 +81,6 @@ img {
 	position: absolute;
 	left: 50px;
 	top: 50px;
-	width: calc({{ image.width }} * 1px);
-	height: calc({{ image.height }} * 1px);
 }
 {% endfor %}
 
@@ -139,8 +137,8 @@ svg {
     <defs>
     	
     	{% for i in range(0,npieces)  %}
-    	  <clipPath id="clip{{ i+1 }}" clipPathUnits="userSpaceOnUse">
-			<path id="path{{ i+1 }}" d="M{{ lines[i][0] }}{{ lines[i][1] }}{{ lines[i][2] }}{{ lines[i][3] }}" />
+    	  <clipPath id="clip{{ i+1 }}" clipPathUnits="objectBoundingBox">
+			<path id="path{{ i+1 }}" d="M{{ plines[i][0] }}{{ plines[i][1] }}{{ plines[i][2] }}{{ plines[i][3] }}" />
 		  </clipPath>
 		{% endfor %}
     	
