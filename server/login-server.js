@@ -16,7 +16,7 @@ var tempKeys = {};
 const User = require('./models/user');
 const UserData = require('./models/userdata');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/gifsaw', {useNewUrlParser: true});
+mongoose.connect('mongodb://45.32.213.227:27017/triplelog', {useNewUrlParser: true});
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy;
 // use static authenticate method of model in LocalStrategy
@@ -43,19 +43,19 @@ app.get('/account',
   function(req, res){
   	if (!req.isAuthenticated()){
   		if (req.query.e && req.query.e=='duplicate'){
-  			res.write(nunjucks.render('loginregister.html',{
+  			res.write(nunjucks.render('templates/loginregisterbase.html',{
 				duplicate: true,
 			}));
 			res.end();
   		}
   		else if (req.query.e && req.query.e=='badlogin'){
-  			res.write(nunjucks.render('loginregister.html',{
+  			res.write(nunjucks.render('templates/loginregisterbase.html',{
 				badlogin: true,
 			}));
 			res.end();
   		}
   		else {
-  			res.write(nunjucks.render('loginregister.html',{}));
+  			res.write(nunjucks.render('templates/loginregisterbase.html',{}));
 			res.end();
   		}
 		
@@ -87,7 +87,7 @@ app.get('/account',
 			var creations = result.creations;
 		
 		
-			res.write(nunjucks.render('account.html',{
+			res.write(nunjucks.render('templates/accountbase.html',{
 				username: req.user.options.displayName || req.user.username,
 				name: req.user.name || '',
 				options: req.user.options,

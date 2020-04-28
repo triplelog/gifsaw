@@ -18,7 +18,7 @@ const { PerformanceObserver, performance } = require('perf_hooks');
 const FileType = require('file-type');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/gifsaw', {useNewUrlParser: true});
+mongoose.connect('mongodb://45.32.213.227:27017/triplelog', {useNewUrlParser: true});
 const User = require('./models/user');
 const UserData = require('./models/userdata');
 const Puzzle = require('./models/puzzle');
