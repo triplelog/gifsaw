@@ -34,7 +34,7 @@
 		<img src="{{ image.name }}">
 		<!--<iframe style="pointer-events: none; overflow: hidden;" src="" width="500" height="400"></iframe>-->
 		<!--<video style="pointer-events: none; overflow: hidden;" src="" width="500" height="400" controls loop autoplay></video>-->
-		<svg style="pointer-events: none; position:absolute; top:0px; left:0px; width:100%; height:100%;" width="{{ image.width }}" height="{{ image.height }}" preserveAspectRatio="none" viewBox = "0 0 {{ image.width }} {{ image.height }}" version = "1.1">
+		<svg style="pointer-events: none; position:absolute; top:0px; left:0px; width:100%; height:100%;" width="{{ image.showwidth }}" height="{{ image.showheight }}" preserveAspectRatio="none" viewBox = "0 0 {{ image.width }} {{ image.height }}" version = "1.1">
 			<!--<path d="M0,0 0,1 1,1 1,0 0,0" fill="red">-->
 			<!--<use class="full" href="#path{{ i+1 }}">-->
 			<path class="piece" id="fill{{ i+1 }}" d="M{{ lines[i][0] }}{{ lines[i][1] }}{{ lines[i][2] }}{{ lines[i][3] }}" />
@@ -102,7 +102,8 @@ img {
 }
 img {
 	display: block;
-	width: calc({{ image.width }} * 1px);
+	width: calc({{ image.showwidth }});
+	/*width: calc(512 * 1px);*/
 	height: auto;
 	background: rgba(255,255,255,1);
 }
@@ -168,8 +169,8 @@ var pieces = {{ pieces | safe }};
 var npieces= {{ npieces }};
 var matches= {{ matchesHolder | safe}};
 var saveButton = document.getElementById('save');
-var cwidth = {{ image.width }};
-var cheight = {{ image.height }};
+var cwidth = {{ image.showwidth }};
+var cheight = {{ image.showheight }};
 var clines = {{ clines | safe }};
 var ccenters= {{ ccenters }};
 var pieceheight = cheight*{{ actheight }}/{{ image.height }}/{{ nrows }};
