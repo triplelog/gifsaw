@@ -159,7 +159,7 @@ function updateLines() {
 		svg.setAttribute('width',imageWidth);
 		svg.setAttribute('height',imageHeight);
 		svg.setAttribute('viewBox',"0 0 "+imageWidth+" "+imageHeight);
-		svg.setAttribute('stroke-width',imageWidth/100);
+		
 		var path = svg.querySelector('path');
 		var pathstr = '';
 		for (var i=0;i<retval.length;i++){
@@ -169,6 +169,8 @@ function updateLines() {
 			pathstr += 'M'+retval[i][3]+' ';
 		}
 		path.setAttribute('d',pathstr);
+		var sw = Math.max(imageWidth,imageHeight)/100;
+		path.setAttribute('stroke-width',sw);
 		
 		//console.log(retval[0]);
 	}
