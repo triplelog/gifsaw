@@ -81,8 +81,8 @@ img {
 	position: absolute;
 	left: 50px;
 	top: 50px;
-	width: {{image.width}};
-	height: {{image.height}};
+	width: calc({{ image.width }} * 1px);
+	height: calc({{ image.height }} * 1px);
 }
 {% endfor %}
 
