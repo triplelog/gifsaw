@@ -60,7 +60,6 @@ app.get('/puzzlepage',
 app.get('/puzzles/:puzzleid', 
 	
 	function(req, res) {
-		console.log(req);
 		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
 		var collab = true;
 		if (req.query && req.query.q && req.query.q == 'solo'){
@@ -169,7 +168,7 @@ app.post('/create',
 			score: score,
 			npieces: npieces,
 			pagename: fname,
-			image: {'name':'../img/in/'+fullname,'width':dimensions.width,'height':dimensions.height,'showwidth':dimensions.width*2,'showheight':dimensions.height*2},
+			image: {'name':'../img/in/'+fullname,'width':dimensions.width,'height':dimensions.height,'showwidth':dimensions.width,'showheight':dimensions.height},
 			clines:JSON.stringify(retval[6]),
 			ccenters:JSON.stringify(retval[7]),
 			lines:retval[0],
