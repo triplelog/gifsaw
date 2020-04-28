@@ -164,60 +164,67 @@ svg {
 {% endblock %}
 {% block content31 %}
 <form action="../create" method="post">
-	<label for="npieces">Number of Pieces</label>
-	<input type="number" id="npieces" name="npieces"></input>
+	<div>
+		<label for="npieces">Number of Pieces</label>
+		<input type="number" id="npieces" name="npieces"></input>
+	</div>
+	<div>
+		<label for="size">Size</label>
+		<select id="size">
+		</select>
+	</div>
+	<div>
+		<label for="nrows">Rows: </label>
+		<input type="number" id="nrows" name="nrows"></input>
 
-	<label for="size">Size</label>
-	<select id="size">
-	</select>
-
-	<label for="nrows">Number of Rows</label>
-	<input type="number" id="nrows" name="nrows"></input>
-
-	<label for="ncols">Number of Columns</label>
-	<input type="number" id="ncols" name="ncols"></input>
-	
-	<label for="initialScript">Scoring Script: </label>
-	<textarea id="initialScript" name="initialScript">var players={};
-	function newPlayer(username){
-		var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
-		players[username]={score:0,color:color};
-	}
-	function newMerge(username,matches){
-		players[username].score++;
-		var score = {};
-		score[username]=players[username].score;
-		return {'css':{stroke: players[username].color},'message':'Merge','accept':true,'score':score};
-	}</textarea>
-	<textarea id="initialCSS" name="initialCSS">.pieceBorder{
-		stroke-dasharray: .02;
-		stroke:yellow;
-		stroke-width:.02;
-		stroke-opacity:.5;
-		fill: transparent;
-	}
-	.interiorBorder{
-		stroke-dasharray: .01;
-		stroke:blue;
-		stroke-width:.01;
-		stroke-opacity:.5;
-		fill: transparent;
-	}
-	.interiorBorder.toggled{
-		stroke-dasharray: .03;
-		stroke:blue;
-		stroke-width:.03;
-		stroke-opacity:1;
-		fill: transparent;
-	}
-	.piece {
-		fill: black;
-		fill-opacity: .1;
-		stroke: none;
-	}</textarea>
-	<input type="number" name="pointyFactor" id="pointyFactor" value="4"></input>
-	<input type="number" name="heightFactor" id="heightFactor" value="25"></input>
-	<input type="number" name="widthFactor" id="widthFactor" value="50"></input>
+		<label for="ncols">Columns: </label>
+		<input type="number" id="ncols" name="ncols"></input>
+	</div>
+	<div>
+		<input type="number" name="pointyFactor" id="pointyFactor" value="4"></input>
+		<input type="number" name="heightFactor" id="heightFactor" value="25"></input>
+		<input type="number" name="widthFactor" id="widthFactor" value="50"></input>
+	</div>
+	<div>
+		<label for="initialScript">Scoring Script: </label>
+		<textarea id="initialScript" name="initialScript">var players={};
+		function newPlayer(username){
+			var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
+			players[username]={score:0,color:color};
+		}
+		function newMerge(username,matches){
+			players[username].score++;
+			var score = {};
+			score[username]=players[username].score;
+			return {'css':{stroke: players[username].color},'message':'Merge','accept':true,'score':score};
+		}</textarea>
+		<textarea id="initialCSS" name="initialCSS">.pieceBorder{
+			stroke-dasharray: .02;
+			stroke:yellow;
+			stroke-width:.02;
+			stroke-opacity:.5;
+			fill: transparent;
+		}
+		.interiorBorder{
+			stroke-dasharray: .01;
+			stroke:blue;
+			stroke-width:.01;
+			stroke-opacity:.5;
+			fill: transparent;
+		}
+		.interiorBorder.toggled{
+			stroke-dasharray: .03;
+			stroke:blue;
+			stroke-width:.03;
+			stroke-opacity:1;
+			fill: transparent;
+		}
+		.piece {
+			fill: black;
+			fill-opacity: .1;
+			stroke: none;
+		}</textarea>
+	</div>
 	
 	
 	<input type="text" name="fileSrc" style="display: none;"></input>
