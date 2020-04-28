@@ -1,0 +1,235 @@
+{% extends "templates/base.html" %}
+
+{% block borderRadius %}
+	--border-radius: 1.25rem;
+{% endblock %}
+
+{% block content22CSS %}
+	/*border: 1px solid black;*/
+{% endblock %}
+	
+{% block centerSize %}
+	--height-center: 150px;
+	--width-center: 200px;
+{% endblock %}
+
+{% block titleCSS %}
+.title {
+	line-height: 2.5rem;
+	text-align: center;
+	font-size: 1rem;
+	border: 2px solid black;
+  	border-radius: var(--border-radius);
+  	position: relative;
+  	top:-2px;
+  	left:-2px;
+  	width: calc(100% + 0px);
+  	background: red;
+  	background-image: url("../img/farmbg2-40.png");
+  	background-size: 100% 100%;
+  	background-repeat: no-repeat;
+  	background-position: 0px 0px;
+  	color: white;
+  	text-shadow: 0px 0px 10px black;
+}
+.titleBG {
+	background-image: url("../img/ftractor-40.png");
+  	background-size: auto 100%;
+  	background-repeat: no-repeat;
+  	background-position: 0px 0px;
+  	transition: background-position 1s linear;
+}
+.titleBG:hover {
+  	background-position: 350px 0px;
+  	transition: all 2s linear;
+}
+
+{% endblock %}
+
+
+{% block moreCSS %}
+
+.content-22 {
+	overflow: visible;
+}
+.content-31 {
+	display: none;
+}
+.content-33 {
+	display: none;
+}
+.content-11 {
+	grid-column: 1;
+	grid-row: 1 / 3;
+}
+.content-13 {
+	grid-column: 3;
+	grid-row: 1 / 3;
+}
+
+
+
+.title a {
+	text-decoration: none;
+	color: white;
+	font-size: 1.5rem;
+}
+.title a:hover {
+	text-decoration: underline;
+	text-shadow: 0px 0px 10px black 0px 0px 10px black;
+}
+.title label:hover {
+	cursor: pointer;
+	text-shadow: 0px 0px 10px black 0px 0px 10px black;
+}
+body {
+	background-image: url("../img/lightbg.png");
+	background-size: cover;
+	
+}
+{% endblock %}
+
+
+{% block title11 %}
+<div class="title">
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		<a href="https://sudokufarm.com">Log In</a>
+	</span>
+	<span class="titleRight">
+	
+	</span>
+</div>
+{% endblock %}
+{% block content11 %}
+			<form class="" action="/login" method="post">
+				<div><fieldset {% if badlogin %}style="border-color: red;"{% endif %}>
+					<legend {% if badlogin %}style="color: red;"{% endif %}>Username</legend>
+					<input id="username" name="username" type="text">
+					
+				</fieldset></div>
+				<div><fieldset {% if badlogin %}style="border-color: red;"{% endif %}>
+					<legend {% if badlogin %}style="color: red;"{% endif %}>Password</legend>
+					<input id="password" name="password" type="password">
+
+					
+				</fieldset></div>
+				<div>
+					<button type="submit" class="">Sign In</button>
+				</div>
+				{% if badlogin %}
+				<div>
+					<span style="color: red;">Username and/or password incorrect.</span>
+				</div>
+				{% endif %}
+			</form>
+{% endblock %}	
+
+{% block title13 %}
+<div class="title">
+	<div class="titleBG">
+		<span class="titleLeft">
+		
+		</span>
+		<span class="titleCenter">
+			<a href="https://gifsaw.com">Register</a>
+		</span>
+		<span class="titleRight">
+		
+		
+		</span>
+	</div>
+</div>
+{% endblock %}
+{% block content13 %}
+			<form class="" action="/register" method="post">
+				<div><fieldset>
+					<legend>Email</legend>
+
+					
+					<input id="email" name="email" type="email">
+					
+				</fieldset></div>
+				<div><fieldset {% if duplicate %}style="border-color: red;"{% endif %}>
+					{% if duplicate %}
+						<legend style="color: red;">Username (Username not available.)</legend>
+					{% else %}
+						<legend>Username</legend>
+					{% endif %}
+					<input id="username" name="username" type="text">
+					
+				</fieldset></div>
+				<div><fieldset>
+					<legend>Password</legend>
+
+					<input id="password" name="password" type="password">
+
+					
+				</fieldset></div>
+				<div>
+					<button type="submit" class="">Register</button>
+				</div>
+			</form>
+{% endblock %}	
+
+{% block title31 %}
+<div class="title">
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		<a href="https://csshole.com">???</a>
+	</span>
+	<span class="titleRight">
+		<label for="radio31-1"><i class="fas fa-compress-alt"></i></label>
+		<label for="radio31-2"><i class="fas fa-expand-alt"></i></label>
+		<label for="radio31-3"><i class="fas fa-expand"></i></label>
+	</span>
+</div>
+{% endblock %}
+{% block content31 %}
+
+{% endblock %}
+
+{% block title33 %}
+<div class="title">
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		<a href="https://qblur.com">???</a>
+	</span>
+	<span class="titleRight">
+		<label for="radio33-1"><i class="fas fa-compress-alt"></i></label>
+		<label for="radio33-2"><i class="fas fa-expand-alt"></i></label>
+		<label for="radio33-3"><i class="fas fa-expand"></i></label>
+	</span>
+</div>
+{% endblock %}
+{% block content33 %}
+
+{% endblock %}
+
+
+
+
+{% block content22 %}
+	Sudoku Farm Logo
+{% endblock %}
+
+
+
+
+
+
+{% block bodyStart %}
+
+{% endblock %}
+
+
+{% block scripts %}
+
+{% endblock %}
+
