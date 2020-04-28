@@ -1,0 +1,270 @@
+{% extends "templates/base.html" %}
+
+{% block borderRadius %}
+	--border-radius: 1.25rem;
+{% endblock %}
+
+{% block content22CSS %}
+	/*border: 1px solid black;*/
+{% endblock %}
+	
+{% block centerSize %}
+	--height-center: 150px;
+	--width-center: 200px;
+{% endblock %}
+
+{% block titleCSS %}
+.title {
+	line-height: 2.5rem;
+	text-align: center;
+	font-size: 1rem;
+	border: 2px solid black;
+  	border-radius: var(--border-radius);
+  	position: relative;
+  	top:-2px;
+  	left:-2px;
+  	width: calc(100% + 0px);
+  	background: red;
+  	background-image: url("../img/farmbg2-40.png");
+  	background-size: 100% 100%;
+  	background-repeat: no-repeat;
+  	background-position: 0px 0px;
+  	color: white;
+  	text-shadow: 0px 0px 10px black;
+}
+.titleBG {
+	background-image: url("../img/ftractor-40.png");
+  	background-size: auto 100%;
+  	background-repeat: no-repeat;
+  	background-position: 0px 0px;
+  	transition: background-position 1s linear;
+}
+.titleBG:hover {
+  	background-position: 350px 0px;
+  	transition: all 2s linear;
+}
+
+{% endblock %}
+
+
+{% block moreCSS %}
+.title a {
+	text-decoration: none;
+	color: white;
+	font-size: 1.5rem;
+}
+.title a:hover {
+	text-decoration: underline;
+	text-shadow: 0px 0px 10px black 0px 0px 10px black;
+}
+.title label:hover {
+	cursor: pointer;
+	text-shadow: 0px 0px 10px black 0px 0px 10px black;
+}
+body {
+	background-image: url("../img/lightbg.png");
+	background-size: cover;
+	
+}
+img {
+	display: block;
+}
+svg {
+	display: block;
+	pointer-events: none;
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+}
+#imageHolder {
+	display: block;
+	position: relative;
+	top:0px;
+	left:0px;
+	height:0px;
+	width:0px;
+}
+{% endblock %}
+
+
+{% block title11 %}
+<div class="title">
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		<a href="https://sudokufarm.com">Image</a>
+	</span>
+	<span class="titleRight">
+		<label for="radio11-1"><i class="fas fa-compress-alt"></i></label>
+		<label for="radio11-2"><i class="fas fa-expand-alt"></i></label>
+		<label for="radio11-3"><i class="fas fa-expand"></i></label>
+	</span>
+</div>
+{% endblock %}
+{% block content11 %}
+<div>
+	Image: 
+	<select id="imgType">
+		<option value="upload">Upload</option>
+		<option value="url">URL</option>
+		<option value="drag">Drag/Drop</option>
+	</select>
+	<input type="file" name="imgSrc" id="imgSrc"></input>
+	<input type="text" name="imgUrl" id="imgUrl"></input>
+	<span id="imgDrag"></span>
+</div>
+{% endblock %}	
+
+{% block title13 %}
+<div class="title">
+	<div class="titleBG">
+		<span class="titleLeft">
+		
+		</span>
+		<span class="titleCenter">
+			<a href="https://gifsaw.com">Preview</a>
+		</span>
+		<span class="titleRight">
+			<label for="radio13-3"><i class="fas fa-expand"></i></label>
+			<label for="radio13-2"><i class="fas fa-expand-alt"></i></label>
+			<label for="radio13-1"><i class="fas fa-compress-alt"></i></label>
+		
+		
+		</span>
+	</div>
+</div>
+{% endblock %}
+{% block content13 %}
+<div id="imageHolder">
+	<img src="">
+	<svg width="0" height="0" preserveAspectRatio="none" viewBox = "0 0 1 1" version = "1.1">
+		<path d="M0,0 1,1" stroke="red" stroke-width=".01" fill='none'/>
+		
+	</svg>
+</div>
+{% endblock %}	
+
+{% block title31 %}
+<div class="title">
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		<a href="../create">Pieces</a>
+	</span>
+	<span class="titleRight">
+		<label for="radio31-1"><i class="fas fa-compress-alt"></i></label>
+		<label for="radio31-2"><i class="fas fa-expand-alt"></i></label>
+		<label for="radio31-3"><i class="fas fa-expand"></i></label>
+	</span>
+</div>
+{% endblock %}
+{% block content31 %}
+<form action="../create" method="post">
+	<label for="npieces">Number of Pieces</label>
+	<input type="number" id="npieces" name="npieces"></input>
+
+	<label for="size">Size</label>
+	<select id="size">
+	</select>
+
+	<label for="nrows">Number of Rows</label>
+	<input type="number" id="nrows" name="nrows"></input>
+
+	<label for="ncols">Number of Columns</label>
+	<input type="number" id="ncols" name="ncols"></input>
+	
+	<label for="initialScript">Scoring Script: </label>
+	<textarea id="initialScript" name="initialScript">var players={};
+	function newPlayer(username){
+		var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
+		players[username]={score:0,color:color};
+	}
+	function newMerge(username,matches){
+		players[username].score++;
+		var score = {};
+		score[username]=players[username].score;
+		return {'css':{stroke: players[username].color},'message':'Merge','accept':true,'score':score};
+	}</textarea>
+	<textarea id="initialCSS" name="initialCSS">.pieceBorder{
+		stroke-dasharray: .02;
+		stroke:yellow;
+		stroke-width:.02;
+		stroke-opacity:.5;
+		fill: transparent;
+	}
+	.interiorBorder{
+		stroke-dasharray: .01;
+		stroke:blue;
+		stroke-width:.01;
+		stroke-opacity:.5;
+		fill: transparent;
+	}
+	.interiorBorder.toggled{
+		stroke-dasharray: .03;
+		stroke:blue;
+		stroke-width:.03;
+		stroke-opacity:1;
+		fill: transparent;
+	}
+	.piece {
+		fill: black;
+		fill-opacity: .1;
+		stroke: none;
+	}</textarea>
+	<input type="number" name="pointyFactor" id="pointyFactor" value="4"></input>
+	<input type="number" name="heightFactor" id="heightFactor" value="25"></input>
+	<input type="number" name="widthFactor" id="widthFactor" value="50"></input>
+	
+	
+	<input type="text" name="fileSrc" style="display: none;"></input>
+	<button type="submit">Create</button>
+</form>
+{% endblock %}
+
+{% block title33 %}
+<div class="title">
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		<a href="https://qblur.com">Scoring</a>
+	</span>
+	<span class="titleRight">
+		<label for="radio33-1"><i class="fas fa-compress-alt"></i></label>
+		<label for="radio33-2"><i class="fas fa-expand-alt"></i></label>
+		<label for="radio33-3"><i class="fas fa-expand"></i></label>
+	</span>
+</div>
+{% endblock %}
+{% block content33 %}
+
+{% endblock %}
+
+
+
+
+{% block content22 %}
+	Gifsaw
+	<a href="../account">My Account</a>
+	<a href="../about">About</a>
+{% endblock %}
+
+
+
+
+
+
+{% block bodyStart %}
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="../js/create.js"></script>
+<script src="../js/upload.js"></script>
+{% endblock %}
+
