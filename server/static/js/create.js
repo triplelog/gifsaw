@@ -158,7 +158,7 @@ function updateLines() {
 		document.getElementById('imageHolder').style.width= imageWidth+'px';
 		svg.setAttribute('width',imageWidth);
 		svg.setAttribute('height',imageHeight);
-		svg.setAttribute('viewBox',"0 0 "+imageWidth+" "+imageHeight+");
+		svg.setAttribute('viewBox',"0 0 "+imageWidth+" "+imageHeight);
 		svg.setAttribute('stroke-width',imageWidth/100);
 		var path = svg.querySelector('path');
 		var pathstr = '';
