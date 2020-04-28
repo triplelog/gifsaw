@@ -6,6 +6,8 @@ sudo apt-get install gifsicle imagemagick
 
 
 
+#update ws, servers, and nginx with correct domain
+
 
 
 ## Creating
