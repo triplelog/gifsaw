@@ -162,7 +162,7 @@ app.post('/create',
 			var piece = {id:'video'+(i+1),rotation:retval[3][i],location:retval[2][i],centers:retval[1][i]};
 			pieces.push(piece);
 		}
-		var htmlstr = nunjucks.render('templates/basepuzzle.html',{
+		var htmlstr = nunjucks.render('templates/createbase.html',{
 			gametype: gametype,
 			players: players,
 			score: score,
