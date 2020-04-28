@@ -60,6 +60,7 @@ app.get('/puzzlepage',
 app.get('/puzzles/:puzzleid', 
 	
 	function(req, res) {
+		console.log(req);
 		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
 		var collab = true;
 		if (req.query && req.query.q && req.query.q == 'solo'){
@@ -581,7 +582,6 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		const y0 = fullheight*(conversions['video'+i][1]+conversions['video'+i][3]*height/(nrows));
 		const x1 = x0+fullwidth*(width/ncols);
 		const y1 = y0+fullheight*(height/(nrows));
-		
 		
 		var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		if ((i%ncols)%2 == Math.floor(i/ncols)%2){
