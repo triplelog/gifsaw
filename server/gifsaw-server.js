@@ -614,6 +614,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 					bottom += " "+val[4]+','+val[5];
 				}
 			}
+			console.log(bottom);
 			var piecelines = [];
 			if (i%ncols > 0){ //not first column
 				piecelines.push(lines[i-1][2]);
