@@ -14,7 +14,7 @@ const { PerformanceObserver, performance } = require('perf_hooks');
 
 var tempKeys = {};
 const User = require('./models/user');
-const UserData = require('./models/userdata');
+const GifsawData = require('./models/gifsawdata');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://45.32.213.227:27017/triplelog', {useNewUrlParser: true});
 var passport = require('passport')
@@ -65,27 +65,7 @@ app.get('/account',
 		tempKeys[tkey] = {username:req.user.username};
 		
 		UserData.findOne({username:req.user.username}, function(err,result) {
-			var formulas = result.formulas.color;
-			var workspace;
-			var wxml;
-			var code;
-			//console.log(req.user);
-			for (var i=0;i<formulas.length;i++){
-				formulas[i].id = i;
-				workspace = new Blockly.Workspace();
-				wxml = Blockly.Xml.textToDom(formulas[i].workspace);
-				Blockly.Xml.domToWorkspace(wxml, workspace);
-				code = Blockly.Lua.workspaceToCode(workspace);
-				formulas[i].code = code;
-			}
-		
-			var images = result.images;
-			var templates = result.templates;
-			for (var i=0;i<templates.length;i++){
-				templates[i].id = i;
-			}
-			var creations = result.creations;
-		
+			
 		
 			res.write(nunjucks.render('templates/accountbase.html',{
 				username: req.user.options.displayName || req.user.username,
@@ -93,10 +73,6 @@ app.get('/account',
 				options: req.user.options,
 				friends: result.friends,
 				tkey: tkey,
-				formulas: formulas,
-				images: images,
-				templates: templates,
-				creations: creations,
 			}));
 			res.end();
 		})
@@ -121,8 +97,8 @@ app.post('/register',
 		  
 		}
 		else {
-			var userData = new UserData({username: req.body.username.toLowerCase(), formulas: {gradient:[],distance:[],color:[]}, images: [], templates: [], creations: [], friends: [], followers: []});
-			userData.save(function(err,result){
+			var gifsawData = new GifsawData({username: req.body.username.toLowerCase(), puzzles: [], friends: [], followers: []});
+			gifsawData.save(function(err,result){
 				console.log('user registered!',performance.now());
 				var robot = 'python3 python/robohash/createrobo.py '+req.body.username.toLowerCase()+' 1';
 				var child = exec(robot, function(err, stdout, stderr) {

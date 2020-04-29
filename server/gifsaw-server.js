@@ -20,7 +20,7 @@ const FileType = require('file-type');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://45.32.213.227:27017/triplelog', {useNewUrlParser: true});
 const User = require('./models/user');
-const UserData = require('./models/userdata');
+const GifsawData = require('./models/gifsawdata');
 const Puzzle = require('./models/puzzle');
 
 var express = require('express');
