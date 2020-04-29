@@ -115,14 +115,23 @@ img {
 	height: auto;
 	background: rgba(255,255,255,1);
 }
-img.size2 {
+.size2 img {
 	width: calc({{ image.width }}px / 2);
 }
-img.size3 {
+.size3 img {
 	width: calc({{ image.width }}px / 3);
 }
-img.size4 {
+.size4 img {
 	width: calc({{ image.width }}px / 4);
+}
+.size2 {
+	--scale: 2;
+}
+.size3 {
+	--scale: 3;
+}
+.size4 {
+	--scale: 4;
 }
 
 #progressdiv {
@@ -198,15 +207,13 @@ var i= 2;
 while (cwidth > w || cheight > h){
 	cwidth = gifwidth/i;
 	cheight = gifheight/i;
-	console.log(cwidth,cheight);
 	for (var ii=0;ii<ncols*nrows;ii++){
-		var el = document.getElementById('video'+(ii+1)).querySelector('img');
+		var el = document.getElementById('video'+(ii+1));
 		
 		el.classList.add('size'+i);
 		if (i>2){
 			el.classList.remove('size'+(i-1));
 		}
-		console.log(el);
 	}
 
 	if (i==4){break;}
