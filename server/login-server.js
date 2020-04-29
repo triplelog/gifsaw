@@ -64,8 +64,8 @@ app.get('/account',
   		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
 		tempKeys[tkey] = {username:req.user.username};
 		
-		UserData.findOne({username:req.user.username}, function(err,result) {
-			
+		GifsawData.findOne({username:req.user.username}, function(err,result) {
+			if (err){console.log(err);}
 		
 			res.write(nunjucks.render('templates/accountbase.html',{
 				username: req.user.options.displayName || req.user.username,
