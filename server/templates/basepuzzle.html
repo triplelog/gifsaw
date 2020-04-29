@@ -199,6 +199,21 @@ var merges = 0;
 var w = window.innerWidthm|| document.documentElement.clientWidth || document.body.clientWidth;
 var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 console.log(w,gifwidth);
+var i= 2;
+while (cwidth > w || cheight > h){
+	cwidth = gifwidth/i;
+	cheight = gifheight/i;
+	for (var ii=0;ii<ncols*nrows;ii++){
+		var el = document.getElementById('video'+(i+1)).querySelector('img');
+		el.classList.add('size'+i);
+		if (i>2){
+			el.classList.remove('size'+(i-1));
+		}
+	}
+
+	if (i==4){break;}
+	i++;
+}
 </script>
 <script src="../js/puzzle.js"></script>
 
