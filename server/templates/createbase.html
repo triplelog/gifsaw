@@ -199,23 +199,23 @@ svg {
 			return {'css':{stroke: players[username].color},'message':'Merge','accept':true,'score':score};
 		}</textarea>
 		<textarea id="initialCSS" name="initialCSS">.pieceBorder{
-			stroke-dasharray: 2;
+			stroke-dasharray: 5;
 			stroke:yellow;
-			stroke-width:2;
-			stroke-opacity:.5;
+			stroke-width:calc(2.5 * 2);
+			stroke-opacity:.67;
 			fill: transparent;
 		}
 		.interiorBorder{
-			stroke-dasharray: 1;
+			stroke-dasharray: 2;
 			stroke:blue;
-			stroke-width:1;
+			stroke-width:calc(1 * 2);
 			stroke-opacity:.5;
 			fill: transparent;
 		}
 		.interiorBorder.toggled{
-			stroke-dasharray: 3;
+			stroke-dasharray: 8;
 			stroke:blue;
-			stroke-width:3;
+			stroke-width:calc(4 * 2);
 			stroke-opacity:1;
 			fill: transparent;
 		}
