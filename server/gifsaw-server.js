@@ -486,18 +486,11 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 	w /= heightFactor;
 	ww /= widthFactor;
 	line = [{'M':[x0,y1]}];
-	//line = x0+','+y1+' ';
 	line.push({'L':[c-ww,y1]});
-	//line += (c-ww)+','+y1+' ';
 	line.push({'C':[c-ww/pointyFactor,y1+w,c+ww/pointyFactor,y1+w,c+ww,y1]})
-	//line += 'C'+(c-ww/pointyFactor)+','+(y1+w)+' ';
-	//line += (c+ww/pointyFactor)+','+(y1+w)+' ';
-	//line += (c+ww)+','+y1+' ';
 	line.push({'L':[x1,y1]});
-	//line += 'L'+x1+','+y1+' ';
 	if (i/ncols >= nrows-1){
 		line = [{'M':[x0,y1]},{'L':[x1,y1]}];
-		//line = x0+','+y1+' '+x1+','+y1+' ';
 	}
 	line;`);
 	var rightcodes = [];
@@ -511,17 +504,15 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 	if (y1>y0){ww = -1*w;}
 	w /= heightFactor;
 	ww /= widthFactor;
-	line = x1+','+y1+' ';
-	line += (x1)+','+(c-ww)+' ';
-	line += 'C'+(x1+w)+','+(c-ww/pointyFactor)+' ';
-	line += (x1+w)+','+(c+ww/pointyFactor)+' ';
-	line += (x1)+','+(c+ww)+' ';
-	line += 'L'+x1+','+y0+' ';
-	if (i%ncols == ncols-1){
-		line = x1+','+y1+' ' + x1+','+y0+' ';
+	line = [{'M':[x1,y1]}];
+	line.push({'L':[x1,c-ww]});
+	line.push({'C':[x1+w,c-ww/pointyFactor,x1+w,c+ww/pointyFactor,x1,c+ww]})
+	line.push({'L':[x1,y0]});
+	if (i/ncols >= nrows-1){
+		line = [{'M':[x1,y1]},{'L':[x1,y0]}];
 	}
 	line;`));
-	rightcodes.push(new VMScript(`line = x1+','+y1+' ';
+	rightcodes.push(new VMScript(`
 	w = x1-x0;
 	if (w<0){w *= -1;}
 	if (y1-y0<0 && y0-y1<w){w=y0-y1;}
@@ -531,14 +522,12 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 	if (y1>y0){ww = -1*w;}
 	w /= heightFactor;
 	ww /= widthFactor;
-	line = x1+','+y1+' ';
-	line += (x1)+','+(c-ww)+' ';
-	line += 'C'+(x1-w)+','+(c-ww/pointyFactor)+' ';
-	line += (x1-w)+','+(c+ww/pointyFactor)+' ';
-	line += (x1)+','+(c+ww)+' ';
-	line += 'L'+x1+','+y0+' ';
-	if (i%ncols == ncols-1){
-		line = x1+','+y1+' ' + x1+','+y0+' ';
+	line = [{'M':[x1,y1]}];
+	line.push({'L':[x1,c-ww]});
+	line.push({'C':[x1-w,c-ww/pointyFactor,x1-w,c+ww/pointyFactor,x1,c+ww]})
+	line.push({'L':[x1,y0]});
+	if (i/ncols >= nrows-1){
+		line = [{'M':[x1,y1]},{'L':[x1,y0]}];
 	}
 	line;`));
 	vm.run('var x0; var x1; var y0; var y1; var i; var ncols; var nrows; var line; var actheight = '+actheight+'; var actwidth = '+actwidth+'; var pointyFactor= '+pointyFactor+';'+'; var heightFactor= '+heightFactor+'; var widthFactor= '+widthFactor+';');
@@ -594,7 +583,23 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		if ((i%ncols)%2 == Math.floor(i/ncols)%2){
 			var left = x0+','+y0+' '+x0+','+y1+' ';
-			var right = getRightLine(vm,rightcode,x0,x1,y0,y1,i,ncols);
+			var rightArray = getRightLine(vm,rightcode,x0,x1,y0,y1,i,ncols);
+			var right = "";
+			for (var ii=0;ii<rightArray.length;ii++){
+				var key = Object.keys(rightArray[ii])[0];
+				var val = rightArray[ii][key];
+				if (key=='M'){
+					right += val[0]+","+val[1]+" ";
+				}
+				else if (key=='L'){
+					right += "L"+val[0]+','+val[1]+" ";
+				}
+				else if (key=='C'){
+					right += "C"+val[0]+','+val[1]+" ";
+					right += ""+val[2]+','+val[3]+" ";
+					right += ""+val[4]+','+val[5]+" ";
+				}
+			}
 			var top = x1+','+y0+' '+x0+','+y0+' ';
 			var bottomArray = getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows);
 			var bottom = "";
@@ -633,8 +638,23 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		}
 		else {
 			var left = x0+','+y1+' '+x0+','+y0+' ';
-		
-			var right = getRightLine(vm,rightcode,x0,x1,y1,y0,i,ncols);
+			var rightArray = getRightLine(vm,rightcode,x0,x1,y1,y0,i,ncols);
+			var right = "";
+			for (var ii=0;ii<rightArray.length;ii++){
+				var key = Object.keys(rightArray[ii])[0];
+				var val = rightArray[ii][key];
+				if (key=='M'){
+					right += val[0]+","+val[1]+" ";
+				}
+				else if (key=='L'){
+					right += "L"+val[0]+','+val[1]+" ";
+				}
+				else if (key=='C'){
+					right += "C"+val[0]+','+val[1]+" ";
+					right += ""+val[2]+','+val[3]+" ";
+					right += ""+val[4]+','+val[5]+" ";
+				}
+			}
 			var top = x0+','+y0+' '+x1+','+y0+' ';
 			var bottomArray = getBottomLine(vm,bottomcode,x1,x0,y0,y1,i,ncols,nrows);
 			var bottom = "";
@@ -693,36 +713,45 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			x1c = x0c+actwidth/(40+2*actwidth)/ncols;
 			y1c = y0c+actheight/(actheight+40)/(nrows);
 		}
-		x0c /= fullwidth;
-		x1c /= fullwidth;
-		y0c /= fullheight;
-		y1c /= fullheight;
-		var x0p = x0/fullwidth;
-		var y0p = y0/fullheight;
-		var x1p = x1/fullwidth;
-		var y1p = y1/fullheight;
+
 
 		
 		if ((i%ncols)%2 == Math.floor(i/ncols)%2){
-			var left = x0c+','+y0c+' '+x0c+','+y1c+' ';
+			var left = x0c/fullwidth+','+y0c/fullheight+' '+x0c/fullwidth+','+y1c/fullheight+' ';
 		
-			var right = getRightLine(vm,rightcode,x0c,x1c,y0c,y1c,i,ncols);
-			var top = x1c+','+y0c+' '+x0c+','+y0c+' ';
+			var rightArray = getRightLine(vm,rightcode,x0c,x1c,y0c,y1c,i,ncols);
+			var right = "";
+			for (var ii=0;ii<rightArray.length;ii++){
+				var key = Object.keys(rightArray[ii])[0];
+				var val = rightArray[ii][key];
+				if (key=='M'){
+					right += val[0]/fullwidth+","+val[1]/fullheight+" ";
+				}
+				else if (key=='L'){
+					right += "L"+val[0]/fullwidth+','+val[1]/fullheight+" ";
+				}
+				else if (key=='C'){
+					right += "C"+val[0]/fullwidth+','+val[1]/fullheight+" ";
+					right += ""+val[2]/fullwidth+','+val[3]/fullheight+" ";
+					right += ""+val[4]/fullwidth+','+val[5]/fullheight+" ";
+				}
+			}
+			var top = x1c/fullwidth+','+y0c/fullheight+' '+x0c/fullwidth+','+y0c/fullheight+' ';
 			var bottomArray = getBottomLine(vm,bottomcode,x0c,x1c,y0c,y1c,i,ncols,nrows);
 			var bottom = "";
 			for (var ii=0;ii<bottomArray.length;ii++){
 				var key = Object.keys(bottomArray[ii])[0];
 				var val = bottomArray[ii][key];
 				if (key=='M'){
-					bottom += val[0]+","+val[1]+" ";
+					bottom += val[0]/fullwidth+","+val[1]/fullheight+" ";
 				}
 				else if (key=='L'){
-					bottom += "L"+val[0]+','+val[1]+" ";
+					bottom += "L"+val[0]/fullwidth+','+val[1]/fullheight+" ";
 				}
 				else if (key=='C'){
-					bottom += "C"+val[0]+','+val[1]+" ";
-					bottom += ""+val[2]+','+val[3]+" ";
-					bottom += ""+val[4]+','+val[5]+" ";
+					bottom += "C"+val[0]/fullwidth+','+val[1]/fullheight+" ";
+					bottom += ""+val[2]/fullwidth+','+val[3]/fullheight+" ";
+					bottom += ""+val[4]/fullwidth+','+val[5]/fullheight+" ";
 				}
 			}
 			var piecelines = [];
@@ -746,25 +775,41 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		
 		}
 		else {
-			var left = x0c+','+y1c+' '+x0c+','+y0c+' ';
+			var left = x0c/fullwidth+','+y1c/fullheight+' '+x0c/fullwidth+','+y0c/fullheight+' ';
 		
-			var right = getRightLine(vm,rightcode,x0c,x1c,y1c,y0c,i,ncols);
-			var top = x0c+','+y0c+' '+x1c+','+y0c+' ';
+			var rightArray = getRightLine(vm,rightcode,x0c,x1c,y1c,y0c,i,ncols);
+			var right = "";
+			for (var ii=0;ii<rightArray.length;ii++){
+				var key = Object.keys(rightArray[ii])[0];
+				var val = rightArray[ii][key];
+				if (key=='M'){
+					right += val[0]/fullwidth+","+val[1]/fullheight+" ";
+				}
+				else if (key=='L'){
+					right += "L"+val[0]/fullwidth+','+val[1]/fullheight+" ";
+				}
+				else if (key=='C'){
+					right += "C"+val[0]/fullwidth+','+val[1]/fullheight+" ";
+					right += ""+val[2]/fullwidth+','+val[3]/fullheight+" ";
+					right += ""+val[4]/fullwidth+','+val[5]/fullheight+" ";
+				}
+			}
+			var top = x0c/fullwidth+','+y0c/fullheight+' '+x1c/fullwidth+','+y0c/fullheight+' ';
 			var bottomArray = getBottomLine(vm,bottomcode,x1c,x0c,y0c,y1c,i,ncols,nrows);
 			var bottom = "";
 			for (var ii=0;ii<bottomArray.length;ii++){
 				var key = Object.keys(bottomArray[ii])[0];
 				var val = bottomArray[ii][key];
 				if (key=='M'){
-					bottom += val[0]+","+val[1]+" ";
+					bottom += val[0]/fullwidth+","+val[1]/fullheight+" ";
 				}
 				else if (key=='L'){
-					bottom += "L"+val[0]+','+val[1]+" ";
+					bottom += "L"+val[0]/fullwidth+','+val[1]/fullheight+" ";
 				}
 				else if (key=='C'){
-					bottom += "C"+val[0]+','+val[1]+" ";
-					bottom += ""+val[2]+','+val[3]+" ";
-					bottom += ""+val[4]+','+val[5]+" ";
+					bottom += "C"+val[0]/fullwidth+','+val[1]/fullheight+" ";
+					bottom += ""+val[2]/fullwidth+','+val[3]/fullheight+" ";
+					bottom += ""+val[4]/fullwidth+','+val[5]/fullheight+" ";
 				}
 			}
 			var piecelines = [];
@@ -789,94 +834,10 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			clines.push(piecelines);
 		
 		}
-		if ((i%ncols)%2 == Math.floor(i/ncols)%2){
-			var left = x0p+','+y0p+' '+x0p+','+y1p+' ';
-		
-			var right = getRightLine(vm,rightcode,x0p,x1p,y0p,y1p,i,ncols);
-			var top = x1p+','+y0p+' '+x0p+','+y0p+' ';
-			var bottomArray = getBottomLine(vm,bottomcode,x0p,x1p,y0p,y1p,i,ncols,nrows);
-			var bottom = "";
-			for (var ii=0;ii<bottomArray.length;ii++){
-				var key = Object.keys(bottomArray[ii])[0];
-				var val = bottomArray[ii][key];
-				if (key=='M'){
-					bottom += val[0]+","+val[1]+" ";
-				}
-				else if (key=='L'){
-					bottom += "L"+val[0]+','+val[1]+" ";
-				}
-				else if (key=='C'){
-					bottom += "C"+val[0]+','+val[1]+" ";
-					bottom += ""+val[2]+','+val[3]+" ";
-					bottom += ""+val[4]+','+val[5]+" ";
-				}
-			}
-			var piecelines = [];
-			if (i%ncols > 0){
-				piecelines.push(plines[i-1][2]);
-			}
-			else {
-				piecelines.push(left);
-			}
-			piecelines.push(bottom);
-			piecelines.push(right);
-			if (i >= ncols){
-				piecelines.push(plines[i-ncols][3]);
-			}
-			else {
-				piecelines.push(top);
-			}
-			plines.push(piecelines);
-			
-			
-		
-		}
-		else {
-			var left = x0p+','+y1p+' '+x0p+','+y0p+' ';
-		
-			var right = getRightLine(vm,rightcode,x0p,x1p,y1p,y0p,i,ncols);
-			var top = x0p+','+y0p+' '+x1p+','+y0p+' ';
-			var bottomArray = getBottomLine(vm,bottomcode,x1p,x0p,y0p,y1p,i,ncols,nrows);
-			var bottom = "";
-			for (var ii=0;ii<bottomArray.length;ii++){
-				var key = Object.keys(bottomArray[ii])[0];
-				var val = bottomArray[ii][key];
-				if (key=='M'){
-					bottom += val[0]+","+val[1]+" ";
-				}
-				else if (key=='L'){
-					bottom += "L"+val[0]+','+val[1]+" ";
-				}
-				else if (key=='C'){
-					bottom += "C"+val[0]+','+val[1]+" ";
-					bottom += ""+val[2]+','+val[3]+" ";
-					bottom += ""+val[4]+','+val[5]+" ";
-				}
-			}
-			var piecelines = [];
-			if (i%ncols > 0){
-				piecelines.push(plines[i-1][2]);
-			}
-			else {
-				piecelines.push(left);
-			}
-			if (i >= ncols){
-				piecelines.push(plines[i-ncols][1]);
-			}
-			else {
-				//hlines.push([line1,line2])
-				piecelines.push(top);
-			}
-			piecelines.push(right);
-			piecelines.push(bottom);
-			
-			
-			
-			plines.push(piecelines);
-		
-		}
-		ccenters.push([(x0c+x1c)/2,(y0c+y1c)/2]);
+
+		ccenters.push([(x0c+x1c)/2/fullwidth,(y0c+y1c)/2/fullheight]);
 	}
+	plines = clines;
 	console.log(performance.now());
 	for (var i=0;i<ncols*nrows;i++){
 		locations.push([Math.floor(Math.random()*600),10+Math.floor(Math.random()*300)])
