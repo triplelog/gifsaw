@@ -69,7 +69,7 @@ app.get('/account',
 				console.log(err);
 			}
 			if (result == null){
-				result = {username: req.body.username.toLowerCase(), puzzles: [], friends: [], followers: []};
+				result = {username: req.user.username.toLowerCase(), puzzles: [], friends: [], followers: []};
 				var gifsawData = new GifsawData(result);
 				gifsawData.save(function(err2,result2){
 				});
