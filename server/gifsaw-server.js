@@ -598,19 +598,20 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			var top = x1+','+y0+' '+x0+','+y0+' ';
 			var bottomArray = getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows);
 			var bottom = "";
+			console.log(bottomArray);
 			for (var ii=0;ii<bottomArray.length;ii++){
 				var key = Object.keys(bottomArray[ii])[0];
 				var val = bottomArray[ii][key];
 				if (key=='M'){
-					bottom += val[0]+", "+val[1];
+					bottom += val[0]+","+val[1];
 				}
 				else if (key=='L'){
-					bottom += " L"+val[0]+', '+val[1];
+					bottom += " L"+val[0]+','+val[1];
 				}
 				else if (key=='C'){
-					bottom += " C"+val[0]+', '+val[1];
-					bottom += " "+val[2]+', '+val[3];
-					bottom += " "+val[4]+', '+val[5];
+					bottom += " C"+val[0]+','+val[1];
+					bottom += " "+val[2]+','+val[3];
+					bottom += " "+val[4]+','+val[5];
 				}
 			}
 			var piecelines = [];
