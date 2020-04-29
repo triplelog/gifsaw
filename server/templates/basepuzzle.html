@@ -188,9 +188,10 @@ var matches= {{ matchesHolder | safe}};
 var saveButton = document.getElementById('save');
 var cwidth = {{ image.width }};
 var cheight = {{ image.height }};
+var ncols = {{ ncols }};
+var nrows = {{ nrows }};
 
-
-var w = window.innerWidthm|| document.documentElement.clientWidth || document.body.clientWidth;
+var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 console.log(w,gifwidth);
 var i= 2;
@@ -216,8 +217,6 @@ var clines = {{ clines | safe }};
 var ccenters= {{ ccenters }};
 var pieceheight = cheight*{{ actheight }}/{{ image.height }}/{{ nrows }};
 var piecewidth = pieceheight*{{ actwidth }}/{{ actheight }}*{{ nrows }}/{{ ncols }};
-var ncols = {{ ncols }};
-var nrows = {{ nrows }};
 var merges = 0;
 
 </script>
