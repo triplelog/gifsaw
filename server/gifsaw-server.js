@@ -485,14 +485,19 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 	if (x0>x1){ww = -1*w;}
 	w /= heightFactor;
 	ww /= widthFactor;
-	line = x0+','+y1+' ';
-	line += (c-ww)+','+y1+' ';
-	line += 'C'+(c-ww/pointyFactor)+','+(y1+w)+' ';
-	line += (c+ww/pointyFactor)+','+(y1+w)+' ';
-	line += (c+ww)+','+y1+' ';
-	line += 'L'+x1+','+y1+' ';
+	line = [{'M':[x0,y1]}];
+	//line = x0+','+y1+' ';
+	line.push({'L':[c-ww,y1]});
+	//line += (c-ww)+','+y1+' ';
+	line.push({'C':[c-ww/pointyFactor,y1+w,c+ww/pointyFactor,y1+w,c+ww,y1]})
+	//line += 'C'+(c-ww/pointyFactor)+','+(y1+w)+' ';
+	//line += (c+ww/pointyFactor)+','+(y1+w)+' ';
+	//line += (c+ww)+','+y1+' ';
+	line.push({'L':[x1,y1]});
+	//line += 'L'+x1+','+y1+' ';
 	if (i/ncols >= nrows-1){
-		line = x0+','+y1+' '+x1+','+y1+' ';
+		line = [{'M':[x0,y1]},{'L':[x1,y1]}];
+		//line = x0+','+y1+' '+x1+','+y1+' ';
 	}
 	line;`);
 	var rightcodes = [];
@@ -591,7 +596,23 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			var left = x0+','+y0+' '+x0+','+y1+' ';
 			var right = getRightLine(vm,rightcode,x0,x1,y0,y1,i,ncols);
 			var top = x1+','+y0+' '+x0+','+y0+' ';
-			var bottom = getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows);
+			var bottomArray = getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows);
+			var bottom = "";
+			for (var ii=0;ii<bottomArray.length;ii++){
+				var key = bottomArray[ii].keys()[0];
+				var val = bottomArray[ii][key];
+				if (key=='M'){
+					bottom += val[0]+", "+val[1];
+				}
+				else if (key=='L'){
+					bottom += " L"+val[0]+', '+val[1];
+				}
+				else if (key=='C'){
+					bottom += " C"+val[0]+', '+val[1];
+					bottom += " "+val[2]+', '+val[3];
+					bottom += " "+val[4]+', '+val[5];
+				}
+			}
 			var piecelines = [];
 			if (i%ncols > 0){ //not first column
 				piecelines.push(lines[i-1][2]);
@@ -615,8 +636,23 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		
 			var right = getRightLine(vm,rightcode,x0,x1,y1,y0,i,ncols);
 			var top = x0+','+y0+' '+x1+','+y0+' ';
-			var bottom = getBottomLine(vm,bottomcode,x1,x0,y0,y1,i,ncols,nrows);
-			
+			var bottomArray = getBottomLine(vm,bottomcode,x1,x0,y0,y1,i,ncols,nrows);
+			var bottom = "";
+			for (var ii=0;ii<bottomArray.length;ii++){
+				var key = bottomArray[ii].keys()[0];
+				var val = bottomArray[ii][key];
+				if (key=='M'){
+					bottom += val[0]+", "+val[1];
+				}
+				else if (key=='L'){
+					bottom += " L"+val[0]+', '+val[1];
+				}
+				else if (key=='C'){
+					bottom += " C"+val[0]+', '+val[1];
+					bottom += " "+val[2]+', '+val[3];
+					bottom += " "+val[4]+', '+val[5];
+				}
+			}
 			var piecelines = [];
 			if (i%ncols > 0){ //not first column
 				//var newLine = flipRightVertical(vlines[i-1][1].split(' '),x0,y1);
@@ -672,8 +708,23 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		
 			var right = getRightLine(vm,rightcode,x0c,x1c,y0c,y1c,i,ncols);
 			var top = x1c+','+y0c+' '+x0c+','+y0c+' ';
-			var bottom = getBottomLine(vm,bottomcode,x0c,x1c,y0c,y1c,i,ncols,nrows);
-			
+			var bottomArray = getBottomLine(vm,bottomcode,x0c,x1c,y0c,y1c,i,ncols,nrows);
+			var bottom = "";
+			for (var ii=0;ii<bottomArray.length;ii++){
+				var key = bottomArray[ii].keys()[0];
+				var val = bottomArray[ii][key];
+				if (key=='M'){
+					bottom += val[0]+", "+val[1];
+				}
+				else if (key=='L'){
+					bottom += " L"+val[0]+', '+val[1];
+				}
+				else if (key=='C'){
+					bottom += " C"+val[0]+', '+val[1];
+					bottom += " "+val[2]+', '+val[3];
+					bottom += " "+val[4]+', '+val[5];
+				}
+			}
 			var piecelines = [];
 			if (i%ncols > 0){
 				piecelines.push(clines[i-1][2]);
@@ -699,8 +750,23 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		
 			var right = getRightLine(vm,rightcode,x0c,x1c,y1c,y0c,i,ncols);
 			var top = x0c+','+y0c+' '+x1c+','+y0c+' ';
-			var bottom = getBottomLine(vm,bottomcode,x1c,x0c,y0c,y1c,i,ncols,nrows);
-			
+			var bottomArray = getBottomLine(vm,bottomcode,x1c,x0c,y0c,y1c,i,ncols,nrows);
+			var bottom = "";
+			for (var ii=0;ii<bottomArray.length;ii++){
+				var key = bottomArray[ii].keys()[0];
+				var val = bottomArray[ii][key];
+				if (key=='M'){
+					bottom += val[0]+", "+val[1];
+				}
+				else if (key=='L'){
+					bottom += " L"+val[0]+', '+val[1];
+				}
+				else if (key=='C'){
+					bottom += " C"+val[0]+', '+val[1];
+					bottom += " "+val[2]+', '+val[3];
+					bottom += " "+val[4]+', '+val[5];
+				}
+			}
 			var piecelines = [];
 			if (i%ncols > 0){
 				piecelines.push(clines[i-1][2]);
@@ -728,8 +794,23 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		
 			var right = getRightLine(vm,rightcode,x0p,x1p,y0p,y1p,i,ncols);
 			var top = x1p+','+y0p+' '+x0p+','+y0p+' ';
-			var bottom = getBottomLine(vm,bottomcode,x0p,x1p,y0p,y1p,i,ncols,nrows);
-			
+			var bottomArray = getBottomLine(vm,bottomcode,x0p,x1p,y0p,y1p,i,ncols,nrows);
+			var bottom = "";
+			for (var ii=0;ii<bottomArray.length;ii++){
+				var key = bottomArray[ii].keys()[0];
+				var val = bottomArray[ii][key];
+				if (key=='M'){
+					bottom += val[0]+", "+val[1];
+				}
+				else if (key=='L'){
+					bottom += " L"+val[0]+', '+val[1];
+				}
+				else if (key=='C'){
+					bottom += " C"+val[0]+', '+val[1];
+					bottom += " "+val[2]+', '+val[3];
+					bottom += " "+val[4]+', '+val[5];
+				}
+			}
 			var piecelines = [];
 			if (i%ncols > 0){
 				piecelines.push(plines[i-1][2]);
@@ -755,8 +836,23 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		
 			var right = getRightLine(vm,rightcode,x0p,x1p,y1p,y0p,i,ncols);
 			var top = x0p+','+y0p+' '+x1p+','+y0p+' ';
-			var bottom = getBottomLine(vm,bottomcode,x1p,x0p,y0p,y1p,i,ncols,nrows);
-			
+			var bottomArray = getBottomLine(vm,bottomcode,x1p,x0p,y0p,y1p,i,ncols,nrows);
+			var bottom = "";
+			for (var ii=0;ii<bottomArray.length;ii++){
+				var key = bottomArray[ii].keys()[0];
+				var val = bottomArray[ii][key];
+				if (key=='M'){
+					bottom += val[0]+", "+val[1];
+				}
+				else if (key=='L'){
+					bottom += " L"+val[0]+', '+val[1];
+				}
+				else if (key=='C'){
+					bottom += " C"+val[0]+', '+val[1];
+					bottom += " "+val[2]+', '+val[3];
+					bottom += " "+val[4]+', '+val[5];
+				}
+			}
 			var piecelines = [];
 			if (i%ncols > 0){
 				piecelines.push(plines[i-1][2]);
