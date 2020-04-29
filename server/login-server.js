@@ -62,10 +62,18 @@ app.get('/account',
   	}
   	else {
   		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
-		tempKeys[tkey] = {username:req.user.username};
+		tempKeys[tkey] = {username:req.user.username.toLowerCase()};
 		
-		GifsawData.findOne({username:req.user.username}, function(err,result) {
-			if (err){console.log(err);}
+		GifsawData.findOne({username:req.user.username.toLowerCase()}, function(err,result) {
+			if (err){
+				console.log(err);
+			}
+			if (result == null){
+				result = {username: req.body.username.toLowerCase(), puzzles: [], friends: [], followers: []};
+				var gifsawData = new GifsawData(result);
+				gifsawData.save(function(err2,result2){
+				});
+			}
 		
 			res.write(nunjucks.render('templates/accountbase.html',{
 				username: req.user.options.displayName || req.user.username,
