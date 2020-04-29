@@ -508,7 +508,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 	line.push({'L':[x1,c-ww]});
 	line.push({'C':[x1+w,c-ww/pointyFactor,x1+w,c+ww/pointyFactor,x1,c+ww]})
 	line.push({'L':[x1,y0]});
-	if (i/ncols >= nrows-1){
+	if (i%ncols == ncols-1){
 		line = [{'M':[x1,y1]},{'L':[x1,y0]}];
 	}
 	line;`));
@@ -526,7 +526,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 	line.push({'L':[x1,c-ww]});
 	line.push({'C':[x1-w,c-ww/pointyFactor,x1-w,c+ww/pointyFactor,x1,c+ww]})
 	line.push({'L':[x1,y0]});
-	if (i/ncols >= nrows-1){
+	if (i%ncols == ncols-1){
 		line = [{'M':[x1,y1]},{'L':[x1,y0]}];
 	}
 	line;`));
