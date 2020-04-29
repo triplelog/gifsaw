@@ -72,7 +72,19 @@ app.get('/account',
 				result = {username: req.user.username.toLowerCase(), puzzles: [], friends: [], followers: []};
 				var gifsawData = new GifsawData(result);
 				gifsawData.save(function(err2,result2){
+					var robot = 'python3 python/robohash/createrobo.py '+req.body.username.toLowerCase()+' 1';
+					var child = exec(robot, function(err, stdout, stderr) {
+						console.log('robot created: ',performance.now());
+						req.login(user, function(err) {
+						  if (err) { res.redirect('/'); }
+						  else {
+							console.log('logged in: ',performance.now());
+							res.redirect('../account');
+						  }
+						});
+					});
 				});
+				
 			}
 		
 			res.write(nunjucks.render('templates/accountbase.html',{
