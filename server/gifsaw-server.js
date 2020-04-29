@@ -599,7 +599,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			var bottomArray = getBottomLine(vm,bottomcode,x0,x1,y0,y1,i,ncols,nrows);
 			var bottom = "";
 			for (var ii=0;ii<bottomArray.length;ii++){
-				var key = bottomArray[ii].keys()[0];
+				var key = Object.keys(bottomArray[ii])[0];
 				var val = bottomArray[ii][key];
 				if (key=='M'){
 					bottom += val[0]+", "+val[1];
@@ -639,7 +639,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			var bottomArray = getBottomLine(vm,bottomcode,x1,x0,y0,y1,i,ncols,nrows);
 			var bottom = "";
 			for (var ii=0;ii<bottomArray.length;ii++){
-				var key = bottomArray[ii].keys()[0];
+				var key = Object.keys(bottomArray[ii])[0];
 				var val = bottomArray[ii][key];
 				if (key=='M'){
 					bottom += val[0]+", "+val[1];
@@ -711,7 +711,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			var bottomArray = getBottomLine(vm,bottomcode,x0c,x1c,y0c,y1c,i,ncols,nrows);
 			var bottom = "";
 			for (var ii=0;ii<bottomArray.length;ii++){
-				var key = bottomArray[ii].keys()[0];
+				var key = Object.keys(bottomArray[ii])[0];
 				var val = bottomArray[ii][key];
 				if (key=='M'){
 					bottom += val[0]+", "+val[1];
@@ -753,7 +753,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			var bottomArray = getBottomLine(vm,bottomcode,x1c,x0c,y0c,y1c,i,ncols,nrows);
 			var bottom = "";
 			for (var ii=0;ii<bottomArray.length;ii++){
-				var key = bottomArray[ii].keys()[0];
+				var key = Object.keys(bottomArray[ii])[0];
 				var val = bottomArray[ii][key];
 				if (key=='M'){
 					bottom += val[0]+", "+val[1];
@@ -797,7 +797,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			var bottomArray = getBottomLine(vm,bottomcode,x0p,x1p,y0p,y1p,i,ncols,nrows);
 			var bottom = "";
 			for (var ii=0;ii<bottomArray.length;ii++){
-				var key = bottomArray[ii].keys()[0];
+				var key = Object.keys(bottomArray[ii])[0];
 				var val = bottomArray[ii][key];
 				if (key=='M'){
 					bottom += val[0]+", "+val[1];
@@ -839,7 +839,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 			var bottomArray = getBottomLine(vm,bottomcode,x1p,x0p,y0p,y1p,i,ncols,nrows);
 			var bottom = "";
 			for (var ii=0;ii<bottomArray.length;ii++){
-				var key = bottomArray[ii].keys()[0];
+				var key = Object.keys(bottomArray[ii])[0];
 				var val = bottomArray[ii][key];
 				if (key=='M'){
 					bottom += val[0]+", "+val[1];
