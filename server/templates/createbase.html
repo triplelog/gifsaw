@@ -41,12 +41,12 @@
 .puzzlePieces {
 	stroke-dasharray: 250;
     stroke-dashoffset: 250;
-    transition: stroke-dashoffset 4s linear;
+    transition: stroke-dashoffset 3s linear;
 }
 
 .title:hover .puzzlePieces {
 	stroke-dashoffset: 0;
-    transition: stroke-dashoffset 4s linear;
+    transition: stroke-dashoffset 2s linear;
 }
 .titleBG {
 	z-index: 2;
@@ -200,9 +200,9 @@ svg {
 		<input type="number" name="heightFactor" id="heightFactor" value="25" style="width: 4rem;"></input>
 		<input type="number" name="widthFactor" id="widthFactor" value="50" style="width: 4rem;"></input>
 	</div>
-	<div>
+	<div style="display: none;">
 		<label for="initialScript">Scoring Script: </label>
-		<input type="text" id="initialScript"  name="initialScript" style="display: none;"></input>
+		<input type="text" id="initialScript"  name="initialScript"></input>
 		
 		<textarea id="initialCSS" name="initialCSS">.pieceBorder{
 			stroke-dasharray: calc(2.5 * var(--scale));
@@ -254,17 +254,19 @@ svg {
 </div>
 {% endblock %}
 {% block content33 %}
-<textarea id="scriptTextarea">var players={};
-		function newPlayer(username){
-			var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
-			players[username]={score:0,color:color};
-		}
-		function newMerge(username,matches){
-			players[username].score++;
-			var score = {};
-			score[username]=players[username].score;
-			return {'css':{stroke: players[username].color},'message':'Merge','accept':true,'score':score};
-		}</textarea>
+<textarea id="scriptTextarea" rows="10" columns="80" class="prism-live language-js">
+var players={};
+function newPlayer(username){
+	var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
+	players[username]={score:0,color:color};
+}
+function newMerge(username,matches){
+	players[username].score++;
+	var score = {};
+	score[username]=players[username].score;
+	return {'css':{stroke: players[username].color},'message':'Merge','accept':true,'score':score};
+}
+</textarea>
 {% endblock %}
 
 
@@ -289,5 +291,7 @@ svg {
 {% block scripts %}
 <script src="../js/create.js"></script>
 <script src="../js/upload.js"></script>
+<script src="../js/prism.js"></script>
+<script src="../js/prism-live.js?load=css,html,javascript"></script>
 {% endblock %}
 
