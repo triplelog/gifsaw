@@ -51,7 +51,11 @@ app.get('/',
 	function(req, res) {
 		var vm = new VM();
 		var retval = makelines(vm,false,3000,500,3,18,.4,2.5,5.0);
-		console.log(JSON.stringify(retval[0][19].join('')));
+		
+		var cG = `<clipPath id="clipG" clipPathUnits="userSpaceOnUse">
+				<path id="pathG" d="M`+JSON.stringify(retval[0][19].join(''))+`"/>
+		</clipPath>`;
+		console.log(cG);
 		res.write(nunjucks.render('templates/index.html',{
 			
 		}));
