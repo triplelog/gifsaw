@@ -325,8 +325,14 @@ document.getElementById('size').addEventListener('change',updateSize);
 document.getElementById('pointyFactor').addEventListener('change',updateLines);
 document.getElementById('heightFactor').addEventListener('change',updateLines);
 document.getElementById('widthFactor').addEventListener('change',updateLines);
-
-
+function updateScript() {
+	var el1 = document.getElementById('scriptTextarea');
+	var el2 = document.getElementById('initialScript');
+	console.log(el1.value);
+	el2.value = el1.value;
+}
+document.getElementById('scriptTextarea').addEventListener('change',updateScript);
+document.getElementById('scriptTextarea').addEventListener('input',updateScript);
 
 
 

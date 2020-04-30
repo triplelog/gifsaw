@@ -202,17 +202,8 @@ svg {
 	</div>
 	<div>
 		<label for="initialScript">Scoring Script: </label>
-		<textarea id="initialScript" name="initialScript">var players={};
-		function newPlayer(username){
-			var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
-			players[username]={score:0,color:color};
-		}
-		function newMerge(username,matches){
-			players[username].score++;
-			var score = {};
-			score[username]=players[username].score;
-			return {'css':{stroke: players[username].color},'message':'Merge','accept':true,'score':score};
-		}</textarea>
+		<input type="text" id="initialScript"  name="initialScript" style="display: none;"></input>
+		
 		<textarea id="initialCSS" name="initialCSS">.pieceBorder{
 			stroke-dasharray: calc(2.5 * var(--scale));
 			stroke:yellow;
@@ -263,7 +254,17 @@ svg {
 </div>
 {% endblock %}
 {% block content33 %}
-
+<textarea id="scriptTextarea">var players={};
+		function newPlayer(username){
+			var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
+			players[username]={score:0,color:color};
+		}
+		function newMerge(username,matches){
+			players[username].score++;
+			var score = {};
+			score[username]=players[username].score;
+			return {'css':{stroke: players[username].color},'message':'Merge','accept':true,'score':score};
+		}</textarea>
 {% endblock %}
 
 
