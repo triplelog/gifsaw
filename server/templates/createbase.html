@@ -39,14 +39,14 @@
 }
 
 .puzzlePieces {
-	stroke-dasharray: 280;
-    stroke-dashoffset: 280;
-    transition: stroke-dashoffset 3s linear;
+	stroke-dasharray: 250;
+    stroke-dashoffset: 250;
+    transition: stroke-dashoffset 4s linear;
 }
 
 .title:hover .puzzlePieces {
 	stroke-dashoffset: 0;
-    transition: stroke-dashoffset 3s linear;
+    transition: stroke-dashoffset 4s linear;
 }
 .titleBG {
 	z-index: 2;
@@ -190,15 +190,15 @@ svg {
 	</div>
 	<div>
 		<label for="nrows">Rows: </label>
-		<input type="number" id="nrows" name="nrows"></input>
+		<input type="number" id="nrows" name="nrows" style="width: 5rem;"></input>
 
 		<label for="ncols">Columns: </label>
-		<input type="number" id="ncols" name="ncols"></input>
+		<input type="number" id="ncols" name="ncols" style="width: 5rem;"></input>
 	</div>
 	<div>
-		<input type="number" name="pointyFactor" id="pointyFactor" value="4"></input>
-		<input type="number" name="heightFactor" id="heightFactor" value="25"></input>
-		<input type="number" name="widthFactor" id="widthFactor" value="50"></input>
+		<input type="number" name="pointyFactor" id="pointyFactor" value="4" style="width: 4rem;"></input>
+		<input type="number" name="heightFactor" id="heightFactor" value="25" style="width: 4rem;"></input>
+		<input type="number" name="widthFactor" id="widthFactor" value="50" style="width: 4rem;"></input>
 	</div>
 	<div>
 		<label for="initialScript">Scoring Script: </label>
