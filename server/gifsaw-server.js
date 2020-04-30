@@ -46,6 +46,16 @@ app.get('/index.html',
 		res.end();
 	}
 );
+app.get('/', 
+	
+	function(req, res) {
+		
+		res.write(nunjucks.render('templates/index.html',{
+			
+		}));
+		res.end();
+	}
+);
 
 app.get('/puzzlepage', 
 	
@@ -67,6 +77,32 @@ app.get('/puzzles/:puzzleid',
 		}
 		var puzzleid = req.params.puzzleid;
 		var matches = false;
+		var initialCSS = `.pieceBorder{
+			stroke-dasharray: calc(2.5 * var(--scale));
+			stroke:yellow;
+			stroke-width:calc(2.5 * var(--scale));
+			stroke-opacity:.67;
+			fill: transparent;
+		}
+		.interiorBorder{
+			stroke-dasharray: calc(1 * var(--scale));
+			stroke:blue;
+			stroke-width:calc(1 * var(--scale));
+			stroke-opacity:.5;
+			fill: transparent;
+		}
+		.interiorBorder.toggled{
+			stroke-dasharray: calc(4 * var(--scale));
+			stroke:blue;
+			stroke-width:calc(4 * var(--scale));
+			stroke-opacity:1;
+			fill: transparent;
+		}
+		.piece {
+			fill: black;
+			fill-opacity: .01;
+			stroke: none;
+		}`;
 		tempKeys[tkey]={username:'',puzzleid:puzzleid};
 		if (!collab){
 			matches = true;
@@ -75,6 +111,7 @@ app.get('/puzzles/:puzzleid',
 			tkey: tkey,
 			matches: matches,
 			collab: collab,
+			initialCSS: initialCSS,
 		}));
 		res.end();
 	}
@@ -100,39 +137,12 @@ app.post('/create',
 				players[username].score++;
 				return {stroke: players[username].color};
 			}`;
-			var initialCSS = `.pieceBorder{
-				stroke-dasharray: .02;
-				stroke:red;
-				stroke-width:.02;
-				stroke-opacity:.5;
-				fill: transparent;
-			}
-			.interiorBorder{
-				stroke-dasharray: .01;
-				stroke:blue;
-				stroke-width:.01;
-				stroke-opacity:.5;
-				fill: transparent;
-			}
-			.interiorBorder.toggled{
-				stroke-dasharray: .03;
-				stroke:blue;
-				stroke-width:.03;
-				stroke-opacity:1;
-				fill: transparent;
-			}
-			.piece {
-				fill: black;
-				fill-opacity: .1;
-				stroke: none;
-			}`;
 		}
 		var fullname = req.body.fileSrc.replace('../img/in/','');
 		var fname = fullname.substring(0,fullname.indexOf('.'));
 		var nrows = parseInt(req.body.nrows);
 		var ncols = parseInt(req.body.ncols);
 		initialScript = req.body.initialScript;
-		initialCSS = req.body.initialCSS;
 		
 		var encryptedpuzzle = false;
 		
@@ -193,7 +203,7 @@ app.post('/create',
 			<script src="../js/solopuzzle.js"></script>
 
 			{% endif %}`,
-			initialCSS: initialCSS,
+			initialCSS: '{{ initialCSS }}',
 			
 		});
 		
