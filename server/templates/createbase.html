@@ -33,22 +33,25 @@
   	text-shadow: 0px 0px 10px black;
 }
 
+#imageHolder .puzzlePieces {
+	stroke-dasharray: 0;
+    stroke-dashoffset: 0;
+}
+
+.puzzlePieces {
+	stroke-dasharray: 280;
+    stroke-dashoffset: 280;
+    transition: stroke-dashoffset 3s linear;
+}
+
 .title:hover .puzzlePieces {
-	animation: letter-animation 3s linear forwards;
-    animation-delay: 0s;
-    animation-iteration-count: 1;
+	stroke-dashoffset: 0;
+    transition: stroke-dashoffset 3s linear;
 }
 .titleBG {
 	z-index: 2;
 }
-@keyframes letter-animation {
-    0% {
-        stroke-dashoffset: 280;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
-}
+
 
 {% endblock %}
 
@@ -92,23 +95,7 @@ svg {
 	height:0px;
 	width:0px;
 }
-.puzzlePieces {
-	stroke-dasharray: 280;
-    stroke-dashoffset: 280;
-}
-#imageHolder:hover .puzzlePieces {
-	animation: letter-animation 3s linear forwards;
-    animation-delay: 0s;
-    animation-iteration-count: 1;
-}
-@keyframes letter-animation {
-    0% {
-        stroke-dashoffset: 280;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
-}
+
 {% endblock %}
 
 
