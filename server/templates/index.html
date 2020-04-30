@@ -10,7 +10,7 @@
 	
 {% block centerSize %}
 	--height-center: 150px;
-	--width-center: 200px;
+	--width-center: 9rem;
 {% endblock %}
 
 {% block titleCSS %}
@@ -59,6 +59,11 @@ body {
 img {
 	padding: 0px;
 	margin: 0px;
+}
+.logoDiv {
+	position: relative;
+	width: 18rem;
+	left:-4.5rem;
 }
 {% endblock %}
 
@@ -173,8 +178,8 @@ Collab
 
 
 {% block content22 %}
-	<div>
-		<img src="../img/logobg/galaxy.jpg" style="width:3rem;"><img src="../img/logobg/industry.jpg" style="width:3rem;"><img src="../img/logobg/flowers.jpg" style="width:3rem;">
+	<div class="logoDiv">
+		<img src="../img/logobg/galaxy.jpg" style="width:3rem;"><img src="../img/logobg/industry.jpg" style="width:3rem;"><img src="../img/logobg/flowers.jpg" style="width:3rem;"><img src="../img/logobg/galaxy.jpg" style="width:3rem;"><img src="../img/logobg/industry.jpg" style="width:3rem;"><img src="../img/logobg/flowers.jpg" style="width:3rem;">
 	</div>
 	<a href="../account">My Account</a><br />
 	<a href="../about">About</a>
