@@ -86,6 +86,19 @@ svg {
 	height:0px;
 	width:0px;
 }
+.puzzlePieces {
+	animation: letter-animation 5s linear forwards;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+}
+@keyframes letter-animation {
+    0% {
+        stroke-dashoffset: 2600;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
 {% endblock %}
 
 
@@ -141,7 +154,7 @@ svg {
 <div id="imageHolder">
 	<img src="">
 	<svg width="0" height="0" preserveAspectRatio="none" viewBox = "0 0 1 1" version = "1.1">
-		<path d="M0,0 1,1" stroke="red" stroke-width=".01" fill='none'/>
+		<path d="M0,0 1,1" stroke="red" stroke-width=".01" fill='none' class="puzzlePieces"/>
 		
 	</svg>
 </div>
