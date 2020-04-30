@@ -52,10 +52,14 @@ app.get('/',
 		var vm = new VM();
 		var retval = makelines(vm,false,3000,500,3,18,.4,2.5,5.0);
 		
-		var cG = `<clipPath id="clipG" clipPathUnits="userSpaceOnUse">
-				<path id="pathG" d="M`+JSON.stringify(retval[0][19].join(''))+`"/>
+		var letters = ['G','I','F','S','A','W'];
+		for (var i=19;i<21;i++){
+			var cG = `<clipPath id="clip`+letters[i-19]+`" clipPathUnits="userSpaceOnUse">
+				<path id="path`+letters[i-19]+`" d="M`+retval[0][19].join('')+`"/>
 		</clipPath>`;
 		console.log(cG);
+		}
+		
 		res.write(nunjucks.render('templates/index.html',{
 			
 		}));
