@@ -75,8 +75,15 @@ img {
 .logoG {
 	-webkit-clip-path:url(#clipG);
 	clip-path:url(#clipG);
-	position: relative;
-	left: -50px;
+	position: absolute;
+	left: 0px;
+	width:3000px;
+}
+.logoI {
+	-webkit-clip-path:url(#clipG);
+	clip-path:url(#clipG);
+	position: absolute;
+	left: 0px;
 	width:3000px;
 }
 {% endblock %}
@@ -195,6 +202,9 @@ Collab
 	<div class="logoG">
 		<img src="../img/logobg/galaxyrect.jpg">
 	</div>
+	<div class="logoI">
+		<img src="../img/logobg/icerect.jpg">
+	</div>
 	<div class="logoDiv">
 		<!--<img src="../img/logobg/galaxy.jpg" style="width:3rem;"><img src="../img/logobg/industry.jpg" style="width:3rem;"><img src="../img/logobg/flowers.jpg" style="width:3rem;"><img src="../img/logobg/galaxy.jpg" style="width:3rem;"><img src="../img/logobg/industry.jpg" style="width:3rem;"><img src="../img/logobg/flowers.jpg" style="width:3rem;">
 		-->
@@ -207,6 +217,9 @@ Collab
 		
 			  <clipPath id="clipG" clipPathUnits="objectBoundingBox">
 				<path id="pathG" d="M.1,.1 .1,.2 .11666,.2 .11666,.1 .1,.1" />
+			  </clipPath>
+			  <clipPath id="clipI" clipPathUnits="objectBoundingBox">
+				<path id="pathI" d="M.11666,.1 .1,.2 .13333,.2 .13333,.1 .11666,.1" />
 			  </clipPath>
 		
 		  
