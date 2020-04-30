@@ -89,8 +89,10 @@ svg {
 .puzzlePieces {
 	stroke-dasharray: 280;
     stroke-dashoffset: 280;
-	animation: letter-animation 5s linear forwards;
-    animation-delay: 1s;
+}
+.puzzlePieces:hover {
+	animation: letter-animation 2s linear forwards;
+    animation-delay: 0s;
     animation-iteration-count: infinite;
 }
 @keyframes letter-animation {
