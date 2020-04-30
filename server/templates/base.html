@@ -222,7 +222,19 @@
   	overflow: auto;
 }
 
+.puzzlePieces {
+	stroke-dasharray: 250;
+    stroke-dashoffset: 250;
+    transition: stroke-dashoffset 3s linear;
+}
 
+.title:hover .puzzlePieces {
+	stroke-dashoffset: 0;
+    transition: stroke-dashoffset 2s linear;
+}
+.titleBG {
+	z-index: 2;
+}
 {% block titleCSS %}
 {% endblock %}
 
