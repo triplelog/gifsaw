@@ -51,7 +51,7 @@ app.get('/',
 	function(req, res) {
 		var vm = new VM();
 		var retval = makelines(vm,false,900,150,3,18,4,25,50);
-		console.log(JSON.stringify(retval[8][19].join('M')));
+		console.log(JSON.stringify(retval[0][19].join('M')));
 		res.write(nunjucks.render('templates/index.html',{
 			
 		}));
