@@ -66,9 +66,17 @@ img {
 	left:-4.5rem;
 }
 .logoDiv span {
+	position: absolute;
+	left: 0px;
 	font-size: 3rem;
 	color: white;
-	text-shadow: 0px 0px 10px black 0px 0px 10px black;
+	text-shadow: 0px 0px 10px black;
+}
+#logoG {
+	-webkit-clip-path:url(#clipG);
+	clip-path:url(#clipG);
+	position: relative;
+	left: -4.5rem;
 }
 {% endblock %}
 
@@ -183,12 +191,28 @@ Collab
 
 
 {% block content22 %}
+	<div class="logoG">
+		<img src="../img/logobg/galaxyrect.jpg" style="width:3rem;">
+		<span>GIFSAW</span>
+	</div>
 	<div class="logoDiv">
-		<img src="../img/logobg/galaxy.jpg" style="width:3rem;"><img src="../img/logobg/industry.jpg" style="width:3rem;"><img src="../img/logobg/flowers.jpg" style="width:3rem;"><img src="../img/logobg/galaxy.jpg" style="width:3rem;"><img src="../img/logobg/industry.jpg" style="width:3rem;"><img src="../img/logobg/flowers.jpg" style="width:3rem;">
+		<!--<img src="../img/logobg/galaxy.jpg" style="width:3rem;"><img src="../img/logobg/industry.jpg" style="width:3rem;"><img src="../img/logobg/flowers.jpg" style="width:3rem;"><img src="../img/logobg/galaxy.jpg" style="width:3rem;"><img src="../img/logobg/industry.jpg" style="width:3rem;"><img src="../img/logobg/flowers.jpg" style="width:3rem;">
+		-->
 		<span>GIFSAW</span>
 	</div>
 	<a href="../account">My Account</a><br />
 	<a href="../about">About</a>
+	<svg width="0" height="0" viewBox = "0 0 1 1" version = "1.1">
+		<defs>
+		
+			  <clipPath id="clipG" clipPathUnits="objectBoundingBox">
+				<path id="pathG" d="M.1,.1 .1,.2 .11666,.2 .11666,.1 .1,.1" />
+			  </clipPath>
+		
+		  
+		</defs>
+	
+	</svg>
 {% endblock %}
 
 
