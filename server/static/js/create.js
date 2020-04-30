@@ -1,4 +1,4 @@
-var ws = new WebSocket('wss://soliturn.com:8080');
+var ws = new WebSocket('wss://gifsaw.com:8080');
 ws.onopen = function(evt) {
 	var jsonmessage = {'type':'key'};
 	jsonmessage.message = 'tkey';
