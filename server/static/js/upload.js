@@ -24,8 +24,8 @@ function handleDrop(e) {
 	sendImage(ffile);
 	document.getElementById('imgSrc').style.display = 'none';
 	document.getElementById('imgUrl').style.display = 'none';
-	document.querySelector('.imgDrag').textContent = "Image Uploaded";
 	document.getElementById('imgType').value = 'drag';
+	//add message somewhere that image uploaded
 }
 
 
@@ -62,7 +62,6 @@ function chgImgType(evt){
 	else if (imgType == 'drag'){
 		document.getElementById('imgSrc').style.display = 'none';
 		document.getElementById('imgUrl').style.display = 'none';
-		document.querySelector('.imgDrag').textContent = "";
 	}
 }
 document.getElementById('imgType').addEventListener('change', chgImgType);
