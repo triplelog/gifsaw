@@ -9,8 +9,8 @@
 {% endblock %}
 	
 {% block centerSize %}
-	--height-center: 50vh;
-	--width-center: 50vw;
+	--height-center: calc(66vw * {{ image.height }} * {{ image.width }});
+	--width-center: 66vw;
 {% endblock %}
 
 {% block titleCSS %}
@@ -25,7 +25,14 @@
   	left:-2px;
   	width: calc(100% + 0px);
   	background: red;
+  	background-image: url("../img/nightskysatsmall.jpg");
+  	background-size: 100% 100%;
+  	background-repeat: no-repeat;
+  	background-position: 0px 0px;
+  	color: white;
+  	text-shadow: 0px 0px 10px black;
 }
+
 {% endblock %}
 
 {% block content22 %}
@@ -64,6 +71,9 @@
 	--side-height: 33;
 	--top-width: 27;
 	--scale: 1;
+}
+.content-11 {
+	grid-column: 2;
 }
 .content-31 {
 	display: none;
