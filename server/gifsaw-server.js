@@ -416,7 +416,7 @@ wss.on('connection', function connection(ws) {
   	ws.on('message', function incoming(message) {
 		if (typeof message !== 'string'){
 			console.log("af",performance.now());
-			var buffer = Buffer.from(message);
+			var buffer = Buffer.from(message).slice(0,1000);
 			FileType.fromBuffer(buffer.slice(0,1000)).then( (val) => {
 				var ext = '.'+val.ext;
 				for (var i=0;i<imgTypes.length;i++){
@@ -503,7 +503,7 @@ wss.on('connection', function connection(ws) {
 			}
 			else {
 				inSrc = 'static/img/in/'+imgid+ext;
-				var wget = 'wget -O '+inSrc+' "'+ url + '" && echo "done"';
+				var wget = '(ulimit -f 1000; wget -O '+inSrc+' "'+ url + '")';
 				console.log(wget);
 				var child = exec(wget, function(err, stdout, stderr) {
 					if (err){console.log(err)}
