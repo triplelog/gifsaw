@@ -65,7 +65,13 @@ img {
 	width: 18rem;
 	left:-4.5rem;
 }
-
+.centerLink {
+	text-align: center;
+	
+}
+.centerLink a {
+	border: 1px solid black;
+}
 
 {% endblock %}
 
@@ -184,8 +190,12 @@ Collab
 	<div class="logoDiv">
 		<img src="../img/logobg/fulllogo.png" style="width:18rem;">		
 	</div>
-	<a href="../account">My Account</a><br />
-	<a href="../about">About</a>
+	<div class="centerLink">
+		<a href="../account">My Account</a>
+	</div>
+	<div class="centerLink">
+		<a href="../about">About</a>
+	</div>
 	
 {% endblock %}
 
