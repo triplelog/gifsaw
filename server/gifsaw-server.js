@@ -121,11 +121,10 @@ app.get('/puzzles/:puzzleid',
 app.post('/solo', 
 	
 	function(req, res) {
-		console.log(req.body.background);
-		console.log(req.body.pieces);
-		
+		var bgtype = req.body.background;
+		var bgid = 1;
 		//compute dimensions and fname
-		var fullname = req.body.background+".gif";
+		var fullname = bgtype+bgid+".gif";
 		var fname = fullname.substring(0,fullname.indexOf('.'));
 		var dimensions = sizeOf('static/img/' + fullname);
 		//compute nrows and ncols
@@ -177,7 +176,7 @@ app.post('/solo',
 			score: false,
 			npieces: nrows*ncols,
 			pagename: fname,
-			image: {'name':'../img/in/'+fullname,'width':dimensions.width,'height':dimensions.height},
+			image: {'name':'../img/'+fullname,'width':dimensions.width,'height':dimensions.height},
 			clines:JSON.stringify(retval[6]),
 			ccenters:JSON.stringify(retval[7]),
 			plines:retval[8],
@@ -193,13 +192,13 @@ app.post('/solo',
 			initialCSS: initialCSS ,
 			
 		});
-		fs.writeFile("static/city1.html", htmlstr, function (err2) {
+		fs.writeFile("static/"+bgtype+bgid+".html", htmlstr, function (err2) {
 			if (err){
 				console.log(err);
 				res.redirect('../create');
 			}
 			else {
-				res.redirect("../city1.html?n="+req.body.pieces);
+				res.redirect("../"+bgtype+bgid+".html?n="+req.body.pieces);
 			}
 		
 		});
