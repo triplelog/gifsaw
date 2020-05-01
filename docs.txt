@@ -1,7 +1,7 @@
 npm install -s ws passport passport-local mongoose passport-local-mongoose
 npm install -s nunjucks express express-session papaparse
-npm install -s image-size vm2 body-parser file-type
-sudo apt-get install gifsicle imagemagick
+npm install -s image-size vm2 body-parser file-type get-video-dimensions
+sudo apt-get install gifsicle imagemagick ffmpeg
 
 
 
