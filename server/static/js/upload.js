@@ -74,7 +74,6 @@ document.getElementById('imgType').addEventListener('change', chgImgType);
 function chgImgUrl(evt) {
 	var url = evt.target.value;
 	var jsonmessage = {'type':'download','url':url};
-	console.log(jsonmessage);
 	ws.send(JSON.stringify(jsonmessage));
 }
 
