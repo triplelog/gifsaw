@@ -342,8 +342,7 @@ function updateScript(evt) {
 	var el2 = document.getElementById('initialScript');
 	if (evt && evt.target.id == 'scoring'){
 		var id = evt.target.value;
-		console.log(id,defaultScripts[id]);
-		el1.setAttribute('value',defaultScripts[id]);
+		el1.value = defaultScripts[id];
 	}
 	
 	el2.setAttribute('value',el1.value);
