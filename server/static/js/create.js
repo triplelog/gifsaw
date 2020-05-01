@@ -337,13 +337,21 @@ document.getElementById('ncols').addEventListener('change',updateLines);
 document.getElementById('pointyFactor').addEventListener('change',updateLines);
 document.getElementById('heightFactor').addEventListener('change',updateLines);
 document.getElementById('widthFactor').addEventListener('change',updateLines);
-function updateScript() {
+function updateScript(evt) {
 	var el1 = document.getElementById('scriptTextarea');
 	var el2 = document.getElementById('initialScript');
+	if (evt && evt.target.id == 'scoring'){
+		var id = evt.target.value;
+		console.log(id,defaultScripts[id]);
+		el1.setAttribute('value',defaultScripts[id]);
+	}
+	
 	el2.setAttribute('value',el1.value);
 }
 document.getElementById('scriptTextarea').addEventListener('change',updateScript);
 document.getElementById('scriptTextarea').addEventListener('input',updateScript);
+
+document.getElementById('scoring').addEventListener('change',updateScript);
 
 
 

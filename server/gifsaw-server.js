@@ -265,6 +265,7 @@ app.post('/create',
 			var piece = {id:'video'+(i+1),rotation:retval[3][i],location:retval[2][i],centers:retval[1][i]};
 			pieces.push(piece);
 		}
+		var defaultScripts = makeScripts();
 		var htmlstr = nunjucks.render('templates/basepuzzle.html',{
 			gametype: gametype,
 			players: players,
@@ -297,6 +298,7 @@ app.post('/create',
 
 			{% endif %}`,
 			initialCSS: '{{ initialCSS }}',
+			defaultScripts: defaultScripts,
 			
 		});
 		
@@ -599,7 +601,36 @@ function socketanswer(pairs,matches) {
 
 }
 
-
+function makeScripts() {
+	var script;
+	defaultScripts = [];
+	script = `var players={};
+	function newPlayer(username){
+		players[username]={score:0};
+	}
+	function newMerge(username,matches){
+		players[username].score++;
+		var score = {};
+		score[username]=players[username].score;
+		return {'message':'Merge','accept':true,'score':score};
+	}`;
+	defaultScripts.push(script);
+	
+	script = `var players={};
+	function newPlayer(username){
+		var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
+		players[username]={score:0,color:color};
+	}
+	function newMerge(username,matches){
+		players[username].score++;
+		var score = {};
+		score[username]=players[username].score;
+		return {'css':{stroke: players[username].color},'message':'Merge','accept':true,'score':score};
+	}`;
+	defaultScripts.push(script);
+	
+	return defaultScripts;
+}
 function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFactor,heightFactor,widthFactor) {
 	var lines = [];
 	var clines = [];

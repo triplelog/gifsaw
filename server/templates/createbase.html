@@ -130,7 +130,8 @@ svg {
 	<div>
 		<label for="scoring">Scoring: </label>
 		<select id="scoring">
-			<option>Basic</option>
+			<option value="0">Basic</option>
+			<option value="1">Old</option>
 		</select>
 	</div>
 	<form action="../create" method="post">
@@ -148,17 +149,7 @@ svg {
 		</div>
 		<div style="display: none;">
 			<label for="initialScript">Scoring Script: </label>
-			<input type="text" id="initialScript"  name="initialScript" value="var players={};
-	function newPlayer(username){
-		var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
-		players[username]={score:0,color:color};
-	}
-	function newMerge(username,matches){
-		players[username].score++;
-		var score = {};
-		score[username]=players[username].score;
-		return {'css':{stroke: players[username].color},'message':'Merge','accept':true,'score':score};
-	}"></input>
+			<input type="text" id="initialScript"  name="initialScript" value="{{ defaultScripts[0] }}"></input>
 		
 		
 		</div>
@@ -314,5 +305,8 @@ function newMerge(username,matches){
 <script src="../js/upload.js"></script>
 <script src="../js/prism.js"></script>
 <script src="../js/prism-live.js?load=css,html,javascript"></script>
+<script>
+var defaultScripts = {{ defaultScripts | dump | safe }};
+</script>
 {% endblock %}
 
