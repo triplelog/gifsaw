@@ -123,7 +123,87 @@ app.post('/solo',
 	function(req, res) {
 		console.log(req.body.background);
 		console.log(req.body.pieces);
-		res.redirect("../city1.html?n="+req.body.pieces);
+		
+		//compute dimensions and fname
+		var fullname = req.body.background+".gif";
+		var fname = fullname.substring(0,fullname.indexOf('.'));
+		var dimensions = sizeOf('static/img/' + fullname);
+		//compute nrows and ncols
+		var np = getNpieces(parseInt(req.body.pieces),dimensions.width,dimensions.height);
+		var nrows = np[0];
+		var ncols = np[1];
+		//compute retval and pieces
+		var vm = new VM();
+		var retval = makelines(vm,false,dimensions.width,dimensions.height,nrows,ncols,.4,2.5,5);
+		
+		var pieces = [];
+		var npieces = retval[5];
+		
+		for (var i=0;i<npieces;i++){
+			var piece = {id:'video'+(i+1),rotation:retval[3][i],location:retval[2][i],centers:retval[1][i]};
+			pieces.push(piece);
+		}
+		
+		var initialCSS = `.pieceBorder{
+			stroke-dasharray: calc(2.5 * var(--scale));
+			stroke:yellow;
+			stroke-width:calc(2.5 * var(--scale));
+			stroke-opacity:.67;
+			fill: transparent;
+		}
+		.interiorBorder{
+			stroke-dasharray: calc(1 * var(--scale));
+			stroke:blue;
+			stroke-width:calc(1 * var(--scale));
+			stroke-opacity:.5;
+			fill: transparent;
+		}
+		.interiorBorder.toggled{
+			stroke-dasharray: calc(4 * var(--scale));
+			stroke:blue;
+			stroke-width:calc(4 * var(--scale));
+			stroke-opacity:1;
+			fill: transparent;
+		}
+		.piece {
+			fill: black;
+			fill-opacity: .01;
+			stroke: none;
+		}`;
+		
+		var htmlstr = nunjucks.render('templates/basepuzzle.html',{
+			gametype: 'solo',
+			players: 'one',
+			score: false,
+			npieces: nrows*ncols,
+			pagename: fname,
+			image: {'name':'../img/in/'+fullname,'width':dimensions.width,'height':dimensions.height},
+			clines:JSON.stringify(retval[6]),
+			ccenters:JSON.stringify(retval[7]),
+			plines:retval[8],
+			lines:retval[0],
+			matchesHolder:JSON.stringify(retval[4]),
+			nrows:nrows,
+			ncols:ncols,
+			actheight:dimensions.height,
+			actwidth:dimensions.width,
+			pieces: JSON.stringify(pieces),
+			collabHolder: `<script>var keepscore = false; var collab = false;</script>
+			<script src="../js/solopuzzle.js"></script>`,
+			initialCSS: initialCSS ,
+			
+		});
+		fs.writeFile("static/city1.html", htmlstr, function (err2) {
+			if (err){
+				console.log(err);
+				res.redirect('../create');
+			}
+			else {
+				res.redirect("../city1.html?n="+req.body.pieces);
+			}
+		
+		});
+		
 	}
 );
 app.post('/create', 
@@ -225,8 +305,8 @@ app.post('/create',
 				return;
 			}
 			fs.writeFile("puzzles/"+puzzleid+'.html', htmlstr, function (err2) {
-				if (err){
-					console.log(err);
+				if (err2){
+					console.log(err2);
 					res.redirect('../create');
 				}
 				else {
@@ -930,4 +1010,39 @@ function getRightLine(vm,rightcode,x0,x1,y0,y1,i,ncols){
 	vm.run('x0='+x0+'; '+'x1='+x1+'; '+'y0='+y0+'; '+'y1='+y1+'; '+'i='+i+'; '+'ncols='+ncols+'; ');
 	var line = vm.run(rightcode);
 	return line;
+}
+function getNpieces(npieces,width,height) {
+	
+	let nrowsf = Math.floor(Math.sqrt(npieces*height/width));
+	let ncolsf = Math.floor(nrowsf*width/height);
+
+	
+	//Find closest approximations
+	var approxdimensions = [];
+	var mind = npieces*2;
+	if (nrowsf <3){nrowsf = 3;}
+	if (ncolsf <3){ncolsf = 3;}
+	for (var i=nrowsf-2;i<nrowsf+4;i++) {
+		for (var ii=ncolsf-2;ii<ncolsf+4;ii++) {
+			var nnpieces = i*ii;
+			var npieceserr = Math.sqrt( (nnpieces-npieces)*(nnpieces-npieces)/(npieces*npieces) );
+			var rat = ii/i;
+			var raterr = Math.sqrt( (rat-width/height)*(rat-width/height)/((width/height)*(width/height)) );
+			//var score = (raterr+.01) * Math.pow( npieceserr+.01, 2);
+			var score = raterr + npieceserr*8;
+			var dim = {nrows:i,ncols:ii,score:score};
+			approxdimensions.push(dim);
+		}
+	}
+
+	approxdimensions.sort(function compare(a, b) {
+	  if (a.score > b.score) return 1;
+	  if (b.score > a.score) return -1;
+
+	  return 0;
+	});
+	
+	var nrows = approxdimensions[0].nrows;
+	var ncols = approxdimensions[0].ncols;
+	return [nrows,ncols];
 }
