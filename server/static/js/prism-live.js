@@ -79,8 +79,7 @@ var _ = Prism.Live = class PrismLive {
 			// TODO load dynamically if not present
 			new Incrementable(this.textarea);
 		}
-		document.getElementById('scoring').addEventListener('change',this.update);
-		console.log(document.getElementById('scoring'));
+		
 		$.bind(this.textarea, {
 			input: evt => this.update(),
 			

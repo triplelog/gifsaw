@@ -343,6 +343,15 @@ function updateScript(evt) {
 	if (evt && evt.target.id == 'scoring'){
 		var id = evt.target.value;
 		el1.value = defaultScripts[id];
+		var code = el1.value;
+
+		if (/\n$/.test(el1.value)) {
+			code += "\u200b";
+		}
+		console.log(code);
+		document.querySelector('code').textContent = code;
+
+		Prism.highlightElement(document.querySelector('code'));
 	}
 	
 	el2.setAttribute('value',el1.value);
