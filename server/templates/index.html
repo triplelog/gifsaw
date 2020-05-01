@@ -120,7 +120,7 @@ img {
 	
 	</span>
 	<span class="titleCenter">
-		<a href="https://gifsaw.com">Create A Puzzle</a>
+		<a href="https://gifsaw.com/create">Create A Puzzle</a>
 	</span>
 	<span class="titleRight">
 		<label for="radio13-3"><i class="fas fa-expand"></i></label>
@@ -139,7 +139,7 @@ img {
 		<li>Select the number of pieces</li>
 		<li>Create a scoring system (optional)</li>
 	</ol>
-	<button>Create a Puzzle</button>
+	<button onclick="gotoCreate();">Create a Puzzle</button>
 </div>
 {% endblock %}	
 
@@ -237,6 +237,10 @@ Collab
 
 
 {% block scripts %}
-
+<script>
+function gotoCreate() {
+	window.location.href = 'https://gifsaw.com/create';
+}
+</script>
 {% endblock %}
 
