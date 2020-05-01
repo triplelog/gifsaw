@@ -508,7 +508,7 @@ wss.on('connection', function connection(ws) {
 			}
 			else {
 				inSrc = 'static/img/in/'+imgid+ext;
-				var wget = '(ulimit -f '+maxsize/512+'; wget -O '+inSrc+' "'+ url + '")';
+				var wget = '(ulimit -f '+parseInt(maxsize/512)+'; wget -O '+inSrc+' "'+ url + '")';
 				var child = exec(wget, function(err, stdout, stderr) {
 					if (err){
 						console.log(err);
