@@ -9,7 +9,7 @@
 {% endblock %}
 	
 {% block centerSize %}
-	--height-center: calc(66vw * {{ image.height }} * {{ image.width }});
+	--height-center: calc(66vw * {{ image.height }} / {{ image.width }});
 	--width-center: 66vw;
 {% endblock %}
 
