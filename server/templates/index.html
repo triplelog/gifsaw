@@ -132,7 +132,12 @@ img {
 </div>
 {% endblock %}
 {% block content13 %}
-Choose an image, number of pieces, and scoring system.
+<ol>
+	<li>Upload or choose a background gif or image</li>
+	<li>Select the number of pieces</li>
+	<li>Create the scoring system</li>
+</ol>
+<button>Create a Puzzle</button>
 {% endblock %}	
 
 {% block title31 %}
@@ -157,10 +162,15 @@ Choose an image, number of pieces, and scoring system.
 </div>
 {% endblock %}
 {% block content31 %}
-<ul>
-	<li>Nature</li>
-	<li>Space</li>
-</ul>
+<div>
+What type of background?<select>
+	<option>Nature</option>
+</select>
+</div>
+<div>
+How many pieces?<input type="number" name="pieces" value="25"></input>
+</div>
+<button>Start</button>
 {% endblock %}
 
 {% block title33 %}
@@ -185,8 +195,12 @@ Choose an image, number of pieces, and scoring system.
 </div>
 {% endblock %}
 {% block content33 %}
+<div>
 1-on-1
+</div>
+<div>
 Collab
+</div>
 {% endblock %}
 
 
