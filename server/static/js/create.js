@@ -152,6 +152,8 @@ function updateLines(evt) {
 	var nrows = parseInt(document.getElementById('nrows').value);
 	var ncols = parseInt(document.getElementById('ncols').value);
 	document.getElementById('npieces').setAttribute('value',nrows*ncols);
+	document.getElementById('nrowsForm').value = nrows;
+	document.getElementById('ncolsForm').value = ncols;
 	var pointyFactor = parseFloat(document.getElementById('pointyFactor').value)/10;
 	var heightFactor = parseFloat(document.getElementById('heightFactor').value)/10;
 	var widthFactor = parseFloat(document.getElementById('widthFactor').value)/10;
