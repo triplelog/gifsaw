@@ -68,16 +68,6 @@ app.get('/',
 	}
 );
 
-app.get('/puzzlepage', 
-	
-	function(req, res) {
-		res.write(nunjucks.render('templates/basepuzzle.html',{
-		
-		}));
-		res.end();
-	}
-);
-
 app.get('/puzzles/:puzzleid', 
 	
 	function(req, res) {
@@ -128,6 +118,14 @@ app.get('/puzzles/:puzzleid',
 	}
 );
 
+app.post('/solo', 
+	
+	function(req, res) {
+		console.log(req.body.background);
+		console.log(req.body.pieces);
+		res.redirect("../city1.html?n="+req.body.pieces);
+	}
+);
 app.post('/create', 
 	
 	function(req, res) {
