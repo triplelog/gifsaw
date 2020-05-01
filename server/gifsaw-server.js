@@ -438,7 +438,6 @@ wss.on('connection', function connection(ws) {
 		}
 	
 		var dm = JSON.parse(message);
-		console.log(dm);
 		if (dm.type && dm.type == 'key'){
 			if (dm.message && tempKeys[dm.message]){
 				if (tempKeys[dm.message].username && tempKeys[dm.message].username != ''){
@@ -493,12 +492,13 @@ wss.on('connection', function connection(ws) {
 		else if (dm.type && dm.type == 'download') {
 			var url = dm.url;
 			var ext = '';
-			console.log(url);
 			for (var i=0;i<imgTypes.length;i++){
+				console.log(imgTypes[i],url.indexOf(imgTypes[i]));
 				if (url.indexOf(imgTypes[i])==url.length-imgTypes[i].length){
 					ext = imgTypes[i];
 				}
 			}
+			console.log(ext)
 			if (ext == ''){
 				//send message rejecting
 				return;
