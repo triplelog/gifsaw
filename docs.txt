@@ -1,10 +1,15 @@
 npm install -s ws passport passport-local mongoose passport-local-mongoose
 npm install -s nunjucks express express-session papaparse
 npm install -s image-size vm2 body-parser file-type get-video-dimensions
-sudo apt-get install gifsicle imagemagick ffmpeg
+curl -sL http://www.lcdf.org/gifsicle/gifsicle-1.92.tar.gz | tar -zx
+cd gifsicle-1.92
+./configure --disable-gifview
+sudo make install
+sudo apt-get install imagemagick ffmpeg
 
 
-
+./mp42gif.sh -i city/aerial.mp4 -f 12 -h 960 -o ../../server/static/gifs/city/aerial.gif
+gifsicle -O3 --colors 192 --lossy=80 aerial.gif -o optaerial.gif
 
 #update ws, servers, and nginx with correct domain
 
