@@ -138,14 +138,20 @@ function updateSize(evt) {
 	var ncols = parseInt(dim[1]);
 	document.getElementById('nrows').value = nrows;
 	document.getElementById('ncols').value = ncols;
+	document.getElementById('nrowsForm').value = nrows;
+	document.getElementById('ncolsForm').value = ncols;
 	
 	updateLines();
 	
 }
-function updateLines() {
+function updateLines(evt) {
+	if (evt.target.id == 'pointyFactor' || evt.target.id == 'heightFactor' || evt.target.id == 'widthFactor'){
+		document.getElementById(evt.target.id+'Form').setAttribute('value',evt.target.value);
+	}
 	var img = document.getElementById('imageHolder').querySelector('img');
 	var nrows = parseInt(document.getElementById('nrows').value);
 	var ncols = parseInt(document.getElementById('ncols').value);
+	document.getElementById('npieces').setAttribute('value',nrows*ncols);
 	var pointyFactor = parseFloat(document.getElementById('pointyFactor').value)/10;
 	var heightFactor = parseFloat(document.getElementById('heightFactor').value)/10;
 	var widthFactor = parseFloat(document.getElementById('widthFactor').value)/10;
@@ -323,6 +329,8 @@ function getRightLine(x0,x1,y0,y1,i,ncols,actwidth,actheight,pointyFactor,height
 }
 document.getElementById('npieces').addEventListener('change',updateNpieces);
 document.getElementById('size').addEventListener('change',updateSize);
+document.getElementById('nrows').addEventListener('change',updateLines);
+document.getElementById('ncols').addEventListener('change',updateLines);
 document.getElementById('pointyFactor').addEventListener('change',updateLines);
 document.getElementById('heightFactor').addEventListener('change',updateLines);
 document.getElementById('widthFactor').addEventListener('change',updateLines);
