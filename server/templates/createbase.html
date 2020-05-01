@@ -261,17 +261,7 @@ svg {
 {% endblock %}
 {% block content33 %}
 <textarea id="scriptTextarea" rows="10" columns="80" class="prism-live language-js">
-var players={};
-function newPlayer(username){
-	var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
-	players[username]={score:0,color:color};
-}
-function newMerge(username,matches){
-	players[username].score++;
-	var score = {};
-	score[username]=players[username].score;
-	return {'css':{stroke: players[username].color},'message':'Merge','accept':true,'score':score};
-}
+{{ defaultScripts[0] }}
 </textarea>
 {% endblock %}
 

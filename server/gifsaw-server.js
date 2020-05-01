@@ -265,7 +265,7 @@ app.post('/create',
 			var piece = {id:'video'+(i+1),rotation:retval[3][i],location:retval[2][i],centers:retval[1][i]};
 			pieces.push(piece);
 		}
-		var defaultScripts = makeScripts();
+		
 		var htmlstr = nunjucks.render('templates/basepuzzle.html',{
 			gametype: gametype,
 			players: players,
@@ -298,7 +298,7 @@ app.post('/create',
 
 			{% endif %}`,
 			initialCSS: '{{ initialCSS }}',
-			defaultScripts: defaultScripts,
+			
 			
 		});
 		
@@ -330,9 +330,9 @@ app.post('/create',
 app.get('/create', 
 	
 	function(req, res) {
-		
+		var defaultScripts = makeScripts();
 		res.write(nunjucks.render('templates/createbase.html',{
-			
+			defaultScripts: defaultScripts,
 		}));
 		res.end();
 	}
