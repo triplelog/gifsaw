@@ -503,7 +503,7 @@ wss.on('connection', function connection(ws) {
 			}
 			else {
 				inSrc = 'static/img/in/'+imgid+ext;
-				var wget = 'wget -O '+inSrc+' '+ url + '" && echo "done"';
+				var wget = 'wget -O '+inSrc+' "'+ url + '" && echo "done"';
 				console.log(wget);
 				var child = exec(wget, function(err, stdout, stderr) {
 					if (err){console.log(err)}
