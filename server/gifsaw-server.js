@@ -413,7 +413,7 @@ wss.on('connection', function connection(ws) {
   	var username = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
   	var puzzleid = '';
   	var myroom = false;
-  	var maxsize = 2000000; //1000000~1MB
+  	var maxsize = 1000000; //1000000~1MB
   	ws.on('message', function incoming(message) {
 		if (typeof message !== 'string'){
 			console.log("af",performance.now());
@@ -508,7 +508,7 @@ wss.on('connection', function connection(ws) {
 			}
 			else {
 				inSrc = 'static/img/in/'+imgid+ext;
-				var wget = '(ulimit -f '+maxsize/1000+'; wget -O '+inSrc+' "'+ url + '")';
+				var wget = '(ulimit -f '+maxsize/512+'; wget -O '+inSrc+' "'+ url + '")';
 				var child = exec(wget, function(err, stdout, stderr) {
 					if (err){
 						console.log(err);
