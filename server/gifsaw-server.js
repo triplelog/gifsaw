@@ -193,8 +193,8 @@ app.post('/solo',
 			
 		});
 		fs.writeFile("static/"+bgtype+bgid+".html", htmlstr, function (err2) {
-			if (err){
-				console.log(err);
+			if (err2){
+				console.log(err2);
 				res.redirect('../create');
 			}
 			else {
