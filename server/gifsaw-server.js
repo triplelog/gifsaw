@@ -489,6 +489,35 @@ wss.on('connection', function connection(ws) {
 			}
 			return;
 		}
+		else if (dm.type && dm.type == 'download') {
+			var url = dm.url;
+			var ext = '';
+			for (var i=0;i<imgTypes.length;i++){
+				if (url.indexOf(imgTypes[i])==url.length-imgTypes[i].length){
+					ext = imgTypes[i];
+				}
+			}
+			if (ext == ''){
+				//send message rejecting
+				return;
+			}
+			else {
+				inSrc = 'static/img/in/'+imgid+ext;
+				var wget = 'wget -O '+inSrc+' '+ url + '" && echo "done"';
+				var child = exec(wget, function(err, stdout, stderr) {
+					if (err){}
+					else {
+						if (err){console.log(err);}
+						console.log("cf",performance.now());
+						var jsonmessage = {'type':'imageSrc','src':inSrc.replace('static/','../')};
+						ws.send(JSON.stringify(jsonmessage));
+					}
+				
+				});
+			}
+		
+			return;
+		}
 		else if (dm.type == 'possMatch'){
 			if (dm.message && dm.message.length>1){
 				var tomatch = socketanswer(dm.message[1],matches);
