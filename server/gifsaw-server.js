@@ -127,6 +127,8 @@ app.post('/solo',
 		var fullname = bgtype+bgid+".gif";
 		var fname = fullname.substring(0,fullname.indexOf('.'));
 		var dimensions = sizeOf('static/img/' + fullname);
+		var dimvid = sizeOf('static/gifs/aerial.mp4');
+		console.log(dimvid);
 		//compute nrows and ncols
 		var np = getNpieces(parseInt(req.body.pieces),dimensions.width,dimensions.height);
 		var nrows = np[0];
