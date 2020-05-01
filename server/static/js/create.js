@@ -145,7 +145,7 @@ function updateSize(evt) {
 	
 }
 function updateLines(evt) {
-	if (evt.target.id == 'pointyFactor' || evt.target.id == 'heightFactor' || evt.target.id == 'widthFactor'){
+	if (evt && (evt.target.id == 'pointyFactor' || evt.target.id == 'heightFactor' || evt.target.id == 'widthFactor')){
 		document.getElementById(evt.target.id+'Form').setAttribute('value',evt.target.value);
 	}
 	var img = document.getElementById('imageHolder').querySelector('img');
