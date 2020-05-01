@@ -494,7 +494,8 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 	var locations = [];
 	var rotations = [];
 	var matches = {};
-	const bottomcode = new VMScript(`
+	var bottomcodes = [];
+	bottomcodes.push(new VMScript(`
 	w = x1-x0;
 	if (w<0){w *= -1;}
 	if (y1-y0<0 && y0-y1<w){w=y0-y1;}
@@ -512,7 +513,26 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 	if (i/ncols >= nrows-1){
 		line = [{'M':[x0,y1]},{'L':[x1,y1]}];
 	}
-	line;`);
+	line;`));
+	bottomcodes.push(new VMScript(`
+	w = x1-x0;
+	if (w<0){w *= -1;}
+	if (y1-y0<0 && y0-y1<w){w=y0-y1;}
+	else if (y1-y0>0 && y1-y0<w){w=y1-y0;}
+	c = (x0+x1)/2;
+	
+	ww = w;
+	if (x0>x1){ww = -1*w;}
+	w /= heightFactor;
+	ww /= widthFactor;
+	line = [{'M':[x0,y1]}];
+	line.push({'L':[c-ww,y1]});
+	line.push({'C':[c-ww/pointyFactor,y1-w,c+ww/pointyFactor,y1-w,c+ww,y1]})
+	line.push({'L':[x1,y1]});
+	if (i/ncols >= nrows-1){
+		line = [{'M':[x0,y1]},{'L':[x1,y1]}];
+	}
+	line;`));
 	var rightcodes = [];
 	rightcodes.push(new VMScript(`
 	w = x1-x0;
@@ -601,6 +621,22 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		
 		
 		var rightcode = rightcodes[Math.floor(Math.random()*2)];
+		var bottomcode = bottomcodes[Math.floor(Math.random()*2)];
+		if (i < ncols){
+			bottomcode = bottomcodes[1];
+		}
+		else if (i < 2*ncols){
+			bottomcode = bottomcodes[0];
+		}
+		
+		if (i%ncols == 0){rightcode = rightcodes[1];}
+		if (i%ncols == 1){rightcode = rightcodes[0];}
+		if (i%ncols == 2){rightcode = rightcodes[1];}
+		if (i%ncols == 3){rightcode = rightcodes[1];}
+		if (i%ncols == 4){rightcode = rightcodes[1];}
+		if (i%ncols == 5){rightcode = rightcodes[1];}
+		if (i%ncols == 6){rightcode = rightcodes[0];}
+		
 		if ((i%ncols)%2 == Math.floor(i/ncols)%2){
 			var left = x0+','+y0+' '+x0+','+y1+' ';
 			var rightArray = getRightLine(vm,rightcode,x0,x1,y0,y1,i,ncols);
