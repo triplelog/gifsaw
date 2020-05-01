@@ -82,7 +82,8 @@ var _ = Prism.Live = class PrismLive {
 
 		$.bind(this.textarea, {
 			input: evt => this.update(),
-
+			change: evt => this.update(),
+			
 			keyup: evt => {
 				if (evt.key == "Enter") { // Enter
 					// Maintain indent on line breaks
