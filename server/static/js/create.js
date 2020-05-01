@@ -146,12 +146,13 @@ function updateSize(evt) {
 }
 function updateLines(evt) {
 	if (evt && (evt.target.id == 'pointyFactor' || evt.target.id == 'heightFactor' || evt.target.id == 'widthFactor')){
-		document.getElementById(evt.target.id+'Form').setAttribute('value',evt.target.value);
+		document.getElementById(evt.target.id+'Form').value = parseInt(evt.target.value);
 	}
 	var img = document.getElementById('imageHolder').querySelector('img');
 	var nrows = parseInt(document.getElementById('nrows').value);
 	var ncols = parseInt(document.getElementById('ncols').value);
-	document.getElementById('npieces').setAttribute('value',nrows*ncols);
+	document.getElementById('npieces').value = parseInt(nrows*ncols);
+	
 	document.getElementById('nrowsForm').value = nrows;
 	document.getElementById('ncolsForm').value = ncols;
 	var pointyFactor = parseFloat(document.getElementById('pointyFactor').value)/10;
