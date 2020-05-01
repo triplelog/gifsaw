@@ -493,12 +493,10 @@ wss.on('connection', function connection(ws) {
 			var url = dm.url;
 			var ext = '';
 			for (var i=0;i<imgTypes.length;i++){
-				console.log(imgTypes[i],url.indexOf(imgTypes[i]));
 				if (url.indexOf(imgTypes[i])==url.length-imgTypes[i].length){
 					ext = imgTypes[i];
 				}
 			}
-			console.log(ext)
 			if (ext == ''){
 				//send message rejecting
 				return;
@@ -506,11 +504,10 @@ wss.on('connection', function connection(ws) {
 			else {
 				inSrc = 'static/img/in/'+imgid+ext;
 				var wget = 'wget -O '+inSrc+' '+ url + '" && echo "done"';
+				console.log(wget);
 				var child = exec(wget, function(err, stdout, stderr) {
-					if (err){}
+					if (err){console.log(err)}
 					else {
-						if (err){console.log(err);}
-						console.log("cf",performance.now());
 						var jsonmessage = {'type':'imageSrc','src':inSrc.replace('static/','../')};
 						ws.send(JSON.stringify(jsonmessage));
 					}
