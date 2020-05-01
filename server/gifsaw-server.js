@@ -49,7 +49,8 @@ app.get('/index.html',
 app.get('/', 
 	
 	function(req, res) {
-		var vm = new VM();
+		/*var vm = new VM();
+		
 		var retval = makelines(vm,false,3000,500,3,18,.4,3,5.0);
 		
 		var letters = ['G','I','F','S','A','W'];
@@ -58,7 +59,7 @@ app.get('/',
 				<path id="path`+letters[i-19]+`" d="M`+retval[0][i].join('')+`"/>
 		</clipPath>`;
 		console.log(cG);
-		}
+		}*/
 		
 		res.write(nunjucks.render('templates/index.html',{
 			
