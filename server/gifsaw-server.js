@@ -213,7 +213,7 @@ app.post('/solo',
 app.post('/create', 
 	
 	function(req, res) {
-		
+		console.log(req.body);
 		var puzzleid = crypto.randomBytes(100).toString('hex').substr(2, 12);
 		var vm = new VM();
 		var gametype = 'solo';
