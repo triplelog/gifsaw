@@ -705,7 +705,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		
 		var rightcode = rightcodes[Math.floor(Math.random()*2)];
 		var bottomcode = bottomcodes[Math.floor(Math.random()*2)];
-		if (i < ncols){
+		/*if (i < ncols){
 			bottomcode = bottomcodes[1];
 		}
 		else if (i < 2*ncols){
@@ -718,7 +718,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 		if (i%ncols == 3){rightcode = rightcodes[1];}
 		if (i%ncols == 4){rightcode = rightcodes[1];}
 		if (i%ncols == 5){rightcode = rightcodes[1];}
-		if (i%ncols == 6){rightcode = rightcodes[0];}
+		if (i%ncols == 6){rightcode = rightcodes[0];}*/
 		
 		if ((i%ncols)%2 == Math.floor(i/ncols)%2){
 			var left = x0+','+y0+' '+x0+','+y1+' ';
