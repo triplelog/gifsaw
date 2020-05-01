@@ -50,7 +50,7 @@ app.get('/',
 	
 	function(req, res) {
 		var vm = new VM();
-		var retval = makelines(vm,false,3000,500,3,18,.4,2.5,5.0);
+		var retval = makelines(vm,false,3000,500,3,18,.4,3,5.0);
 		
 		var letters = ['G','I','F','S','A','W'];
 		for (var i=19;i<25;i++){
