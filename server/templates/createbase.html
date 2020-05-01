@@ -103,7 +103,7 @@ svg {
 		
 	</span>
 	<span class="titleCenter">
-		<a href="https://sudokufarm.com">Image</a>
+		<a href="https://sudokufarm.com">Options</a>
 	</span>
 	<span class="titleRight">
 		<label for="radio11-1"><i class="fas fa-compress-alt"></i></label>
@@ -113,7 +113,7 @@ svg {
 </div>
 {% endblock %}
 {% block content11 %}
-<div>
+<div class="imgDrag">
 	Image: 
 	<select id="imgType">
 		<option value="upload">Upload</option>
@@ -122,7 +122,16 @@ svg {
 	</select>
 	<input type="file" name="imgSrc" id="imgSrc"></input>
 	<input type="text" name="imgUrl" id="imgUrl"></input>
-	<span id="imgDrag"></span>
+	<div>
+		<label for="npieces">Number of Pieces: </label>
+		<input type="number" id="npieces"></input>
+	</div>
+	<div>
+		<label for="scoring">Scoring: </label>
+		<select id="scoring">
+			<option>Basic</option>
+		</select>
+	</div>
 </div>
 {% endblock %}	
 
@@ -183,9 +192,8 @@ svg {
 {% endblock %}
 {% block content31 %}
 <form action="../create" method="post">
-	<div>
-		<label for="npieces">Number of Pieces</label>
-		<input type="number" id="npieces" name="npieces"></input>
+	<div style="display: none;">
+		<input name="npieces"></input>
 	</div>
 	<div>
 		<label for="size">Size</label>
