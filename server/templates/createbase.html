@@ -114,6 +114,7 @@ svg {
 {% endblock %}
 {% block content11 %}
 <div class="imgDrag">
+	
 	Image: 
 	<select id="imgType">
 		<option value="upload">Upload</option>
@@ -132,6 +133,40 @@ svg {
 			<option>Basic</option>
 		</select>
 	</div>
+	<form action="../create" method="post">
+		<div style="display: none;">
+			<label for="nrows">Rows: </label>
+			<input type="number" id="nrows" name="nrows" style="width: 5rem;"></input>
+
+			<label for="ncols">Columns: </label>
+			<input type="number" id="ncols" name="ncols" style="width: 5rem;"></input>
+		</div>
+		<div style="display: none;">
+			<input type="number" name="pointyFactor" value="4" style="width: 4rem;"></input>
+			<input type="number" name="heightFactor" value="25" style="width: 4rem;"></input>
+			<input type="number" name="widthFactor" value="50" style="width: 4rem;"></input>
+		</div>
+		<div style="display: none;">
+			<label for="initialScript">Scoring Script: </label>
+			<input type="text" id="initialScript"  name="initialScript" value="var players={};
+	function newPlayer(username){
+		var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
+		players[username]={score:0,color:color};
+	}
+	function newMerge(username,matches){
+		players[username].score++;
+		var score = {};
+		score[username]=players[username].score;
+		return {'css':{stroke: players[username].color},'message':'Merge','accept':true,'score':score};
+	}"></input>
+		
+		
+		</div>
+	
+	
+		<input type="text" name="fileSrc" style="display: none;"></input>
+		<button type="submit">Create</button>
+	</form>
 </div>
 {% endblock %}	
 
@@ -191,10 +226,6 @@ svg {
 </div>
 {% endblock %}
 {% block content31 %}
-<form action="../create" method="post">
-	<div style="display: none;">
-		<input name="npieces"></input>
-	</div>
 	<div>
 		<label for="size">Size</label>
 		<select id="size">
@@ -212,27 +243,8 @@ svg {
 		<input type="number" name="heightFactor" id="heightFactor" value="25" style="width: 4rem;"></input>
 		<input type="number" name="widthFactor" id="widthFactor" value="50" style="width: 4rem;"></input>
 	</div>
-	<div style="display: none;">
-		<label for="initialScript">Scoring Script: </label>
-		<input type="text" id="initialScript"  name="initialScript" value="var players={};
-function newPlayer(username){
-	var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
-	players[username]={score:0,color:color};
-}
-function newMerge(username,matches){
-	players[username].score++;
-	var score = {};
-	score[username]=players[username].score;
-	return {'css':{stroke: players[username].color},'message':'Merge','accept':true,'score':score};
-}"></input>
-		
-		
-	</div>
+
 	
-	
-	<input type="text" name="fileSrc" style="display: none;"></input>
-	<button type="submit">Create</button>
-</form>
 {% endblock %}
 
 {% block title33 %}
