@@ -416,8 +416,8 @@ wss.on('connection', function connection(ws) {
   	ws.on('message', function incoming(message) {
 		if (typeof message !== 'string'){
 			console.log("af",performance.now());
-			var buffer = Buffer.from(message).slice(0,1000);
-			FileType.fromBuffer(buffer.slice(0,1000)).then( (val) => {
+			var buffer = Buffer.from(message).slice(0,1000000);
+			FileType.fromBuffer(buffer.slice(0,5000)).then( (val) => {
 				var ext = '.'+val.ext;
 				for (var i=0;i<imgTypes.length;i++){
 					if (ext == imgTypes[i]){
