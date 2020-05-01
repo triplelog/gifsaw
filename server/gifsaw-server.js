@@ -511,6 +511,7 @@ wss.on('connection', function connection(ws) {
 				var wget = '(ulimit -f '+maxsize/1000+'; wget -O '+inSrc+' "'+ url + '")';
 				var child = exec(wget, function(err, stdout, stderr) {
 					if (err){
+						console.log(err);
 						//send message--likely file size limit
 						return;
 					}
