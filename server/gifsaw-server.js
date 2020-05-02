@@ -100,6 +100,11 @@ app.get('/puzzles/:puzzleid',
 			stroke-opacity:1;
 			fill: transparent;
 		}
+		.interiorBorder.myBorder{
+			stroke:white;
+			stroke-width:calc(1.5 * var(--scale));
+			stroke-opacity:.7;
+		}
 		.piece {
 			fill: black;
 			fill-opacity: .01;
