@@ -13,7 +13,7 @@ ws.onmessage = function(evt){
 	//el.innerHTML = '';
 	//el.appendChild(img);
 	document.querySelector('input[name="fileSrc"]').setAttribute('value',dm.src);
-	
+	updateLines();
 }
 
 var imageHeight = false;
