@@ -110,7 +110,12 @@ app.get('/puzzles/:puzzleid',
 			fill-opacity: .01;
 			stroke: none;
 		}`;
-		tempKeys[tkey]={username:'',puzzleid:puzzleid};
+		
+		var username = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
+		if (req.isAuthenticated()){
+			username = req.user.username;
+		}
+		tempKeys[tkey]={username:username,puzzleid:puzzleid};
 		if (!collab){
 			matches = true;
 		}
@@ -119,6 +124,7 @@ app.get('/puzzles/:puzzleid',
 			matches: matches,
 			collab: collab,
 			initialCSS: initialCSS,
+			username: username,
 		}));
 		res.end();
 	}
@@ -308,6 +314,7 @@ app.post('/create',
 
 			{% endif %}`,
 			initialCSS: '{{ initialCSS }}',
+			usernameHolder: 'var username = "{{ username }}";'
 			
 			
 		});
@@ -559,15 +566,14 @@ wss.on('connection', function connection(ws) {
 							//Send acceptMerge.message
 						}
 						else{
-							var jsonmessage = {'type':'foundMatch','message':['video'+dm.message[0],tomatch,'me',acceptMatch]}
+							var jsonmessage = {'type':'foundMatch','message':['video'+dm.message[0],tomatch,username,acceptMatch]}
 							for (var i in myroom.players){
 								if (i != username){
-									jsonmessage.message[2] = username;
 									myroom.players[i].ws.send(JSON.stringify(jsonmessage));
 								}
 								else{
-									myroom.merges.push(['video'+dm.message[0],tomatch,i,acceptMatch]);
-									myroom.players[i].ws.send(JSON.stringify(jsonmessage));
+									myroom.merges.push(['video'+dm.message[0],tomatch,username,acceptMatch]);
+									myroom.players[username].ws.send(JSON.stringify(jsonmessage));
 								}
 							}
 						}
