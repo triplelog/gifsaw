@@ -13,7 +13,7 @@ ws.onmessage = function(evt){
 	//el.innerHTML = '';
 	//el.appendChild(img);
 	document.querySelector('input[name="fileSrc"]').setAttribute('value',dm.src);
-	updateLines();
+	setTimeout(updateLines(),1000);
 }
 
 var imageHeight = false;
@@ -151,6 +151,9 @@ function updateLines(evt) {
 	var img = document.getElementById('imageHolder').querySelector('img');
 	var nrows = parseInt(document.getElementById('nrows').value);
 	var ncols = parseInt(document.getElementById('ncols').value);
+	if (isNaN(nrows) || isNaN(ncols)){
+		return;
+	}
 	document.getElementById('npieces').value = parseInt(nrows*ncols);
 	
 	document.getElementById('nrowsForm').value = nrows;
