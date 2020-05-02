@@ -100,15 +100,19 @@ svg {
 	</span>
 	
 	<label for="npieces" style="grid-column: 1; grid-row: 2;">Number of Pieces</label>
-	<input type="number" id="npieces" style="grid-column: 2; grid-row: 2;"></input>
+	<span style="grid-column: 2; grid-row: 2;">
+		<input type="number" id="npieces"></input>
+	</span>
 
-		<label for="scoring" style="grid-column: 1; grid-row: 3;">Scoring</label>
-		<select id="scoring" style="grid-column: 2; grid-row: 3;">
+	<label for="scoring" style="grid-column: 1; grid-row: 3;">Scoring</label>
+	<span style="grid-column: 2; grid-row: 3;">
+		<select id="scoring">
 			<option value="0">Basic</option>
 			<option value="1">More</option>
 			<option value="2">Less</option>
 			<option value="3">Old</option>
 		</select>
+	</span>
 
 	<form action="../create" method="post" style="grid-column: 1 / 3; grid-row: 4;">
 		<div style="display: none;">
