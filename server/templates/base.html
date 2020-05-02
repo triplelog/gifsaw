@@ -26,21 +26,26 @@
   	grid-template-rows: calc((var(--height-container) - var(--height-center)) / 2) var(--height-center) calc((var(--height-container) - var(--height-center)) / 2);
 }
 
+.container div .title {
+	display: grid;
+	grid-template-columns: 100%;
+  	grid-template-rows: 20% auto 20%;
+
+}
 .container div .title .titleLeft {
-	float: left;
+	grid-column: 1;
 	margin-left: 4px;
-	width: 100px;
 	min-height: 1px;
 	z-index: 3;
 	position: relative;
 }
 .container div .title .titleCenter {
+	grid-column: 2;
 	z-index: 3;
 	position: relative;
 }
 .container div .title .titleRight {
-	float: right;
-	width: 100px;
+	grid-column: 3;
 	min-height: 1px;
 	z-index: 3;
 	position: relative;
@@ -107,7 +112,7 @@
 #radio11-3:checked ~ .content-11 {
 	grid-row:  1 / 4;
 	grid-column:  1 / 4;
-	z-index: 3;
+	z-index: 4;
 }
 
 #radio13-1:checked ~ .content-13 {
@@ -123,7 +128,7 @@
 #radio13-3:checked ~ .content-13 {
 	grid-row:  1 / 4;
 	grid-column:  1 / 4;
-	z-index: 3;
+	z-index: 4;
 }
 
 #radio31-1:checked ~ .content-31 {
@@ -139,7 +144,7 @@
 #radio31-3:checked ~ .content-31 {
 	grid-row:  1 / 4;
 	grid-column:  1 / 4;
-	z-index: 3;
+	z-index: 4;
 }
 
 #radio33-1:checked ~ .content-33 {
@@ -155,7 +160,7 @@
 #radio33-3:checked ~ .content-33 {
 	grid-row:  1 / 4;
 	grid-column:  1 / 4;
-	z-index: 3;
+	z-index: 4;
 }
 /*
 .content-11:hover ~ .content-22 {
@@ -264,6 +269,39 @@ svg {
 	text-decoration: none;
 	line-height: 1.5rem;
 	height: 2rem;
+}
+
+.title {
+	line-height: calc (2 * var(--border-radius));
+	text-align: center;
+	font-size: 1rem;
+	border: 2px solid black;
+  	border-radius: var(--border-radius);
+  	position: relative;
+  	top:-2px;
+  	left:-2px;
+  	width: calc(100% + 0px);
+  	background: red;
+  	background-image: url("../img/nightskysatsmall.jpg");
+  	background-size: 100% 100%;
+  	background-repeat: no-repeat;
+  	background-position: 0px 0px;
+  	color: white;
+  	text-shadow: 0px 0px 10px black;
+}
+
+.title a {
+	text-decoration: none;
+	color: white;
+	font-size: 1.5rem;
+}
+.title a:hover {
+	text-decoration: underline;
+	text-shadow: 0px 0px 10px black 0px 0px 10px black;
+}
+.title label:hover {
+	cursor: pointer;
+	text-shadow: 0px 0px 10px black 0px 0px 10px black;
 }
 
 {% block titleCSS %}
