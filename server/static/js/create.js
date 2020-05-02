@@ -9,15 +9,26 @@ ws.onmessage = function(evt){
 	console.log(dm);
 	//var el = document.getElementById('imageHolder');
 	var img = document.getElementById('imageHolder').querySelector('img');
-	img.setAttribute('src',dm.src);
+	if (img.getAttribute('src')==dm.src){
+		img.setAttribute('src',dm.src+"?1");
+	}
+	else {
+		img.setAttribute('src',dm.src);
+	}
+	
 	//el.innerHTML = '';
 	//el.appendChild(img);
 	document.querySelector('input[name="fileSrc"]').setAttribute('value',dm.src);
 	
+	setTimeout(refreshImg(),300);
+	
+}
+function refreshImg() {
+	var img = document.getElementById('imageHolder').querySelector('img');
+	
 	document.getElementById('imageHolder').style.height= img.height+'px';
 	document.getElementById('imageHolder').style.width= img.width+'px';
 }
-
 var imageHeight = false;
 var imageWidth = false;
 var dimensions = [];
