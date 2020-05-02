@@ -25,7 +25,8 @@ ws.onmessage = function(evt){
 }
 function refreshImg() {
 	var img = document.getElementById('imageHolder').querySelector('img');
-	
+	console.log(img);
+	console.log(img.height);
 	document.getElementById('imageHolder').style.height= img.height+'px';
 	document.getElementById('imageHolder').style.width= img.width+'px';
 }
