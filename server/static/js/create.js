@@ -29,7 +29,7 @@ function refreshImg() {
 	console.log(img.width,img.height);
 	var fullel = img.parentElement.parentElement.parentElement;
 	var titleel = img.parentElement.parentElement.parentElement.querySelector('title');
-	console.log(fullel.clientWidth,fullel.clientHeight-titleel.clientHeight);
+	console.log(fullel);//.clientWidth,fullel.clientHeight-titleel.clientHeight);
 	document.getElementById('imageHolder').style.height= img.height+'px';
 	document.getElementById('imageHolder').style.width= img.width+'px';
 }
