@@ -13,7 +13,9 @@ ws.onmessage = function(evt){
 	//el.innerHTML = '';
 	//el.appendChild(img);
 	document.querySelector('input[name="fileSrc"]').setAttribute('value',dm.src);
-	setTimeout(updateLines(),1000);
+	
+	document.getElementById('imageHolder').style.height= img.height+'px';
+	document.getElementById('imageHolder').style.width= img.width+'px';
 }
 
 var imageHeight = false;
