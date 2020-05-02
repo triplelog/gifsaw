@@ -28,8 +28,11 @@ function refreshImg() {
 	var img = document.getElementById('imageHolder').querySelector('img');
 	console.log(img.width,img.height);
 	var fullel = img.parentElement.parentElement.parentElement;
-	var titleel = img.parentElement.parentElement.parentElement.querySelector('title');
-	console.log(fullel);//.clientWidth,fullel.clientHeight-titleel.clientHeight);
+	var titleel = img.parentElement.parentElement.parentElement.querySelector('.title');
+	console.log(fullel.clientWidth,fullel.clientHeight-titleel.clientHeight);
+	var availWidth = fullel.clientWidth;
+	var availHeight = fullel.clientHeight-titleel.clientHeight;
+	if (img.height>availHeight){}
 	document.getElementById('imageHolder').style.height= img.height+'px';
 	document.getElementById('imageHolder').style.width= img.width+'px';
 }
