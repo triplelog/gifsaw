@@ -23,7 +23,7 @@ function socketanswer(piece1,pairs) {
 
 }
 
-function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
+function socketmerge(piece1,pairs,scoringUser,wsMessage=false) {
 	var video1 = document.getElementById(piece1);
 	if (video1) {
 		var p1 = document.getElementById('path'+piece1.substr(5,));
@@ -75,12 +75,12 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 				el1.classList.remove('top');
 				el1.classList.remove('bottom');
 				el1.classList.remove('pieceBorder');
-				if (cssJson){
-					for (i in cssJson){
-						el1.style[i]=cssJson[i];
+				if (wsMessage && wsMessage.css){
+					for (i in wsMessage.css){
+						el1.style[i]=wsMessage.css[i];
 					}
 				}
-				if (scoringUser == username){
+				if (scoringUser == username || scoringUser == 'me'){
 					el1.classList.add('myBorder');
 				}
 				
@@ -157,18 +157,38 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 		}
 		p1.setAttribute('d', p1d);
 		if (keepscore) {
-			if (score[scoringUser]){
-				score[scoringUser] += mypoints;
-				document.getElementById('score-'+scoringUser).innerHTML = scoringUser+': '+score[scoringUser];
+			if (wsMessage){
+				if (wsMessage.score){
+					for (var ii in wsMessage.score){
+						var el = document.getElementById('score-'+ii);
+						if (el){
+							el.textContent = ii+': '+wsMessage.score[ii];
+						}
+						else {
+							var scorediv = document.getElementById('scorediv');
+							var newDiv = document.createElement("div");
+							newDiv.id = 'score-'+ii;
+							newDiv.textContent = ii+': '+wsMessage.score[ii];
+							scorediv.appendChild(newDiv);
+						}
+					}
+				}
 			}
 			else {
-				score[scoringUser] = mypoints;
-				var scorediv = document.getElementById('scorediv');
-				var newDiv = document.createElement("div");
-				newDiv.id = 'score-'+scoringUser;
-				newDiv.innerHTML = scoringUser+': '+score[scoringUser];
-				scorediv.appendChild(newDiv);
+				if (score[scoringUser]){
+					score[scoringUser] += mypoints;
+					document.getElementById('score-'+scoringUser).innerHTML = scoringUser+': '+score[scoringUser];
+				}
+				else {
+					score[scoringUser] = mypoints;
+					var scorediv = document.getElementById('scorediv');
+					var newDiv = document.createElement("div");
+					newDiv.id = 'score-'+scoringUser;
+					newDiv.innerHTML = scoringUser+': '+score[scoringUser];
+					scorediv.appendChild(newDiv);
+				}
 			}
+			
 		}
 		document.getElementById('progressdiv').value = merges*100/(ncols*(nrows-1)+nrows*(ncols-1));
 		
