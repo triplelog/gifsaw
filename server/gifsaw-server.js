@@ -314,7 +314,7 @@ app.post('/create',
 
 			{% endif %}`,
 			initialCSS: '{{ initialCSS }}',
-			usernameHolder: 'var username = "{{ username }}";'
+			usernameHolder: '{{ username }}',
 			
 			
 		});
