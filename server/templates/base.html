@@ -215,8 +215,8 @@ svg {
 
 .title {
 	border-radius: var(--border-radius);
-	line-height: calc (2 * var(--border-radius));
-	height: calc (2 * var(--border-radius));
+	line-height: calc(2 * var(--border-radius));
+	height: calc(2 * var(--border-radius));
 	text-align: center;
 	font-size: 1rem;
 	border: 2px solid black;
@@ -250,7 +250,7 @@ svg {
 .container div .title {
 	display: grid;
 	grid-template-columns: 1fr auto 1fr;
-  	grid-template-rows: calc (2 * var(--border-radius));
+  	grid-template-rows: max-content;
   	justify-content: stretch;
 
 }
@@ -260,28 +260,28 @@ svg {
 	min-height: 1px;
 	z-index: 3;
 	position: relative;
-	line-height: calc (2 * var(--border-radius));
-	height: calc (2 * var(--border-radius));
+	line-height: calc(2 * var(--border-radius));
+	height: calc(2 * var(--border-radius));
 }
 .container div .title .titleCenter {
 	grid-column: 2;
 	z-index: 3;
 	position: relative;
-	line-height: calc (2 * var(--border-radius));
-	height: calc (2 * var(--border-radius));
+	line-height: calc(2 * var(--border-radius));
+	height: calc(2 * var(--border-radius));
 }
 .container div .title .titleRight {
 	grid-column: 3;
 	min-height: 1px;
 	z-index: 3;
 	position: relative;
-	line-height: calc (2 * var(--border-radius));
-	height: calc (2 * var(--border-radius));
+	line-height: calc(2 * var(--border-radius));
+	height: calc(2 * var(--border-radius));
 }
 .container div .title .titleRight label{
 	margin-right: calc(var(--border-radius) / 3);
-	height: calc (2 * var(--border-radius));
-	line-height: calc (2 * var(--border-radius));
+	height: calc(2 * var(--border-radius));
+	line-height: calc(2 * var(--border-radius));
 	float: right;
 }
 
