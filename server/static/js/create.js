@@ -9,6 +9,7 @@ ws.onmessage = function(evt){
 	console.log(dm);
 	//var el = document.getElementById('imageHolder');
 	var img = document.getElementById('imageHolder').querySelector('img');
+	img.addEventListener('load',refreshImg);
 	if (img.getAttribute('src')==dm.src){
 		img.setAttribute('src',dm.src+"?1");
 	}
@@ -20,7 +21,7 @@ ws.onmessage = function(evt){
 	//el.appendChild(img);
 	document.querySelector('input[name="fileSrc"]').setAttribute('value',dm.src);
 	
-	setTimeout(refreshImg,3000);
+	setTimeout(refreshImg,100);
 	
 }
 function refreshImg() {
