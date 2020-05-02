@@ -9,13 +9,14 @@ ws.onmessage = function(evt){
 	console.log(dm);
 	//var el = document.getElementById('imageHolder');
 	var img = document.getElementById('imageHolder').querySelector('img');
-	img.addEventListener('load',refreshImg);
+	
 	if (img.getAttribute('src')==dm.src){
 		img.setAttribute('src',dm.src+"?1");
 	}
 	else {
 		img.setAttribute('src',dm.src);
 	}
+	img.addEventListener('load',refreshImg);
 	
 	//el.innerHTML = '';
 	//el.appendChild(img);
@@ -26,6 +27,9 @@ ws.onmessage = function(evt){
 }
 function refreshImg() {
 	var img = document.getElementById('imageHolder').querySelector('img');
+	img.width = "";
+	img.height = "";
+	img = document.getElementById('imageHolder').querySelector('img');
 	var fullel = img.parentElement.parentElement.parentElement;
 	var titleel = img.parentElement.parentElement.parentElement.querySelector('.title');
 	var availWidth = fullel.clientWidth;
