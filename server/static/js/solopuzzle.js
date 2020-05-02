@@ -80,6 +80,9 @@ function socketmerge(piece1,pairs,scoringUser,cssJson=false) {
 						el1.style[i]=cssJson[i];
 					}
 				}
+				if (scoringUser == 'me'){
+					el1.classList.add('myBorder');
+				}
 				
 			}
 			
