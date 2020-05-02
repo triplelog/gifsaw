@@ -284,14 +284,18 @@ svg {
 	line-height: calc(2 * var(--border-radius));
 	float: right;
 }
-
+.buttonHolder {
+	display: grid;
+	grid-template-columns: auto;
+  	grid-template-rows: max-content;
+  	justify-content: center;
+}
 button.submit {
 	color: #fff !important;
 	text-decoration: none;
 	background: #ed3330;
-	padding: 1rem;
+	padding: .5rem 1.5rem;
 	border-radius: .5rem;
-	display: inline-block;
 	border: none;
 	transition: all 0.4s ease 0s;
 	font-size: 1.25rem;
