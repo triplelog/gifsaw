@@ -25,7 +25,8 @@ function handleDrop(e) {
 	document.getElementById('imgSrc').style.display = 'none';
 	document.getElementById('imgUrl').style.display = 'none';
 	document.getElementById('imgType').value = 'drag';
-	//add message somewhere that image uploaded
+	document.getElementById('imgDragText').style.display = 'inline-block';
+	document.getElementById('imgDragText').textContent = 'Image Loaded';
 }
 
 
@@ -54,14 +55,18 @@ function chgImgType(evt){
 	if (imgType == 'upload'){
 		document.getElementById('imgSrc').style.display = 'inline-block';
 		document.getElementById('imgUrl').style.display = 'none';
+		document.getElementById('imgDragText').style.display = 'none';
 	}
 	else if (imgType == 'url'){
 		document.getElementById('imgSrc').style.display = 'none';
 		document.getElementById('imgUrl').style.display = 'inline-block';
+		document.getElementById('imgDragText').style.display = 'none';
 	}
 	else if (imgType == 'drag'){
 		document.getElementById('imgSrc').style.display = 'none';
 		document.getElementById('imgUrl').style.display = 'none';
+		document.getElementById('imgDragText').style.display = 'inline-block';
+		document.getElementById('imgDragText').textContent = 'Drag Image Here';
 	}
 }
 document.getElementById('imgType').addEventListener('change', chgImgType);
@@ -87,4 +92,5 @@ function sendImage(img) {
 
 document.getElementById('imgSrc').style.display = 'inline-block';
 document.getElementById('imgUrl').style.display = 'none';
+document.getElementById('imgDragText').style.display = 'none';
 
