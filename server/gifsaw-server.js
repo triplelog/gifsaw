@@ -114,6 +114,8 @@ app.get('/puzzles/:puzzleid',
 		var username = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
 		if (req.isAuthenticated()){
 			username = req.user.username;
+			//Load user's initialCSS here
+			//initialCSS = ;
 		}
 		tempKeys[tkey]={username:username,puzzleid:puzzleid};
 		if (!collab){
