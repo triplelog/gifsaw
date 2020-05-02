@@ -10,12 +10,8 @@ ws.onmessage = function(evt){
 	//var el = document.getElementById('imageHolder');
 	var img = document.getElementById('imageHolder').querySelector('img');
 	
-	if (img.getAttribute('src')==dm.src){
-		img.setAttribute('src',dm.src+"?1");
-	}
-	else {
-		img.setAttribute('src',dm.src);
-	}
+	img.setAttribute('src',dm.src+"?"+Math.floor(Math.random()*10000));
+
 	img.addEventListener('load',refreshImg);
 	
 	//el.innerHTML = '';
