@@ -84,10 +84,11 @@ svg {
 </div>
 {% endblock %}
 {% block content11 %}
-<div class="imgDrag">
+<div class="imgDrag formHolder">
 	
-	Image: 
-	<select id="imgType">
+	
+	<span style="grid-column: 1; grid-row: 1;">Image</span>
+	<select id="imgType" style="grid-column: 2; grid-row: 1;">
 		<option value="upload">Upload</option>
 		<option value="url">URL</option>
 		<option value="drag">Drag/Drop</option>
@@ -108,7 +109,7 @@ svg {
 			<option value="3">Old</option>
 		</select>
 	</div>
-	<form action="../create" method="post">
+	<form action="../create" method="post" style="grid-column: 1 / 3;">
 		<div style="display: none;">
 			<label for="nrows">Rows: </label>
 			<input type="number" id="nrowsForm" name="nrows" style="width: 5rem;"></input>
