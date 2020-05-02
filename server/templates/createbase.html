@@ -199,22 +199,40 @@ svg {
 </div>
 {% endblock %}
 {% block content31 %}
-	<div>
-		<label for="size">Size</label>
-		<select id="size">
-		</select>
-	</div>
-	<div>
-		<label for="nrows">Rows: </label>
-		<input type="number" id="nrows" name="nrows" style="width: 5rem;"></input>
+	<div class="formHolder">
 
-		<label for="ncols">Columns: </label>
-		<input type="number" id="ncols" name="ncols" style="width: 5rem;"></input>
-	</div>
-	<div>
-		<input type="number" name="pointyFactor" id="pointyFactor" value="4" style="width: 4rem;"></input>
-		<input type="number" name="heightFactor" id="heightFactor" value="25" style="width: 4rem;"></input>
-		<input type="number" name="widthFactor" id="widthFactor" value="50" style="width: 4rem;"></input>
+		<label for="size" style="grid-column: 1; grid-row: 1; text-align: right;">Size: </label>
+		<span  style="grid-column: 2; grid-row: 1;">
+			<select id="size">
+			</select>
+		</span>
+
+		<label for="nrows" style="grid-column: 1; grid-row: 2; text-align: right;">Rows: </label>
+		<span  style="grid-column: 2; grid-row: 2;">
+			<input type="number" id="nrows" name="nrows" style="width: 5rem;"></input>
+		</span>
+
+		<label for="ncols" style="grid-column: 1; grid-row: 3; text-align: right;">Columns: </label>
+		<span  style="grid-column: 2; grid-row: 3;">
+			<input type="number" id="ncols" name="ncols" style="width: 5rem;"></input>
+		</span>
+
+		<label for="pointyFactor" style="grid-column: 1; grid-row: 4; text-align: right;">Pointiness: </label>
+		<span  style="grid-column: 2; grid-row: 4;">
+			<input type="number" name="pointyFactor" id="pointyFactor" value="4" style="width: 4rem;"></input>
+		</span>
+		
+		<label for="heightFactor" style="grid-column: 1; grid-row: 5; text-align: right;">Height: </label>
+		<span  style="grid-column: 2; grid-row: 5;">
+			<input type="number" name="heightFactor" id="heightFactor" value="25" style="width: 4rem;"></input>
+		</span>
+		
+		<label for="widthFactor" style="grid-column: 1; grid-row: 6; text-align: right;">Width: </label>
+		<span  style="grid-column: 2; grid-row: 6;">
+			<input type="number" name="widthFactor" id="widthFactor" value="50" style="width: 4rem;"></input>
+		</span>
+		
+		
 	</div>
 
 	
