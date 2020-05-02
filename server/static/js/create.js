@@ -27,9 +27,8 @@ ws.onmessage = function(evt){
 }
 function refreshImg() {
 	var img = document.getElementById('imageHolder').querySelector('img');
-	img.width = "";
-	img.height = "";
-	img = document.getElementById('imageHolder').querySelector('img');
+	img.removeAttribute('width');
+	img.removeAttribute('height');
 	var fullel = img.parentElement.parentElement.parentElement;
 	var titleel = img.parentElement.parentElement.parentElement.querySelector('.title');
 	var availWidth = fullel.clientWidth;
