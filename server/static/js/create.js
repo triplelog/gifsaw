@@ -20,7 +20,7 @@ ws.onmessage = function(evt){
 	//el.appendChild(img);
 	document.querySelector('input[name="fileSrc"]').setAttribute('value',dm.src);
 	
-	setTimeout(refreshImg(),300);
+	setTimeout(refreshImg(),3000);
 	
 }
 function refreshImg() {
