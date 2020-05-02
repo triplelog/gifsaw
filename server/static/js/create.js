@@ -25,6 +25,9 @@ ws.onmessage = function(evt){
 	setTimeout(refreshImg,100);
 	
 }
+document.getElementById('radio13-1').addEventListener('click',refreshImg);
+document.getElementById('radio13-2').addEventListener('click',refreshImg);
+document.getElementById('radio13-3').addEventListener('click',refreshImg);
 function refreshImg() {
 	var img = document.getElementById('imageHolder').querySelector('img');
 	img.removeAttribute('width');
