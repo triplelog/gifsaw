@@ -634,6 +634,68 @@ function newMerge(username,matches){
 	
 	script = `var players={};
 function newPlayer(username){
+	players[username]={score:0};
+}
+function newMerge(username,matches){
+	players[username].score+= matches.length;
+	var score = {};
+	score[username]=players[username].score;
+	return {'message':'Merge','accept':true,'score':score};
+}`;
+	defaultScripts.push(script);
+	
+	script = `var players={};
+function newPlayer(username){
+	players[username]={score:0};
+}
+function newMerge(username,matches){
+	if (matches.length > 0){
+		players[username].score+= 1/matches.length;
+	}
+	var score = {};
+	score[username]=players[username].score;
+	return {'message':'Merge','accept':true,'score':score};
+}`;
+	defaultScripts.push(script);
+	
+	script = `var players={};
+function newPlayer(username){
+	players[username]={score:0};
+}
+function newMerge(username,matches){
+	players[username].score++;
+	var score = {};
+	score[username]=players[username].score;
+	return {'message':'Merge','accept':true,'score':score};
+}`;
+	defaultScripts.push(script);
+	
+	script = `var players={};
+function newPlayer(username){
+	players[username]={score:0};
+}
+function newMerge(username,matches){
+	players[username].score++;
+	var score = {};
+	score[username]=players[username].score;
+	return {'message':'Merge','accept':true,'score':score};
+}`;
+	defaultScripts.push(script);
+	
+	script = `var players={};
+function newPlayer(username){
+	players[username]={score:0};
+}
+function newMerge(username,matches){
+	players[username].score++;
+	var score = {};
+	score[username]=players[username].score;
+	return {'message':'Merge','accept':true,'score':score};
+}`;
+	defaultScripts.push(script);
+	
+	script = `var players={};
+function newPlayer(username){
 	var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
 	players[username]={score:0,color:color};
 }
