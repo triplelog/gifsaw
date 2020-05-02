@@ -26,37 +26,7 @@
   	grid-template-rows: calc((var(--height-container) - var(--height-center)) / 2) var(--height-center) calc((var(--height-container) - var(--height-center)) / 2);
 }
 
-.container div .title {
-	display: grid;
-	grid-template-columns: 1fr auto 1fr;
-  	grid-template-rows: 100%;
-  	justify-content: stretch;
 
-}
-.container div .title .titleLeft {
-	grid-column: 1;
-	margin-left: 4px;
-	min-height: 1px;
-	z-index: 3;
-	position: relative;
-}
-.container div .title .titleCenter {
-	grid-column: 2;
-	z-index: 3;
-	position: relative;
-}
-.container div .title .titleRight {
-	grid-column: 3;
-	min-height: 1px;
-	z-index: 3;
-	position: relative;
-}
-.container div .title .titleRight label{
-	margin-right: calc(var(--border-radius) / 3);
-	height: calc (2 * var(--border-radius));
-	line-height: calc (2 * var(--border-radius));
-	float: right;
-}
 
 .content-11 {
 	grid-row:  1;
@@ -244,12 +214,13 @@ svg {
 }
 
 .title {
+	border-radius: var(--border-radius);
 	line-height: calc (2 * var(--border-radius));
 	height: calc (2 * var(--border-radius));
 	text-align: center;
 	font-size: 1rem;
 	border: 2px solid black;
-  	border-radius: var(--border-radius);
+  	
   	position: relative;
   	top:-2px;
   	left:-2px;
@@ -275,6 +246,37 @@ svg {
 .title label:hover {
 	cursor: pointer;
 	text-shadow: 0px 0px 10px black 0px 0px 10px black;
+}
+.container div .title {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+  	grid-template-rows: 100%;
+  	justify-content: stretch;
+
+}
+.container div .title .titleLeft {
+	grid-column: 1;
+	margin-left: 4px;
+	min-height: 1px;
+	z-index: 3;
+	position: relative;
+}
+.container div .title .titleCenter {
+	grid-column: 2;
+	z-index: 3;
+	position: relative;
+}
+.container div .title .titleRight {
+	grid-column: 3;
+	min-height: 1px;
+	z-index: 3;
+	position: relative;
+}
+.container div .title .titleRight label{
+	margin-right: calc(var(--border-radius) / 3);
+	height: calc (2 * var(--border-radius));
+	line-height: calc (2 * var(--border-radius));
+	float: right;
 }
 
 {% block titleCSS %}
