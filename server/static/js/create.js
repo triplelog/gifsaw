@@ -26,13 +26,23 @@ ws.onmessage = function(evt){
 }
 function refreshImg() {
 	var img = document.getElementById('imageHolder').querySelector('img');
-	console.log(img.width,img.height);
 	var fullel = img.parentElement.parentElement.parentElement;
 	var titleel = img.parentElement.parentElement.parentElement.querySelector('.title');
-	console.log(fullel.clientWidth,fullel.clientHeight-titleel.clientHeight);
 	var availWidth = fullel.clientWidth;
 	var availHeight = fullel.clientHeight-titleel.clientHeight;
-	if (img.height>availHeight){}
+	console.log(img.width,img.height);
+	if (img.height>availHeight || img.width > availWidth){
+		var imgRatio = img.height/img.width;
+		if (img.height/availHeight > img.width / availWidth){
+			img.height = availHeight;
+			img.width = img.height/imgRatio;
+		}
+		else {
+			img.width = availWidth;
+			img.height = img.width*imgRatio;
+		}
+	}
+	console.log(img.width,img.height);
 	document.getElementById('imageHolder').style.height= img.height+'px';
 	document.getElementById('imageHolder').style.width= img.width+'px';
 }
