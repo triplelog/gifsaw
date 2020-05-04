@@ -197,7 +197,7 @@ var w = window.innerWidth || document.documentElement.clientWidth || document.bo
 var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 console.log(w,gifwidth);
 var i= 2;
-while (cwidth > w || cheight > h){
+while (cwidth > w * .67 || cheight > h * .67){
 	cwidth = gifwidth/i;
 	cheight = gifheight/i;
 	for (var ii=0;ii<ncols*nrows;ii++){
