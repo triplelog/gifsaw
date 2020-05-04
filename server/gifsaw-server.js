@@ -1126,7 +1126,7 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 	plines = clines;
 	console.log(performance.now());
 	for (var i=0;i<ncols*nrows;i++){
-		locations.push([Math.floor(Math.random()*600),10+Math.floor(Math.random()*300)])
+		locations.push([Math.random(),Math.random()])
 	}
 	
 	for (var i=0;i<ncols*nrows;i++){
