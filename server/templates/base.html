@@ -14,12 +14,13 @@
 	display: grid;
 	--height-container: calc(100vh - 3rem);
 	--width-container: calc(100vw - 3rem);
-	height: var(--height-container);
-	width: var(--width-container);
+	
 	{% block centerSize %}
 	{% endblock %}
 	{% block borderRadius %}
 	{% endblock %}
+	height: var(--height-container);
+	width: var(--width-container);
 	margin: 1rem auto;
 	/*border: 1px dotted blue;*/
 	grid-template-columns: calc((var(--width-container) - var(--width-center)) / 2) var(--width-center) calc((var(--width-container) - var(--width-center)) / 2);
