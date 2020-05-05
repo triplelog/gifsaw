@@ -9,8 +9,8 @@
 {% endblock %}
 	
 {% block centerSize %}
-	--height-center: {{ image.height }};
-	--width-center: {{ image.width }};
+	--height-center: calc({{ image.height }}px * 7 / 6);
+	--width-center: calc({{ image.width }}px * 7 / 6);
 	
 {% endblock %}
 
@@ -57,18 +57,7 @@
 	--scale: 1;
 }
 
-.container.size2 {
-	--height-center: calc({{ image.height }}px / 2);
-	--width-center: calc({{ image.width }}px / 2);
-}
-.container.size3 {
-	--height-center: calc({{ image.height }}px / 3);
-	--width-center: calc({{ image.width }}px / 3);
-}
-.container.size4 {
-	--height-center: calc({{ image.height }}px / 4);
-	--width-center: calc({{ image.width }}px / 4);
-}
+
 
 .content-11 {
 	grid-row: 2;
@@ -123,6 +112,22 @@ img {
 	height: auto;
 	background: rgba(255,255,255,1);
 }
+.container.size2 {
+	--height-center: calc({{ image.height }}px * 7 / 12);
+	--width-center: calc({{ image.width }}px * 7 / 12);
+}
+.container.size3 {
+	--height-center: calc({{ image.height }}px * 7 / 18);
+	--width-center: calc({{ image.width }}px * 7 / 18);
+}
+.container.size4 {
+	--height-center: calc({{ image.height }}px * 7 / 24);
+	--width-center: calc({{ image.width }}px * 7/ 24);
+}
+.container.size5 {
+	--height-center: calc({{ image.height }}px * 7 / 30);
+	--width-center: calc({{ image.width }}px * 7/ 30);
+}
 .size2 img {
 	width: calc({{ image.width }}px / 2);
 }
@@ -132,6 +137,9 @@ img {
 .size4 img {
 	width: calc({{ image.width }}px / 4);
 }
+.size5 img {
+	width: calc({{ image.width }}px / 5);
+}
 .size2 {
 	--scale: 2;
 }
@@ -140,6 +148,9 @@ img {
 }
 .size4 {
 	--scale: 4;
+}
+.size5 {
+	--scale: 5;
 }
 
 #progressdiv {
@@ -212,7 +223,7 @@ var w = window.innerWidth || document.documentElement.clientWidth || document.bo
 var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 console.log(w,gifwidth);
 var i= 2;
-while (cwidth > w * .67 || cheight > h * .67){
+while (cwidth > w * .75 || cheight > h * .75){
 	cwidth = gifwidth/i;
 	cheight = gifheight/i;
 	var el = document.querySelector('.container');
@@ -223,7 +234,7 @@ while (cwidth > w * .67 || cheight > h * .67){
 	}
 
 
-	if (i==4){break;}
+	if (i==5){break;}
 	i++;
 }
 
