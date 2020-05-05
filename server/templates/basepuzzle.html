@@ -74,19 +74,14 @@
 body {
 	background: gray;
 }
-/*
-img {
-	position: absolute;
-	left: 50px;
-	top: 50px;
-}*/
+
 {% for i in range(0,npieces) %}
 #video{{ i+1 }} {
 	-webkit-clip-path:url(#clip{{ i+1 }});
 	clip-path:url(#clip{{ i+1 }});
 	position: absolute;
-	left: 50px;
-	top: 50px;
+	left: 5px;
+	top: 5px;
 }
 {% endfor %}
 
@@ -98,7 +93,7 @@ img {
 }
 #rotatebutton {
 	position: absolute;
-	left: 50px;
+	left: 5px;
 	top: 0px;
 }
 #pointsspan {
@@ -223,7 +218,7 @@ var w = window.innerWidth || document.documentElement.clientWidth || document.bo
 var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 console.log(w,gifwidth);
 var i= 2;
-while (cwidth > w * .75 || cheight > h * .75){
+while (cwidth > w * .75 || cheight > h * .75 || (cwidth > w * .5 && cheight > h * .5) ){
 	cwidth = gifwidth/i;
 	cheight = gifheight/i;
 	var el = document.querySelector('.container');
@@ -232,6 +227,15 @@ while (cwidth > w * .75 || cheight > h * .75){
 	if (i>2){
 		el.classList.remove('size'+(i-1));
 	}
+	
+	if (cwidth/w > cheight/h){
+		//landscape mode for info box
+	}
+	else {
+		//portrait mode for info box
+	}
+	
+	
 
 
 	if (i==5){break;}
@@ -278,4 +282,7 @@ var username = "{{ usernameHolder }}";
 <progress id="progressdiv" class="progress" value="0" max="100"></progress>
 <button id="save" href="">Save</button>
 <button id="toggle" onclick="toggle()">Toggle</button>
+<div>
+	<img src="{{ image.name }}" style="width: 100%">
+</div>
 {% endblock %}
