@@ -9,11 +9,11 @@
 {% endblock %}
 	
 {% block centerSize %}
-	--height-container: calc(100vh);
-	--width-container: calc(100vw);
+	--height-container: calc(100vh - 2rem);
+	--width-container: calc(100vw - 2rem);
 	--height-center: calc({{ image.height }}px * 7 / 6);
 	--width-center: calc({{ image.width }}px * 7 / 6);
-	margin: 0px;
+	margin: 1rem;
 	
 {% endblock %}
 
@@ -62,14 +62,28 @@
 
 
 
-.content-11 {
+.content-11, .content-12, .content-13 {
+	border: 0px solid black;
+	border-radius: 0px;
+	position: relative;
+  	overflow: hidden;
+  	background: white;
 }
-.content-31 {
+.content-21, .content-23 {
+	border: 0px solid black;
+	border-radius: 0px;
+	position: relative;
+  	overflow: hidden;
+  	background: white;
 }
-.content-33 {
+.content-31, .content-32, .content-33 {
+	border: 0px solid black;
+	border-radius: 0px;
+	position: relative;
+  	overflow: hidden;
+  	background: white;
 }
-.content-13 {
-}
+
 body {
 	background: gray;
 }
