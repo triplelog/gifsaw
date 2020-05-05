@@ -215,7 +215,7 @@ var i= 2;
 while (cwidth > w * .67 || cheight > h * .67){
 	cwidth = gifwidth/i;
 	cheight = gifheight/i;
-	var el = document.getElementById('container');
+	var el = document.querySelector('.container');
 		
 	el.classList.add('size'+i);
 	if (i>2){
