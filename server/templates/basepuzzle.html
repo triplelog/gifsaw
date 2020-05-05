@@ -9,8 +9,9 @@
 {% endblock %}
 	
 {% block centerSize %}
-	--height-center: calc(66vw * {{ image.height }} / {{ image.width }});
-	--width-center: 66vw;
+	--height-center: {{ image.height }};
+	--width-center: {{ image.width }};
+	
 {% endblock %}
 
 {% block titleCSS %}
@@ -55,6 +56,20 @@
 	--top-width: 27;
 	--scale: 1;
 }
+
+.container.size2 {
+	--height-center: calc({{ image.height }}px / 2);
+	--width-center: calc({{ image.width }}px / 2);
+}
+.container.size3 {
+	--height-center: calc({{ image.height }}px / 3);
+	--width-center: calc({{ image.width }}px / 3);
+}
+.container.size4 {
+	--height-center: calc({{ image.height }}px / 4);
+	--width-center: calc({{ image.width }}px / 4);
+}
+
 .content-11 {
 	grid-row: 2;
 }
@@ -200,14 +215,13 @@ var i= 2;
 while (cwidth > w * .67 || cheight > h * .67){
 	cwidth = gifwidth/i;
 	cheight = gifheight/i;
-	for (var ii=0;ii<ncols*nrows;ii++){
-		var el = document.getElementById('video'+(ii+1));
+	var el = document.getElementById('container');
 		
-		el.classList.add('size'+i);
-		if (i>2){
-			el.classList.remove('size'+(i-1));
-		}
+	el.classList.add('size'+i);
+	if (i>2){
+		el.classList.remove('size'+(i-1));
 	}
+
 
 	if (i==4){break;}
 	i++;
