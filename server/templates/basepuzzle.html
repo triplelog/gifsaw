@@ -60,7 +60,11 @@
 
 
 .content-11 {
-	grid-row: 2;
+	grid-row: 1 / 3;
+}
+.content-11.landscape {
+	grid-row: 1;
+	grid-column: 1 / 3;
 }
 .content-31 {
 	display: none;
@@ -168,6 +172,12 @@ img {
 svg {
 	position: absolute;
 }
+.content-11:Not(.landscape) img {
+	width: 100%;
+}
+.landscape img {
+	height: 100%;
+}
 {{ initialCSS }}
 {% endblock %}
 
@@ -228,12 +238,7 @@ while (cwidth > w * .75 || cheight > h * .75 || (cwidth > w * .5 && cheight > h 
 		el.classList.remove('size'+(i-1));
 	}
 	
-	if (cwidth/w > cheight/h){
-		//landscape mode for info box
-	}
-	else {
-		//portrait mode for info box
-	}
+	
 	
 	
 
@@ -241,7 +246,15 @@ while (cwidth > w * .75 || cheight > h * .75 || (cwidth > w * .5 && cheight > h 
 	if (i==5){break;}
 	i++;
 }
-
+if (cwidth/w > cheight/h){
+	//landscape mode for info box
+	var ell = document.querySelector('.content-11');
+	ell.classList.add("landscape");
+}
+else {
+	//portrait mode for info box
+}
+	
 var clines = {{ clines | safe }};
 var ccenters= {{ ccenters }};
 var pieceheight = cheight*{{ actheight }}/{{ image.height }}/{{ nrows }};
@@ -283,6 +296,6 @@ var username = "{{ usernameHolder }}";
 <button id="save" href="">Save</button>
 <button id="toggle" onclick="toggle()">Toggle</button>
 <div>
-	<img src="{{ image.name }}" style="width: 100%">
+	<img id="previewImage" src="{{ image.name }}" style="width: 100%; border: 1px solid black;">
 </div>
 {% endblock %}
