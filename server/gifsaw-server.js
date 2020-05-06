@@ -621,7 +621,7 @@ function socketanswer(pairs,matches) {
 
 function makeScripts() {
 	var script;
-	defaultScripts = [];
+	defaultScripts = {};
 	script = `var players={};
 function newPlayer(username){
 	players[username]={score:0};
@@ -632,7 +632,7 @@ function newMerge(username,matches){
 	score[username]=players[username].score;
 	return {'message':'Merge','accept':true,'score':score};
 }`;
-	defaultScripts.push(script);
+	defaultScripts['default'] = script;
 	
 	script = `var players={};
 function newPlayer(username){
@@ -644,7 +644,7 @@ function newMerge(username,matches){
 	score[username]=players[username].score;
 	return {'message':'Merge','accept':true,'score':score};
 }`;
-	defaultScripts.push(script);
+	defaultScripts['edges'] = script;
 	
 	script = `var players={};
 function newPlayer(username){
@@ -658,56 +658,9 @@ function newMerge(username,matches){
 	score[username]=players[username].score;
 	return {'message':'Merge','accept':true,'score':score};
 }`;
-	defaultScripts.push(script);
+	defaultScripts['denominator'] = script;
 	
-	script = `var players={};
-function newPlayer(username){
-	players[username]={score:0};
-}
-function newMerge(username,matches){
-	players[username].score++;
-	var score = {};
-	score[username]=players[username].score;
-	return {'message':'Merge','accept':true,'score':score};
-}`;
-	defaultScripts.push(script);
 	
-	script = `var players={};
-function newPlayer(username){
-	players[username]={score:0};
-}
-function newMerge(username,matches){
-	players[username].score++;
-	var score = {};
-	score[username]=players[username].score;
-	return {'message':'Merge','accept':true,'score':score};
-}`;
-	defaultScripts.push(script);
-	
-	script = `var players={};
-function newPlayer(username){
-	players[username]={score:0};
-}
-function newMerge(username,matches){
-	players[username].score++;
-	var score = {};
-	score[username]=players[username].score;
-	return {'message':'Merge','accept':true,'score':score};
-}`;
-	defaultScripts.push(script);
-	
-	script = `var players={};
-function newPlayer(username){
-	var color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')';
-	players[username]={score:0,color:color};
-}
-function newMerge(username,matches){
-	players[username].score++;
-	var score = {};
-	score[username]=players[username].score;
-	return {'css':{stroke: players[username].color},'message':'Merge','accept':true,'score':score};
-}`;
-	defaultScripts.push(script);
 	
 	return defaultScripts;
 }
