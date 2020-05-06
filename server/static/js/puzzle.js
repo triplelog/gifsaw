@@ -72,6 +72,12 @@ function dragstart(event) {
 				if (document.getElementById(tempkey) && tempkey != dragid){
 					let tempvideo = videos[tempkey].getBoundingClientRect();
 					for (var ii=0;ii<pieces[i-1].centers.length;ii++){
+						var oldRot = tempvideo.style.transform;
+						console.log(tempvideo.left);
+						tempvideo.style.transform = 'rotate(0deg)';
+						console.log(tempvideo.left);
+						tempvideo.style.transform = oldRot;
+						console.log(tempvideo.left);
 						vmatches.push([tempkey,[parseFloat(tempvideo.left)+pieces[i-1].centers[ii].x*parseFloat(cwidth),parseFloat(tempvideo.top)+pieces[i-1].centers[ii].y*parseFloat(cheight), pieces[i-1].centers[ii].id]]);
 
 						nmatches++;
