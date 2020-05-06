@@ -157,7 +157,7 @@ app.post('/solo',
 		var npieces = retval[5];
 		
 		for (var i=0;i<npieces;i++){
-			var piece = {id:'video'+(i+1),rotation:retval[3][i],location:retval[2][i],centers:retval[1][i]};
+			var piece = {id:'video'+(i+1),rotation:retval[3][i],location:retval[2][i],centers:retval[1][i],group:'group0'};
 			pieces.push(piece);
 		}
 		
@@ -280,7 +280,7 @@ app.post('/create',
 		}
 		
 		for (var i=0;i<npieces;i++){
-			var piece = {id:'video'+(i+1),rotation:retval[3][i],location:retval[2][i],centers:retval[1][i]};
+			var piece = {id:'video'+(i+1),rotation:retval[3][i],location:retval[2][i],centers:retval[1][i],group:'group0'};
 			pieces.push(piece);
 		}
 		
@@ -383,7 +383,7 @@ app.get('/puzzle',
 		var pieces = [];
 		npieces = retval[6];
 		for (var i=0;i<npieces;i++){
-			var piece = {id:'video'+(i+1),rotation:retval[4][i],location:retval[3][i],centers:retval[2][i],group:'group1'};
+			var piece = {id:'video'+(i+1),rotation:retval[4][i],location:retval[3][i],centers:retval[2][i],group:'group0'};
 			pieces.push(piece);
 		}
 		res.write(nunjucks.render('encryptedpuzzle.html',{
