@@ -70,20 +70,18 @@ function dragstart(event) {
 				let tempkey = 'video'+i;
 				var el = document.getElementById(tempkey);
 				if (el && tempkey != dragid){
-					let tempvideo = videos[tempkey].getBoundingClientRect();
+					
 					
 					var oldRot = el.style.transform;
-					console.log(el.getBoundingClientRect().left);
 					el.style.transform = 'rotate(0deg)';
-					console.log(el.getBoundingClientRect().left);
-					el.style.transform = oldRot;
-					console.log(el.getBoundingClientRect().left);
+					let tempvideo = videos[tempkey].getBoundingClientRect();
 					for (var ii=0;ii<pieces[i-1].centers.length;ii++){
 						
 						vmatches.push([tempkey,[parseFloat(tempvideo.left)+pieces[i-1].centers[ii].x*parseFloat(cwidth),parseFloat(tempvideo.top)+pieces[i-1].centers[ii].y*parseFloat(cheight), pieces[i-1].centers[ii].id]]);
 
 						nmatches++;
 					}
+					el.style.transform = oldRot;
 				}
 			}
 		}
