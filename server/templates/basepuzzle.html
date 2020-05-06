@@ -326,27 +326,36 @@ var pieceheight = cheight*{{ actheight }}/{{ image.height }}/{{ nrows }};
 var piecewidth = pieceheight*{{ actwidth }}/{{ actheight }}*{{ nrows }}/{{ ncols }};
 var merges = 0;
 var username = "{{ usernameHolder }}";
-
+var clickOperation = 'rotate';
 
 var groupEls = document.querySelectorAll('.group');
-for (var el in groupEls){
-	console.log(el);
-	console.log(groupEls[el]);
-	groupEls[el].addEventListener('click', selectGroup);
+for (var i=0;i<groupEls.length;i++){
+	groupEls[i].addEventListener('click', selectGroup);
 }
 
 function selectGroup(event) {
-	var groupEls = document.querySelectorAll('.group');
-	for (var el in groupEls){
-		el.classList.remove('selected');
-	}
 	var el = event.target;
-	console.log(el);
 	if (el.tagName != 'DIV'){
 		el = el.parentElement;
 	}
-	console.log(el);
-	el.classList.add('selected');
+	var groupEls = document.querySelectorAll('.group');
+	for (var i=0;i<groupEls.length;i++){
+		if (groupEls[i] != el){
+			groupEls[i].classList.remove('selected');
+		}
+		else {
+			if (groupEls[i].classList.contains('selected')){
+				groupEls[i].classList.remove('selected');
+				clickOperation = 'rotate';
+			}
+			else {
+				el.classList.add('selected');
+				clickOperation = 'group'+i;
+			}
+		}
+	}
+
+	
 }
 
 </script>
