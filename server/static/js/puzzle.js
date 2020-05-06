@@ -146,7 +146,6 @@ function dragmove(event) {
 
 }
 function dragend(event) {
-	console.log(event.target);
 	if (isclick && dragid && dragid != '') {
 		var drid = dragid;
 		var pieceInfo = pieces[parseInt(drid.substr(5,))-1];

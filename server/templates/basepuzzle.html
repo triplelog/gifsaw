@@ -328,9 +328,16 @@ var merges = 0;
 var username = "{{ usernameHolder }}";
 
 
-document.querySelector('.group').addEventListener('click', selectGroup);
+var groupEls = document.querySelectorAll('.group');
+for (var el in groupEls){
+	groupEls[el].addEventListener('click', selectGroup);
+}
 
 function selectGroup(event) {
+	var groupEls = document.querySelectorAll('.group');
+	for (var el in groupEls){
+		groupEls[el].classList.remove('selected');
+	}
 	var el = event.target;
 	console.log(el);
 	if (el.tagName != 'DIV'){
