@@ -230,16 +230,16 @@ svg {
 	line-height: 3rem;
 }
 
-.group i.openFolder {
+.group i.fa-eye-slash {
 	display: none;
 }
-.group.selected i.openFolder {
+.group.selected i.fa-eye-slash {
 	display: inline-block;
 }
-.group.selected i.closedFolder {
+.group.selected i.fa-eye {
 	display: none;
 }
-.group.selected {
+.group.open {
 	color: red;
 	font-size: 1.3rem;
 }
@@ -332,30 +332,56 @@ var groupEls = document.querySelectorAll('.group');
 for (var i=0;i<groupEls.length;i++){
 	groupEls[i].addEventListener('click', selectGroup);
 }
+groupEls = document.querySelectorAll('.fa-eye');
+for (var i=0;i<groupEls.length;i++){
+	groupEls[i].addEventListener('click', selectEye);
+}
+groupEls = document.querySelectorAll('.fa-eye-slash');
+for (var i=0;i<groupEls.length;i++){
+	groupEls[i].addEventListener('click', selectEye);
+}
 
 function selectGroup(event) {
 	var el = event.target;
+	if (el.tagName == 'I'){return;}
 	if (el.tagName != 'DIV'){
 		el = el.parentElement;
 	}
 	var groupEls = document.querySelectorAll('.group');
 	for (var i=0;i<groupEls.length;i++){
 		if (groupEls[i] != el){
-			groupEls[i].classList.remove('selected');
+			groupEls[i].classList.remove('open');
 		}
 		else {
-			if (groupEls[i].classList.contains('selected')){
-				groupEls[i].classList.remove('selected');
+			if (groupEls[i].classList.contains('open')){
+				groupEls[i].classList.remove('open');
 				clickOperation = 'rotate';
 			}
 			else {
-				el.classList.add('selected');
+				el.classList.add('open');
 				clickOperation = 'group'+i;
 			}
 		}
 	}
 
 	
+}
+function selectEye(event){
+	var el = event.target.parentElement;
+	var id = el.id;
+	if (el.classList.contains('selected')){
+		el.classList.remove('selected');
+		for (var i=0;i<currentGroups.length;i++){
+			if (currentGroups[i]==id){
+				currentGroups.splice(i,1);
+				break;
+			}
+		}
+	}
+	else {
+		el.classList.add('selected');
+		currentGroups.push(id);
+	}
 }
 
 </script>
@@ -428,8 +454,8 @@ function selectGroup(event) {
 </div>
 
 <div style="background: white;">
-	<div class="group"><i class="fas fa-folder-open openFolder"></i><i class="fas fa-folder closedFolder"></i>Group 0</div>
-	<div class="group"><i class="fas fa-folder-open openFolder"></i><i class="fas fa-folder closedFolder"></i>Group 1</div>
-	<div><i class="fas fa-plus"></i></div>
+	<div class="group" id="group0"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Main</div>
+	<div class="group" id="group1"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Group 1</div>
+	<div><i class="fas fa-plus"></i>New Group</div>
 </div>
 {% endblock %}
