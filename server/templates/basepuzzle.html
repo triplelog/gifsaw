@@ -215,10 +215,10 @@ svg {
 	position: absolute;
 }
 .container:Not(.landscape) .content-33 img {
-	width: 100%;
+	width: calc(100% - 3px);
 }
 .landscape .content-33 img {
-	height: calc((var(--height-container) - var(--height-center)) / 2 - 1rem);
+	height: calc((var(--height-container) - var(--height-center)) / 2 - 1.2rem - 3px);
 	width: unset;
 }
 .container:Not(.landscape) .content-11 {
