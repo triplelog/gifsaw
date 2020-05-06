@@ -383,7 +383,7 @@ app.get('/puzzle',
 		var pieces = [];
 		npieces = retval[6];
 		for (var i=0;i<npieces;i++){
-			var piece = {id:'video'+(i+1),rotation:retval[4][i],location:retval[3][i],centers:retval[2][i]};
+			var piece = {id:'video'+(i+1),rotation:retval[4][i],location:retval[3][i],centers:retval[2][i],group:'group1'};
 			pieces.push(piece);
 		}
 		res.write(nunjucks.render('encryptedpuzzle.html',{

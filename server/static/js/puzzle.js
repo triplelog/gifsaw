@@ -159,7 +159,8 @@ function dragend(event) {
 		else {
 			var drid = dragid;
 			var pieceInfo = pieces[parseInt(drid.substr(5,))-1];
-			cvideo.style.display = 'none';
+			pieceInfo.group = clickOperation;
+			updateGroups();
 		}
 	}
 	else if (dragid && dragid != '') {
@@ -360,5 +361,16 @@ function getUrlVars() {
         vars[key] = value;
     });
     return vars;
+}
+function updateGroups() {
+	for (var i=0;i<pieces.length;i++){
+		videos['video'+(i+1)].style.display = 'none';
+		for (var ii=0;ii<currentGroups.length;ii++){
+			if (pieces[i].group == currentGroups[ii]){
+				videos['video'+(i+1)].style.display = 'block';
+				break;
+			}
+		}
+	}
 }
 

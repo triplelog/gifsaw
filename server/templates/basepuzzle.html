@@ -327,7 +327,7 @@ var piecewidth = pieceheight*{{ actwidth }}/{{ actheight }}*{{ nrows }}/{{ ncols
 var merges = 0;
 var username = "{{ usernameHolder }}";
 var clickOperation = 'rotate';
-
+var currentGroups = ['group0'];
 var groupEls = document.querySelectorAll('.group');
 for (var i=0;i<groupEls.length;i++){
 	groupEls[i].addEventListener('click', selectGroup);
@@ -428,8 +428,8 @@ function selectGroup(event) {
 </div>
 
 <div style="background: white;">
+	<div class="group"><i class="fas fa-folder-open openFolder"></i><i class="fas fa-folder closedFolder"></i>Group 0</div>
 	<div class="group"><i class="fas fa-folder-open openFolder"></i><i class="fas fa-folder closedFolder"></i>Group 1</div>
-	<div class="group"><i class="fas fa-folder-open openFolder"></i><i class="fas fa-folder closedFolder"></i>Group 2</div>
 	<div><i class="fas fa-plus"></i></div>
 </div>
 {% endblock %}
