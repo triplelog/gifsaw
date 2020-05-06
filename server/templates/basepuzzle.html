@@ -230,13 +230,13 @@ svg {
 	line-height: 3rem;
 }
 
-.group i.fa-eye-slash {
+.group i.fa-eye {
 	display: none;
 }
-.group.selected i.fa-eye-slash {
+.group.selected i.fa-eye {
 	display: inline-block;
 }
-.group.selected i.fa-eye {
+.group.selected i.fa-eye-slash {
 	display: none;
 }
 .group.open {
@@ -456,8 +456,8 @@ function selectEye(event){
 </div>
 
 <div style="background: white;">
-	<div class="group" id="group0"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Main</div>
-	<div class="group" id="group1"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Group 1</div>
+	<div class="group selected" id="group0"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Main</div>
+	<div class="group selected" id="group1"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Group 1</div>
 	<div><i class="fas fa-plus"></i>New Group</div>
 </div>
 {% endblock %}
