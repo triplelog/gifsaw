@@ -230,13 +230,13 @@ svg {
 	line-height: 3rem;
 }
 
-.openGroup {
+.group i:nth-child(1) {
 	display: none;
 }
-.group:hover i:Not(.openGroup) {
+.group:hover i:nth-child(2) {
 	display: none;
 }
-.group:hover .openGroup {
+.group:hover i:nth-child(1) {
 	display: block;
 }
 {{ initialCSS }}
