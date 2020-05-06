@@ -323,6 +323,22 @@ var piecewidth = pieceheight*{{ actwidth }}/{{ actheight }}*{{ nrows }}/{{ ncols
 var merges = 0;
 var username = "{{ usernameHolder }}";
 
+
+document.querySelector('.group').addEventListener('drop', handleDrop, false);
+var names = ['dragenter', 'dragover', 'dragleave', 'drop'];
+names.forEach(eventName => {
+  document.querySelector('.group').addEventListener(eventName, preventDefaults, false)
+})
+
+function preventDefaults(e) {
+	e.preventDefault();
+    e.stopPropagation();
+}
+function handleDrop(e) {
+  
+  console.log(e);
+}
+
 </script>
 <script src="../js/puzzle.js"></script>
 
@@ -393,8 +409,8 @@ var username = "{{ usernameHolder }}";
 </div>
 
 <div style="background: white;">
-	<div class="group"><i class="fas fa-folder-open"></i><i class="fas fa-folder"></i>Group 1</div>
-	<div class="group"><i class="fas fa-folder-open"></i><i class="fas fa-folder"></i>Group 2</div>
+	<div class="group"><i class="fas fa-folder-open openFolder"></i><i class="fas fa-folder closedFolder"></i>Group 1</div>
+	<div class="group"><i class="fas fa-folder-open openFolder"></i><i class="fas fa-folder closedFolder"></i>Group 2</div>
 	<div><i class="fas fa-plus"></i></div>
 </div>
 {% endblock %}
