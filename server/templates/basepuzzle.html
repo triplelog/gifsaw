@@ -237,7 +237,7 @@ svg {
 	display: none;
 }
 .group:hover i:nth-child(1) {
-	display: block;
+	display: inline-block;
 }
 {{ initialCSS }}
 {% endblock %}
@@ -393,8 +393,8 @@ var username = "{{ usernameHolder }}";
 </div>
 
 <div style="background: white;">
-	<div class="group"><i class="fas fa-folder-open openGroup"></i><i class="fas fa-folder"></i>Group 1</div>
-	<div class="group"><i class="fas fa-folder-open openGroup"></i><i class="fas fa-folder"></i>Group 2</div>
+	<div class="group"><i class="fas fa-folder-open"></i><i class="fas fa-folder"></i>Group 1</div>
+	<div class="group"><i class="fas fa-folder-open"></i><i class="fas fa-folder"></i>Group 2</div>
 	<div><i class="fas fa-plus"></i></div>
 </div>
 {% endblock %}
