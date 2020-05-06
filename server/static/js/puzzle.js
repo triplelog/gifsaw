@@ -68,15 +68,16 @@ function dragstart(event) {
 			}
 			for (var i=1;i<npieces+1;i++) {
 				let tempkey = 'video'+i;
-				
-				if (document.getElementById(tempkey) && tempkey != dragid){
+				var el = document.getElementById(tempkey);
+				if (el && tempkey != dragid){
 					let tempvideo = videos[tempkey].getBoundingClientRect();
-					var oldRot = videos[tempkey].style.transform;
-					console.log(videos[tempkey].left);
-					videos[tempkey].style.transform = 'rotate(0deg)';
-					console.log(videos[tempkey].left);
-					videos[tempkey].style.transform = oldRot;
-					console.log(videos[tempkey].left);
+					
+					var oldRot = el.style.transform;
+					console.log(el.left);
+					el.style.transform = 'rotate(0deg)';
+					console.log(el.left);
+					el.style.transform = oldRot;
+					console.log(el.left);
 					for (var ii=0;ii<pieces[i-1].centers.length;ii++){
 						
 						vmatches.push([tempkey,[parseFloat(tempvideo.left)+pieces[i-1].centers[ii].x*parseFloat(cwidth),parseFloat(tempvideo.top)+pieces[i-1].centers[ii].y*parseFloat(cheight), pieces[i-1].centers[ii].id]]);
