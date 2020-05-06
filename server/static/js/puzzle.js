@@ -74,7 +74,7 @@ function dragstart(event) {
 					let tempvideo = videos[tempkey].getBoundingClientRect();
 					
 					for (var ii=0;ii<pieces[i-1].centers.length;ii++){
-						if (pieces[i-1].rotation == cvideo.rotation){
+						if (pieces[i-1].rotation == pieces[vidid].rotation){
 							var centerx = pieces[i-1].centers[ii].x*parseFloat(cwidth);
 							var centery = pieces[i-1].centers[ii].y*parseFloat(cheight);
 							if (pieces[i-1].rotation == 90) {
