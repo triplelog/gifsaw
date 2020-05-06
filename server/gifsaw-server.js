@@ -1130,8 +1130,8 @@ function makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFacto
 	}
 	
 	for (var i=0;i<ncols*nrows;i++){
-		//rotations.push(Math.floor(Math.random()*4)*90)
-		rotations.push(0)
+		rotations.push(Math.floor(Math.random()*4)*90)
+		//rotations.push(0)
 	}
 	
 	for (var ii=0;ii<ncols*nrows;ii++){
