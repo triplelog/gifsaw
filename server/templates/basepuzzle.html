@@ -230,14 +230,18 @@ svg {
 	line-height: 3rem;
 }
 
-.group i:nth-child(1) {
+.group i.openFolder {
 	display: none;
 }
-.group:hover i:nth-child(2) {
-	display: none;
-}
-.group:hover i:nth-child(1) {
+.group.selected i.openFolder {
 	display: inline-block;
+}
+.group.selected i.closedFolder {
+	display: none;
+}
+.group.selected {
+	color: red;
+	font-size: 1.3rem;
 }
 {{ initialCSS }}
 {% endblock %}
@@ -324,19 +328,16 @@ var merges = 0;
 var username = "{{ usernameHolder }}";
 
 
-document.querySelector('.group').addEventListener('drop', handleDrop, false);
-var names = ['dragenter', 'dragover', 'dragleave', 'drop'];
-names.forEach(eventName => {
-  document.querySelector('.group').addEventListener(eventName, preventDefaults, false)
-})
+document.querySelector('.group').addEventListener('click', selectGroup);
 
-function preventDefaults(e) {
-	e.preventDefault();
-    e.stopPropagation();
-}
-function handleDrop(e) {
-  
-  console.log(e);
+function selectGroup(event) {
+	var el = event.target;
+	console.log(el);
+	if (el.tagName != 'DIV'){
+		el = el.parentElement;
+	}
+	console.log(el);
+	el.classList.add('selected');
 }
 
 </script>
