@@ -330,7 +330,9 @@ var username = "{{ usernameHolder }}";
 
 var groupEls = document.querySelectorAll('.group');
 for (var el in groupEls){
-	el.addEventListener('click', selectGroup);
+	console.log(el);
+	console.log(groupEls[el]);
+	groupEls[el].addEventListener('click', selectGroup);
 }
 
 function selectGroup(event) {
