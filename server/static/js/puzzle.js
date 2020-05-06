@@ -147,12 +147,19 @@ function dragmove(event) {
 }
 function dragend(event) {
 	if (isclick && dragid && dragid != '') {
-		var drid = dragid;
-		var pieceInfo = pieces[parseInt(drid.substr(5,))-1];
-		document.getElementById(drid).style.transform = 'rotate('+(parseInt(pieceInfo.rotation)+90)+'deg)';
-		pieceInfo.rotation=(parseInt(pieceInfo.rotation)+90);
-		if (pieceInfo.rotation> 350) {
-			pieceInfo.rotation = pieceInfo.rotation-360;
+		if (clickOperation == 'rotate'){
+			var drid = dragid;
+			var pieceInfo = pieces[parseInt(drid.substr(5,))-1];
+			document.getElementById(drid).style.transform = 'rotate('+(parseInt(pieceInfo.rotation)+90)+'deg)';
+			pieceInfo.rotation=(parseInt(pieceInfo.rotation)+90);
+			if (pieceInfo.rotation> 350) {
+				pieceInfo.rotation = pieceInfo.rotation-360;
+			}
+		}
+		else {
+			var drid = dragid;
+			var pieceInfo = pieces[parseInt(drid.substr(5,))-1];
+			cvideo.style.display = 'none';
 		}
 	}
 	else if (dragid && dragid != '') {
