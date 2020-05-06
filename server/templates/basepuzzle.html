@@ -220,6 +220,7 @@ svg {
 .content-00 {
 	grid-row: 1;
 	grid-column: 1 / 5;
+	background: transparent;
 }
 {{ initialCSS }}
 {% endblock %}
@@ -327,13 +328,14 @@ var username = "{{ usernameHolder }}";
 		<label for="radio33-3"><i class="fas fa-expand"></i></label>
 	</span>
 </div>
-<button id="save" href="">Save</button>
-<button id="toggle" onclick="toggle()">Toggle Borders</button>
-<div>
-	<progress id="progressdiv" class="progress" value="0" max="100"></progress>
+<div style="background: white;">
+	<button id="save" href="">Save</button>
+	<button id="toggle" onclick="toggle()">Toggle Borders</button>
+	<div>
+		<progress id="progressdiv" class="progress" value="0" max="100"></progress>
+	</div>
+	<div id="scorediv"></div>
 </div>
-<div id="scorediv"></div>
-
 
 
 
@@ -355,7 +357,7 @@ var username = "{{ usernameHolder }}";
 </div>
 
 <div>
-	<img id="previewImage" src="{{ image.name }}" style="border: 1px solid black;">
+	<img id="previewImage" src="{{ image.name }}">
 </div>
 
 <div class="title">
