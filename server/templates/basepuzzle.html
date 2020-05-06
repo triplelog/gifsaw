@@ -68,7 +68,7 @@
 	grid-row: 2 / 4;
 	grid-column: 2 / 4;
 }
-.content-12, .content-21, .content-23, .content-32 {
+.content-12, .content-21, .content-23, .content-32, .content-13, .content-31 {
 	display: none;
 }
 .content-11, .content-12, .content-13 {
@@ -218,7 +218,8 @@ svg {
 	width: 100%;
 }
 .landscape .content-33 img {
-	height: 100%;
+	height: calc((var(--height-container) - var(--height-center)) / 2 - 1rem);
+	width: unset;
 }
 {{ initialCSS }}
 {% endblock %}
