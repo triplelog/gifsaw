@@ -149,6 +149,9 @@ function dragend() {
 		var possMatches = {};
 		possMatches[parseInt(dragid.substr(5,))]=[];
 		const start = Date.now();
+		
+		var oldRot = cvideo.style.transform;
+		cvideo.style.transform = 'rotate(0deg)';
 		for (var ii=0;ii<pieceInfo.centers.length;ii++) {
 			let newx = parseFloat(cvideo.getBoundingClientRect().left)+pieceInfo.centers[ii].x*parseFloat(cwidth);
 			let newy = parseFloat(cvideo.getBoundingClientRect().top)+pieceInfo.centers[ii].y*parseFloat(cheight);
@@ -202,7 +205,7 @@ function dragend() {
 				}
 			}
 		}			
-		
+		cvideo.style.transform = oldRot;
 		if (possMatches[parseInt(dragid.substr(5,))].length>0){
 			if (collab){
 				var jsonmessage = {type:'possMatch',message:[parseInt(dragid.substr(5,)), possMatches[parseInt(dragid.substr(5,))]]};
