@@ -327,7 +327,7 @@ var piecewidth = pieceheight*{{ actwidth }}/{{ actheight }}*{{ nrows }}/{{ ncols
 var merges = 0;
 var username = "{{ usernameHolder }}";
 var clickOperation = 'rotate';
-var currentGroups = ['group0'];
+var currentGroups = ['group0','group1'];
 var groupEls = document.querySelectorAll('.group');
 for (var i=0;i<groupEls.length;i++){
 	groupEls[i].addEventListener('click', selectGroup);
@@ -382,6 +382,8 @@ function selectEye(event){
 		el.classList.add('selected');
 		currentGroups.push(id);
 	}
+	console.log(currentGroups);
+	updateGroups();
 }
 
 </script>
