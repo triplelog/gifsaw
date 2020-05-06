@@ -222,6 +222,23 @@ svg {
 	grid-column: 1 / 5;
 	background: transparent;
 }
+
+.group {
+	width: 100%;
+	height: 3rem;
+	font-size: 1.2rem;
+	line-height: 3rem;
+}
+
+.openGroup {
+	display: none;
+}
+.group:hover i:Not(.openGroup) {
+	display: none;
+}
+.group:hover .openGroup {
+	display: block;
+}
 {{ initialCSS }}
 {% endblock %}
 
@@ -375,8 +392,9 @@ var username = "{{ usernameHolder }}";
 	</span>
 </div>
 
-<div>
-	<div><i class="fas fa-folder"></i>Group 1</div>
+<div style="background: white;">
+	<div class="group"><i class="fas fa-folder-open openGroup"></i><i class="fas fa-folder"></i>Group 1</div>
+	<div class="group"><i class="fas fa-folder-open openGroup"></i><i class="fas fa-folder"></i>Group 2</div>
 	<div><i class="fas fa-plus"></i></div>
 </div>
 {% endblock %}
