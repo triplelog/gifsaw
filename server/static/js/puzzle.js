@@ -74,15 +74,25 @@ function dragstart(event) {
 					let tempvideo = videos[tempkey].getBoundingClientRect();
 					
 					for (var ii=0;ii<pieces[i-1].centers.length;ii++){
-						var centerx = pieces[i-1].centers[ii].x*parseFloat(cwidth);
-						var centery = pieces[i-1].centers[ii].y*parseFloat(cheight);
-						if (pieces[i-1].rotation == 90) {
-							centerx = (1-pieces[i-1].centers[ii].y)*parseFloat(cheight);
-							centery = pieces[i-1].centers[ii].x*parseFloat(cwidth);
-						}
-						vmatches.push([tempkey,[parseFloat(tempvideo.left)+centerx,parseFloat(tempvideo.top)+centery, pieces[i-1].centers[ii].id]]);
+						if (pieces[i-1].rotation == cvideo.rotation){
+							var centerx = pieces[i-1].centers[ii].x*parseFloat(cwidth);
+							var centery = pieces[i-1].centers[ii].y*parseFloat(cheight);
+							if (pieces[i-1].rotation == 90) {
+								centerx = (1-pieces[i-1].centers[ii].y)*parseFloat(cheight);
+								centery = pieces[i-1].centers[ii].x*parseFloat(cwidth);
+							}
+							else if (pieces[i-1].rotation == 180) {
+								centerx = (1-pieces[i-1].centers[ii].x)*parseFloat(cwidth);
+								centery = (1-pieces[i-1].centers[ii].y)*parseFloat(cheight);
+							}
+							else if (pieces[i-1].rotation == 270) {
+								centerx = (pieces[i-1].centers[ii].y)*parseFloat(cheight);
+								centery = (1-pieces[i-1].centers[ii].x)*parseFloat(cwidth);
+							}
+							vmatches.push([tempkey,[parseFloat(tempvideo.left)+centerx,parseFloat(tempvideo.top)+centery, pieces[i-1].centers[ii].id]]);
 
-						nmatches++;
+							nmatches++;
+						}
 					}
 				}
 			}
@@ -152,8 +162,6 @@ function dragend() {
 		possMatches[parseInt(dragid.substr(5,))]=[];
 		const start = Date.now();
 		
-		//var oldRot = cvideo.style.transform;
-		//cvideo.style.transform = 'rotate(0deg)';
 		var rotwidth = piecewidth;
 		var rotheight = pieceheight;
 		if (pieceInfo.rotation == 90 || pieceInfo.rotation == 270){
@@ -166,6 +174,14 @@ function dragend() {
 			if (pieceInfo.rotation == 90) {
 				centerx = (1-pieceInfo.centers[ii].y)*parseFloat(cheight);
 				centery = pieceInfo.centers[ii].x*parseFloat(cwidth);
+			}
+			else if (pieceInfo.rotation == 180) {
+				centerx = (1-pieceInfo.centers[ii].x)*parseFloat(cwidth);
+				centery = (1-pieceInfo.centers[ii].y)*parseFloat(cheight);
+			}
+			else if (pieceInfo.rotation == 270) {
+				centerx = (pieceInfo.centers[ii].y)*parseFloat(cheight);
+				centery = (1-pieceInfo.centers[ii].x)*parseFloat(cwidth);
 			}
 			
 			let newx = parseFloat(cvideo.getBoundingClientRect().left)+centerx;
@@ -234,6 +250,64 @@ function dragend() {
 				
 					}
 				}
+				else if (pieceInfo.rotation == 180 && pieceInfo.rotation==pieces[tempkey].rotation) {
+					if (newx < tempbox[0] + rotwidth + 10 && newy < tempbox[1] + rotheight + 10) {
+						if (newx > tempbox[0] + rotwidth - 10) {
+							//in far right match zone
+						
+							if (newy > tempbox[1] - 10 && newy < tempbox[1] + 10) {
+								possMatch = 'left';
+							}
+						
+						}
+						else if (newx > tempbox[0] - rotwidth - 10 && newx < tempbox[0] - rotwidth + 10) {
+							//in far left match zone
+						
+							if (newy > tempbox[1] - 10 && newy < tempbox[1] + 10) {
+								possMatch = 'right';
+							}
+						}
+						else if (newx > tempbox[0] - 10 && newx < tempbox[0] + 10) {
+							//in center match zone
+							if (newy > tempbox[1] + rotheight - 10) {
+								possMatch = 'top';
+							}
+							else if (newy > tempbox[1] - rotheight - 10 && newy < tempbox[1] - rotheight + 10) {
+								possMatch = 'bottom';
+							}
+						}
+				
+					}
+				}
+				else if (pieceInfo.rotation == 270 && pieceInfo.rotation==pieces[tempkey].rotation) {
+					if (newx < tempbox[0] + rotwidth + 10 && newy < tempbox[1] + rotheight + 10) {
+						if (newx > tempbox[0] + rotwidth - 10) {
+							//in far right match zone
+						
+							if (newy > tempbox[1] - 10 && newy < tempbox[1] + 10) {
+								possMatch = 'bottom';
+							}
+						
+						}
+						else if (newx > tempbox[0] - rotwidth - 10 && newx < tempbox[0] - rotwidth + 10) {
+							//in far left match zone
+						
+							if (newy > tempbox[1] - 10 && newy < tempbox[1] + 10) {
+								possMatch = 'top';
+							}
+						}
+						else if (newx > tempbox[0] - 10 && newx < tempbox[0] + 10) {
+							//in center match zone
+							if (newy > tempbox[1] + rotheight - 10) {
+								possMatch = 'left';
+							}
+							else if (newy > tempbox[1] - rotheight - 10 && newy < tempbox[1] - rotheight + 10) {
+								possMatch = 'right';
+							}
+						}
+				
+					}
+				}
 				if (possMatch) {
 					console.log(possMatch);
 					var realid = tempbox[2]; //video1 if actual piece is topleft
@@ -250,7 +324,6 @@ function dragend() {
 				}
 			}
 		}			
-		//cvideo.style.transform = oldRot;
 		if (possMatches[parseInt(dragid.substr(5,))].length>0){
 			if (collab){
 				var jsonmessage = {type:'possMatch',message:[parseInt(dragid.substr(5,)), possMatches[parseInt(dragid.substr(5,))]]};
