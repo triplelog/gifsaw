@@ -72,8 +72,8 @@ function dragstart(event) {
 				if (el && tempkey != dragid){
 					
 					
-					var oldRot = el.style.transform;
-					el.style.transform = 'rotate(0deg)';
+					var oldRot = el.style.transformOrigin;
+					el.style.transformOrigin = '0% 0%';
 					let tempvideo = videos[tempkey].getBoundingClientRect();
 					for (var ii=0;ii<pieces[i-1].centers.length;ii++){
 						
@@ -81,7 +81,7 @@ function dragstart(event) {
 
 						nmatches++;
 					}
-					el.style.transform = oldRot;
+					el.style.transformOrigin = oldRot;
 				}
 			}
 		}
@@ -150,8 +150,8 @@ function dragend() {
 		possMatches[parseInt(dragid.substr(5,))]=[];
 		const start = Date.now();
 		
-		var oldRot = cvideo.style.transform;
-		cvideo.style.transform = 'rotate(0deg)';
+		var oldRot = cvideo.style.transformOrigin;
+		cvideo.style.transformOrigin = '0% 0%';
 		for (var ii=0;ii<pieceInfo.centers.length;ii++) {
 			let newx = parseFloat(cvideo.getBoundingClientRect().left)+pieceInfo.centers[ii].x*parseFloat(cwidth);
 			let newy = parseFloat(cvideo.getBoundingClientRect().top)+pieceInfo.centers[ii].y*parseFloat(cheight);
@@ -205,7 +205,7 @@ function dragend() {
 				}
 			}
 		}			
-		cvideo.style.transform = oldRot;
+		cvideo.style.transformOrigin = oldRot;
 		if (possMatches[parseInt(dragid.substr(5,))].length>0){
 			if (collab){
 				var jsonmessage = {type:'possMatch',message:[parseInt(dragid.substr(5,)), possMatches[parseInt(dragid.substr(5,))]]};
