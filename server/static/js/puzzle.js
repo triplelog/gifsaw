@@ -73,11 +73,11 @@ function dragstart(event) {
 					let tempvideo = videos[tempkey].getBoundingClientRect();
 					
 					var oldRot = el.style.transform;
-					console.log(el.left);
+					console.log(tempvideo.left);
 					el.style.transform = 'rotate(0deg)';
-					console.log(el.left);
+					console.log(tempvideo.left);
 					el.style.transform = oldRot;
-					console.log(el.left);
+					console.log(tempvideo.left);
 					for (var ii=0;ii<pieces[i-1].centers.length;ii++){
 						
 						vmatches.push([tempkey,[parseFloat(tempvideo.left)+pieces[i-1].centers[ii].x*parseFloat(cwidth),parseFloat(tempvideo.top)+pieces[i-1].centers[ii].y*parseFloat(cheight), pieces[i-1].centers[ii].id]]);
