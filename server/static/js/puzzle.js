@@ -157,7 +157,7 @@ function dragend() {
 		for (var ii=0;ii<pieceInfo.centers.length;ii++) {
 			var centerx = pieceInfo.centers[ii].x*parseFloat(cwidth);
 			var centery = pieceInfo.centers[ii].y*parseFloat(cheight);
-			if (pieceInfo].rotation == 90) {
+			if (pieceInfo.rotation == 90) {
 				centerx = (1-pieceInfo.centers[ii].y)*parseFloat(cheight);
 				centery = pieceInfo.centers[ii].x*parseFloat(cwidth);
 			}
