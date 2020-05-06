@@ -259,14 +259,12 @@ svg {
 	grid-column: 1;
 	margin-left: 4px;
 	min-height: 1px;
-	z-index: 3;
 	position: relative;
 	line-height: calc(2 * var(--border-radius));
 	height: calc(2 * var(--border-radius));
 }
 .container div .title .titleCenter {
 	grid-column: 2;
-	z-index: 3;
 	position: relative;
 	line-height: calc(2 * var(--border-radius));
 	height: calc(2 * var(--border-radius));
@@ -274,7 +272,6 @@ svg {
 .container div .title .titleRight {
 	grid-column: 3;
 	min-height: 1px;
-	z-index: 3;
 	position: relative;
 	line-height: calc(2 * var(--border-radius));
 	height: calc(2 * var(--border-radius));
@@ -418,6 +415,10 @@ button.submit:hover {
 			{% block content22 %}
 			{% endblock %}
 		</div>
+	</div>
+	<div class="content-00">
+		{% block content00 %}
+		{% endblock %}
 	</div>
 </div>
 
