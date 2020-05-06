@@ -71,17 +71,19 @@ function dragstart(event) {
 				var el = document.getElementById(tempkey);
 				if (el && tempkey != dragid){
 					
-					
-					var oldRot = el.style.transformOrigin;
-					el.style.transformOrigin = '0% 0%';
 					let tempvideo = videos[tempkey].getBoundingClientRect();
+					
 					for (var ii=0;ii<pieces[i-1].centers.length;ii++){
-						
-						vmatches.push([tempkey,[parseFloat(tempvideo.left)+pieces[i-1].centers[ii].x*parseFloat(cwidth),parseFloat(tempvideo.top)+pieces[i-1].centers[ii].y*parseFloat(cheight), pieces[i-1].centers[ii].id]]);
+						var centerx = pieces[i-1].centers[ii].x*parseFloat(cwidth);
+						var centery = pieces[i-1].centers[ii].y*parseFloat(cheight);
+						if (pieces[i-1].rotation == 90) {
+							centerx = (1-pieces[i-1].centers[ii].y)*parseFloat(cheight);
+							centery = pieces[i-1].centers[ii].x*parseFloat(cwidth);
+						}
+						vmatches.push([tempkey,[parseFloat(tempvideo.left)+centerx,parseFloat(tempvideo.top)+centery, pieces[i-1].centers[ii].id]]);
 
 						nmatches++;
 					}
-					el.style.transformOrigin = oldRot;
 				}
 			}
 		}
@@ -150,11 +152,18 @@ function dragend() {
 		possMatches[parseInt(dragid.substr(5,))]=[];
 		const start = Date.now();
 		
-		var oldRot = cvideo.style.transformOrigin;
-		cvideo.style.transformOrigin = '0% 0%';
+		var oldRot = cvideo.style.transform;
+		cvideo.style.transform = 'rotate(0deg)';
 		for (var ii=0;ii<pieceInfo.centers.length;ii++) {
-			let newx = parseFloat(cvideo.getBoundingClientRect().left)+pieceInfo.centers[ii].x*parseFloat(cwidth);
-			let newy = parseFloat(cvideo.getBoundingClientRect().top)+pieceInfo.centers[ii].y*parseFloat(cheight);
+			var centerx = pieceInfo.centers[ii].x*parseFloat(cwidth);
+			var centery = pieceInfo.centers[ii].y*parseFloat(cheight);
+			if (pieceInfo].rotation == 90) {
+				centerx = (1-pieceInfo.centers[ii].y)*parseFloat(cheight);
+				centery = pieceInfo.centers[ii].x*parseFloat(cwidth);
+			}
+			
+			let newx = parseFloat(cvideo.getBoundingClientRect().left)+centerx;
+			let newy = parseFloat(cvideo.getBoundingClientRect().top)+centery;
 			let newid = pieceInfo.centers[ii].id;
 			for (var i=0;i<nmatches;i++) {
 				var possMatch = false;
@@ -205,7 +214,7 @@ function dragend() {
 				}
 			}
 		}			
-		cvideo.style.transformOrigin = oldRot;
+		cvideo.style.transform = oldRot;
 		if (possMatches[parseInt(dragid.substr(5,))].length>0){
 			if (collab){
 				var jsonmessage = {type:'possMatch',message:[parseInt(dragid.substr(5,)), possMatches[parseInt(dragid.substr(5,))]]};
