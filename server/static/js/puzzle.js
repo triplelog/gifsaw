@@ -152,8 +152,14 @@ function dragend() {
 		possMatches[parseInt(dragid.substr(5,))]=[];
 		const start = Date.now();
 		
-		var oldRot = cvideo.style.transform;
-		cvideo.style.transform = 'rotate(0deg)';
+		//var oldRot = cvideo.style.transform;
+		//cvideo.style.transform = 'rotate(0deg)';
+		var rotwidth = piecewidth;
+		var rotheight = pieceheight;
+		if (pieceInfo.rotation == 90 || pieceInfo.rotation == 270){
+			rotwidth = pieceheight;
+			rotheight = piecewidth;
+		}
 		for (var ii=0;ii<pieceInfo.centers.length;ii++) {
 			var centerx = pieceInfo.centers[ii].x*parseFloat(cwidth);
 			var centery = pieceInfo.centers[ii].y*parseFloat(cheight);
@@ -170,9 +176,9 @@ function dragend() {
 				let tempkey = parseInt(vmatches[i][0].substr(5,))-1;
 				let tempbox = vmatches[i][1];
 
-				if (pieceInfo.rotation==pieces[tempkey].rotation) {
-					if (newx < tempbox[0] + piecewidth + 10 && newy < tempbox[1] + pieceheight + 10) {
-						if (newx > tempbox[0] + piecewidth - 10) {
+				if (pieceInfo.rotation == 0 && pieceInfo.rotation==pieces[tempkey].rotation) {
+					if (newx < tempbox[0] + rotwidth + 10 && newy < tempbox[1] + rotheight + 10) {
+						if (newx > tempbox[0] + rotwidth - 10) {
 							//in far right match zone
 						
 							if (newy > tempbox[1] - 10 && newy < tempbox[1] + 10) {
@@ -180,7 +186,7 @@ function dragend() {
 							}
 						
 						}
-						else if (newx > tempbox[0] - piecewidth - 10 && newx < tempbox[0] - piecewidth + 10) {
+						else if (newx > tempbox[0] - rotwidth - 10 && newx < tempbox[0] - rotwidth + 10) {
 							//in far left match zone
 						
 							if (newy > tempbox[1] - 10 && newy < tempbox[1] + 10) {
@@ -189,17 +195,47 @@ function dragend() {
 						}
 						else if (newx > tempbox[0] - 10 && newx < tempbox[0] + 10) {
 							//in center match zone
-							if (newy > tempbox[1] + pieceheight - 10) {
+							if (newy > tempbox[1] + rotheight - 10) {
 								possMatch = 'bottom';
 							}
-							else if (newy > tempbox[1] - pieceheight - 10 && newy < tempbox[1] - pieceheight + 10) {
+							else if (newy > tempbox[1] - rotheight - 10 && newy < tempbox[1] - rotheight + 10) {
 								possMatch = 'top';
 							}
 						}
 				
 					}
 				}
+				else if (pieceInfo.rotation == 90 && pieceInfo.rotation==pieces[tempkey].rotation) {
+					if (newx < tempbox[0] + rotwidth + 10 && newy < tempbox[1] + rotheight + 10) {
+						if (newx > tempbox[0] + rotwidth - 10) {
+							//in far right match zone
+						
+							if (newy > tempbox[1] - 10 && newy < tempbox[1] + 10) {
+								possMatch = 'top';
+							}
+						
+						}
+						else if (newx > tempbox[0] - rotwidth - 10 && newx < tempbox[0] - rotwidth + 10) {
+							//in far left match zone
+						
+							if (newy > tempbox[1] - 10 && newy < tempbox[1] + 10) {
+								possMatch = 'bottom';
+							}
+						}
+						else if (newx > tempbox[0] - 10 && newx < tempbox[0] + 10) {
+							//in center match zone
+							if (newy > tempbox[1] + rotheight - 10) {
+								possMatch = 'right';
+							}
+							else if (newy > tempbox[1] - rotheight - 10 && newy < tempbox[1] - rotheight + 10) {
+								possMatch = 'left';
+							}
+						}
+				
+					}
+				}
 				if (possMatch) {
+					console.log(possMatch);
 					var realid = tempbox[2]; //video1 if actual piece is topleft
 					var skipMatch = false;
 					/*for (var iii=0;iii<possMatches[parseInt(dragid.substr(5,))].length;iii++) {
@@ -214,7 +250,7 @@ function dragend() {
 				}
 			}
 		}			
-		cvideo.style.transform = oldRot;
+		//cvideo.style.transform = oldRot;
 		if (possMatches[parseInt(dragid.substr(5,))].length>0){
 			if (collab){
 				var jsonmessage = {type:'possMatch',message:[parseInt(dragid.substr(5,)), possMatches[parseInt(dragid.substr(5,))]]};
