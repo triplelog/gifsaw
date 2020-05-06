@@ -327,13 +327,15 @@ var username = "{{ usernameHolder }}";
 		<label for="radio33-3"><i class="fas fa-expand"></i></label>
 	</span>
 </div>
-<div id="scorediv"></div>
+<button id="save" href="">Save</button>
+<button id="toggle" onclick="toggle()">Toggle Borders</button>
 <div>
 	<progress id="progressdiv" class="progress" value="0" max="100"></progress>
 </div>
-<div>Groups</div>
-<button id="save" href="">Save</button>
-<button id="toggle" onclick="toggle()">Toggle Borders</button>
+<div id="scorediv"></div>
+
+
+
 
 
 
@@ -354,5 +356,24 @@ var username = "{{ usernameHolder }}";
 
 <div>
 	<img id="previewImage" src="{{ image.name }}" style="border: 1px solid black;">
+</div>
+
+<div class="title">
+
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		<a href="https://qblur.com">Groups</a>
+	</span>
+	<span class="titleRight">
+		<label for="radio33-1"><i class="fas fa-compress-alt"></i></label>
+		<label for="radio33-2"><i class="fas fa-expand-alt"></i></label>
+		<label for="radio33-3"><i class="fas fa-expand"></i></label>
+	</span>
+</div>
+
+<div>
+	
 </div>
 {% endblock %}
