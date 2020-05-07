@@ -32,7 +32,6 @@ function refreshImg() {
 	var titleel = img.parentElement.parentElement.parentElement.querySelector('.title');
 	var availWidth = fullel.clientWidth;
 	var availHeight = fullel.clientHeight-titleel.clientHeight;
-	console.log(img.width,img.height);
 	if (img.height>availHeight || img.width > availWidth){
 		var imgRatio = img.height/img.width;
 		if (img.height/availHeight > img.width / availWidth){
@@ -44,7 +43,6 @@ function refreshImg() {
 			img.height = img.width*imgRatio;
 		}
 	}
-	console.log(img.width,img.height);
 	document.getElementById('imageHolder').style.height= img.height+'px';
 	document.getElementById('imageHolder').style.width= img.width+'px';
 }
@@ -55,8 +53,6 @@ function updateNpieces() {
 	var npieces = document.getElementById('npieces').value;
 	var img = document.getElementById('imageHolder').querySelector('img');
 	if (img){
-		console.log(img.height);
-		console.log(img.width);
 		imageHeight = img.height;
 		imageWidth = img.width;
 	}
@@ -177,6 +173,7 @@ function updateSize(evt) {
 	
 }
 function updateLines(evt) {
+	if (evt){console.log(evt.target);}
 	if (evt && (evt.target.id == 'pointyFactor' || evt.target.id == 'heightFactor' || evt.target.id == 'widthFactor')){
 		document.getElementById(evt.target.id+'Form').value = parseInt(evt.target.value);
 	}
