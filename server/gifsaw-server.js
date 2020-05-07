@@ -425,9 +425,9 @@ app.post('/create',
 				}
 				
 				{% if groupNames %}
-				groupNames = {{ groupNames }};
+				groupNames = {{ groupNames | dump | safe}};
 				for (var i=2;i<groupNames.length;i++){
-					newGroup(groupNames[i]);
+					newGroup(false,groupNames[i]);
 				}
 				{% endif %}
 				updateGroups();

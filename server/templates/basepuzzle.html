@@ -429,7 +429,7 @@ function selectEye(event){
 }
 
 document.getElementById('newGroup').addEventListener('click',newGroup);
-function newGroup(name) {
+function newGroup(evt,name=false) {
 	
 	var el = document.getElementById('groups');
 	var groupEls = el.querySelectorAll('.group');
