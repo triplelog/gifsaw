@@ -418,8 +418,11 @@ function newGroup() {
 	newI.addEventListener('click', selectEye);
 	newEl.appendChild(newI);
 	
-	newEl.innerHTML += 'Group '+elid;
-
+	var newSpan = document.createElement('span');
+	newSpan.textContent = 'Group '+elid;
+	newEl.appendChild(newSpan);
+	
+	newEl.addEventListener('click', selectGroup);
 	
 	el.appendChild(newEl);
 }
