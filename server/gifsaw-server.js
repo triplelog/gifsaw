@@ -374,6 +374,11 @@ app.get('/create',
 		res.write(nunjucks.render('templates/createbase.html',{
 			defaultScripts: defaultScripts,
 			selectedScript: 'edges',
+			nrows: 1,
+			ncols: 1,
+			pointyFactor: 70,
+			heightFactor: 50,
+			widthFactor: 30,
 		}));
 		res.end();
 	}

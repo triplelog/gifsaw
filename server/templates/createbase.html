@@ -209,27 +209,27 @@ svg {
 
 		<label for="nrows" style="grid-column: 1; grid-row: 2; text-align: right;">Rows: </label>
 		<span  style="grid-column: 2; grid-row: 2;">
-			<input type="number" id="nrows" name="nrows" style="width: 5rem;"></input>
+			<input type="number" id="nrows" name="nrows" value="{{ nrows }}" style="width: 5rem;"></input>
 		</span>
 
 		<label for="ncols" style="grid-column: 1; grid-row: 3; text-align: right;">Columns: </label>
 		<span  style="grid-column: 2; grid-row: 3;">
-			<input type="number" id="ncols" name="ncols" style="width: 5rem;"></input>
+			<input type="number" id="ncols" name="ncols" value="{{ ncols }}" style="width: 5rem;"></input>
 		</span>
 
 		<label for="pointyFactor" style="grid-column: 1; grid-row: 4; text-align: right;">Pointiness: </label>
 		<span  style="grid-column: 2; grid-row: 4;">
-			<input type="range" name="pointyFactor" id="pointyFactor" value="50" min="1" max="99" style="width: 6rem;"></input>
+			<input type="range" name="pointyFactor" id="pointyFactor" value="{{ pointyFactor }}" min="1" max="99" style="width: 6rem;"></input>
 		</span>
 		
 		<label for="heightFactor" style="grid-column: 1; grid-row: 5; text-align: right;">Height: </label>
 		<span  style="grid-column: 2; grid-row: 5;">
-			<input type="range" name="heightFactor" id="heightFactor" value="50" min="1" max="99" style="width: 6rem;"></input>
+			<input type="range" name="heightFactor" id="heightFactor" value="{{ heightFactor }}" min="1" max="99" style="width: 6rem;"></input>
 		</span>
 		
 		<label for="widthFactor" style="grid-column: 1; grid-row: 6; text-align: right;">Width: </label>
 		<span  style="grid-column: 2; grid-row: 6;">
-			<input type="range" name="widthFactor" id="widthFactor" value="50" min="1" max="99" style="width: 6rem;"></input>
+			<input type="range" name="widthFactor" id="widthFactor" value="{{ widthFactor }}" min="1" max="99" style="width: 6rem;"></input>
 		</span>
 		
 		

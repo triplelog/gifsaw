@@ -206,6 +206,11 @@ function updateLines(evt) {
 		if (evt.target.id == 'widthFactor') {document.getElementById(evt.target.id+'Form').value = widthFactor;}
 		
 	}
+	if (evt && evt == 'initial'){
+		document.getElementById(evt.target.id+'Form').value = pointyFactor;
+		document.getElementById(evt.target.id+'Form').value = heightFactor;
+		document.getElementById(evt.target.id+'Form').value = widthFactor;
+	}
 	if (img){
 		imageHeight = img.height;
 		imageWidth = img.width;
@@ -388,6 +393,7 @@ document.getElementById('widthFactor').addEventListener('change',updateLines);
 document.getElementById('pointyFactor').addEventListener('input',updateLines);
 document.getElementById('heightFactor').addEventListener('input',updateLines);
 document.getElementById('widthFactor').addEventListener('input',updateLines);
+updateLines('initial');
 function updateScript(evt) {
 	var el1 = document.getElementById('scriptTextarea');
 	var el2 = document.getElementById('initialScript');
