@@ -749,6 +749,9 @@ wss.on('connection', function connection(ws) {
 			if (dm.message){
 				GifsawData.findOne({username: username}, function(err, result) {
 					console.log(result);
+					if (!result.saved){
+						result.saved = {};
+					}
 					console.log(result.saved);
 					result.saved[puzzleid] = dm.message;
 					result.markModified('saved');
