@@ -190,8 +190,8 @@ function updateLines(evt) {
 	
 	document.getElementById('nrowsForm').value = nrows;
 	document.getElementById('ncolsForm').value = ncols;
-	var pointyFactor = parseFloat(document.getElementById('pointyFactor').value)/10;
-	var heightFactor = parseFloat(document.getElementById('heightFactor').value)/10;
+	var pointyFactor = parseFloat(document.getElementById('pointyFactor').value)/125;
+	var heightFactor = parseFloat(document.getElementById('heightFactor').value)/20;
 	var widthFactor = parseFloat(document.getElementById('widthFactor').value)/10;
 	if (img){
 		imageHeight = img.height;

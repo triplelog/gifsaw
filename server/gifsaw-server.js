@@ -77,6 +77,16 @@ app.get('/puzzles/:puzzleid',
 		if (req.query && req.query.q && req.query.q == 'solo'){
 			collab = false;
 		}
+		else if (req.query && req.query.q && req.query.q == 'fork'){
+			//redirect to fork page
+			res.redirect('../fork?q='+req.params.puzzleid);
+			return;
+		}
+		else if (req.query && req.query.q && req.query.q == 'edit'){
+			//redirect to edit page if original user
+			res.redirect('../edit?q='+req.params.puzzleid);
+			return;
+		}
 		var puzzleid = req.params.puzzleid;
 		var matches = false;
 		var initialCSS = `.pieceBorder{
@@ -321,8 +331,11 @@ app.post('/create',
 			
 		});
 		
-		
-		var puzzle = new Puzzle({id:puzzleid,matches:retval[4],initialScript:initialScript});
+		var username = '';
+		if (req.isAuthenticated()){
+			username = req.user.username;
+		}
+		var puzzle = new Puzzle({id:puzzleid,matches:retval[4],initialScript:initialScript,creator:username});
 		puzzle.save(function(err,result) {
 			if (err){
 				console.log(err);
