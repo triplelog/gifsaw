@@ -1,4 +1,4 @@
-var ws = false;
+
 function savePuzzle() {
 	if (!ws){
 		ws = new WebSocket('wss://gifsaw.com:8080');

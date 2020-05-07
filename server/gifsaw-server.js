@@ -352,6 +352,7 @@ app.post('/create',
 
 			<script>
 				document.getElementById('save').style.display = 'inline-block';
+				var ws = false;
 				var keepscore = false; var collab = false; var tkey = '{{tkey}}';
 			</script>
 			<script src="../js/solopuzzle.js"></script>
@@ -747,7 +748,7 @@ wss.on('connection', function connection(ws) {
 		else if (dm.type && dm.type == 'saveProgress'){
 			if (dm.message){
 				GifsawData.findOne({username: username}, 'saved', function(err, result) {
-					result.saved = dm.message;
+					result.saved[puzzleid] = dm.message;
 					result.markModified('saved');
 					result.save(function(err2,result2) {
 						if (err2){
