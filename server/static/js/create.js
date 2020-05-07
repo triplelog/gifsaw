@@ -189,9 +189,9 @@ function updateLines(evt) {
 	
 	document.getElementById('nrowsForm').value = nrows;
 	document.getElementById('ncolsForm').value = ncols;
-	var pointyFactor = parseFloat(document.getElementById('pointyFactor').value)/10 - 4.6;
+	var pointyFactor = parseFloat(document.getElementById('pointyFactor').value)/33 - (50/33-.4);
 	if (parseFloat(document.getElementById('pointyFactor').value)<50){
-		pointyFactor = parseFloat(document.getElementById('pointyFactor').value)/150 + .0666;
+		pointyFactor = parseFloat(document.getElementById('pointyFactor').value)/150 - (50/153-.4);
 	}
 	var heightFactor = parseFloat(document.getElementById('heightFactor').value)/20;
 	var widthFactor = parseFloat(document.getElementById('widthFactor').value)/10;
@@ -375,6 +375,9 @@ document.getElementById('ncols').addEventListener('change',updateLines);
 document.getElementById('pointyFactor').addEventListener('change',updateLines);
 document.getElementById('heightFactor').addEventListener('change',updateLines);
 document.getElementById('widthFactor').addEventListener('change',updateLines);
+document.getElementById('pointyFactor').addEventListener('input',updateLines);
+document.getElementById('heightFactor').addEventListener('input',updateLines);
+document.getElementById('widthFactor').addEventListener('input',updateLines);
 function updateScript(evt) {
 	var el1 = document.getElementById('scriptTextarea');
 	var el2 = document.getElementById('initialScript');
