@@ -173,8 +173,9 @@ function updateSize(evt) {
 	
 }
 function updateLines(evt) {
-	if (evt){console.log(evt.target);}
+
 	if (evt && (evt.target.id == 'pointyFactor' || evt.target.id == 'heightFactor' || evt.target.id == 'widthFactor')){
+		console.log(evt.target);
 		document.getElementById(evt.target.id+'Form').value = parseInt(evt.target.value);
 	}
 	var img = document.getElementById('imageHolder').querySelector('img');
@@ -190,6 +191,7 @@ function updateLines(evt) {
 	var pointyFactor = parseFloat(document.getElementById('pointyFactor').value)/125;
 	var heightFactor = parseFloat(document.getElementById('heightFactor').value)/20;
 	var widthFactor = parseFloat(document.getElementById('widthFactor').value)/10;
+	console.log(pointyFactor);
 	if (img){
 		imageHeight = img.height;
 		imageWidth = img.width;
