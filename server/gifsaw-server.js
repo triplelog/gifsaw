@@ -75,21 +75,14 @@ app.get('/puzzles/:puzzleid',
 	function(req, res) {
 		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
 		var collab = true;
-		if (req.query && req.query.q && req.query.q == 'solo'){
-			collab = false;
-		}
-		else if (req.query && req.query.q && req.query.q == 'fork'){
-			//redirect to fork page
-			res.redirect('../fork?q='+req.params.puzzleid);
-			return;
-		}
-		else if (req.query && req.query.q && req.query.q == 'edit'){
-			//redirect to edit page if original user
-			res.redirect('../edit?q='+req.params.puzzleid);
-			return;
+		var savedMerges = [];
+		var username = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
+		if (req.isAuthenticated()){
+			username = req.user.username;
+			//Load user's initialCSS here
+			//initialCSS = ;
 		}
 		var puzzleid = req.params.puzzleid;
-		var matches = false;
 		var initialCSS = `.pieceBorder{
 			stroke-dasharray: calc(2.5 * var(--scale));
 			stroke:black;
@@ -126,12 +119,63 @@ app.get('/puzzles/:puzzleid',
 			stroke: none;
 		}`;
 		
-		var username = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
-		if (req.isAuthenticated()){
-			username = req.user.username;
-			//Load user's initialCSS here
-			//initialCSS = ;
+		
+		if (req.query && req.query.q && req.query.q == 'solo'){
+			collab = false;
 		}
+		else if (username != '' && req.query && req.query.q && req.query.q == 'saved') {
+
+			GifsawData.findOne({username: username}, 'saved', function(err, result) {
+				if (result && result.saved && result.saved[puzzleid]){
+					savedMerges = result.saved[puzzleid];
+					tempKeys[tkey]={username:username,puzzleid:puzzleid};
+					matches = true;
+					collab = false;
+					
+					res.write(nunjucks.render('puzzles/'+puzzleid+'.html',{
+						tkey: tkey,
+						matches: matches,
+						collab: collab,
+						initialCSS: initialCSS,
+						username: username,
+						savedMerges: savedMerges,
+					}));
+					res.end();
+				}
+				else {
+					savedMerges = [];
+					tempKeys[tkey]={username:username,puzzleid:puzzleid};
+					matches = true;
+					collab = false;
+					
+					res.write(nunjucks.render('puzzles/'+puzzleid+'.html',{
+						tkey: tkey,
+						matches: matches,
+						collab: collab,
+						initialCSS: initialCSS,
+						username: username,
+						savedMerges: savedMerges,
+					}));
+					res.end();
+				}
+			}) 
+			return;
+		}
+		else if (req.query && req.query.q && req.query.q == 'fork'){
+			//redirect to fork page
+			res.redirect('../fork?q='+req.params.puzzleid);
+			return;
+		}
+		else if (req.query && req.query.q && req.query.q == 'edit'){
+			//redirect to edit page if original user
+			res.redirect('../edit?q='+req.params.puzzleid);
+			return;
+		}
+		
+		var matches = false;
+		
+		
+		
 		tempKeys[tkey]={username:username,puzzleid:puzzleid};
 		if (!collab){
 			matches = true;
@@ -142,6 +186,7 @@ app.get('/puzzles/:puzzleid',
 			collab: collab,
 			initialCSS: initialCSS,
 			username: username,
+			savedMerges: savedMerges,
 		}));
 		res.end();
 	}
@@ -353,6 +398,11 @@ app.post('/create',
 			<script>
 				document.getElementById('save').style.display = 'inline-block';
 				var ws = false;
+				var savedMerges = {{ savedMerges }};
+				for (var i=0;i<savedMerges.length;i++){
+					socketmerge(savedMerges[i][0],savedMerges[i][1],'me');
+				}
+				
 				var keepscore = false; var collab = false; var tkey = '{{tkey}}';
 			</script>
 			<script src="../js/solopuzzle.js"></script>
