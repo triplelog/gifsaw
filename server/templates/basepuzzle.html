@@ -476,6 +476,8 @@ function newGroup() {
 </div>
 <div style="background: white;">
 	<button id="save" href="">Save</button>
+	<button id="edit" onclick="window.location.href='https://gifsaw.com/puzzles/{{ puzzleid }}?q=edit';">Edit</button>
+	<button id="fork" onclick="window.location.href='https://gifsaw.com/puzzles/{{ puzzleid }}?q=fork">Fork</button>
 	<button id="toggle" onclick="toggle()">Toggle Borders</button>
 	<div>
 		<progress id="progressdiv" class="progress" value="0" max="100"></progress>

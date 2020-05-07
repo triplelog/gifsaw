@@ -142,6 +142,7 @@ app.get('/puzzles/:puzzleid',
 			collab: collab,
 			initialCSS: initialCSS,
 			username: username,
+			puzzleid: puzzleid,
 		}));
 		res.end();
 	}
