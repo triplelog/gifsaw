@@ -180,6 +180,7 @@ app.get('/puzzles/:puzzleid',
 		if (!collab){
 			matches = true;
 		}
+		console.log(savedMerges);
 		res.write(nunjucks.render('puzzles/'+puzzleid+'.html',{
 			tkey: tkey,
 			matches: matches,
@@ -398,7 +399,7 @@ app.post('/create',
 			<script>
 				document.getElementById('save').style.display = 'inline-block';
 				var ws = false;
-				var savedMerges = {{ savedMerges }};
+				var savedMerges = {{ savedMerges | dump | safe }};
 				for (var i=0;i<savedMerges.length;i++){
 					socketmerge(savedMerges[i][0],savedMerges[i][1],'me');
 				}
