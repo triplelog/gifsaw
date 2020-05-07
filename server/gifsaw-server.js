@@ -820,6 +820,7 @@ wss.on('connection', function connection(ws) {
 						result.saved = {};
 					}
 					result.saved[puzzleid] = {'merges':dm.message,'pieces':dm.pieces};
+					console.log(dm.pieces);
 					result.markModified('saved');
 					result.save(function(err2,result2) {
 						if (err2){
