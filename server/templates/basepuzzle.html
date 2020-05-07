@@ -362,6 +362,10 @@ var pieceheight = cheight*{{ actheight }}/{{ image.height }}/{{ nrows }};
 var piecewidth = pieceheight*{{ actwidth }}/{{ actheight }}*{{ nrows }}/{{ ncols }};
 var merges = 0;
 var username = "{{ usernameHolder }}";
+var creator = "{{ creator }}";
+if (creator == username){
+	document.getElementById('edit').style.display = 'inline-block';
+}
 var clickOperation = 'rotate';
 var currentGroups = ['group0','group1'];
 var groupEls = document.querySelectorAll('.group');
@@ -484,7 +488,7 @@ function newGroup() {
 </div>
 <div style="background: white;">
 	<button id="save" href="" style="display: none;">Save</button>
-	<button id="edit" onclick="window.location.href='https://gifsaw.com/edit?q={{ puzzleid }}';">Edit</button>
+	<button id="edit" onclick="window.location.href='https://gifsaw.com/edit?q={{ puzzleid }}';" style="display: none;">Edit</button>
 	<button id="fork" onclick="window.location.href='https://gifsaw.com/fork?q={{ puzzleid }}';">Fork</button>
 	<button id="toggle" onclick="toggle()">Toggle Borders</button>
 	<div>

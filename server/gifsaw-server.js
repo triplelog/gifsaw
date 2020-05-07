@@ -319,6 +319,10 @@ app.post('/create',
 		if (req.body.puzzleid != ''){
 			puzzleid = req.body.puzzleid;
 		}
+		var username = '';
+		if (req.isAuthenticated()){
+			username = req.user.username;
+		}
 		var htmlstr = nunjucks.render('templates/basepuzzle.html',{
 			gametype: gametype,
 			players: players,
@@ -355,15 +359,13 @@ app.post('/create',
 			{% endif %}`,
 			initialCSS: '{{ initialCSS }}',
 			usernameHolder: '{{ username }}',
+			creator: username,
 			puzzleid: puzzleid,
 			
 			
 		});
 		
-		var username = '';
-		if (req.isAuthenticated()){
-			username = req.user.username;
-		}
+		
 		
 		if (req.body.puzzleid != ''){
 			var newObj = {id:puzzleid,matches:retval[4],initialScript:initialScript,creator:username,nrows:nrows,ncols:ncols,pointyFactor:parseInt(req.body.pointyFactor),heightFactor:parseInt(req.body.heightFactor),widthFactor:parseInt(req.body.widthFactor),imgSrc:fullname};
