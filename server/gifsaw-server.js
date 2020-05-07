@@ -429,6 +429,7 @@ app.post('/create',
 				for (var i=2;i<groupNames.length;i++){
 					newGroup(groupNames[i]);
 				}
+				{% endif %}
 				updateGroups();
 			</script>
 
