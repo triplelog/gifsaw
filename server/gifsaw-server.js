@@ -371,7 +371,7 @@ app.post('/create',
 							res.redirect('../create');
 						}
 						else {
-				
+							console.log(nrows,ncols);
 							res.redirect('../puzzles/'+puzzleid);
 						}
 			
