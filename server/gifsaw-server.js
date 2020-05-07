@@ -91,29 +91,33 @@ app.get('/puzzles/:puzzleid',
 		var matches = false;
 		var initialCSS = `.pieceBorder{
 			stroke-dasharray: calc(2.5 * var(--scale));
-			stroke:yellow;
+			stroke:black;
 			stroke-width:calc(2.5 * var(--scale));
 			stroke-opacity:.67;
 			fill: transparent;
 		}
 		.interiorBorder{
 			stroke-dasharray: calc(1 * var(--scale));
-			stroke:blue;
+			stroke:gray;
 			stroke-width:calc(1 * var(--scale));
 			stroke-opacity:.5;
 			fill: transparent;
 		}
 		.interiorBorder.toggled{
 			stroke-dasharray: calc(4 * var(--scale));
-			stroke:blue;
 			stroke-width:calc(4 * var(--scale));
 			stroke-opacity:1;
 			fill: transparent;
 		}
 		.interiorBorder.myBorder{
-			stroke:white;
+			stroke:green;
 			stroke-width:calc(1.5 * var(--scale));
 			stroke-opacity:.7;
+		}
+		.interiorBorder.myBorder.toggled{
+			stroke-dasharray: calc(4 * var(--scale));
+			stroke-width:calc(4 * var(--scale));
+			stroke-opacity:1;
 		}
 		.piece {
 			fill: black;
