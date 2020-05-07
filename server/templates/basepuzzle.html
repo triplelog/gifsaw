@@ -400,8 +400,27 @@ document.getElementById('newGroup').addEventListener('click',newGroup);
 function newGroup() {
 	var el = document.getElementById('groups');
 	var groupEls = el.querySelectorAll('.group');
-	var elid = groupEls[groupEls.length-1].id.substring(5,6);
+	var elid = parseInt(groupEls[groupEls.length-1].id.substring(5))+1;
 	console.log(elid);
+	var newEl = document.createElement('div');
+	newEl.classList.add('group');
+	newEl.id = 'group'+elid;
+	var newI = document.createElement('i');
+	newI.classList.add('fas');
+	newI.classList.add('fa-eye');
+	newI.addEventListener('click', selectEye);
+	newEl.appendChild(newI);
+	
+	newI = document.createElement('i');
+	newI.classList.add('fas');
+	newI.classList.add('fa-eye-slash');
+	newI.addEventListener('click', selectEye);
+	newEl.appendChild(newI);
+	
+	newEl.textContent = 'Group '+elid;
+
+	
+	el.appendChild(newEl);
 }
 </script>
 <script src="../js/puzzle.js"></script>
