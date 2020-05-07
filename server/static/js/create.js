@@ -393,7 +393,7 @@ document.getElementById('widthFactor').addEventListener('change',updateLines);
 document.getElementById('pointyFactor').addEventListener('input',updateLines);
 document.getElementById('heightFactor').addEventListener('input',updateLines);
 document.getElementById('widthFactor').addEventListener('input',updateLines);
-updateLines('initial');
+
 function updateScript(evt) {
 	var el1 = document.getElementById('scriptTextarea');
 	var el2 = document.getElementById('initialScript');
@@ -415,8 +415,18 @@ function updateScript(evt) {
 }
 document.getElementById('scriptTextarea').addEventListener('change',updateScript);
 document.getElementById('scriptTextarea').addEventListener('input',updateScript);
-updateScript();
+
 document.getElementById('scoring').addEventListener('change',updateScript);
 
+var img = document.getElementById('imageHolder').querySelector('img');
+
+img.addEventListener('load',refreshImg);
+
+document.querySelector('input[name="fileSrc"]').setAttribute('value',img.getAttribute('src'));
+
+setTimeout(refreshImg,100);
+
+updateLines('initial');
+updateScript();
 
 

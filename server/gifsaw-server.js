@@ -373,12 +373,13 @@ app.get('/create',
 		var defaultScripts = makeScripts();
 		res.write(nunjucks.render('templates/createbase.html',{
 			defaultScripts: defaultScripts,
-			selectedScript: 'edges',
+			selectedScript: 'default',
 			nrows: 1,
 			ncols: 1,
 			pointyFactor: 70,
 			heightFactor: 50,
 			widthFactor: 30,
+			imgSrc: '../img/in/pd6gm0cd8000.jpg',
 		}));
 		res.end();
 	}
