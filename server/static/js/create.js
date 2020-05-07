@@ -200,9 +200,9 @@ function updateLines(evt) {
 		widthFactor = wf/15 - (50/15-5);
 	}
 	if (evt && evt == 'initial'){
-		document.getElementById(evt.target.id+'Form').value = pointyFactor;
-		document.getElementById(evt.target.id+'Form').value = heightFactor;
-		document.getElementById(evt.target.id+'Form').value = widthFactor;
+		document.getElementById('pointyFactorForm').value = pointyFactor;
+		document.getElementById('heightFactorForm').value = heightFactor;
+		document.getElementById('widthFactorForm').value = widthFactor;
 	}
 	else if (evt && (evt.target.id == 'pointyFactor' || evt.target.id == 'heightFactor' || evt.target.id == 'widthFactor')){
 		if (evt.target.id == 'pointyFactor') {document.getElementById(evt.target.id+'Form').value = pointyFactor;}
