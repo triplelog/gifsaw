@@ -9,6 +9,7 @@ var getDimensions = require('get-video-dimensions');
 const { exec } = require('child_process');
 const bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
+nunjucks.configure({noCache:true});
 var crypto = require("crypto");
 //var Blockly = require('blockly');
 const options = {
@@ -369,8 +370,7 @@ app.post('/create',
 							res.redirect('../create');
 						}
 						else {
-							var indexnc = htmlstr.indexOf('ncols');
-							console.log(nrows,ncols, htmlstr.substring(indexnc,indexnc+50));
+							
 							res.redirect('../puzzles/'+puzzleid);
 						}
 			
