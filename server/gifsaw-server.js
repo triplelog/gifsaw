@@ -406,7 +406,7 @@ app.post('/create',
 			<script src="../js/solopuzzle.js"></script>
 			<script>
 				for (var i=0;i<savedMerges.length;i++){
-					socketmerge(savedMerges[i][0],savedMerges[i][1],'me');
+					socketmerge(savedMerges[i][0],savedMerges[i][1].slice(),'me');
 				}
 				
 			</script>
