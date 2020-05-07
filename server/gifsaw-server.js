@@ -385,7 +385,6 @@ app.post('/create',
 					res.redirect('../create');
 					return;
 				}
-				console.log('line 388: ',result);
 				fs.writeFile("puzzles/"+puzzleid+'.html', htmlstr, function (err2) {
 					if (err2){
 						console.log(err2);
@@ -420,7 +419,6 @@ app.get('/fork',
 				res.redirect('../create');
 			}
 			else {
-				console.log(result);
 				var defaultScripts = makeScripts();
 				res.write(nunjucks.render('templates/createbase.html',{
 					defaultScripts: defaultScripts,
