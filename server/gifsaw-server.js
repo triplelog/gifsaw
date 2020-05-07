@@ -406,13 +406,12 @@ app.post('/create',
 			<script>
 				for (var i=0;i<savedMerges.length;i++){
 					var drid = savedMerges[i][0];
-					console.log(drid);
 					var pieceInfo = pieces[parseInt(drid.substring(5))-1];
 					pieceInfo.rotation = 0;
 					document.getElementById(drid).style.transform = 'rotate(0deg)';
 					var pairs = savedMerges[i][1].slice();
 					for (var pairi=0;pairi<pairs.length;pairi++){
-						drid = pairs[pairi];
+						drid = pairs[pairi][0];
 						pieceInfo = pieces[parseInt(drid.substring(5))-1];
 						pieceInfo.rotation = 0;
 						document.getElementById(drid).style.transform = 'rotate(0deg)';
