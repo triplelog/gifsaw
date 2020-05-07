@@ -385,6 +385,7 @@ app.post('/create',
 					res.redirect('../create');
 					return;
 				}
+				console.log('line 388: ',result);
 				fs.writeFile("puzzles/"+puzzleid+'.html', htmlstr, function (err2) {
 					if (err2){
 						console.log(err2);
