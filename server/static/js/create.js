@@ -200,14 +200,14 @@ function updateLines(evt) {
 		widthFactor = wf/15 - (50/15-5);
 	}
 	if (evt && evt == 'initial'){
-		document.getElementById('pointyFactorForm').value = pointyFactor;
-		document.getElementById('heightFactorForm').value = heightFactor;
-		document.getElementById('widthFactorForm').value = widthFactor;
+		document.getElementById('pointyFactorForm').value = document.getElementById('pointyFactor').value;
+		document.getElementById('heightFactorForm').value = document.getElementById('heightFactor').value;
+		document.getElementById('widthFactorForm').value = document.getElementById('widthFactor').value;
 	}
 	else if (evt && (evt.target.id == 'pointyFactor' || evt.target.id == 'heightFactor' || evt.target.id == 'widthFactor')){
-		if (evt.target.id == 'pointyFactor') {document.getElementById(evt.target.id+'Form').value = pointyFactor;}
-		if (evt.target.id == 'heightFactor') {document.getElementById(evt.target.id+'Form').value = heightFactor;}
-		if (evt.target.id == 'widthFactor') {document.getElementById(evt.target.id+'Form').value = widthFactor;}
+		if (evt.target.id == 'pointyFactor') {document.getElementById(evt.target.id+'Form').value = document.getElementById(evt.target.id).value;}
+		if (evt.target.id == 'heightFactor') {document.getElementById(evt.target.id+'Form').value = document.getElementById(evt.target.id).value;}
+		if (evt.target.id == 'widthFactor') {document.getElementById(evt.target.id+'Form').value = document.getElementById(evt.target.id).value;}
 		
 	}
 	

@@ -250,7 +250,7 @@ app.post('/create',
 	
 	function(req, res) {
 		console.log(req.body);
-		var puzzleid = crypto.randomBytes(100).toString('hex').substr(2, 12);
+		
 		var vm = new VM();
 		var gametype = 'solo';
 		var players = 'one';
@@ -283,9 +283,22 @@ app.post('/create',
 			actheight = dimensions.height-40;
 			actwidth = (dimensions.width-40)/2;
 		}
-		var pointyFactor = parseFloat(req.body.pointyFactor); // from .2 (very round) to 10 (pointy)?
-		var heightFactor = parseFloat(req.body.heightFactor); // from 1 (tall) to 10 (short)?
-		var widthFactor = parseFloat(req.body.widthFactor); // from 1 (long) to 10 (short)?
+		var pf = parseFloat(req.body.pointyFactor);
+		var pointyFactor = pf/40 - (50/40-.4);
+		if (pf<50){
+			pointyFactor = pf/150 - (50/150-.4);
+		}
+		var hf = 100-parseFloat(req.body.heightFactor);
+		var heightFactor = hf/7-(50/7-2.5);
+		if (hf<50){
+			heightFactor = hf/25 - (50/25-2.5);
+		}
+		var wf = 100-parseFloat(req.body.widthFactor);
+		var widthFactor = wf/9-(50/9-5);
+		if (wf<50){
+			widthFactor = wf/15 - (50/15-5);
+		}
+		
 		var retval = makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFactor,heightFactor,widthFactor);
 		
 		var pieces = [];
@@ -343,29 +356,87 @@ app.post('/create',
 		if (req.isAuthenticated()){
 			username = req.user.username;
 		}
-		var puzzle = new Puzzle({id:puzzleid,matches:retval[4],initialScript:initialScript,creator:username});
-		puzzle.save(function(err,result) {
-			if (err){
-				console.log(err);
-				res.redirect('../create');
-				return;
-			}
-			fs.writeFile("puzzles/"+puzzleid+'.html', htmlstr, function (err2) {
-				if (err2){
-					console.log(err2);
-					res.redirect('../create');
-				}
-				else {
+		var puzzleid = crypto.randomBytes(100).toString('hex').substr(2, 12);
+		if (req.body.puzzleid != ''){
+			puzzleid = req.body.puzzleid;
+			var newObj = {id:puzzleid,matches:retval[4],initialScript:initialScript,creator:username,nrows:nrows,ncols:ncols,pointyFactor:parseInt(req.body.pointyFactor),heightFactor:parseInt(req.body.heightFactor),widthFactor:parseInt(req.body.widthFactor),imgSrc:fullname};
 				
-					res.redirect('../puzzles/'+puzzleid);
-				}
+			Puzzle.replaceOne({id:puzzleid}, newObj, function(err,result) {
+				if (!err){
+					fs.writeFile("puzzles/"+puzzleid+'.html', htmlstr, function (err2) {
+						if (err2){
+							console.log(err2);
+							res.redirect('../create');
+						}
+						else {
+				
+							res.redirect('../puzzles/'+puzzleid);
+						}
 			
-			});
-		})
+					});
+				}
+			})
+		}
+		else {
+			var puzzle = new Puzzle({id:puzzleid,matches:retval[4],initialScript:initialScript,creator:username,nrows:nrows,ncols:ncols,pointyFactor:parseInt(req.body.pointyFactor),heightFactor:parseInt(req.body.heightFactor),widthFactor:parseInt(req.body.widthFactor),imgSrc:fullname});
+			puzzle.save(function(err,result) {
+				if (err){
+					console.log(err);
+					res.redirect('../create');
+					return;
+				}
+				fs.writeFile("puzzles/"+puzzleid+'.html', htmlstr, function (err2) {
+					if (err2){
+						console.log(err2);
+						res.redirect('../create');
+					}
+					else {
+				
+						res.redirect('../puzzles/'+puzzleid);
+					}
+			
+				});
+			})
+		}
+		
 		
 		
 	}
 );
+
+app.get('/fork', 
+	function(req, res) {
+		var puzzleid = '';
+		if (req.query && req.query.q){
+			puzzleid = req.query.q;
+		}
+		else {
+			res.redirect('../create');
+			return;
+		}
+		Puzzle.findOne({id:puzzleid}, function(err,result) {
+			if (err || result == null){
+				res.redirect('../create');
+			}
+			else {
+				var defaultScripts = makeScripts();
+				res.write(nunjucks.render('templates/createbase.html',{
+					defaultScripts: defaultScripts,
+					selectedScript: 'default',
+					nrows: result.nrows,
+					ncols: result.ncols,
+					pointyFactor: result.pointyFactor,
+					heightFactor: result.heightFactor,
+					widthFactor: result.widthFactor,
+					imgSrc: '../img/in/'+result.imgSrc,
+				}));
+				res.end();
+			}
+		})
+		
+	}
+);
+
 
 app.get('/create', 
 	
