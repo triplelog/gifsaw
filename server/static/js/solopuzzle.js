@@ -48,6 +48,8 @@ function socketanswer(piece1,pairs) {
 }
 
 function socketmerge(piece1,pairs,scoringUser,wsMessage=false) {
+	console.log(piece1);
+	console.log(pairs);
 	var video1 = document.getElementById(piece1);
 	if (video1) {
 		var p1 = document.getElementById('path'+piece1.substr(5,));
