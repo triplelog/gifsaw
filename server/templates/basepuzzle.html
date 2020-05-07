@@ -454,14 +454,15 @@ function newGroup(evt,name=false) {
 	var newSpan = document.createElement('span');
 	if (!name){
 		name = document.getElementById('newGroupName').value;
+		if (name == ''){
+			name = 'Group '+elid;
+		}
+		groupNames.push(name);
 	}
-	if (name != ""){
-		newSpan.textContent = name;
-	}
-	else {
-		newSpan.textContent = 'Group '+elid;
-	}
-	groupNames.push(name);
+
+	newSpan.textContent = name;
+
+	
 	newEl.appendChild(newSpan);
 	
 	newEl.addEventListener('click', selectGroup);
