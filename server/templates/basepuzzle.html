@@ -424,6 +424,7 @@ function selectEye(event){
 
 document.getElementById('newGroup').addEventListener('click',newGroup);
 function newGroup() {
+	
 	var el = document.getElementById('groups');
 	var groupEls = el.querySelectorAll('.group');
 	var elid = parseInt(groupEls[groupEls.length-1].id.substring(5))+1;
@@ -445,7 +446,14 @@ function newGroup() {
 	newEl.appendChild(newI);
 	
 	var newSpan = document.createElement('span');
-	newSpan.textContent = 'Group '+elid;
+	var name = document.getElementById('newGroupName').value;
+	if (name != ""){
+		newSpan.textContent = name;
+	}
+	else {
+		newSpan.textContent = 'Group '+elid;
+	}
+	
 	newEl.appendChild(newSpan);
 	
 	newEl.addEventListener('click', selectGroup);
@@ -528,6 +536,6 @@ function newGroup() {
 		<div class="group selected" id="group0"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Main</div>
 		<div class="group selected" id="group1"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Group 1</div>
 	</div>
-	<div id="newGroup"><i class="fas fa-plus"></i>New Group</div>
+	<div><i class="fas fa-plus"></i> New <input type="text" id="newGroupName"></input><button id="newGroup">Add</button></div>
 </div>
 {% endblock %}
