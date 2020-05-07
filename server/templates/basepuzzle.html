@@ -369,6 +369,7 @@ if (creator == username){
 }
 var clickOperation = 'rotate';
 var currentGroups = ['group0','group1'];
+var groupNames = ['Main', 'Group 1'];
 var groupEls = document.querySelectorAll('.group');
 for (var i=0;i<groupEls.length;i++){
 	groupEls[i].addEventListener('click', selectGroup);
@@ -428,7 +429,7 @@ function selectEye(event){
 }
 
 document.getElementById('newGroup').addEventListener('click',newGroup);
-function newGroup() {
+function newGroup(name) {
 	
 	var el = document.getElementById('groups');
 	var groupEls = el.querySelectorAll('.group');
@@ -451,14 +452,16 @@ function newGroup() {
 	newEl.appendChild(newI);
 	
 	var newSpan = document.createElement('span');
-	var name = document.getElementById('newGroupName').value;
+	if (!name){
+		name = document.getElementById('newGroupName').value;
+	}
 	if (name != ""){
 		newSpan.textContent = name;
 	}
 	else {
 		newSpan.textContent = 'Group '+elid;
 	}
-	
+	groupNames.push(name);
 	newEl.appendChild(newSpan);
 	
 	newEl.addEventListener('click', selectGroup);

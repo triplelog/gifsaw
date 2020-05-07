@@ -7,7 +7,7 @@ function savePuzzle() {
 			jsonmessage.message = tkey;
 			ws.send(JSON.stringify(jsonmessage));
 			
-			jsonmessage = {'type':'saveProgress','message':savedMerges,'pieces':pieces};
+			jsonmessage = {'type':'saveProgress','message':savedMerges,'pieces':pieces,'groups':groupNames};
 			ws.send(JSON.stringify(jsonmessage));
 		}
 		ws.onmessage = function(evt){
@@ -15,7 +15,7 @@ function savePuzzle() {
 		}
 	}
 	else {
-		var jsonmessage = {'type':'saveProgress','message':savedMerges,'pieces':pieces};
+		var jsonmessage = {'type':'saveProgress','message':savedMerges,'pieces':pieces,'groups':groupNames};
 		ws.send(JSON.stringify(jsonmessage));
 	}
 	

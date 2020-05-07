@@ -130,6 +130,7 @@ app.get('/puzzles/:puzzleid',
 				if (result && result.saved && result.saved[puzzleid]){
 					savedMerges = result.saved[puzzleid].merges;
 					var savedPieces = result.saved[puzzleid].pieces;
+					var groups = result.saved[puzzleid].groups;
 					matches = true;
 					collab = false;
 					
@@ -141,6 +142,7 @@ app.get('/puzzles/:puzzleid',
 						username: username,
 						savedMerges: savedMerges,
 						savedPieces: savedPieces,
+						groupNames: groups,
 					}));
 					res.end();
 				}
@@ -421,21 +423,13 @@ app.post('/create',
 					socketmerge(savedMerges[i][0],pairs,'me');
 					
 				}
-				{% if savedPieces %}
-					pieces = {{ savedPieces | dump | safe }};
-					for (var i=0;i<npieces;i++) {
-						var video = document.getElementById('video'+(i+1));
-						if (!video){continue;}
-	
-						video.style.left = (.08*w+(w*.9 - cwidth)*pieces[i].location[0])+'px';
-						video.style.top = (.08*h+(h*.9 - cheight)*pieces[i].location[1])+'px';
-						video.style.transform = 'rotate('+pieces[i].rotation+'deg)';
-						video.style.transformOrigin = pieces[i].centers[0].x*100+'% '+pieces[i].centers[0].y*100+'%';
-	
-	
-					}
-					updateGroups();
-				{% endif %}
+				
+				{% if groupNames %}
+				groupNames = {{ groupNames }};
+				for (var i=2;i<groupNames.length;i++){
+					newGroup(groupNames[i]);
+				}
+				updateGroups();
 			</script>
 
 			{% endif %}`,
@@ -832,7 +826,7 @@ wss.on('connection', function connection(ws) {
 					if (!result.saved){
 						result.saved = {};
 					}
-					result.saved[puzzleid] = {'merges':dm.message,'pieces':dm.pieces};
+					result.saved[puzzleid] = {'merges':dm.message,'pieces':dm.pieces,'groupNames':dm.groups};
 					result.markModified('saved');
 					result.save(function(err2,result2) {
 						if (err2){
