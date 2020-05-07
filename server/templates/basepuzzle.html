@@ -163,6 +163,10 @@ img {
 	--height-center: calc({{ image.height }}px * 7 / 30);
 	--width-center: calc({{ image.width }}px * 7/ 30);
 }
+.container.sizeh {
+	--height-center: calc({{ image.height }}px * 7 / 3);
+	--width-center: calc({{ image.width }}px * 7 / 3);
+}
 .size2 img {
 	width: calc({{ image.width }}px / 2);
 }
@@ -175,6 +179,9 @@ img {
 .size5 img {
 	width: calc({{ image.width }}px / 5);
 }
+.sizeh img {
+	width: calc({{ image.width }}px * 2);
+}
 .size2 {
 	--scale: 2;
 }
@@ -186,6 +193,9 @@ img {
 }
 .size5 {
 	--scale: 5;
+}
+.sizeh {
+	--scale: .5;
 }
 
 #scorediv {
@@ -309,24 +319,34 @@ var w = window.innerWidth || document.documentElement.clientWidth || document.bo
 var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 console.log(w,gifwidth);
 var i= 2;
-while (cwidth > w * .75 || cheight > h * .75 || (cwidth > w * .5 && cheight > h * .5) ){
-	cwidth = gifwidth/i;
-	cheight = gifheight/i;
-	var el = document.querySelector('.container');
+if ( cwidth > w * .375 || cheight > h * .375 || (cwidth > w * .25 && cheight > h * .25) ){
+	while (cwidth > w * .75 || cheight > h * .75 || (cwidth > w * .5 && cheight > h * .5) ){
+		cwidth = gifwidth/i;
+		cheight = gifheight/i;
+		var el = document.querySelector('.container');
 		
-	el.classList.add('size'+i);
-	if (i>2){
-		el.classList.remove('size'+(i-1));
+		el.classList.add('size'+i);
+		if (i>2){
+			el.classList.remove('size'+(i-1));
+		}
+	
+	
+	
+	
+
+
+		if (i==5){break;}
+		i++;
 	}
-	
-	
-	
-	
-
-
-	if (i==5){break;}
-	i++;
 }
+else {
+	cwidth = gifwidth*2;
+	cheight = gifheight*2;
+	var el = document.querySelector('.container');
+	
+	el.classList.add('sizeh');
+}
+
 if (cwidth/w > cheight/h){
 	//landscape mode for info box
 	var ell = document.querySelector('.container');
