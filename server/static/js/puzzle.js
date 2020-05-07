@@ -363,7 +363,6 @@ function getUrlVars() {
     return vars;
 }
 function updateGroups() {
-	console.log(currentGroups);
 	for (var i=0;i<pieces.length;i++){
 		videos['video'+(i+1)].style.display = 'none';
 		for (var ii=0;ii<currentGroups.length;ii++){
