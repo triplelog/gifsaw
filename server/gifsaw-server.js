@@ -142,7 +142,6 @@ app.get('/puzzles/:puzzleid',
 			collab: collab,
 			initialCSS: initialCSS,
 			username: username,
-			puzzleid: puzzleid,
 		}));
 		res.end();
 	}
@@ -316,7 +315,10 @@ app.post('/create',
 			var piece = {id:'video'+(i+1),rotation:retval[3][i],location:retval[2][i],centers:retval[1][i],group:'group0'};
 			pieces.push(piece);
 		}
-		
+		var puzzleid = crypto.randomBytes(100).toString('hex').substr(2, 12);
+		if (req.body.puzzleid != ''){
+			puzzleid = req.body.puzzleid;
+		}
 		var htmlstr = nunjucks.render('templates/basepuzzle.html',{
 			gametype: gametype,
 			players: players,
@@ -350,6 +352,7 @@ app.post('/create',
 			{% endif %}`,
 			initialCSS: '{{ initialCSS }}',
 			usernameHolder: '{{ username }}',
+			puzzleid: puzzleid,
 			
 			
 		});
@@ -358,9 +361,8 @@ app.post('/create',
 		if (req.isAuthenticated()){
 			username = req.user.username;
 		}
-		var puzzleid = crypto.randomBytes(100).toString('hex').substr(2, 12);
+		
 		if (req.body.puzzleid != ''){
-			puzzleid = req.body.puzzleid;
 			var newObj = {id:puzzleid,matches:retval[4],initialScript:initialScript,creator:username,nrows:nrows,ncols:ncols,pointyFactor:parseInt(req.body.pointyFactor),heightFactor:parseInt(req.body.heightFactor),widthFactor:parseInt(req.body.widthFactor),imgSrc:fullname};
 				
 			Puzzle.replaceOne({id:puzzleid}, newObj, function(err,result) {
