@@ -400,13 +400,16 @@ app.post('/create',
 				document.getElementById('save').style.display = 'inline-block';
 				var ws = false;
 				var savedMerges = {{ savedMerges | dump | safe }};
-				for (var i=0;i<savedMerges.length;i++){
-					socketmerge(savedMerges[i][0],savedMerges[i][1],'me');
-				}
 				
 				var keepscore = false; var collab = false; var tkey = '{{tkey}}';
 			</script>
 			<script src="../js/solopuzzle.js"></script>
+			<script>
+				for (var i=0;i<savedMerges.length;i++){
+					socketmerge(savedMerges[i][0],savedMerges[i][1],'me');
+				}
+				
+			</script>
 
 			{% endif %}`,
 			initialCSS: '{{ initialCSS }}',
