@@ -117,7 +117,7 @@ app.post('/register',
 		  
 		}
 		else {
-			var gifsawData = new GifsawData({username: req.body.username.toLowerCase(), puzzles: [], friends: [], followers: []});
+			var gifsawData = new GifsawData({username: req.body.username.toLowerCase(), created: {}, saved: {}, stats: {}, friends: [], followers: [], options: {}});
 			gifsawData.save(function(err,result){
 				console.log('user registered!',performance.now());
 				var robot = 'python3 python/robohash/createrobo.py '+req.body.username.toLowerCase()+' 1';

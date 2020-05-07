@@ -361,6 +361,7 @@ var ccenters= {{ ccenters }};
 var pieceheight = cheight*{{ actheight }}/{{ image.height }}/{{ nrows }};
 var piecewidth = pieceheight*{{ actwidth }}/{{ actheight }}*{{ nrows }}/{{ ncols }};
 var merges = 0;
+var savedMerges = [];
 var username = "{{ usernameHolder }}";
 var creator = "{{ creator }}";
 if (creator == username){

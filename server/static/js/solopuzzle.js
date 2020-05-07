@@ -1,3 +1,26 @@
+var ws = false;
+function savePuzzle() {
+	if (!ws){
+		ws = new WebSocket('wss://gifsaw.com:8080');
+		ws.onopen = function(evt) {
+			var jsonmessage = {'type':'soloKey'};
+			jsonmessage.message = tkey;
+			ws.send(JSON.stringify(jsonmessage));
+			
+			jsonmessage = {'type':'saveProgress','message':savedMerges};
+			ws.send(JSON.stringify(jsonmessage));
+		}
+		ws.onmessage = function(evt){
+			
+		}
+	}
+	else {
+		var jsonmessage = {'type':'saveProgress','message':savedMerges};
+		ws.send(JSON.stringify(jsonmessage));
+	}
+	
+	
+}
 function socketanswer(piece1,pairs) {
 	var tomatch = [];
 	var piece1 = 'video'+piece1;
@@ -17,6 +40,7 @@ function socketanswer(piece1,pairs) {
 		}
 	}
 	if (tomatch.length>0){
+		savedMerges.push([piece1,tomatch,'me']);
 		socketmerge(piece1,tomatch,'me');
 		
 	}

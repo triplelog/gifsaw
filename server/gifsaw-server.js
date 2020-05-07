@@ -659,6 +659,17 @@ wss.on('connection', function connection(ws) {
 			}
 			return;
 		}
+		else if (dm.type && dm.type == 'soloKey'){
+			if (dm.message && tempKeys[dm.message]){
+				if (tempKeys[dm.message].username && tempKeys[dm.message].username != ''){
+					username = tempKeys[dm.message].username;
+				}
+				if (tempKeys[dm.message].puzzleid){
+					puzzleid = tempKeys[dm.message].puzzleid;
+				}
+			}
+			return;
+		}
 		else if (dm.type && dm.type == 'download') {
 			var url = dm.url;
 			var ext = '';
@@ -730,6 +741,22 @@ wss.on('connection', function connection(ws) {
 				else {
 					return
 				}
+			}
+			return;
+		}
+		else if (dm.type && dm.type == 'saveProgress'){
+			if (dm.message){
+				GifsawUser.findOne({username: username}, 'saved', function(err, result) {
+					result.saved = dm.message;
+					result.markModified('saved');
+					result.save(function(err2,result2) {
+						if (err2){
+							console.log(err2);
+							return;
+						}
+						console.log(result2);
+					})
+				}) 
 			}
 			return;
 		}
