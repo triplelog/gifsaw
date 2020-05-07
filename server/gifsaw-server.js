@@ -419,6 +419,7 @@ app.get('/fork',
 				res.redirect('../create');
 			}
 			else {
+				console.log(result);
 				var defaultScripts = makeScripts();
 				res.write(nunjucks.render('templates/createbase.html',{
 					defaultScripts: defaultScripts,
