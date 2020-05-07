@@ -362,8 +362,6 @@ app.post('/create',
 			var newObj = {id:puzzleid,matches:retval[4],initialScript:initialScript,creator:username,nrows:nrows,ncols:ncols,pointyFactor:parseInt(req.body.pointyFactor),heightFactor:parseInt(req.body.heightFactor),widthFactor:parseInt(req.body.widthFactor),imgSrc:fullname};
 				
 			Puzzle.replaceOne({id:puzzleid}, newObj, function(err,result) {
-				console.log('line 365',err);
-				console.log('line 366',result);
 				if (!err){
 					fs.writeFile("puzzles/"+puzzleid+'.html', htmlstr, function (err2) {
 						if (err2){
@@ -371,7 +369,8 @@ app.post('/create',
 							res.redirect('../create');
 						}
 						else {
-							console.log(nrows,ncols);
+							var indexnc = htmlstr.indexOf('ncols');
+							console.log(nrows,ncols, htmlstr.substring(indexnc,indexnc+50));
 							res.redirect('../puzzles/'+puzzleid);
 						}
 			
