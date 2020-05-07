@@ -40,7 +40,7 @@ function socketanswer(piece1,pairs) {
 		}
 	}
 	if (tomatch.length>0){
-		savedMerges.push([piece1,tomatch,'me']);
+		savedMerges.push([piece1,tomatch.slice(),'me']);
 		socketmerge(piece1,tomatch,'me');
 		
 	}
