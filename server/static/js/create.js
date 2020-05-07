@@ -197,9 +197,9 @@ function updateLines(evt) {
 		heightFactor = hf/25 - (50/25-2.5);
 	}
 	var wf = 100-parseFloat(document.getElementById('widthFactor').value);
-	var widthFactor = wf/10-(50/10-5);
+	var widthFactor = wf/9-(50/9-5);
 	if (wf<50){
-		widthFactor = wf/12.5 - (50/12.5-5);
+		widthFactor = wf/15 - (50/15-5);
 	}
 	console.log(widthFactor);
 	if (img){
