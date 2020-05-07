@@ -12,8 +12,8 @@ for (var i=0;i<npieces;i++) {
 	
 	video.addEventListener('mousedown',dragstart);
 	
-	video.style.left = w*.125+(w - cwidth)*.825*pieces[i].location[0]+'px';
-	video.style.top = h*.125+(h - cheight)*.825*pieces[i].location[1]+'px';
+	video.style.left = (w - cwidth)*(pieces[i].location[0]*.825+.125)+'px';
+	video.style.top = (h - cheight)*(pieces[i].location[1]*.825+.125)+'px';
 	video.style.transform = 'rotate('+pieces[i].rotation+'deg)';
 	video.style.transformOrigin = pieces[i].centers[0].x*100+'% '+pieces[i].centers[0].y*100+'%';
 	//video.style.display = 'none';
