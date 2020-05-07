@@ -396,6 +396,13 @@ function selectEye(event){
 	updateGroups();
 }
 
+document.getElementById('newGroup').addEventListener('click',newGroup);
+function newGroup() {
+	var el = document.getElementById('groups');
+	var groupEls = el.querySelectorAll('.group');
+	var elid = groupEls[groupEls.length-1].id.substring(5,6);
+	console.log(elid);
+}
 </script>
 <script src="../js/puzzle.js"></script>
 
@@ -465,9 +472,9 @@ function selectEye(event){
 	</span>
 </div>
 
-<div style="background: white;">
+<div style="background: white;" id="groups">
 	<div class="group selected" id="group0"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Main</div>
 	<div class="group selected" id="group1"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Group 1</div>
-	<div><i class="fas fa-plus"></i>New Group</div>
+	<div id="newGroup"><i class="fas fa-plus"></i>New Group</div>
 </div>
 {% endblock %}
