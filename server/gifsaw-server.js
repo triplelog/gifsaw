@@ -275,9 +275,9 @@ app.post('/create',
 			actheight = dimensions.height-40;
 			actwidth = (dimensions.width-40)/2;
 		}
-		var pointyFactor = parseFloat(req.body.pointyFactor)/10; // from .2 (very round) to 10 (pointy)?
-		var heightFactor = parseFloat(req.body.heightFactor)/10; // from 1 (tall) to 10 (short)?
-		var widthFactor = parseFloat(req.body.widthFactor)/10; // from 1 (long) to 10 (short)?
+		var pointyFactor = parseFloat(req.body.pointyFactor); // from .2 (very round) to 10 (pointy)?
+		var heightFactor = parseFloat(req.body.heightFactor); // from 1 (tall) to 10 (short)?
+		var widthFactor = parseFloat(req.body.widthFactor); // from 1 (long) to 10 (short)?
 		var retval = makelines(vm,encryptedpuzzle,actwidth,actheight,nrows,ncols,pointyFactor,heightFactor,widthFactor);
 		
 		var pieces = [];
