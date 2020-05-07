@@ -107,9 +107,10 @@ svg {
 	<label for="scoring" style="grid-column: 1; grid-row: 3; text-align: right;">Scoring</label>
 	<span style="grid-column: 2; grid-row: 3;">
 		<select id="scoring">
-			<option value="default">Default</option>
-			<option value="edges">Edges</option>
-			<option value="denominator">Denominator</option>
+			<option value="default" {% if selectedScript == 'default' %}selected{% endif %}>Default</option>
+			<option value="edges" {% if selectedScript == 'edges' %}selected{% endif %}>Edges</option>
+			<option value="denominator" {% if selectedScript == 'denominator' %}selected{% endif %}>Denominator</option>
+			<option value="custom" {% if selectedScript == 'custom' %}selected{% endif %}>Custom</option>
 		</select>
 	</span>
 
@@ -128,7 +129,7 @@ svg {
 		</div>
 		<div style="display: none;">
 			<label for="initialScript">Scoring Script: </label>
-			<input type="text" id="initialScript"  name="initialScript" value="{{ defaultScripts['default'] }}"></input>
+			<input type="text" id="initialScript"  name="initialScript" value=""></input>
 		
 		
 		</div>
@@ -260,7 +261,7 @@ svg {
 {% endblock %}
 {% block content33 %}
 <textarea id="scriptTextarea" rows="10" columns="80" class="prism-live language-js">
-{{ defaultScripts['default'] }}
+{{ defaultScripts[selectedScript] }}
 </textarea>
 {% endblock %}
 

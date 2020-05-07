@@ -409,7 +409,7 @@ function updateScript(evt) {
 }
 document.getElementById('scriptTextarea').addEventListener('change',updateScript);
 document.getElementById('scriptTextarea').addEventListener('input',updateScript);
-
+updateScript();
 document.getElementById('scoring').addEventListener('change',updateScript);
 
 

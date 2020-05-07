@@ -373,6 +373,7 @@ app.get('/create',
 		var defaultScripts = makeScripts();
 		res.write(nunjucks.render('templates/createbase.html',{
 			defaultScripts: defaultScripts,
+			selectedScript: 'edges',
 		}));
 		res.end();
 	}
@@ -680,6 +681,16 @@ function newMerge(username,matches){
 	return {'message':'Merge','accept':true,'score':score};
 }`;
 	defaultScripts['denominator'] = script;
+	
+	script = `var players={};
+function newPlayer(username){
+	players[username]={score:0};
+}
+function newMerge(username,matches){
+	var score = {};
+	return {'message':'Merge','accept':true,'score':score};
+}`;
+	defaultScripts['custom'] = script;
 	
 	
 	
