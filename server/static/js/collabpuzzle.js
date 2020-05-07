@@ -18,6 +18,17 @@ ws.onmessage = function(evt){
 					tomatch = tomatch.splice(i,1);
 				}
 			}
+			var drid = dm.message[0];
+			var pieceInfo = pieces[parseInt(drid.substring(5))-1];
+			pieceInfo.rotation = 0;
+			document.getElementById(drid).style.transform = 'rotate(0deg)';
+			var pairs = tomatch.slice();
+			for (var pairi=0;pairi<pairs.length;pairi++){
+				drid = pairs[pairi][0];
+				pieceInfo = pieces[parseInt(drid.substring(5))-1];
+				pieceInfo.rotation = 0;
+				document.getElementById(drid).style.transform = 'rotate(0deg)';
+			}
 			if (dm.message[3]){
 				socketmerge(dm.message[0],tomatch,dm.message[2],dm.message[3]);
 			}

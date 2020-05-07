@@ -15,7 +15,7 @@ function savePuzzle() {
 		}
 	}
 	else {
-		var jsonmessage = {'type':'saveProgress','message':savedMerges};
+		var jsonmessage = {'type':'saveProgress','message':savedMerges,'pieces':pieces};
 		ws.send(JSON.stringify(jsonmessage));
 	}
 	

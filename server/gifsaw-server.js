@@ -128,7 +128,8 @@ app.get('/puzzles/:puzzleid',
 
 			GifsawData.findOne({username: username}, 'saved', function(err, result) {
 				if (result && result.saved && result.saved[puzzleid]){
-					savedMerges = result.saved[puzzleid];
+					savedMerges = result.saved[puzzleid].merges;
+					var savedPieces = result.saved[puzzleid].pieces;
 					matches = true;
 					collab = false;
 					
@@ -139,6 +140,7 @@ app.get('/puzzles/:puzzleid',
 						initialCSS: initialCSS,
 						username: username,
 						savedMerges: savedMerges,
+						savedPieces: savedPieces,
 					}));
 					res.end();
 				}
@@ -418,7 +420,9 @@ app.post('/create',
 					}
 					socketmerge(savedMerges[i][0],pairs,'me');
 				}
-				
+				{% if savedPieces %}
+					pieces = {{ savedPieces | dump | safe }};
+				{% endif %}
 			</script>
 
 			{% endif %}`,
@@ -815,7 +819,7 @@ wss.on('connection', function connection(ws) {
 					if (!result.saved){
 						result.saved = {};
 					}
-					result.saved[puzzleid] = dm.message;
+					result.saved[puzzleid] = {'merges':dm.message,'pieces':dm.pieces};
 					result.markModified('saved');
 					result.save(function(err2,result2) {
 						if (err2){
