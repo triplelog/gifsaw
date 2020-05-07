@@ -409,6 +409,7 @@ function newGroup() {
 	newI.classList.add('fas');
 	newI.classList.add('fa-eye');
 	newI.addEventListener('click', selectEye);
+	console.log(newI);
 	newEl.appendChild(newI);
 	
 	newI = document.createElement('i');
@@ -417,7 +418,7 @@ function newGroup() {
 	newI.addEventListener('click', selectEye);
 	newEl.appendChild(newI);
 	
-	newEl.textContent = 'Group '+elid;
+	//newEl.textContent = 'Group '+elid;
 
 	
 	el.appendChild(newEl);
@@ -491,9 +492,11 @@ function newGroup() {
 	</span>
 </div>
 
-<div style="background: white;" id="groups">
-	<div class="group selected" id="group0"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Main</div>
-	<div class="group selected" id="group1"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Group 1</div>
+<div style="background: white;">
+	<div id="groups">
+		<div class="group selected" id="group0"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Main</div>
+		<div class="group selected" id="group1"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Group 1</div>
+	</div>
 	<div id="newGroup"><i class="fas fa-plus"></i>New Group</div>
 </div>
 {% endblock %}
