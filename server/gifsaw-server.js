@@ -748,6 +748,8 @@ wss.on('connection', function connection(ws) {
 		else if (dm.type && dm.type == 'saveProgress'){
 			if (dm.message){
 				GifsawData.findOne({username: username}, 'saved', function(err, result) {
+					console.log(result);
+					console.log(result.saved);
 					result.saved[puzzleid] = dm.message;
 					result.markModified('saved');
 					result.save(function(err2,result2) {
