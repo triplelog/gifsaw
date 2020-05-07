@@ -746,7 +746,7 @@ wss.on('connection', function connection(ws) {
 		}
 		else if (dm.type && dm.type == 'saveProgress'){
 			if (dm.message){
-				GifsawUser.findOne({username: username}, 'saved', function(err, result) {
+				GifsawData.findOne({username: username}, 'saved', function(err, result) {
 					result.saved = dm.message;
 					result.markModified('saved');
 					result.save(function(err2,result2) {
