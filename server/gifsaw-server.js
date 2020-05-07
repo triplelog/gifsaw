@@ -439,6 +439,42 @@ app.get('/fork',
 	}
 );
 
+app.get('/edit', 
+	function(req, res) {
+		var puzzleid = '';
+		if (req.query && req.query.q){
+			puzzleid = req.query.q;
+		}
+		else {
+			res.redirect('../create');
+			return;
+		}
+		Puzzle.findOne({id:puzzleid}, function(err,result) {
+			if (err || result == null){
+				res.redirect('../create');
+			}
+			else {
+				console.log(result);
+				var defaultScripts = makeScripts();
+				res.write(nunjucks.render('templates/createbase.html',{
+					defaultScripts: defaultScripts,
+					selectedScript: 'default',
+					nrows: result.nrows,
+					ncols: result.ncols,
+					pointyFactor: result.pointyFactor,
+					heightFactor: result.heightFactor,
+					widthFactor: result.widthFactor,
+					imgSrc: '../img/in/'+result.imgSrc,
+					puzzleid: puzzleid,
+				}));
+				res.end();
+			}
+		})
+		
+	}
+);
+
+
 
 app.get('/create', 
 	
