@@ -827,7 +827,7 @@ wss.on('connection', function connection(ws) {
 					if (!result.saved){
 						result.saved = {};
 					}
-					result.saved[puzzleid] = {'merges':dm.message,'pieces':dm.pieces,'groupNames':dm.groups};
+					result.saved[puzzleid] = {'merges':dm.message,'pieces':dm.pieces,'groups':dm.groups};
 					result.markModified('saved');
 					result.save(function(err2,result2) {
 						if (err2){
