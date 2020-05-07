@@ -83,6 +83,7 @@ app.get('/puzzles/:puzzleid',
 			//initialCSS = ;
 		}
 		var puzzleid = req.params.puzzleid;
+		tempKeys[tkey]={username:username,puzzleid:puzzleid};
 		var initialCSS = `.pieceBorder{
 			stroke-dasharray: calc(2.5 * var(--scale));
 			stroke:black;
@@ -128,7 +129,6 @@ app.get('/puzzles/:puzzleid',
 			GifsawData.findOne({username: username}, 'saved', function(err, result) {
 				if (result && result.saved && result.saved[puzzleid]){
 					savedMerges = result.saved[puzzleid];
-					tempKeys[tkey]={username:username,puzzleid:puzzleid};
 					matches = true;
 					collab = false;
 					
@@ -144,7 +144,6 @@ app.get('/puzzles/:puzzleid',
 				}
 				else {
 					savedMerges = [];
-					tempKeys[tkey]={username:username,puzzleid:puzzleid};
 					matches = true;
 					collab = false;
 					
@@ -176,7 +175,7 @@ app.get('/puzzles/:puzzleid',
 		
 		
 		
-		tempKeys[tkey]={username:username,puzzleid:puzzleid};
+		
 		if (!collab){
 			matches = true;
 		}
@@ -406,7 +405,18 @@ app.post('/create',
 			<script src="../js/solopuzzle.js"></script>
 			<script>
 				for (var i=0;i<savedMerges.length;i++){
-					socketmerge(savedMerges[i][0],savedMerges[i][1].slice(),'me');
+					var drid = savedMerges[i][0];
+					var pieceInfo = pieces[parseInt(drid.substr(5,))-1];
+					pieceInfo.rotation = 0;
+					document.getElementById(drid).style.transform = 'rotate(0deg)';
+					var pairs = savedMerges[i][1].slice();
+					for (var pairi=0;pairi<pairs.length;pairi++){
+						drid = pairs[pairi];
+						pieceInfo = pieces[parseInt(drid.substr(5,))-1];
+						pieceInfo.rotation = 0;
+						document.getElementById(drid).style.transform = 'rotate(0deg)';
+					}
+					socketmerge(savedMerges[i][0],pairs,'me');
 				}
 				
 			</script>
