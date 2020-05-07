@@ -346,7 +346,10 @@ app.post('/create',
 
 			{% else %}
 
-			<script>var keepscore = false; var collab = false; var tkey = '{{tkey}}';</script>
+			<script>
+				document.getElementById('save').style.display = 'inline-block';
+				var keepscore = false; var collab = false; var tkey = '{{tkey}}';
+			</script>
 			<script src="../js/solopuzzle.js"></script>
 
 			{% endif %}`,
