@@ -189,11 +189,12 @@ function updateLines(evt) {
 	document.getElementById('ncolsForm').value = ncols;
 	var pointyFactor = parseFloat(document.getElementById('pointyFactor').value)/40 - (50/40-.4);
 	if (parseFloat(document.getElementById('pointyFactor').value)<50){
-		pointyFactor = parseFloat(document.getElementById('pointyFactor').value)/140 - (50/140-.4);
+		pointyFactor = parseFloat(document.getElementById('pointyFactor').value)/150 - (50/150-.4);
 	}
-	var heightFactor = parseFloat(document.getElementById('heightFactor').value)/6-(50/6-2.5);
-	if (parseFloat(document.getElementById('heightFactor').value)<50){
-		heightFactor = parseFloat(document.getElementById('heightFactor').value)/33 - (50/33-2.5);
+	var hf = 100-parseFloat(document.getElementById('heightFactor').value);
+	var heightFactor = hf/7-(50/7-2.5);
+	if (hf<50){
+		heightFactor = hf/25 - (50/25-2.5);
 	}
 	var widthFactor = parseFloat(document.getElementById('widthFactor').value)/10;
 	console.log(heightFactor);
