@@ -138,10 +138,10 @@ body {
 </div>
 {% endblock %}
 {% block content33 %}
-{% if myAccount %}
-<div>Add Friend: <input type="text" id="friendName"></input><button onclick="newFriend()">Add</button></div>
-{% else %}
+{% if notMyAccount %}
 <div><a href="../friend?q={{ username }}">Add {{ username }} as a friend</a></div>
+{% else %}
+<div>Add Friend: <input type="text" id="friendName"></input><button onclick="newFriend()">Add</button></div>
 {% endif %}
 
 {% for friend in friends %}
