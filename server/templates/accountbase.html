@@ -84,8 +84,9 @@ body {
 {% endblock %}
 {% block content13 %}
 
-{% for puzzle in created %}
-<div><a href="{{ created[puzzle].url }}">{{ created[puzzle].name }}</a>
+{% for key, puzzle in created %}
+{{ puzzle }}
+<div><a href="{{ puzzle.url }}">{{ puzzle.name }}</a>
 </div>
 {% endfor %}
 
