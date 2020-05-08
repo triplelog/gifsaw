@@ -308,7 +308,7 @@ svg {
 #radio00-1:unchecked + div i.fa-compress-alt {
 	display: none;
 }
-#radio00-1:unchecked ~ div {
+#radio00-1:unchecked ~ #menuDiv {
 	display: none;
 }
 
@@ -563,7 +563,7 @@ function newGroup(evt,name=false) {
 		<label for="radio00-1"><i class="fas fa-expand-alt"></i><i class="fas fa-compress-alt"></i></label>
 	</span>
 </div>
-<div style="background: white;">
+<div style="background: white;" id="menuDiv">
 	<button id="save" onclick="savePuzzle()" style="display: none;">Save</button>
 	<button id="edit" onclick="window.location.href='https://gifsaw.com/edit?q={{ puzzleid }}';" style="display: none;">Edit</button>
 	<button id="fork" onclick="window.location.href='https://gifsaw.com/fork?q={{ puzzleid }}';">Fork</button>
