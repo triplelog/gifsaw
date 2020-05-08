@@ -138,6 +138,15 @@ body {
 </div>
 {% endblock %}
 {% block content33 %}
+{% if myAccount %}
+<div>Add Friend: <input type="text" id="friendName"></input><button onclick="newFriend()">Add</button></div>
+{% else %}
+<div><a href="../friend?q={{ username }}">Add {{ username }} as a friend</a></div>
+{% endif %}
+
+{% for friend in friends %}
+<div>{{ friend }}</div>
+{% endfor %}
 
 {% endblock %}
 
@@ -159,6 +168,32 @@ body {
 
 
 {% block scripts %}
-
+<script>
+var ws = false;
+var tkey = '{{tkey}}';
+function newFriend() {
+	if (!ws){
+		ws = new WebSocket('wss://gifsaw.com:8080');
+		ws.onopen = function(evt) {
+			var jsonmessage = {'type':'accountKey'};
+			jsonmessage.message = tkey;
+			ws.send(JSON.stringify(jsonmessage));
+			
+			jsonmessage = {'type':'newFriend','message':document.getElementById('friendName').value};
+			ws.send(JSON.stringify(jsonmessage));
+		}
+		ws.onmessage = function(evt){
+			//Add friend
+			var dm = JSON.parse(evt.data);
+			if (dm.operation == 'friend'){
+				console.log(dm.friend+" added as a friend");
+			}
+		}
+	}
+	else {
+		jsonmessage = {'type':'newFriend','message':document.getElementById('friendName').value};
+		ws.send(JSON.stringify(jsonmessage));
+	}
+}
 {% endblock %}
 

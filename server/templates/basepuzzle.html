@@ -245,7 +245,7 @@ svg {
 	padding: .1rem .5rem;
 	
 }
-.container.landscape .content-00 > div:nth-child(4){
+.container.landscape .content-00 > div.rules:Not(.title){
 	max-width: 10rem;
 }
 .container.landscape .content-00 div.title{
@@ -532,7 +532,7 @@ function newGroup(evt,name=false) {
 	<div id="scorediv"></div>
 </div>
 
-<div class="title">
+<div class="title rules">
 
 	<span class="titleLeft">
 		
@@ -544,7 +544,7 @@ function newGroup(evt,name=false) {
 		<label for="radio33-1"><i class="fas fa-compress-alt"></i></label>
 	</span>
 </div>
-<div style="background: white;">
+<div style="background: white;" class="rules">
 	Rules
 </div>
 

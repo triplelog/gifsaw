@@ -401,6 +401,8 @@ app.post('/create',
 
 			<script>
 				document.getElementById('save').style.display = 'inline-block';
+				document.querySelectorAll('.rules')[0].style.display = 'none';
+				document.querySelectorAll('.rules')[1].style.display = 'none';
 				var ws = false;
 				var savedMerges = {{ savedMerges | dump | safe }};
 				
@@ -763,6 +765,14 @@ wss.on('connection', function connection(ws) {
 			}
 			return;
 		}
+		else if (dm.type && dm.type == 'accountKey'){
+			if (dm.message && tempKeys[dm.message]){
+				if (tempKeys[dm.message].username && tempKeys[dm.message].username != ''){
+					username = tempKeys[dm.message].username;
+				}
+			}
+			return;
+		}
 		else if (dm.type && dm.type == 'download') {
 			var url = dm.url;
 			var ext = '';
@@ -854,6 +864,25 @@ wss.on('connection', function connection(ws) {
 					})
 				}) 
 			}
+			return;
+		}
+		else if (dm.type && dm.type == 'newFriend'){
+			var friend = dm.message;
+			  var me = username;
+			  GifsawData.countDocuments({username: friend}, function(err, result) {
+				if (err){return}
+				else if (result > 0){
+					GifsawData.updateOne({username: me, friends: { "$ne": friend}}, {$push: {friends: friend}}, function (err2, result2) {
+						if (err2 || !result2 || result2.n == 0){return}
+						else {
+							console.log('new friend');
+							GifsawData.updateOne({username: friend, followers: { "$ne": me}}, {$push: {followers: me}}, function (err3, result3) {})
+							var jsonmessage = {'operation':'friend','message':friend};
+							ws.send(JSON.stringify(jsonmessage));
+						}
+					});
+				}
+			  }).limit(1);
 			return;
 		}
   	});
