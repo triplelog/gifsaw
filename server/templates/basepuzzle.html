@@ -305,14 +305,11 @@ svg {
 #radio00-1:checked + div i.fa-expand-alt {
 	display: none;
 }
-#radio00-1:unchecked + div i.fa-compress-alt {
+#radio00-1:Not(:checked) + div i.fa-compress-alt {
 	display: none;
 }
-#menuDiv {
+#radio00-1:Not(:checked) ~ #menuDiv {
 	display: none;
-}
-#radio00-1:checked ~ #menuDiv {
-	display: inline-block;
 }
 
 #radio00-2:checked + div i.fa-expand-alt {
