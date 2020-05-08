@@ -301,6 +301,13 @@ svg {
 	color: red;
 	font-size: 1.3rem;
 }
+
+#radio00-1:checked ~ div i.fas-expand-alt {
+	display: none;
+}
+#radio00-1:unchecked ~ div i.fas-compress-alt {
+	display: none;
+}
 {{ initialCSS }}
 {% endblock %}
 
@@ -509,6 +516,11 @@ function newGroup(evt,name=false) {
 
 
 {% block content00 %}
+
+<input type="checkbox" style="display: none;" id="radio00-1" checked></input>
+<input type="checkbox" style="display: none;" id="radio00-2" checked></input>
+<input type="checkbox" style="display: none;" id="radio00-3" checked></input>
+<input type="checkbox" style="display: none;" id="radio00-4" checked></input>
 <div class="title">
 
 	<span class="titleLeft">
@@ -518,7 +530,7 @@ function newGroup(evt,name=false) {
 		<a href="https://qblur.com">Menu</a>
 	</span>
 	<span class="titleRight">
-		<label for="radio33-1"><i class="fas fa-compress-alt"></i></label>
+		<label for="radio00-1"><i class="fas fa-expand-alt"></i><i class="fas fa-compress-alt"></i></label>
 	</span>
 </div>
 <div style="background: white;">
