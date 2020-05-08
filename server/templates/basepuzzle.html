@@ -237,15 +237,19 @@ svg {
 	grid-row: 1;
 	grid-column: 1 / 5;
 }
-.container.landscape .content-00 div{
+.container.landscape .content-00 > div{
 	display: inline-block;
 	height: 100%;
 	float: left;
+	overflow-y: auto;
 	
 }
 .container.landscape .content-00 div.title{
 	width: 2rem;
 	overflow: hidden;
+	writing-mode: vertical-lr;
+    -webkit-writing-mode: vertical-lr;
+    -ms-writing-mode: vertical-lr;
 }
 .content-00 {
 	background: transparent;
