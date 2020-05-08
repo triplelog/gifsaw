@@ -84,8 +84,8 @@ body {
 {% endblock %}
 {% block content13 %}
 
-{% for game in games %}
-<div><a href="../{{username}}/{{game.id}}">{{game.id}}</a>
+{% for puzzle in created %}
+<div><a href="{{ created[puzzle].url }}">{{ created[puzzle].name }}</a>
 </div>
 {% endfor %}
 

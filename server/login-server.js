@@ -68,8 +68,9 @@ app.get('/account',
 			if (err){
 				console.log(err);
 			}
+			var created = {};
 			if (result == null){
-				result = {username: req.user.username.toLowerCase(), puzzles: [], friends: [], followers: []};
+				result = {username: req.body.username.toLowerCase(), created: {}, saved: {}, stats: {}, friends: [], followers: [], options: {}};
 				var gifsawData = new GifsawData(result);
 				gifsawData.save(function(err2,result2){
 					var robot = 'python3 python/robohash/createrobo.py '+req.body.username.toLowerCase()+' 1';
@@ -86,13 +87,14 @@ app.get('/account',
 				});
 				
 			}
-		
+			console.log(result.created);
 			res.write(nunjucks.render('templates/accountbase.html',{
 				username: req.user.options.displayName || req.user.username,
 				name: req.user.name || '',
 				options: req.user.options,
 				friends: result.friends,
 				tkey: tkey,
+				created: result.created,
 			}));
 			res.end();
 		})

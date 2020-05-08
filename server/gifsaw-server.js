@@ -483,6 +483,17 @@ app.post('/create',
 			
 				});
 			})
+			//add puzzle to GifsawData for user
+			GifsawData.findOne({username: username}, function(err,result) {
+				if (!result.created){
+					result.created = {};
+				}
+				result.created[puzzleid] = {url:'../puzzles/'+puzzleid,name:puzzleid};
+				result.markModified('created');
+				result.save(function(err2,result2){
+					
+				})
+			})
 		}
 		
 		

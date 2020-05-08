@@ -11,6 +11,8 @@ sudo apt-get install imagemagick ffmpeg
 ./mp42gif.sh -i city/aerial.mp4 -f 12 -h 960 -o ../../server/static/gifs/city/aerial.gif
 gifsicle -O3 --colors 192 --lossy=80 aerial.gif -o optaerial.gif
 
+copy robohash and create static/robots directory
+
 #update ws, servers, and nginx with correct domain
 
 
