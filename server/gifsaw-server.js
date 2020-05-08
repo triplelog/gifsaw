@@ -442,10 +442,13 @@ app.post('/create',
 			
 		});
 		
-		
+		var name = req.body.name;
+		if (req.body.name == ''){
+			name = 'Puzzle '+puzzleid;
+		}
 		
 		if (req.body.puzzleid != ''){
-			var newObj = {id:puzzleid,matches:retval[4],initialScript:initialScript,creator:username,nrows:nrows,ncols:ncols,pointyFactor:parseInt(req.body.pointyFactor),heightFactor:parseInt(req.body.heightFactor),widthFactor:parseInt(req.body.widthFactor),imgSrc:fullname};
+			var newObj = {id:puzzleid,name:name,matches:retval[4],initialScript:initialScript,creator:username,nrows:nrows,ncols:ncols,pointyFactor:parseInt(req.body.pointyFactor),heightFactor:parseInt(req.body.heightFactor),widthFactor:parseInt(req.body.widthFactor),imgSrc:fullname};
 				
 			Puzzle.replaceOne({id:puzzleid}, newObj, function(err,result) {
 				if (!err){
@@ -464,7 +467,7 @@ app.post('/create',
 			})
 		}
 		else {
-			var puzzle = new Puzzle({id:puzzleid,matches:retval[4],initialScript:initialScript,creator:username,nrows:nrows,ncols:ncols,pointyFactor:parseInt(req.body.pointyFactor),heightFactor:parseInt(req.body.heightFactor),widthFactor:parseInt(req.body.widthFactor),imgSrc:fullname});
+			var puzzle = new Puzzle({id:puzzleid,name:name,matches:retval[4],initialScript:initialScript,creator:username,nrows:nrows,ncols:ncols,pointyFactor:parseInt(req.body.pointyFactor),heightFactor:parseInt(req.body.heightFactor),widthFactor:parseInt(req.body.widthFactor),imgSrc:fullname});
 			puzzle.save(function(err,result) {
 				if (err){
 					console.log(err);
@@ -488,7 +491,7 @@ app.post('/create',
 				if (!result.created){
 					result.created = {};
 				}
-				result.created[puzzleid] = {url:'../puzzles/'+puzzleid,name:puzzleid};
+				result.created[puzzleid] = {url:'../puzzles/'+puzzleid,name:name};
 				result.markModified('created');
 				result.save(function(err2,result2){
 					
