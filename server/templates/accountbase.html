@@ -144,9 +144,11 @@ body {
 <div>Add Friend: <input type="text" id="friendName"></input><button onclick="newFriend()">Add</button></div>
 {% endif %}
 
-{% for friend in friends %}
-<div>{{ friend }}</div>
-{% endfor %}
+<div id="friendList">
+	{% for friend in friends %}
+	<div>{{ friend }}</div>
+	{% endfor %}
+</div>
 
 {% endblock %}
 
@@ -186,7 +188,10 @@ function newFriend() {
 			//Add friend
 			var dm = JSON.parse(evt.data);
 			if (dm.operation == 'friend'){
-				console.log(dm.friend+" added as a friend");
+				var el = document.getElementById("friendList");
+				var ell = document.createElement("div");
+				ell.textContent = dm.message;
+				el.appendChild(ell);
 			}
 		}
 	}
