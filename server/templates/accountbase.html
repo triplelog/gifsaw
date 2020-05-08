@@ -85,7 +85,6 @@ body {
 {% block content13 %}
 
 {% for key, puzzle in created %}
-{{ puzzle }}
 <div><a href="{{ puzzle.url }}">{{ puzzle.name }}</a>
 </div>
 {% endfor %}
@@ -104,7 +103,7 @@ body {
 		
 	</span>
 	<span class="titleCenter">
-		<a href="https://csshole.com">Settings</a>
+		<a href="https://csshole.com">Stats</a>
 	</span>
 	<span class="titleRight">
 		<label for="radio31-1"><i class="fas fa-compress-alt"></i></label>
@@ -114,35 +113,7 @@ body {
 </div>
 {% endblock %}
 {% block content31 %}
-Robot
-<div>
-Border Style: <textarea id="initialCSS" name="initialCSS">.pieceBorder{
-			stroke-dasharray: calc(2.5 * var(--scale));
-			stroke:yellow;
-			stroke-width:calc(2.5 * var(--scale));
-			stroke-opacity:.67;
-			fill: transparent;
-		}
-		.interiorBorder{
-			stroke-dasharray: calc(1 * var(--scale));
-			stroke:blue;
-			stroke-width:calc(1 * var(--scale));
-			stroke-opacity:.5;
-			fill: transparent;
-		}
-		.interiorBorder.toggled{
-			stroke-dasharray: calc(4 * var(--scale));
-			stroke:blue;
-			stroke-width:calc(4 * var(--scale));
-			stroke-opacity:1;
-			fill: transparent;
-		}
-		.piece {
-			fill: black;
-			fill-opacity: .01;
-			stroke: none;
-		}</textarea>
-</div>
+0 puzzles finished
 {% endblock %}
 
 {% block title33 %}
