@@ -302,10 +302,43 @@ svg {
 	font-size: 1.3rem;
 }
 
-#radio00-1:checked ~ div i.fa-expand-alt {
+#radio00-1:checked + div i.fa-expand-alt {
 	display: none;
 }
-#radio00-1:unchecked ~ div i.fa-compress-alt {
+#radio00-1:unchecked + div i.fa-compress-alt {
+	display: none;
+}
+#radio00-1:unchecked + div + div {
+	display: none;
+}
+
+#radio00-2:checked + div i.fa-expand-alt {
+	display: none;
+}
+#radio00-2:unchecked + div i.fa-compress-alt {
+	display: none;
+}
+#radio00-2:unchecked + div + div {
+	display: none;
+}
+
+#radio00-3:checked + div i.fa-expand-alt {
+	display: none;
+}
+#radio00-3:unchecked + div i.fa-compress-alt {
+	display: none;
+}
+#radio00-3:unchecked + div + div {
+	display: none;
+}
+
+#radio00-4:checked + div i.fa-expand-alt {
+	display: none;
+}
+#radio00-4:unchecked + div i.fa-compress-alt {
+	display: none;
+}
+#radio00-4:unchecked + div + div {
 	display: none;
 }
 {{ initialCSS }}
@@ -518,9 +551,6 @@ function newGroup(evt,name=false) {
 {% block content00 %}
 
 <input type="checkbox" style="display: none;" id="radio00-1" checked></input>
-<input type="checkbox" style="display: none;" id="radio00-2" checked></input>
-<input type="checkbox" style="display: none;" id="radio00-3" checked></input>
-<input type="checkbox" style="display: none;" id="radio00-4" checked></input>
 <div class="title">
 
 	<span class="titleLeft">
@@ -544,6 +574,7 @@ function newGroup(evt,name=false) {
 	<div id="scorediv"></div>
 </div>
 
+<input type="checkbox" style="display: none;" id="radio00-2" checked></input>
 <div class="title rules">
 
 	<span class="titleLeft">
@@ -553,7 +584,7 @@ function newGroup(evt,name=false) {
 		<a href="https://qblur.com">Rules</a>
 	</span>
 	<span class="titleRight">
-		<label for="radio33-1"><i class="fas fa-compress-alt"></i></label>
+		<label for="radio00-2"><i class="fas fa-expand-alt"></i><i class="fas fa-compress-alt"></i></label>
 	</span>
 </div>
 <div style="background: white;" class="rules">
@@ -563,7 +594,7 @@ function newGroup(evt,name=false) {
 
 
 
-
+<input type="checkbox" style="display: none;" id="radio00-3" checked></input>
 <div class="title">
 
 	<span class="titleLeft">
@@ -573,7 +604,7 @@ function newGroup(evt,name=false) {
 		<a href="https://qblur.com">Preview</a>
 	</span>
 	<span class="titleRight">
-		<label for="radio33-1"><i class="fas fa-compress-alt"></i></label>
+		<label for="radio00-3"><i class="fas fa-expand-alt"></i><i class="fas fa-compress-alt"></i></label>
 	</span>
 </div>
 
@@ -581,6 +612,8 @@ function newGroup(evt,name=false) {
 	<img id="previewImage" src="{{ image.name }}">
 </div>
 
+
+<input type="checkbox" style="display: none;" id="radio00-4" checked></input>
 <div class="title">
 
 	<span class="titleLeft">
@@ -590,7 +623,7 @@ function newGroup(evt,name=false) {
 		<a href="https://qblur.com">Groups</a>
 	</span>
 	<span class="titleRight">
-		<label for="radio33-1"><i class="fas fa-compress-alt"></i></label>
+		<label for="radio00-4"><i class="fas fa-expand-alt"></i><i class="fas fa-compress-alt"></i></label>
 	</span>
 </div>
 
