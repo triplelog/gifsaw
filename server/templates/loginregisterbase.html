@@ -9,7 +9,7 @@
 {% endblock %}
 	
 {% block centerSize %}
-	--height-container: calc(30rem);
+	--height-container: calc(25rem);
 	--width-container: calc(54rem);
 	--height-center: 10rem;
 	--width-center: calc(18rem);
@@ -29,7 +29,7 @@
   	grid-template-rows: 1fr;
   	column-gap: 1rem;
 	position: relative;
-	top: calc((100vh - var(--height-contianer)) / 2);
+	top: calc((100vh - var(--height-container)) / 2);
 }
 .content-22 {
 	overflow: visible;
@@ -55,6 +55,26 @@ body {
 	background-image: url("../img/lightbg.png");
 	background-size: cover;
 	
+}
+
+.imgHolder {
+    height: var(--height-container);
+    width: 100%;
+    white-space: nowrap;
+    text-align: center;
+    margin: 0px;
+}
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+img {
+    vertical-align: middle;
+    max-height: var(--height-container);
+    max-width: 100%;
 }
 {% endblock %}
 
@@ -207,7 +227,10 @@ body {
 
 
 {% block content22 %}
-	<img src="../logo.png" style="max-width:100%;">
+	<div class="imgHolder">
+    	<span class="helper"></span>
+    	<img src="../logo.png">
+	</div>
 {% endblock %}
 
 
