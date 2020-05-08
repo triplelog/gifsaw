@@ -429,4 +429,8 @@ setTimeout(refreshImg,100);
 updateLines('initial');
 updateScript();
 
+updateName() {
+	document.querySelector('input[name="name"]').value = document.getElementById('name').value;
+}
+document.getElementById('name').addEventListener('change',updateName);
 
