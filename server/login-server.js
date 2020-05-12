@@ -16,7 +16,7 @@ var tempKeys = {};
 const User = require('./models/user');
 const GifsawData = require('./models/gifsawdata');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://45.32.213.227:27017/triplelog', {useNewUrlParser: true});
+mongoose.connect('mongodb://45.32.213.227:27017/triplelog', {useNewUrlParser: true, useUnifiedTopology: true});
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy;
 // use static authenticate method of model in LocalStrategy
@@ -70,7 +70,7 @@ app.get('/account',
 			}
 			var created = {};
 			if (result == null){
-				result = {username: req.body.username.toLowerCase(), created: {}, saved: {}, stats: {}, friends: [], followers: [], options: {}};
+				result = {username: req.user.username.toLowerCase(), created: {}, saved: {}, stats: {}, friends: [], followers: [], options: {}};
 				var gifsawData = new GifsawData(result);
 				gifsawData.save(function(err2,result2){
 					var robot = 'python3 python/robohash/createrobo.py '+req.body.username.toLowerCase()+' 1';
