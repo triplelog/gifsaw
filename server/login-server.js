@@ -73,7 +73,7 @@ app.get('/account',
 				result = {username: req.user.username.toLowerCase(), created: {}, saved: {}, stats: {}, friends: [], followers: [], options: {}};
 				var gifsawData = new GifsawData(result);
 				gifsawData.save(function(err2,result2){
-					var robot = 'python3 python/robohash/createrobo.py '+req.body.username.toLowerCase()+' 1';
+					var robot = 'python3 python/robohash/createrobo.py '+req.user.username.toLowerCase()+' 1';
 					var child = exec(robot, function(err, stdout, stderr) {
 						console.log('robot created: ',performance.now());
 						req.login(user, function(err) {
