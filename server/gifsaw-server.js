@@ -278,8 +278,35 @@ app.post('/solo',
 			actheight:dimensions.height,
 			actwidth:dimensions.width,
 			pieces: JSON.stringify(pieces),
-			collabHolder: `<script>var keepscore = false; var collab = false;</script>
-			<script src="../js/solopuzzle.js"></script>`,
+			collabHolder: `<script>
+				document.getElementById('save').style.display = 'inline-block';
+				document.querySelectorAll('.rules')[0].style.display = 'none';
+				document.querySelectorAll('.rules')[1].style.display = 'none';
+				var ws = false;
+				var savedMerges = `+JSON.stringify(savedMerges)+`;
+				
+				var keepscore = false; var collab = false; var tkey = '';
+			</script>
+			<script src="../js/solopuzzle.js"></script>
+			<script>
+				for (var i=0;i<savedMerges.length;i++){
+					var drid = savedMerges[i][0];
+					var pieceInfo = pieces[parseInt(drid.substring(5))-1];
+					pieceInfo.rotation = 0;
+					document.getElementById(drid).style.transform = 'rotate(0deg)';
+					var pairs = savedMerges[i][1].slice();
+					for (var pairi=0;pairi<pairs.length;pairi++){
+						drid = pairs[pairi][0];
+						pieceInfo = pieces[parseInt(drid.substring(5))-1];
+						pieceInfo.rotation = 0;
+						document.getElementById(drid).style.transform = 'rotate(0deg)';
+					}
+					socketmerge(savedMerges[i][0],pairs,'me');
+					
+				}
+				
+				updateGroups();
+			</script>`,
 			initialCSS: initialCSS ,
 			
 		});
