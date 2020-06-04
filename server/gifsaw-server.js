@@ -283,7 +283,7 @@ app.post('/solo',
 				document.querySelectorAll('.rules')[0].style.display = 'none';
 				document.querySelectorAll('.rules')[1].style.display = 'none';
 				var ws = false;
-				var savedMerges = `+JSON.stringify(savedMerges)+`;
+				var savedMerges = [];
 				
 				var keepscore = false; var collab = false; var tkey = '';
 			</script>
