@@ -32,10 +32,6 @@ div.container {
   	transition: background-size 2s linear;
 }
 
-.title:hover {
-	background-size: 140% 100%;
-  	transition: all 2s linear;
-}
 .title {
 	text-decoration: none;
 	color: white;
