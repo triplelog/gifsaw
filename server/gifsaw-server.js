@@ -678,7 +678,7 @@ wss.on('connection', function connection(ws) {
 		if (typeof message !== 'string'){
 			console.log("af",performance.now());
 			var buffer = Buffer.from(message).slice(0,maxsize);
-			if (buffer.length==maxsize){
+			if (buffer.length>=maxsize-1000){
 				//send message
 				return;
 			}

@@ -6,7 +6,7 @@ cd gifsicle-1.92
 ./configure --disable-gifview
 sudo make install
 sudo apt-get install imagemagick ffmpeg
-
+pip3 install robohash
 
 ./mp42gif.sh -i city/aerial.mp4 -f 12 -h 960 -o ../../server/static/gifs/city/aerial.gif
 gifsicle -O3 --colors 192 --lossy=80 aerial.gif -o optaerial.gif
