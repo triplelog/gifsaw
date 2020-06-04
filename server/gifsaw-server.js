@@ -5,7 +5,7 @@ const {VM, VMScript} = require('vm2');
 
 var qs = require('querystring');
 var sizeOf = require('image-size');
-var getDimensions = require('get-video-dimensions');
+//var getDimensions = require('get-video-dimensions');
 const { exec } = require('child_process');
 const bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
