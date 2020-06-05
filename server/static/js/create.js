@@ -49,7 +49,7 @@ function refreshImg() {
 var imageHeight = false;
 var imageWidth = false;
 var dimensions = [];
-function updateNpieces() {
+function updateNpieces(updaten=true,nrows=0,ncols=0) {
 	var npieces = document.getElementById('npieces').value;
 	var img = document.getElementById('imageHolder').querySelector('img');
 	if (img){
@@ -137,6 +137,12 @@ function updateNpieces() {
 	
 	var el = document.getElementById('size');
 	el.innerHTML = '';
+	if (!updaten){
+		var option = document.createElement('option');
+		option.value = nrows+'x'+ncols;
+		option.textContent = nrows+'x'+ncols + ' ('+(nrows*ncols)+' pieces)';
+		el.appendChild(option);
+	}
 	for (var i in dimensions){
 		var option = document.createElement('option');
 		option.value = dimensions[i].nrows+'x'+dimensions[i].ncols;
@@ -182,7 +188,7 @@ function updateLines(evt) {
 		return;
 	}
 	document.getElementById('npieces').value = parseInt(nrows*ncols);
-	
+	updateNpieces(false,nrows,ncols);
 	document.getElementById('nrowsForm').value = nrows;
 	document.getElementById('ncolsForm').value = ncols;
 	var pointyFactor = parseFloat(document.getElementById('pointyFactor').value)/40 - (50/40-.4);

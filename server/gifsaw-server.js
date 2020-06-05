@@ -614,9 +614,9 @@ app.get('/create',
 			selectedScript: 'default',
 			nrows: 5,
 			ncols: 5,
-			pointyFactor: 70,
+			pointyFactor: 50,
 			heightFactor: 50,
-			widthFactor: 30,
+			widthFactor: 50,
 			imgSrc: '../img/in/pd6gm0cd8000.jpg',
 		}));
 		res.end();
