@@ -446,8 +446,8 @@ if (creator == username){
 	document.getElementById('edit').style.display = 'inline-block';
 }
 var clickOperation = 'rotate';
-var currentGroups = ['group0','group1'];
-var groupNames = ['Main', 'Group 1'];
+var currentGroups = ['group0'];
+var groupNames = ['Main'];
 var groupEls = document.querySelectorAll('.group');
 for (var i=0;i<groupEls.length;i++){
 	groupEls[i].addEventListener('click', selectGroup);
@@ -636,7 +636,6 @@ function newGroup(evt,name=false) {
 <div style="background: white;">
 	<div id="groups">
 		<div class="group selected" id="group0"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Main</div>
-		<div class="group" id="group1"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Group 1</div>
 	</div>
 	<div><i class="fas fa-plus"></i> New <input type="text" id="newGroupName"></input><button id="newGroup">Add</button></div>
 </div>
