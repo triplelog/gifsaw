@@ -140,7 +140,7 @@ function updateNpieces(updaten=true,nrows=0,ncols=0) {
 	if (!updaten){
 		var option = document.createElement('option');
 		option.value = nrows+'x'+ncols;
-		option.textContent = nrows+'x'+ncols + ' ('+(nrows*ncols)+' pieces)';
+		option.textContent = nrows+' x '+ncols + ' ('+(nrows*ncols)+' pieces)';
 		el.appendChild(option);
 	}
 	for (var i in dimensions){
@@ -188,9 +188,12 @@ function updateLines(evt) {
 		return;
 	}
 	document.getElementById('npieces').value = parseInt(nrows*ncols);
-	updateNpieces(false,nrows,ncols);
-	document.getElementById('nrowsForm').value = nrows;
-	document.getElementById('ncolsForm').value = ncols;
+	if (evt && evt =='initial'){
+		updateNpieces(false,nrows,ncols);
+		document.getElementById('nrowsForm').value = nrows;
+		document.getElementById('ncolsForm').value = ncols;
+	}
+	
 	var pointyFactor = parseFloat(document.getElementById('pointyFactor').value)/40 - (50/40-.4);
 	if (parseFloat(document.getElementById('pointyFactor').value)<50){
 		pointyFactor = parseFloat(document.getElementById('pointyFactor').value)/150 - (50/150-.4);
