@@ -429,14 +429,19 @@ document.getElementById('scoring').addEventListener('change',updateScript);
 
 var img = document.getElementById('imageHolder').querySelector('img');
 
-img.addEventListener('load',refreshImg);
+img.addEventListener('load',initialImg);
 
 document.querySelector('input[name="fileSrc"]').setAttribute('value',img.getAttribute('src'));
 
-setTimeout(refreshImg,100);
+setTimeout(initialImg,100);
 
-updateLines('initial');
-updateScript();
+
+function initialImg() {
+	refreshImg();
+	updateLines('initial');
+	updateScript();
+}
+
 
 function updateName() {
 	document.querySelector('input[name="name"]').value = document.getElementById('name').value;
