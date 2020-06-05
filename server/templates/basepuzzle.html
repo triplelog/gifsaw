@@ -341,6 +341,16 @@ svg {
 #radio00-4:Not(:checked) + div + div {
 	display: none;
 }
+
+#radio00-5:checked + div i.fa-expand-alt {
+	display: none;
+}
+#radio00-5:Not(:checked) + div i.fa-compress-alt {
+	display: none;
+}
+#radio00-5:Not(:checked) + div + div {
+	display: none;
+}
 {{ initialCSS }}
 
 div.container .titleRight i {
@@ -563,7 +573,7 @@ function newGroup(evt,name=false) {
 		
 	</span>
 	<span class="titleCenter">
-		<a href="https://qblur.com">Menu</a>
+		Menu
 	</span>
 	<span class="titleRight">
 		<label for="radio00-1"><i class="fas fa-expand-alt"></i><i class="fas fa-compress-alt"></i></label>
@@ -587,7 +597,7 @@ function newGroup(evt,name=false) {
 		
 	</span>
 	<span class="titleCenter">
-		<a href="https://qblur.com">Rules</a>
+		Rules
 	</span>
 	<span class="titleRight">
 		<label for="radio00-2"><i class="fas fa-expand-alt"></i><i class="fas fa-compress-alt"></i></label>
@@ -607,7 +617,7 @@ function newGroup(evt,name=false) {
 		
 	</span>
 	<span class="titleCenter">
-		<a href="https://qblur.com">Preview</a>
+		Preview
 	</span>
 	<span class="titleRight">
 		<label for="radio00-3"><i class="fas fa-expand-alt"></i><i class="fas fa-compress-alt"></i></label>
@@ -626,7 +636,7 @@ function newGroup(evt,name=false) {
 		
 	</span>
 	<span class="titleCenter">
-		<a href="https://qblur.com">Groups</a>
+		Groups
 	</span>
 	<span class="titleRight">
 		<label for="radio00-4"><i class="fas fa-expand-alt"></i><i class="fas fa-compress-alt"></i></label>
@@ -638,5 +648,24 @@ function newGroup(evt,name=false) {
 		<div class="group selected" id="group0"><i class="fas fa-eye"></i><i class="fas fa-eye-slash"></i>Main</div>
 	</div>
 	<div><i class="fas fa-plus"></i> New <input type="text" id="newGroupName"></input><button id="newGroup">Add</button></div>
+</div>
+
+
+<input type="checkbox" style="display: none;" id="radio00-5" checked></input>
+<div class="title">
+
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		Advertisement
+	</span>
+	<span class="titleRight">
+		<label for="radio00-5"><i class="fas fa-expand-alt"></i><i class="fas fa-compress-alt"></i></label>
+	</span>
+</div>
+
+<div style="background: white;">
+	
 </div>
 {% endblock %}
