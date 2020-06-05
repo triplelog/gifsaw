@@ -31,7 +31,7 @@ function refreshImg() {
 	var fullel = img.parentElement.parentElement.parentElement;
 	var titleel = img.parentElement.parentElement.parentElement.querySelector('.title');
 	var availWidth = fullel.clientWidth;
-	var availHeight = fullel.clientHeight-titleel.clientHeight;
+	var availHeight = fullel.clientHeight-titleel.clientHeight - 16;
 	if (img.height>availHeight || img.width > availWidth){
 		var imgRatio = img.height/img.width;
 		if (img.height/availHeight > img.width / availWidth){
