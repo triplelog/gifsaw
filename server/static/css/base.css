@@ -465,3 +465,106 @@ input.footnote:Not(:checked) + * + div.footnoteDiv {
 	height: 2rem;
 	line-height: 2rem;
 }
+
+@media screen and (max-width: 600px) {
+	div.container {
+		--height-container: calc(100vh - 2rem);
+		--width-container: calc(100vw - 2rem);
+		height: var(--height-container);
+		width: var(--width-container);
+		max-width: 60rem;
+		margin: .25rem auto;
+		overflow-y: auto;
+		grid-template-columns: 1fr;
+		grid-template-rows: var(--height-center) 13rem 13rem 13rem 13rem auto;
+		grid-row-gap: .5rem;
+	}
+	.content-11 {
+		grid-row:  2;
+		grid-column:  1;
+	}
+	.content-31 {
+		grid-row:  4;
+		grid-column:  1;
+	}
+	.content-22 {
+		grid-row:  1;
+		grid-column:  1;
+	}
+	.content-13 {
+		grid-row:  3;
+		grid-column:  1;
+	}
+
+	.content-33 {
+		grid-row:  5;
+		grid-column:  1;
+	}
+
+	#radio11-1:checked ~ .content-11 {
+		grid-row:  2;
+		grid-column:  1;
+	}
+	#radio11-2:checked ~ .content-11 {
+		grid-row:  2 / 6;
+		grid-column:  1 / 2;
+	}
+	#radio11-3:checked ~ .content-11 {
+		grid-row:  2 / 6;
+		grid-column:  1 / 2;
+	}
+
+	#radio13-1:checked ~ .content-13 {
+		grid-row:  3;
+		grid-column:  1;
+	}
+	#radio13-2:checked ~ .content-13 {
+		grid-row: 3 / 7;
+		grid-column:  1 / 2;
+	}
+	#radio13-3:checked ~ .content-13 {
+		grid-row:  3 / 7;
+		grid-column:  1 / 2;
+	}
+
+	#radio31-1:checked ~ .content-31 {
+		grid-row:  4;
+		grid-column:  1;
+	}
+	#radio31-2:checked ~ .content-31 {
+		grid-row:  4 / 7;
+		grid-column:  1 / 2;
+	}
+	#radio31-3:checked ~ .content-31 {
+		grid-row:  4 / 7;
+		grid-column:  1 / 2;
+	}
+
+	#radio33-1:checked ~ .content-33 {
+		grid-row:  5;
+		grid-column:  1;
+	}
+	#radio33-2:checked ~ .content-33 {
+		grid-row:  5 / 7;
+		grid-column:  1 / 2;
+	}
+	#radio33-3:checked ~ .content-33 {
+		grid-row:  5 / 7;
+		grid-column:  1 / 2;
+	}
+	span.logoText {
+		width:calc(2 * var(--width-center));
+		left:calc(50% - var(--width-center));
+		top:2rem;
+		text-align: center;
+	}
+	div.logoDiv img {
+		width:var(--width-center);
+		left:calc((100% - var(--width-center)) / 2);
+		top:0rem;
+		position:absolute;
+	}
+	.title label i {
+		font-size: .8rem;
+	}
+}
