@@ -39,6 +39,12 @@ div:Not(.content-22) > .content {
 	padding: calc(.5 * var(--border-radius));
 	text-align: center;
 }
+div.content-13 > .content {
+	text-align: left;
+}
+div.content-31 > .content {
+	text-align: left;
+}
 
 {% endblock %}
 
@@ -63,7 +69,9 @@ div:Not(.content-22) > .content {
 {% endblock %}
 {% block content11 %}
 The puzzle in progress -- largest connected
-<span style="margin:auto;"><a class="basic" href="../daily">Join</a></span>
+<div>
+	<span style="margin:auto;"><a class="basic" href="../daily">Join</a></span>
+</div>
 {% endblock %}	
 
 {% block title13 %}
@@ -92,7 +100,7 @@ The puzzle in progress -- largest connected
 		<li>Upload or choose a gif or image</li>
 		<li>Set the number/shape of pieces</li>
 	</ol>
-	<span style="margin:auto;"><button onclick="gotoCreate();" class="basic">Create</button></span>
+	<center><button onclick="gotoCreate();" class="basic">Create</button></center>
 </div>
 {% endblock %}	
 
@@ -128,7 +136,7 @@ Animated? <input type="checkbox" checked></input>
 <div>
 About how many pieces? <input type="number" name="pieces" value="25" style="width:3rem;"></input>
 </div>
-<span style="margin:auto;"><button type="submit" class="basic">Start</button></span>
+<center><button type="submit" class="basic">Start</button></center>
 </form>
 {% endblock %}
 
