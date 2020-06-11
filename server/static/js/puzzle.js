@@ -119,7 +119,7 @@ function dragmove(event) {
 			newLeft = e.touches[0].pageX;
 			newTop = e.touches[0].pageY;
 		}
-		if ((newLeft < startX[0]-0 || newLeft > startX[0]+0) && (newTop < startY[0]-0 || newTop > startY[0]+0)){
+		if ((newLeft < startX[0]-2 || newLeft > startX[0]+2) && (newTop < startY[0]-2 || newTop > startY[0]+2)){
 			if (newLeft - startX[0] + startX[1] <= -1*startX[2]){
 				newLeft = startX[0] - startX[1] - startX[2];
 			}
@@ -135,7 +135,7 @@ function dragmove(event) {
 			isclick = false;
 			
 		}
-		else if (newLeft < startX[0]-0 || newLeft > startX[0]+0){
+		else if (newLeft < startX[0]-2 || newLeft > startX[0]+2){
 			if (newLeft - startX[0] + startX[1] <= -1*startX[2]){
 				newLeft = startX[0] - startX[1] - startX[2];
 			}
@@ -144,7 +144,7 @@ function dragmove(event) {
 			startX[0] = newLeft;
 			isclick = false;
 		}
-		else if (newTop < startY[0]-0 || newTop > startY[0]+0){
+		else if (newTop < startY[0]-2 || newTop > startY[0]+2){
 			if (newTop - startY[0] + startY[1] <= -1*startY[2]){
 				newTop = startY[0] - startY[1] - startY[2];
 			}
