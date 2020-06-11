@@ -38,6 +38,26 @@ var tempKeys = fromLogin.tempKeys;
 
 app.use('/',express.static('static'));
 
+app.get('/about.html', 
+	
+	function(req, res) {
+		
+		res.write(nunjucks.render('templates/aboutbase.html',{
+			
+		}));
+		res.end();
+	}
+);
+app.get('/about', 
+	
+	function(req, res) {
+		
+		res.write(nunjucks.render('templates/aboutbase.html',{
+			
+		}));
+		res.end();
+	}
+);
 app.get('/index.html', 
 	
 	function(req, res) {
