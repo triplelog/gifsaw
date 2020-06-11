@@ -57,6 +57,7 @@ function socketmerge(piece1,pairs,scoringUser,wsMessage=false) {
 			p1d = 'M'+clines[parseInt(piece1.substr(5,))-1][0] + clines[parseInt(piece1.substr(5,))-1][1] + clines[parseInt(piece1.substr(5,))-1][2] + clines[parseInt(piece1.substr(5,))-1][3];
 		}
 		var p1l = (p1d.match(/M/g)||[]).length;
+		var op1l = p1l;
 		if (p1l == 1){
 			piece1Info.centers = [{x:ccenters[parseInt(piece1.substr(5,))-1][0],y:ccenters[parseInt(piece1.substr(5,))-1][1], id:piece1Info.id}];
 		}
@@ -134,8 +135,8 @@ function socketmerge(piece1,pairs,scoringUser,wsMessage=false) {
 					video1.appendChild(p2svg[i]);
 				}
 				
-				console.log(p1l,p2l);
-				if (p1l > p2l) {
+				console.log(op1l,p2l);
+				if (op1l > p2l) {
 					//video2.style.transform = 'rotate('+parseInt(piece1Info.rotation)+'deg)';
 					//video2.style.transformOrigin = ccenters[parseInt(piece1.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece1.substr(5,))-1][1]*100+'%';
 					//video2.style.left = video1.style.left;
@@ -169,13 +170,6 @@ function socketmerge(piece1,pairs,scoringUser,wsMessage=false) {
 					
 					if (p2l == 1){
 						piece2Info.centers = [{x:ccenters[parseInt(piece2.substr(5,))-1][0],y:ccenters[parseInt(piece2.substr(5,))-1][1],id:piece2Info.id}];
-					}
-					
-					if (p1l == 1){
-						//video1.style.left = (parseFloat(video2.style.left) - ccenters[parseInt(piece2.substr(5,))-1][0]*cwidth + piece2Info.centers[0].x*cwidth)+'px';
-						//video1.style.top = (parseFloat(video2.style.top) - ccenters[parseInt(piece2.substr(5,))-1][1]*cheight + piece2Info.centers[0].y*cheight)+'px';
-						piece1Info.centers = [{x:ccenters[parseInt(piece1.substr(5,))-1][0],y:ccenters[parseInt(piece1.substr(5,))-1][1],id:piece1Info.id}];
-						//video1.style.transformOrigin = ccenters[parseInt(piece2.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece2.substr(5,))-1][1]*100+'%';
 					}
 					else {
 						//video1.style.transformOrigin = ccenters[parseInt(piece1.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece1.substr(5,))-1][1]*100+'%';
