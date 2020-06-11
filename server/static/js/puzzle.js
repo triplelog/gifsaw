@@ -11,7 +11,7 @@ for (var i=0;i<npieces;i++) {
 	var video = document.getElementById('video'+(i+1));
 	
 	video.addEventListener('mousedown',dragstart);
-	video.addEventListener('touchstart',dragstart);
+	//video.addEventListener('touchstart',dragstart);
 	
 	video.style.left = (.08*w+(w*.9 - cwidth)*pieces[i].location[0])+'px';
 	video.style.top = (.08*h+(h*.9 - cheight)*pieces[i].location[1])+'px';
@@ -37,8 +37,8 @@ function throttled(delay, fn) {
 const tHandler = throttled(40, dragmove);
 document.addEventListener('mousemove',tHandler);
 document.addEventListener('mouseup',dragend);
-document.addEventListener('touchmove',tHandler);
-document.addEventListener('touchend',dragend);
+//document.addEventListener('touchmove',tHandler);
+//document.addEventListener('touchend',dragend);
 
 
 function dragstart(event) {
