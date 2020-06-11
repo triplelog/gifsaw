@@ -1,0 +1,161 @@
+{% extends "templates/base.html" %}
+
+
+{% block borderRadius %}
+	--border-radius: 1.25rem;
+{% endblock %}
+
+{% block content22CSS %}
+	/*border: 1px solid black;*/
+{% endblock %}
+	
+{% block centerSize %}
+	--height-center: 9rem;
+	--width-center: 9rem;
+{% endblock %}
+
+{% block titleCSS %}
+
+.titleBG {
+	background-image: url("../img/ftractor-40.png");
+  	background-size: auto 100%;
+  	background-repeat: no-repeat;
+  	background-position: 0px 0px;
+  	transition: background-position 1s linear;
+  	height: 100%;
+  	width: 100%;
+  	position: absolute;
+}
+.title:hover .titleBG {
+  	background-position: 350px 0px;
+  	transition: all 2s linear;
+}
+
+{% endblock %}
+
+
+{% block moreCSS %}
+div.content-31 > div.content {
+	text-align: left;
+}
+div.content-13 > div.content {
+	text-align: left;
+}
+body {
+	background-image: url("../img/lightbg.png");
+	background-size: cover;
+	
+}
+
+{% endblock %}
+
+
+{% block title11 %}
+<div class="title">
+	<div class="titleBG">
+	</div>
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		Who?
+	</span>
+	<span class="titleRight">
+	</span>
+</div>
+{% endblock %}
+{% block content11 %}
+ is a freelance developer and data analyst.
+Baseball, factoring, deadspin.
+He also runs CSShole, qblur, and gifsaw.
+{% endblock %}	
+
+{% block title13 %}
+<div class="title">
+	<div class="titleBG">
+	</div>
+	<span class="titleLeft">
+	
+	</span>
+	<span class="titleCenter">
+		What?
+	</span>
+	<span class="titleRight">
+	
+	</span>
+	
+</div>
+{% endblock %}
+{% block content13 %}
+Goals for improving Sudoku Farm include themed games, an android app, and an ability for users to create custom games. Enter any suggestions about the future of Sudoku Farm in the box below.
+<div>
+	<form action="/suggestion" method="post">
+		<textarea name="suggestion" maxlength="500"></textarea>
+		<div><button type="submit" class="basic">Submit</button></div>
+	</form>
+</div>
+{% endblock %}	
+
+{% block title31 %}
+<div class="title">
+	<div class="titleBG">
+	</div>
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		Why?
+	</span>
+	<span class="titleRight">
+	</span>
+</div>
+{% endblock %}
+{% block content31 %}
+Sudoku Farm is a casual game that should be fun for anyone to play. Success requires puzzle solving and strategic thinking.
+{% endblock %}
+
+{% block title33 %}
+<div class="title">
+	<div class="titleBG">
+	</div>
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		How?
+	</span>
+	<span class="titleRight">
+	</span>
+</div>
+{% endblock %}
+{% block content33 %}
+The iOS app is made with Swift. The web app is Javascript with Node on the backend.
+Sudoku puzzles are generated with QQWing. The icons come from freepik.
+If you're crazy, it is also possible to make the game work with just <a href="https://csshole.com/sudokufarm.html">HTML/CSS</a>.
+{% endblock %}
+
+
+
+
+{% block content22 %}
+	<div class="logoDiv" style="height:9rem; position: relative;">
+		<a href="../"><img src="../img/sflogo1024trans.png" style="width:8rem;left:.5rem; position: absolute; top:.5rem;"></a>
+		<span class="logoText" style="pointer-events: none;">Sudoku Farm</span>	
+	</div>
+
+{% endblock %}
+
+
+
+
+
+
+{% block bodyStart %}
+
+{% endblock %}
+
+
+{% block scripts %}
+
+{% endblock %}
+

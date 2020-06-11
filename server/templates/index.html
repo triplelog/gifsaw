@@ -55,7 +55,8 @@ img {
 </div>
 {% endblock %}
 {% block content11 %}
-
+The puzzle in progress -- largest connected
+<a class="basic" href="../daily">Join</a>
 {% endblock %}	
 
 {% block title13 %}
@@ -82,10 +83,9 @@ img {
 	<b><center>Easily create your own puzzle for yourself, your friends, or the world.</center></b>
 	<ol>
 		<li>Upload or choose a gif or image</li>
-		<li>Select the number of pieces</li>
-		<li>Create a scoring system (optional)</li>
+		<li>Set the number/shape of pieces</li>
 	</ol>
-	<button onclick="gotoCreate();">Create a Puzzle</button>
+	<button onclick="gotoCreate();" class="basic">Create</button>
 </div>
 {% endblock %}	
 
@@ -101,7 +101,7 @@ img {
 		
 	</span>
 	<span class="titleCenter">
-		Solo Puzzle
+		Quick Puzzle
 	</span>
 	<span class="titleRight">
 	</span>
@@ -110,15 +110,19 @@ img {
 {% block content31 %}
 <form action="../solo" method="post">
 <div>
-What type of background?<select name="background">
+What type of background?
+<select name="background">
 	<option value="city">City</option>
 	<option value="mountain">Mountain</option>
 </select>
 </div>
 <div>
-Approximately how many pieces?<input type="number" name="pieces" value="25"></input>
+Animated? <input type="checkbox" checked></input>
 </div>
-<button type="submit">Start</button>
+<div>
+About how many pieces?<input type="number" name="pieces" value="25" style="width:3rem;"></input>
+</div>
+<button type="submit" class="basic">Start</button>
 </form>
 {% endblock %}
 
@@ -134,19 +138,14 @@ Approximately how many pieces?<input type="number" name="pieces" value="25"></in
 		
 	</span>
 	<span class="titleCenter">
-		Multiplayer
+		
 	</span>
 	<span class="titleRight">
 	</span>
 </div>
 {% endblock %}
 {% block content33 %}
-<div>
-1-on-1
-</div>
-<div>
-Collab
-</div>
+
 {% endblock %}
 
 
@@ -156,9 +155,6 @@ Collab
 	
 	<div class="logoDiv">
 		<img src="../logo.png" style="width:18rem;">		
-	</div>
-	<div class="centerLink">
-		<button class="basic" onclick="window.location.href='../account';">My Account</button>
 	</div>
 	<div class="centerLink">
 		<button class="basic" onclick="window.location.href='../about';">About</button>
