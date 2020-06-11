@@ -115,11 +115,13 @@ function dragmove(event) {
 	if (dragid && dragid.length > 5) {
 		var newLeft = e.pageX;
 		var newTop = e.pageY;
+		var minm = 1;
 		if (e.touches && e.touches[0]){
 			newLeft = e.touches[0].pageX;
 			newTop = e.touches[0].pageY;
+			minm = 2;
 		}
-		if ((newLeft < startX[0]-2 || newLeft > startX[0]+2) && (newTop < startY[0]-2 || newTop > startY[0]+2)){
+		if ((newLeft < startX[0]-minm || newLeft > startX[0]+minm ) && (newTop < startY[0]-minm  || newTop > startY[0]+minm )){
 			if (newLeft - startX[0] + startX[1] <= -1*startX[2]){
 				newLeft = startX[0] - startX[1] - startX[2];
 			}
@@ -135,7 +137,7 @@ function dragmove(event) {
 			isclick = false;
 			
 		}
-		else if (newLeft < startX[0]-2 || newLeft > startX[0]+2){
+		else if (newLeft < startX[0]-minm  || newLeft > startX[0]+minm ){
 			if (newLeft - startX[0] + startX[1] <= -1*startX[2]){
 				newLeft = startX[0] - startX[1] - startX[2];
 			}
@@ -144,7 +146,7 @@ function dragmove(event) {
 			startX[0] = newLeft;
 			isclick = false;
 		}
-		else if (newTop < startY[0]-2 || newTop > startY[0]+2){
+		else if (newTop < startY[0]-minm  || newTop > startY[0]+minm ){
 			if (newTop - startY[0] + startY[1] <= -1*startY[2]){
 				newTop = startY[0] - startY[1] - startY[2];
 			}

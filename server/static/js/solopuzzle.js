@@ -145,6 +145,7 @@ function socketmerge(piece1,pairs,scoringUser,wsMessage=false) {
 				else {
 					piece1Info.rotation=piece2Info.rotation;
 					video1.style.transform = 'rotate('+parseInt(piece2Info.rotation)+'deg)';
+					video1.style.transformOrigin = video2.style.transformOrigin;
 					video1.style.left = video2.style.left;
 					video1.style.top = video2.style.top;
 					
