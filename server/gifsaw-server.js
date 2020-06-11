@@ -144,6 +144,9 @@ app.get('/puzzles/:puzzleid',
 		if (req.query && req.query.q && req.query.q == 'solo'){
 			collab = false;
 		}
+		else if (2 == 2){//remove this to allow for collab puzzles
+			collab = false;
+		}
 		else if (username != '' && req.query && req.query.q && req.query.q == 'saved') {
 
 			GifsawData.findOne({username: username}, 'saved', function(err, result) {
@@ -202,6 +205,7 @@ app.get('/puzzles/:puzzleid',
 		
 		if (!collab){
 			matches = true;
+			initialCSS += 'div.container div.rules { display: none;}';
 		}
 		console.log(savedMerges);
 		res.write(nunjucks.render('puzzles/'+puzzleid+'.html',{
