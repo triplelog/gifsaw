@@ -135,12 +135,30 @@ function socketmerge(piece1,pairs,scoringUser,wsMessage=false) {
 				}
 				
 				
-				if (3==2 && p1l > p2l || (piece1Info.rotation == 0 && piece2Info.rotation != 0)) {
-					piece2Info.rotation=piece1Info.rotation;
-					video2.style.transform = 'rotate('+parseInt(piece1Info.rotation)+'deg)';
-					video2.style.transformOrigin = ccenters[parseInt(piece1.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece1.substr(5,))-1][1]*100+'%';
-					video2.style.left = video1.style.left;
-					video2.style.top = video1.style.top;
+				if (p1l > p2l) {
+					//video2.style.transform = 'rotate('+parseInt(piece1Info.rotation)+'deg)';
+					//video2.style.transformOrigin = ccenters[parseInt(piece1.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece1.substr(5,))-1][1]*100+'%';
+					//video2.style.left = video1.style.left;
+					//video2.style.top = video1.style.top;
+					
+					if (p2l == 1){
+						//video1.style.left = (parseFloat(video2.style.left) - ccenters[parseInt(piece2.substr(5,))-1][0]*cwidth + piece2Info.centers[0].x*cwidth)+'px';
+						//video1.style.top = (parseFloat(video2.style.top) - ccenters[parseInt(piece2.substr(5,))-1][1]*cheight + piece2Info.centers[0].y*cheight)+'px';
+						piece2Info.centers = [{x:ccenters[parseInt(piece2.substr(5,))-1][0],y:ccenters[parseInt(piece2.substr(5,))-1][1],id:piece2Info.id}];
+						//video1.style.transformOrigin = ccenters[parseInt(piece2.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece2.substr(5,))-1][1]*100+'%';
+					}
+					else {
+						//video1.style.transformOrigin = ccenters[parseInt(piece1.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece1.substr(5,))-1][1]*100+'%';
+					}
+					for (var i=0;i<piece2Info.centers.length;i++) {
+					
+						var tempc = {};
+						tempc.id = piece2Info.centers[i].id;
+						tempc.x = piece2Info.centers[i].x;
+						tempc.y = piece2Info.centers[i].y;
+						
+						piece1Info.centers.push(tempc);
+					}
 				}
 				else {
 					piece1Info.rotation=piece2Info.rotation;
@@ -150,9 +168,13 @@ function socketmerge(piece1,pairs,scoringUser,wsMessage=false) {
 					video1.style.top = video2.style.top;
 					
 					if (p2l == 1){
+						piece2Info.centers = [{x:ccenters[parseInt(piece2.substr(5,))-1][0],y:ccenters[parseInt(piece2.substr(5,))-1][1],id:piece2Info.id}];
+					}
+					
+					if (p1l == 1){
 						//video1.style.left = (parseFloat(video2.style.left) - ccenters[parseInt(piece2.substr(5,))-1][0]*cwidth + piece2Info.centers[0].x*cwidth)+'px';
 						//video1.style.top = (parseFloat(video2.style.top) - ccenters[parseInt(piece2.substr(5,))-1][1]*cheight + piece2Info.centers[0].y*cheight)+'px';
-						piece2Info.centers = [{x:ccenters[parseInt(piece2.substr(5,))-1][0],y:ccenters[parseInt(piece2.substr(5,))-1][1],id:piece2Info.id}];
+						piece1Info.centers = [{x:ccenters[parseInt(piece1.substr(5,))-1][0],y:ccenters[parseInt(piece1.substr(5,))-1][1],id:piece1Info.id}];
 						//video1.style.transformOrigin = ccenters[parseInt(piece2.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece2.substr(5,))-1][1]*100+'%';
 					}
 					else {
