@@ -134,7 +134,7 @@ function socketmerge(piece1,pairs,scoringUser,wsMessage=false) {
 					video1.appendChild(p2svg[i]);
 				}
 				
-				
+				console.log(p1l,p2l);
 				if (p1l > p2l) {
 					//video2.style.transform = 'rotate('+parseInt(piece1Info.rotation)+'deg)';
 					//video2.style.transformOrigin = ccenters[parseInt(piece1.substr(5,))-1][0]*100+'% '+ccenters[parseInt(piece1.substr(5,))-1][1]*100+'%';
