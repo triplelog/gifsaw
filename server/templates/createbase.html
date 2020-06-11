@@ -107,8 +107,8 @@ svg {
 		<input type="number" id="npieces"></input>
 	</span>
 
-	<!--<label for="scoring" style="grid-column: 1; grid-row: 3; text-align: right;">Scoring</label>
-	<span style="grid-column: 2; grid-row: 3;">
+	<label for="scoring" style="grid-column: 1; grid-row: 3; text-align: right; display: none;">Scoring</label>
+	<span style="grid-column: 2; grid-row: 3; display: none">
 		<select id="scoring">
 			<option value="default" {% if selectedScript == 'default' %}selected{% endif %}>Default</option>
 			<option value="edges" {% if selectedScript == 'edges' %}selected{% endif %}>Edges</option>
@@ -117,10 +117,10 @@ svg {
 		</select>
 	</span>
 	
-	<label for="name" style="grid-column: 1; grid-row: 4; text-align: right;">Name of Puzzle</label>
-	<span style="grid-column: 2; grid-row: 4;">
+	<label for="name" style="grid-column: 1; grid-row: 4; text-align: right; display: none">Name of Puzzle</label>
+	<span style="grid-column: 2; grid-row: 4; display: none">
 		<input type="text" id="name"></input>
-	</span>-->
+	</span>
 
 	<form action="../create" method="post" style="grid-column: 1 / 3; grid-row: 5;">
 		<div style="display: none;">
