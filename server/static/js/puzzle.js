@@ -54,12 +54,18 @@ function dragstart(event) {
 		}
 		console.log(dragid);
 		cvideo = videos[dragid];
+		var evtX = e.pageX;
+		var evtY = e.pageY;
+		if (e.touches && e.touches[0]){
+			evtX = e.touches[0].pageX;
+			evtY = e.touches[0].pageY;
+		}
 		if (cvideo) {
 			vmatches = [];
 			nmatches = 0;
 			var vidid = parseInt(dragid.substr(5,))-1;
-			startX = [e.pageX,parseFloat(cvideo.style.left),pieces[vidid].centers[0].x*parseFloat(cwidth)-parseFloat(piecewidth)/2];
-			startY = [e.pageY,parseFloat(cvideo.style.top),pieces[vidid].centers[0].y*parseFloat(cheight)-parseFloat(pieceheight)/2];
+			startX = [evtX,parseFloat(cvideo.style.left),pieces[vidid].centers[0].x*parseFloat(cwidth)-parseFloat(piecewidth)/2];
+			startY = [evtY,parseFloat(cvideo.style.top),pieces[vidid].centers[0].y*parseFloat(cheight)-parseFloat(pieceheight)/2];
 			for (var ii=0;ii<pieces[vidid].centers.length;ii++){
 				if (pieces[vidid].centers[ii].x*parseFloat(cwidth)-parseFloat(piecewidth)/2 < startX[2]){
 					startX[2] = pieces[vidid].centers[ii].x*parseFloat(cwidth)-parseFloat(piecewidth)/2;
@@ -107,8 +113,12 @@ function dragmove(event) {
 	e = event || window.event;
 
 	if (dragid && dragid.length > 5) {
-		let newLeft = e.pageX;
-		let newTop = e.pageY;
+		var newLeft = e.pageX;
+		var newTop = e.pageY;
+		if (e.touches && e.touches[0]){
+			newLeft = e.touches[0].pageX;
+			newTop = e.touches[0].pageY;
+		}
 		if ((newLeft < startX[0]-0 || newLeft > startX[0]+0) && (newTop < startY[0]-0 || newTop > startY[0]+0)){
 			if (newLeft - startX[0] + startX[1] <= -1*startX[2]){
 				newLeft = startX[0] - startX[1] - startX[2];
