@@ -413,7 +413,8 @@ a.basic:hover {
 	cursor: pointer;
 }
 body {
-	background-image: url("../img/cssholebgwide.png");
+	background-image: url("../sepiabg.jpg");
+	/* Background pattern from Toptal Subtle Patterns */
 	background-size: cover;
 	
 }
