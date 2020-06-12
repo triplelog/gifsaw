@@ -641,7 +641,7 @@ app.get('/create',
 			pointyFactor: 50,
 			heightFactor: 50,
 			widthFactor: 50,
-			imgSrc: '../img/none.jpg',
+			imgSrc: '../img/none.png',
 		}));
 		res.end();
 	}
