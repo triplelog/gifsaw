@@ -641,7 +641,7 @@ app.get('/create',
 			pointyFactor: 50,
 			heightFactor: 50,
 			widthFactor: 50,
-			imgSrc: '../img/in/pd6gm0cd8000.jpg',
+			imgSrc: '../img/none.jpg',
 		}));
 		res.end();
 	}
