@@ -415,7 +415,8 @@ a.basic:hover {
 body {
 	background-image: url("../sepiabg.jpg");
 	/* Background pattern from Toptal Subtle Patterns */
-	background-size: cover;
+	background-size: auto;
+	background-repeat: repeat;
 	
 }
 
