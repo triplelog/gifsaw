@@ -38,6 +38,27 @@ div.container {
 
 
 {% block moreCSS %}
+
+div.logoDiv {
+	position: relative;
+	width:300%;
+	left:-100%;
+	top: 1rem;
+	text-align: center;
+}
+div.logoDiv img {
+	width:20rem;
+	top: unset;
+	left:unset;
+	margin: auto;
+}
+@media screen and (max-width: 719px) {
+
+	.centerLink {
+		display: none;
+	}
+}
+
 {% endblock %}
 
 

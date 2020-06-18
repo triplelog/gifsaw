@@ -22,23 +22,12 @@
 
 {% block moreCSS %}
 
-body {
-	background-image: url("../img/lightbg.png");
-	background-size: cover;
-	
-}
+
 img {
 	padding: 0px;
 	margin: 0px;
 }
-div:Not(.content-22) > .content {
-	overflow-y: auto;
-	overflow-x: auto;
-	overflow: auto;
-	height: calc(100% - 2 * var(--border-radius));
-	padding: calc(.5 * var(--border-radius));
-	text-align: center;
-}
+
 
 {% endblock %}
 
@@ -147,9 +136,6 @@ Goals for improving Gifsaw include custom collaborative games. Enter any suggest
 	
 	<div class="logoDiv">
 		<img src="../logo.png" style="width:18rem;">		
-	</div>
-	<div class="centerLink">
-		<button class="basic" onclick="window.location.href='../about';">About</button>
 	</div>
 	
 {% endblock %}
