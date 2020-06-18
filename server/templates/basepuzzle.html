@@ -8,14 +8,7 @@
 	border: 1px solid black;
 {% endblock %}
 	
-{% block centerSize %}
-	--height-container: calc(100vh - 2rem);
-	--width-container: calc(100vw - 2rem);
-	--height-center: calc({{ image.height }}px * 7 / 6);
-	--width-center: calc({{ image.width }}px * 7 / 6);
-	margin: 1rem .5rem;
-	
-{% endblock %}
+
 
 {% block titleCSS %}
 
@@ -59,7 +52,12 @@
 	--top-width: 27;
 	--scale: 1;
 }
-.container {
+div.container {
+	--height-container: calc(100vh - 2rem);
+	--width-container: calc(100vw - 2rem);
+	--height-center: calc({{ image.height }}px * 7 / 6);
+	--width-center: calc({{ image.width }}px * 7 / 6);
+	margin: 1rem .5rem;
 	grid-template-columns: calc((var(--width-container) - var(--width-center)) / 2) calc(var(--width-center) / 2) calc(var(--width-center) / 2) calc((var(--width-container) - var(--width-center)) / 2);
   	grid-template-rows: calc((var(--height-container) - var(--height-center)) / 2) calc(var(--height-center) / 2) calc(var(--height-center) / 2) calc((var(--height-container) - var(--height-center)) / 2);
 }
