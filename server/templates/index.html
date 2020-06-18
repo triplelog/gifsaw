@@ -34,7 +34,24 @@ div.content-31 > .content {
 div.content-33 > .content {
 	text-align: left;
 }
+div.logoDiv {
+	position: relative;
+	width:100%;
+	left:0rem;
+	top: 0rem;
+}
+div.logoDiv img {
+	width:20rem;
+	top: unset;
+	left:unset;
+	margin: auto;
+}
+@media screen and (max-width: 719px) {
 
+	.centerLink {
+		display: none;
+	}
+}
 {% endblock %}
 
 
@@ -179,7 +196,9 @@ About how many pieces? <input type="number" name="pieces" value="25" style="widt
 	
 {% endblock %}
 
-
+{% block footer %}
+	<button class="basic" onclick="window.location.href='../about';">About</button>
+{% endblock %}
 
 
 
