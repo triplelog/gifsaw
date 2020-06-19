@@ -35,14 +35,28 @@ div.logoDiv {
 	position: relative;
 	width:300%;
 	left:-100%;
-	top: 1rem;
+	top: 2rem;
 	text-align: center;
+	height:calc(var(--height-center) - 2rem);
 }
 div.logoDiv img {
 	width:20rem;
 	top: unset;
 	left:unset;
 	margin: auto;
+}
+.centerLink {
+	top:3rem;
+}
+@media screen and (max-width: 959px) {
+
+	div.logoDiv {
+		top: 1rem;
+		height:calc(var(--height-center) - 1rem);
+	}
+	.centerLink {
+		top:2rem;
+	}
 }
 @media screen and (max-width: 719px) {
 
